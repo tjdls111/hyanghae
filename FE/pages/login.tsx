@@ -46,31 +46,32 @@ const Login: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div>{errors.result?.message}</div>
+    <div className={styles.message}>{errors.result?.message}</div>
   ) : (
     <div />
   );
 
   const idError = errors.id?.message ? (
-    <div>{errors.id?.message}</div>
+    <div className={styles.message}>{errors.id?.message}</div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div>{errors.password?.message}</div>
+    <div className={styles.message}>{errors.password?.message}</div>
   ) : (
     <div />
   );
 
   return (
-    <div>
-      <img src="../../public/logo.jpg" />
-      <h1>로그인</h1>
-      <div>
+    <div className={styles.container}>
+      <img className={styles.logo} src={`/logo.jpg`} />
+      <h1 className={styles.title}>로그인</h1>
+      <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
           {resultError}
           <label htmlFor="id">
             <input
+              className={styles.inputForm}
               {...register("id", {
                 required: "아이디를 입력하세요.",
                 pattern: {
@@ -95,6 +96,7 @@ const Login: NextPage = () => {
           {idError}
           <label htmlFor="password">
             <input
+              className={styles.inputForm}
               {...register("password", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -117,8 +119,16 @@ const Login: NextPage = () => {
             />
           </label>
           {pwError}
-          <input type="submit" value="로그인" disabled={!isValid} />
+          <input
+            className={styles.inputBtn}
+            type="submit"
+            value="로그인"
+            disabled={!isValid}
+          />
         </form>
+        <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
+        <strong className={styles.guide}>지금 가입하세요</strong>
+        <p className={styles.guide}>그냥 둘러 볼게요.</p>
       </div>
     </div>
   );
