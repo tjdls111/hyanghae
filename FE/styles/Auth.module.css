@@ -18,7 +18,24 @@
 }
 
 .inputForm {
-  width: 20em;
+  width: 20.5em;
+  height: 3em;
+  background-color: #c4c4c4;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.smallInputForm {
+  width: 17em;
+  height: 3em;
+  background-color: #c4c4c4;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.emailInputForm {
+  width: 8em;
   height: 3em;
   background-color: #c4c4c4;
   border: 0.1em solid black;
@@ -27,7 +44,16 @@
 }
 
 .inputBtn {
-  width: 20em;
+  width: 21em;
+  height: 3em;
+  background-color: #d17d7d;
+  color: white;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.smallInputBtn {
+  width: 3.5em;
   height: 3em;
   background-color: #d17d7d;
   color: white;

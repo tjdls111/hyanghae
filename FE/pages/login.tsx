@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/Login.module.css";
+import styles from "../styles/Auth.module.css";
 
 interface LoginInput {
   result: string;
