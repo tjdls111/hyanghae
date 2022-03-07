@@ -212,13 +212,13 @@ const Signup: NextPage = () => {
                   message: "이메일은 1글자 이상입니다.",
                 },
               })}
-              type="email"
+              type="text"
               placeholder="이메일"
               onInput={clearLoginError}
             />
           </label>
           <span className={styles.guide}>@</span>
-          <label htmlFor="emailPartTwo">
+          {/* <label htmlFor="emailPartTwo">
             <input
               className={styles.emailInputForm}
               {...register("emailPartTwo", {
@@ -228,14 +228,19 @@ const Signup: NextPage = () => {
                   message: "이메일은 1글자 이상입니다.",
                 },
               })}
-              type="email"
+              type="text"
               placeholder="이메일"
               onInput={clearLoginError}
-            />
-            <span>
-              <button className={styles.smallInputBtn}>검사</button>
-            </span>
-          </label>
+            /> */}
+          <select className={styles.selectInput} {...register("emailPartTwo")}>
+            <option value="naver.com">네이버</option>
+            <option value="kakao.com">카카오</option>
+            <option value="gmail.com">지메일</option>
+          </select>
+          <span>
+            <button className={styles.smallInputBtn}>검사</button>
+          </span>
+          {/* </label> */}
           {emailPartOneError}
           {emailPartTwoError}
           <input

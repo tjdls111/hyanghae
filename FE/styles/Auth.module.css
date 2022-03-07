@@ -71,3 +71,11 @@
   color: white;
   margin-top: 0.5em;
 }
+
+.selectInput {
+  width: 8em;
+  height: 3em;
+  border-radius: 0.2em;
+  outline: 0 none;
+  background: #c4c4c4;
+}
