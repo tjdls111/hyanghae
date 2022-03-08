@@ -79,7 +79,7 @@ const Login: NextPage = () => {
           {resultError}
           <label htmlFor="id">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.idForm}`}
               {...register("id", {
                 required: "아이디를 입력하세요.",
                 pattern: {
@@ -104,7 +104,7 @@ const Login: NextPage = () => {
           {idError}
           <label htmlFor="password">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.pwForm}`}
               {...register("password", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -128,7 +128,7 @@ const Login: NextPage = () => {
           </label>
           {pwError}
           <input
-            className={styles.inputBtn}
+            className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
             value="로그인"
             disabled={!isValid}

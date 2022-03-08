@@ -135,7 +135,7 @@ const Signup: NextPage = () => {
           {resultError}
           <label htmlFor="id">
             <input
-              className={styles.smallInputForm}
+              className={`${styles.smallInputForm} ${styles.idForm}`}
               {...register("id", {
                 required: "아이디를 입력하세요.",
                 pattern: {
@@ -169,7 +169,7 @@ const Signup: NextPage = () => {
           {idError}
           <label htmlFor="password">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.pwForm}`}
               {...register("password", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -194,7 +194,7 @@ const Signup: NextPage = () => {
           {pwError}
           <label htmlFor="passwordConfirmation">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.pwConfirmationForm}`}
               {...register("passwordConfirmation", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -219,7 +219,7 @@ const Signup: NextPage = () => {
           {pwConfirmationError}
           <label htmlFor="nickname">
             <input
-              className={styles.smallInputForm}
+              className={`${styles.smallInputForm} ${styles.nicknameForm}`}
               {...register("nickname", {
                 required: "닉네임을 입력하세요.",
                 minLength: {
@@ -248,7 +248,7 @@ const Signup: NextPage = () => {
           {nicknameError}
           <label htmlFor="emailPartOne">
             <input
-              className={styles.emailInputForm}
+              className={`${styles.emailInputForm} ${styles.emailOneForm}`}
               {...register("emailPartOne", {
                 required: "이메일을 입력하세요.",
                 minLength: {
@@ -263,7 +263,10 @@ const Signup: NextPage = () => {
           </label>
           <span className={styles.guide}>@</span>
 
-          <select className={styles.selectInput} {...register("emailPartTwo")}>
+          <select
+            className={`${styles.selectInput} ${styles.mailTwoForm}`}
+            {...register("emailPartTwo")}
+          >
             <option value="naver.com">네이버</option>
             <option value="kakao.com">카카오</option>
             <option value="gmail.com">지메일</option>
@@ -277,7 +280,7 @@ const Signup: NextPage = () => {
           {emailPartOneError}
           {emailPartTwoError}
           <input
-            className={styles.inputBtn}
+            className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
             value="회원가입"
             disabled={!isValid}
