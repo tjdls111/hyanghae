@@ -2,6 +2,8 @@
 
 :root {
   --color-primary: #eb2f64;
+  --color-primary-dark-transparent: #rgba(235, 47, 100, 0.794);
+  --color-primay-light-transparent: hsla(343, 82%, 64%, 0.787);
   --color-primary-light-1: #ef5983;
   --color-primary-light-2: #f382a2;
   --color-primary-light-3: #f7acc1;

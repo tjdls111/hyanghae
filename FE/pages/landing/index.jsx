@@ -1,0 +1,8 @@
+import React from "react";
+import Header from "../../components/landing/Header";
+
+const LandingPage = () => {
+  return <Header />;
+};
+
+export default LandingPage;
