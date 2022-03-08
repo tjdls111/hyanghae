@@ -60,6 +60,30 @@ const Signup: NextPage = () => {
     }
   };
 
+  const idValidation = () => {
+    console.log("아이디 존재 에러");
+    try {
+      // api 연결 - 아이디 중복 검사
+    } catch (e) {
+      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
+      if (error?.response?.status === 401) {
+        setError("result", { message: "해당 아이디가 이미 존재합니다." });
+      }
+    }
+  };
+
+  const nicknameValidation = () => {
+    console.log("닉네임 존재 에러");
+    try {
+      // api 연결 - 닉네임 중복 검사
+    } catch (e) {
+      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
+      if (error?.response?.status === 401) {
+        setError("result", { message: "해당 닉네임이 이미 존재합니다." });
+      }
+    }
+  };
+
   const clearLoginError = () => {
     clearErrors("result");
   };
@@ -104,7 +128,7 @@ const Signup: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} />
+      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
       <h1 className={styles.title}>회원가입</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
@@ -133,7 +157,11 @@ const Signup: NextPage = () => {
               onInput={clearLoginError}
             />
             <span>
-              <button type="button" className={styles.smallInputBtn}>
+              <button
+                type="button"
+                onClick={idValidation}
+                className={styles.smallInputBtn}
+              >
                 검사
               </button>
             </span>
@@ -208,7 +236,13 @@ const Signup: NextPage = () => {
               onInput={clearLoginError}
             />
             <span>
-              <button className={styles.smallInputBtn}>검사</button>
+              <button
+                type="button"
+                onClick={nicknameValidation}
+                className={styles.smallInputBtn}
+              >
+                검사
+              </button>
             </span>
           </label>
           {nicknameError}
@@ -228,29 +262,18 @@ const Signup: NextPage = () => {
             />
           </label>
           <span className={styles.guide}>@</span>
-          {/* <label htmlFor="emailPartTwo">
-            <input
-              className={styles.emailInputForm}
-              {...register("emailPartTwo", {
-                required: "이메일을 입력하세요.",
-                minLength: {
-                  value: 1,
-                  message: "이메일은 1글자 이상입니다.",
-                },
-              })}
-              type="text"
-              placeholder="이메일"
-              onInput={clearLoginError}
-            /> */}
+
           <select className={styles.selectInput} {...register("emailPartTwo")}>
             <option value="naver.com">네이버</option>
             <option value="kakao.com">카카오</option>
             <option value="gmail.com">지메일</option>
           </select>
           <span>
-            <button className={styles.smallInputBtn}>검사</button>
+            <button type="button" className={styles.smallInputBtn}>
+              검사
+            </button>
           </span>
-          {/* </label> */}
+
           {emailPartOneError}
           {emailPartTwoError}
           <input

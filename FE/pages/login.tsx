@@ -72,7 +72,7 @@ const Login: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} />
+      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
