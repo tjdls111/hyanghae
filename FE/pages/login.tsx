@@ -1,8 +1,16 @@
+/*
+로그인
+로그인 폼
+@author Wendy
+@version 1.0.0
+생성일 2022-03-07
+마지막 수정일 2022-03-08
+*/
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/Auth.module.css";
+import styles from "../styles/LoginSignup.module.css";
 
 interface LoginInput {
   result: string;
@@ -64,14 +72,14 @@ const Login: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} />
+      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
           {resultError}
           <label htmlFor="id">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.idForm}`}
               {...register("id", {
                 required: "아이디를 입력하세요.",
                 pattern: {
@@ -96,7 +104,7 @@ const Login: NextPage = () => {
           {idError}
           <label htmlFor="password">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.pwForm}`}
               {...register("password", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -120,7 +128,7 @@ const Login: NextPage = () => {
           </label>
           {pwError}
           <input
-            className={styles.inputBtn}
+            className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
             value="로그인"
             disabled={!isValid}

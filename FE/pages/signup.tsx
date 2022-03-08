@@ -1,8 +1,16 @@
+/*
+회원가입
+회원가입 폼
+@author Wendy
+@version 1.0.0
+생성일 2022-03-07
+마지막 수정일 2022-03-08
+*/
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/Auth.module.css";
+import styles from "../styles/LoginSignup.module.css";
 
 interface SignupInput {
   result: string;
@@ -52,6 +60,30 @@ const Signup: NextPage = () => {
     }
   };
 
+  const idValidation = () => {
+    console.log("아이디 존재 에러");
+    try {
+      // api 연결 - 아이디 중복 검사
+    } catch (e) {
+      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
+      if (error?.response?.status === 401) {
+        setError("result", { message: "해당 아이디가 이미 존재합니다." });
+      }
+    }
+  };
+
+  const nicknameValidation = () => {
+    console.log("닉네임 존재 에러");
+    try {
+      // api 연결 - 닉네임 중복 검사
+    } catch (e) {
+      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
+      if (error?.response?.status === 401) {
+        setError("result", { message: "해당 닉네임이 이미 존재합니다." });
+      }
+    }
+  };
+
   const clearLoginError = () => {
     clearErrors("result");
   };
@@ -96,14 +128,14 @@ const Signup: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} />
+      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
       <h1 className={styles.title}>회원가입</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
           {resultError}
           <label htmlFor="id">
             <input
-              className={styles.smallInputForm}
+              className={`${styles.smallInputForm} ${styles.idForm}`}
               {...register("id", {
                 required: "아이디를 입력하세요.",
                 pattern: {
@@ -125,13 +157,19 @@ const Signup: NextPage = () => {
               onInput={clearLoginError}
             />
             <span>
-              <button className={styles.smallInputBtn}>검사</button>
+              <button
+                type="button"
+                onClick={idValidation}
+                className={styles.smallInputBtn}
+              >
+                검사
+              </button>
             </span>
           </label>
           {idError}
           <label htmlFor="password">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.pwForm}`}
               {...register("password", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -156,7 +194,7 @@ const Signup: NextPage = () => {
           {pwError}
           <label htmlFor="passwordConfirmation">
             <input
-              className={styles.inputForm}
+              className={`${styles.inputForm} ${styles.pwConfirmationForm}`}
               {...register("passwordConfirmation", {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
@@ -181,7 +219,7 @@ const Signup: NextPage = () => {
           {pwConfirmationError}
           <label htmlFor="nickname">
             <input
-              className={styles.smallInputForm}
+              className={`${styles.smallInputForm} ${styles.nicknameForm}`}
               {...register("nickname", {
                 required: "닉네임을 입력하세요.",
                 minLength: {
@@ -198,13 +236,19 @@ const Signup: NextPage = () => {
               onInput={clearLoginError}
             />
             <span>
-              <button className={styles.smallInputBtn}>검사</button>
+              <button
+                type="button"
+                onClick={nicknameValidation}
+                className={styles.smallInputBtn}
+              >
+                검사
+              </button>
             </span>
           </label>
           {nicknameError}
           <label htmlFor="emailPartOne">
             <input
-              className={styles.emailInputForm}
+              className={`${styles.emailInputForm} ${styles.emailOneForm}`}
               {...register("emailPartOne", {
                 required: "이메일을 입력하세요.",
                 minLength: {
@@ -218,33 +262,25 @@ const Signup: NextPage = () => {
             />
           </label>
           <span className={styles.guide}>@</span>
-          {/* <label htmlFor="emailPartTwo">
-            <input
-              className={styles.emailInputForm}
-              {...register("emailPartTwo", {
-                required: "이메일을 입력하세요.",
-                minLength: {
-                  value: 1,
-                  message: "이메일은 1글자 이상입니다.",
-                },
-              })}
-              type="text"
-              placeholder="이메일"
-              onInput={clearLoginError}
-            /> */}
-          <select className={styles.selectInput} {...register("emailPartTwo")}>
+
+          <select
+            className={`${styles.selectInput} ${styles.mailTwoForm}`}
+            {...register("emailPartTwo")}
+          >
             <option value="naver.com">네이버</option>
             <option value="kakao.com">카카오</option>
             <option value="gmail.com">지메일</option>
           </select>
           <span>
-            <button className={styles.smallInputBtn}>검사</button>
+            <button type="button" className={styles.smallInputBtn}>
+              검사
+            </button>
           </span>
-          {/* </label> */}
+
           {emailPartOneError}
           {emailPartTwoError}
           <input
-            className={styles.inputBtn}
+            className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
             value="회원가입"
             disabled={!isValid}
