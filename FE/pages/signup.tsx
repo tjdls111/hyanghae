@@ -20,6 +20,7 @@ interface SignupInput {
   nickname: string;
   emailPartOne: string;
   emailPartTwo: string;
+  validationCode: string;
 }
 
 const Signup: NextPage = () => {
@@ -135,6 +136,13 @@ const Signup: NextPage = () => {
   const emailPartTwoError = errors.emailPartTwo?.message ? (
     <div className={`${styles.message} ${styles.emailTwoMessage}`}>
       {errors.emailPartTwo?.message}
+    </div>
+  ) : (
+    <div />
+  );
+  const validationError = errors.validationCode?.message ? (
+    <div className={`${styles.message} ${styles.validationCode}`}>
+      {errors.validationCode?.message}
     </div>
   ) : (
     <div />
@@ -293,6 +301,24 @@ const Signup: NextPage = () => {
 
           {emailPartOneError}
           {emailPartTwoError}
+          <div>
+            <label htmlFor="validationInput">
+              <input
+                className={`${styles.inputForm} ${styles.validationForm}`}
+                {...register("validationCode", {
+                  required: "인증 번호를 입력하세요.",
+                  minLength: {
+                    value: 1,
+                    message: "인증번호는 1글자 이상입니다",
+                  },
+                })}
+                type="text"
+                placeholder="인증번호를 입력하세요."
+                onInput={clearLoginError}
+              />
+            </label>
+          </div>
+          {validationError}
           <input
             className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
