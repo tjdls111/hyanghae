@@ -1,0 +1,62 @@
+.tutorial {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding-top: 5rem;
+}
+
+.introBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+}
+
+.subHeading {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.mainHeading {
+  font-size: 5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* steps section */
+
+.steps {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 10rem;
+}
+
+.stepImgBox {
+  display: flex;
+  justify-content: center;
+}
+
+.stepImg {
+  border-radius: 10%;
+  width: 50%;
+}
+
+.stepNumber {
+  font-size: 8.6rem;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 4rem;
+}
+
+.stepHeading {
+  font-size: 4rem;
+  color: #333;
+  margin-bottom: 4rem;
+  font-weight: 700;
+}
+
+.stepDescription {
+  font-size: 2rem;
+  line-height: 1.6;
+}
