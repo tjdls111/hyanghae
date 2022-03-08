@@ -1,0 +1,81 @@
+.container {
+  background-color: #343232;
+}
+
+.logo {
+  display: block;
+  margin: 0px auto;
+}
+
+.title {
+  color: aliceblue;
+  text-align: center;
+}
+
+.inputContainer {
+  text-align: center;
+  padding-bottom: 20em;
+}
+
+.inputForm {
+  width: 20.5em;
+  height: 3em;
+  background-color: #c4c4c4;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.smallInputForm {
+  width: 17em;
+  height: 3em;
+  background-color: #c4c4c4;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.emailInputForm {
+  width: 8em;
+  height: 3em;
+  background-color: #c4c4c4;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.inputBtn {
+  width: 21em;
+  height: 3em;
+  background-color: #d17d7d;
+  color: white;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.smallInputBtn {
+  width: 3.5em;
+  height: 3em;
+  background-color: #d17d7d;
+  color: white;
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.message {
+  color: white;
+  padding: 0.8em;
+}
+
+.guide {
+  color: white;
+  margin-top: 0.5em;
+}
+
+.selectInput {
+  width: 8em;
+  height: 3em;
+  border-radius: 0.2em;
+  outline: 0 none;
+  background: #c4c4c4;
+}
