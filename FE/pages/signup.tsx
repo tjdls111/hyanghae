@@ -1,8 +1,16 @@
+/*
+회원가입
+회원가입 폼
+@author Wendy
+@version 1.0.0
+생성일 2022-03-07
+마지막 수정일 2022-03-08
+*/
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/Auth.module.css";
+import styles from "../styles/LoginSignup.module.css";
 
 interface SignupInput {
   result: string;
@@ -125,7 +133,9 @@ const Signup: NextPage = () => {
               onInput={clearLoginError}
             />
             <span>
-              <button className={styles.smallInputBtn}>검사</button>
+              <button type="button" className={styles.smallInputBtn}>
+                검사
+              </button>
             </span>
           </label>
           {idError}
