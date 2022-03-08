@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/LoginSignup.module.css";
+import styles from "../styles/loginSignup.module.css";
 
 interface SignupInput {
   result: string;
@@ -63,7 +63,7 @@ const Signup: NextPage = () => {
       }
     } else {
       setError("passwordConfirmation", {
-        message: "비밀번호가 일치하지 않습니다. 다시 확인해주세요."
+        message: "비밀번호가 일치하지 않습니다. 다시 확인해주세요.",
       });
     }
   };
