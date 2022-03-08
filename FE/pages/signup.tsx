@@ -89,39 +89,53 @@ const Signup: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={styles.message}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>
+      {errors.result?.message}
+    </div>
   ) : (
     <div />
   );
 
   const idError = errors.id?.message ? (
-    <div className={styles.message}>{errors.id?.message}</div>
+    <div className={`${styles.message} ${styles.idMessage}`}>
+      {errors.id?.message}
+    </div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={styles.message}>{errors.password?.message}</div>
+    <div className={`${styles.message} ${styles.pwMessage}`}>
+      {errors.password?.message}
+    </div>
   ) : (
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div className={styles.message}>{errors.passwordConfirmation?.message}</div>
+    <div className={`${styles.message} ${styles.pwConfirmationMessage}`}>
+      {errors.passwordConfirmation?.message}
+    </div>
   ) : (
     <div />
   );
   const nicknameError = errors.nickname?.message ? (
-    <div className={styles.message}>{errors.nickname?.message}</div>
+    <div className={`${styles.message} ${styles.nicknameMessage}`}>
+      {errors.nickname?.message}
+    </div>
   ) : (
     <div />
   );
   const emailPartOneError = errors.emailPartOne?.message ? (
-    <div className={styles.message}>{errors.emailPartOne?.message}</div>
+    <div className={`${styles.message} ${styles.emailOneMessage}`}>
+      {errors.emailPartOne?.message}
+    </div>
   ) : (
     <div />
   );
 
   const emailPartTwoError = errors.emailPartTwo?.message ? (
-    <div className={styles.message}>{errors.emailPartTwo?.message}</div>
+    <div className={`${styles.message} ${styles.emailTwoMessage}`}>
+      {errors.emailPartTwo?.message}
+    </div>
   ) : (
     <div />
   );
@@ -264,7 +278,7 @@ const Signup: NextPage = () => {
           <span className={styles.guide}>@</span>
 
           <select
-            className={`${styles.selectInput} ${styles.mailTwoForm}`}
+            className={`${styles.selectInput} ${styles.mailForm}`}
             {...register("emailPartTwo")}
           >
             <option value="naver.com">네이버</option>
