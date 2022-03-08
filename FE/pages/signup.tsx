@@ -51,13 +51,20 @@ const Signup: NextPage = () => {
       emailPartOne,
       emailPartTwo,
     } = getValues();
-    try {
-      // api 연결
-    } catch (e) {
-      const error = e as AxiosError;
-      if (error?.response?.status === 401) {
-        setError("result", { message: "일치하는 사용자 정보가 없습니다." });
+
+    if (password === passwordConfirmation) {
+      try {
+        // api 연결
+      } catch (e) {
+        const error = e as AxiosError;
+        if (error?.response?.status === 401) {
+          setError("result", { message: "일치하는 사용자 정보가 없습니다." });
+        }
       }
+    } else {
+      setError("passwordConfirmation", {
+        message: "비밀번호가 일치하지 않습니다. 다시 확인해주세요."
+      });
     }
   };
 
@@ -118,6 +125,7 @@ const Signup: NextPage = () => {
   ) : (
     <div />
   );
+
   const nicknameError = errors.nickname?.message ? (
     <div className={`${styles.message} ${styles.nicknameMessage}`}>
       {errors.nickname?.message}
