@@ -36,7 +36,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-	// swagger2
+	// swagger
 	implementation "io.springfox:springfox-boot-starter:3.0.0"	// swagger2와 swagger-ui 포함되어 있음
 
 }
