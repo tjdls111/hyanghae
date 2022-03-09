@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.4'
+	id 'org.springframework.boot' version '2.4.5'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 }
@@ -19,17 +19,26 @@ repositories {
 }
 
 dependencies {
+	// spring-boot-starter
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+//	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// lombok
 	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// mariadb
 	runtimeOnly 'mysql:mysql-connector-java'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+
+	// swagger2
+	implementation "io.springfox:springfox-boot-starter:3.0.0"	// swagger2와 swagger-ui 포함되어 있음
+
 }
 
 tasks.named('test') {
