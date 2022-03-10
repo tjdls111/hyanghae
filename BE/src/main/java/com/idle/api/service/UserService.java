@@ -18,4 +18,6 @@ public interface UserService {
     String insertUser(UserSignUpRequest userSignUpRequest);
     String checkUserId(String userId);
     String checkUserNickname(String userNickname);
+
+    String checkUserPw(String userPw);
 }

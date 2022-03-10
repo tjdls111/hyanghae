@@ -10,12 +10,15 @@
 package com.idle.api.controller;
 
 import com.idle.api.request.UserSignUpRequest;
+import com.idle.api.response.BaseResponseBody;
 import com.idle.api.service.UserService;
+import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -24,9 +27,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     /* Alice */
     @ApiOperation("회원가입")
@@ -59,6 +59,17 @@ public class UserController {
             return new ResponseEntity<>("닉네임 중복", HttpStatus.OK);
         }
         return new ResponseEntity<>("닉네임 사용 가능", HttpStatus.OK);
+    }
+
+    /* Woody */
+    @ApiOperation("마이페이지 비밀번호 검사")
+    @PostMapping("/checkpw")
+    public ResponseEntity<String> checkUserPw(@RequestParam("userPw") String userPw) {
+        String result = userService.checkUserPw(userPw);
+        if (result.equals("fail")) {
+            return new ResponseEntity<>("비밀번호가 맞지 않습니다!", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("비밀번호 인증 성공", HttpStatus.OK);
     }
 
 }

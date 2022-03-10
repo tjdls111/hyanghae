@@ -18,5 +18,6 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserId(String userId);   // 유저 아이디로 검색
+    Optional<User> findByUserPw(String userPw);     // 유저 비밀번호 검색
     Optional<User> findByUserNickname(String userNickname); // 유저 닉네임 검색
 }

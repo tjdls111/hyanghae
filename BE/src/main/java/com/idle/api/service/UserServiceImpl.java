@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+
     /* Alice */
     @Override
     public String insertUser(UserSignUpRequest userSignUpRequest) {
@@ -53,5 +54,14 @@ public class UserServiceImpl implements UserService{
         return "success";
     }
 
+    /* Woody */
+    @Override
+    public String checkUserPw(String userPw) {
+        Optional<User> user = userRepository.findByUserPw(userPw);
+        if(user.isPresent()){
+            return "fail";
+        }
+        return "success";
+    }
 
 }
