@@ -1,16 +1,18 @@
 /*
 회원가입
-회원가입 폼
+회원가입 폼, 회원 가입 api 연결 중
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-08
+마지막 수정일 2022-03-10
 */
 import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../styles/loginSignup.module.css";
+import { apiSignup } from "../api/user";
+import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
   result: string;
@@ -54,7 +56,13 @@ const Signup: NextPage = () => {
 
     if (password === passwordConfirmation) {
       try {
-        // api 연결
+        apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       } catch (e) {
         const error = e as AxiosError;
         if (error?.response?.status === 401) {
