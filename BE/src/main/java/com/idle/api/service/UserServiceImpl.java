@@ -39,9 +39,18 @@ public class UserServiceImpl implements UserService{
         Optional<User> user = userRepository.findByUserId(userId);
         if(user.isPresent()){
             return "fail";
-        }else{
-            return "success";
         }
+        return "success";
+    }
+
+    /* Alice */
+    @Override
+    public String checkUserNickname(String userNickname) {
+        Optional<User> user = userRepository.findByUserNickname(userNickname);
+        if(user.isPresent()){
+            return "fail";
+        }
+        return "success";
     }
 
 

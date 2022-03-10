@@ -17,4 +17,5 @@ import com.idle.api.request.UserSignUpRequest;
 public interface UserService {
     String insertUser(UserSignUpRequest userSignUpRequest);
     String checkUserId(String userId);
+    String checkUserNickname(String userNickname);
 }
