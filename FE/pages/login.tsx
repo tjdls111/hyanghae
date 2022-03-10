@@ -7,10 +7,11 @@
 마지막 수정일 2022-03-08
 */
 import type { NextPage } from "next";
-import { useEffect } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect, useRef } from "react";
+import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/LoginSignup.module.css";
+import styles from "../styles/loginsignup.module.css";
+import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 
 interface LoginInput {
   result: string;
@@ -30,12 +31,6 @@ const Login: NextPage = () => {
   } = useForm<LoginInput>({
     mode: "onChange",
   });
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      // 메인 페이지로 넘기기
-    }
-  }, [isLoggedIn]);
 
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
@@ -84,8 +79,7 @@ const Login: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message:
-                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -99,6 +93,7 @@ const Login: NextPage = () => {
               type="text"
               placeholder="ID"
               onInput={clearLoginError}
+              aria-label="id"
             />
           </label>
           {idError}
@@ -109,8 +104,7 @@ const Login: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -124,15 +118,19 @@ const Login: NextPage = () => {
               type="password"
               placeholder="Password"
               onInput={clearLoginError}
+              aria-label="password"
             />
           </label>
           {pwError}
-          <input
+          <button
             className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
             value="로그인"
             disabled={!isValid}
-          />
+            aria-label="loginBtn"
+          >
+            로그인
+          </button>
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
         <strong className={styles.guide}>지금 가입하세요</strong>
