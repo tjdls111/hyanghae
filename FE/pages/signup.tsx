@@ -43,14 +43,8 @@ const Signup: NextPage = () => {
   }, [isLoggedIn]);
 
   const onValidSubmit: SubmitHandler<SignupInput> = async () => {
-    const {
-      id,
-      password,
-      passwordConfirmation,
-      nickname,
-      emailPartOne,
-      emailPartTwo,
-    } = getValues();
+    const { id, password, passwordConfirmation, nickname, emailPartOne, emailPartTwo } =
+      getValues();
 
     if (password === passwordConfirmation) {
       try {
@@ -97,7 +91,7 @@ const Signup: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={`${styles.message} ${styles.resultMessage}`}>
+    <div className={`${styles.message} ${styles.resultMessage}`} role="alert">
       {errors.result?.message}
     </div>
   ) : (
@@ -105,21 +99,21 @@ const Signup: NextPage = () => {
   );
 
   const idError = errors.id?.message ? (
-    <div className={`${styles.message} ${styles.idMessage}`}>
+    <div className={`${styles.message} ${styles.idMessage}`} role="alert">
       {errors.id?.message}
     </div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={`${styles.message} ${styles.pwMessage}`}>
+    <div className={`${styles.message} ${styles.pwMessage}`} role="alert">
       {errors.password?.message}
     </div>
   ) : (
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div className={`${styles.message} ${styles.pwConfirmationMessage}`}>
+    <div className={`${styles.message} ${styles.pwConfirmationMessage}`} role="alert">
       {errors.passwordConfirmation?.message}
     </div>
   ) : (
@@ -127,14 +121,14 @@ const Signup: NextPage = () => {
   );
 
   const nicknameError = errors.nickname?.message ? (
-    <div className={`${styles.message} ${styles.nicknameMessage}`}>
+    <div className={`${styles.message} ${styles.nicknameMessage}`} role="alert">
       {errors.nickname?.message}
     </div>
   ) : (
     <div />
   );
   const emailPartOneError = errors.emailPartOne?.message ? (
-    <div className={`${styles.message} ${styles.emailOneMessage}`}>
+    <div className={`${styles.message} ${styles.emailOneMessage}`} role="alert">
       {errors.emailPartOne?.message}
     </div>
   ) : (
@@ -142,14 +136,14 @@ const Signup: NextPage = () => {
   );
 
   const emailPartTwoError = errors.emailPartTwo?.message ? (
-    <div className={`${styles.message} ${styles.emailTwoMessage}`}>
+    <div className={`${styles.message} ${styles.emailTwoMessage}`} role="alert">
       {errors.emailPartTwo?.message}
     </div>
   ) : (
     <div />
   );
   const validationError = errors.validationCode?.message ? (
-    <div className={`${styles.message} ${styles.validationCode}`}>
+    <div className={`${styles.message} ${styles.validationCode}`} role="alert">
       {errors.validationCode?.message}
     </div>
   ) : (
@@ -170,8 +164,7 @@ const Signup: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message:
-                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -185,13 +178,10 @@ const Signup: NextPage = () => {
               type="text"
               placeholder="ID"
               onInput={clearLoginError}
+              aria-label="id"
             />
             <span>
-              <button
-                type="button"
-                onClick={idValidation}
-                className={styles.smallInputBtn}
-              >
+              <button type="button" onClick={idValidation} className={styles.smallInputBtn}>
                 검사
               </button>
             </span>
@@ -204,8 +194,7 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -219,6 +208,7 @@ const Signup: NextPage = () => {
               type="password"
               placeholder="Password"
               onInput={clearLoginError}
+              aria-label="password"
             />
           </label>
           {pwError}
@@ -229,8 +219,7 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -244,6 +233,7 @@ const Signup: NextPage = () => {
               type="password"
               placeholder="비밀번호를 다시 한번 입력해주세요"
               onInput={clearLoginError}
+              aria-label="passwordConfirmation"
             />
           </label>
           {pwConfirmationError}
@@ -264,13 +254,10 @@ const Signup: NextPage = () => {
               type="text"
               placeholder="닉네임"
               onInput={clearLoginError}
+              aria-label="nickname"
             />
             <span>
-              <button
-                type="button"
-                onClick={nicknameValidation}
-                className={styles.smallInputBtn}
-              >
+              <button type="button" onClick={nicknameValidation} className={styles.smallInputBtn}>
                 검사
               </button>
             </span>
@@ -289,6 +276,7 @@ const Signup: NextPage = () => {
               type="text"
               placeholder="이메일"
               onInput={clearLoginError}
+              aria-label="emailPartOne"
             />
           </label>
           <span className={styles.guide}>@</span>
@@ -323,16 +311,20 @@ const Signup: NextPage = () => {
                 type="text"
                 placeholder="인증번호를 입력하세요."
                 onInput={clearLoginError}
+                aria-label="code"
               />
             </label>
           </div>
           {validationError}
-          <input
+          <button
             className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
             value="회원가입"
             disabled={!isValid}
-          />
+            aria-label="signupBtn"
+          >
+            회원가입
+          </button>
         </form>
         <p className={styles.guide}>그냥 둘러 볼게요.</p>
       </div>
