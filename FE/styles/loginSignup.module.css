@@ -10,6 +10,7 @@
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
+  margin: 1em;
 }
 
 .inputContainer {
