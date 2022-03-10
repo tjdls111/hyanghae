@@ -1,13 +1,13 @@
 .tutorial {
   max-width: 120rem;
   margin: 0 auto;
-  padding-top: 5rem;
+  padding-top: 15rem;
 }
 
 .introBox {
   display: flex;
   flex-direction: column;
-  row-gap: 3rem;
+  row-gap: 5rem;
 }
 
 .subHeading {
@@ -25,21 +25,24 @@
 /* steps section */
 
 .steps {
-  margin-top: 5rem;
+  width: 100%;
+  padding: 10rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+  justify-content: center;
   gap: 10rem;
 }
 
 .stepImgBox {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  width: 50rem;
+  height: 50rem;
 }
 
 .stepImg {
   border-radius: 10%;
-  width: 50%;
+  object-fit: cover;
 }
 
 .stepNumber {

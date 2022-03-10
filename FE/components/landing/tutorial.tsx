@@ -1,9 +1,6 @@
 import React from "react";
 import styles from "./tutorial.module.css";
 import Image from "next/image";
-import step01 from "../../public/images/step01.jpg";
-import step02 from "../../public/images/step02.jpg";
-import step03 from "../../public/images/step03.jpg";
 
 const Tutorial = () => {
   return (
@@ -13,11 +10,13 @@ const Tutorial = () => {
           <span className={styles.subHeading}>How it works</span>
           <h2 className={styles.mainHeading}>향해를 제대로 즐기는 방법</h2>
         </div>
-
-        {/*  steps section */}
         <div className={styles.steps}>
           <div className={styles.stepImgBox}>
-            <Image className={styles.stepImg} src={step01} />
+            <Image
+              className={styles.stepImg}
+              layout="fill"
+              src="/images/step01.jpg"
+            />
           </div>
           <div className={styles.stepTextBox}>
             <p className={styles.stepNumber}>01</p>
@@ -38,11 +37,19 @@ const Tutorial = () => {
             </p>
           </div>
           <div className={styles.stepImgBox}>
-            <Image className={styles.stepImg} src={step02} />
+            <Image
+              className={styles.stepImg}
+              layout="fill"
+              src="/images/step02.jpg"
+            />
           </div>
 
           <div className={styles.stepImgBox}>
-            <Image className={styles.stepImg} src={step03} />
+            <Image
+              className={styles.stepImg}
+              layout="fill"
+              src="/images/step03.jpg"
+            />
           </div>
           <div className={styles.stepTextBox}>
             <p className={styles.stepNumber}>03</p>

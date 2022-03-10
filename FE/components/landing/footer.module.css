@@ -1,0 +1,32 @@
+.footer {
+  padding: 9.6rem 0;
+  border-top: 1px solid #eee;
+}
+
+.layout {
+  max-width: 130rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  column-gap: 10rem;
+}
+
+.footerLogo {
+  width: 40%;
+}
+
+.footerSection {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+}
+
+.footerHeading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.footerContent {
+  font-size: 1.6rem;
+}
