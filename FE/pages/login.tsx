@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/LoginSignup.module.css";
+import styles from "../styles/loginSignup.module.css";
 
 interface LoginInput {
   result: string;
@@ -54,18 +54,24 @@ const Login: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={styles.message}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>
+      {errors.result?.message}
+    </div>
   ) : (
     <div />
   );
 
   const idError = errors.id?.message ? (
-    <div className={styles.message}>{errors.id?.message}</div>
+    <div className={`${styles.message} ${styles.idMessage}`}>
+      {errors.id?.message}
+    </div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={styles.message}>{errors.password?.message}</div>
+    <div className={`${styles.message} ${styles.pwMessage}`}>
+      {errors.password?.message}
+    </div>
   ) : (
     <div />
   );

@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/LoginSignup.module.css";
+import styles from "../styles/loginSignup.module.css";
 
 interface SignupInput {
   result: string;
@@ -20,6 +20,7 @@ interface SignupInput {
   nickname: string;
   emailPartOne: string;
   emailPartTwo: string;
+  validationCode: string;
 }
 
 const Signup: NextPage = () => {
@@ -50,13 +51,20 @@ const Signup: NextPage = () => {
       emailPartOne,
       emailPartTwo,
     } = getValues();
-    try {
-      // api 연결
-    } catch (e) {
-      const error = e as AxiosError;
-      if (error?.response?.status === 401) {
-        setError("result", { message: "일치하는 사용자 정보가 없습니다." });
+
+    if (password === passwordConfirmation) {
+      try {
+        // api 연결
+      } catch (e) {
+        const error = e as AxiosError;
+        if (error?.response?.status === 401) {
+          setError("result", { message: "일치하는 사용자 정보가 없습니다." });
+        }
       }
+    } else {
+      setError("passwordConfirmation", {
+        message: "비밀번호가 일치하지 않습니다. 다시 확인해주세요.",
+      });
     }
   };
 
@@ -89,39 +97,61 @@ const Signup: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={styles.message}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>
+      {errors.result?.message}
+    </div>
   ) : (
     <div />
   );
 
   const idError = errors.id?.message ? (
-    <div className={styles.message}>{errors.id?.message}</div>
+    <div className={`${styles.message} ${styles.idMessage}`}>
+      {errors.id?.message}
+    </div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={styles.message}>{errors.password?.message}</div>
+    <div className={`${styles.message} ${styles.pwMessage}`}>
+      {errors.password?.message}
+    </div>
   ) : (
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div className={styles.message}>{errors.passwordConfirmation?.message}</div>
+    <div className={`${styles.message} ${styles.pwConfirmationMessage}`}>
+      {errors.passwordConfirmation?.message}
+    </div>
   ) : (
     <div />
   );
+
   const nicknameError = errors.nickname?.message ? (
-    <div className={styles.message}>{errors.nickname?.message}</div>
+    <div className={`${styles.message} ${styles.nicknameMessage}`}>
+      {errors.nickname?.message}
+    </div>
   ) : (
     <div />
   );
   const emailPartOneError = errors.emailPartOne?.message ? (
-    <div className={styles.message}>{errors.emailPartOne?.message}</div>
+    <div className={`${styles.message} ${styles.emailOneMessage}`}>
+      {errors.emailPartOne?.message}
+    </div>
   ) : (
     <div />
   );
 
   const emailPartTwoError = errors.emailPartTwo?.message ? (
-    <div className={styles.message}>{errors.emailPartTwo?.message}</div>
+    <div className={`${styles.message} ${styles.emailTwoMessage}`}>
+      {errors.emailPartTwo?.message}
+    </div>
+  ) : (
+    <div />
+  );
+  const validationError = errors.validationCode?.message ? (
+    <div className={`${styles.message} ${styles.validationCode}`}>
+      {errors.validationCode?.message}
+    </div>
   ) : (
     <div />
   );
@@ -264,7 +294,7 @@ const Signup: NextPage = () => {
           <span className={styles.guide}>@</span>
 
           <select
-            className={`${styles.selectInput} ${styles.mailTwoForm}`}
+            className={`${styles.selectInput} ${styles.mailForm}`}
             {...register("emailPartTwo")}
           >
             <option value="naver.com">네이버</option>
@@ -279,6 +309,24 @@ const Signup: NextPage = () => {
 
           {emailPartOneError}
           {emailPartTwoError}
+          <div>
+            <label htmlFor="validationInput">
+              <input
+                className={`${styles.inputForm} ${styles.validationForm}`}
+                {...register("validationCode", {
+                  required: "인증 번호를 입력하세요.",
+                  minLength: {
+                    value: 1,
+                    message: "인증번호는 1글자 이상입니다",
+                  },
+                })}
+                type="text"
+                placeholder="인증번호를 입력하세요."
+                onInput={clearLoginError}
+              />
+            </label>
+          </div>
+          {validationError}
           <input
             className={`${styles.inputForm} ${styles.inputBtn}`}
             type="submit"
