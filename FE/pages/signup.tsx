@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../styles/loginSignup.module.css";
-import { apiSignup } from "../api/user";
+import { apiSignup, apiCheckId, apiCheckNickname } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
@@ -56,13 +56,14 @@ const Signup: NextPage = () => {
 
     if (password === passwordConfirmation) {
       try {
-        apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        apiSignup(
+          `${emailPartOne}@${emailPartTwo}`,
+          id,
+          nickname,
+          password
+        ).catch((err) => {
+          console.log(err);
+        });
       } catch (e) {
         const error = e as AxiosError;
         if (error?.response?.status === 401) {
@@ -77,31 +78,49 @@ const Signup: NextPage = () => {
   };
 
   const idValidation = () => {
-    console.log("아이디 존재 에러");
+    const { id } = getValues();
+
     try {
       // api 연결 - 아이디 중복 검사
+      apiCheckId(id)
+        .then((res) => {
+          // 아이디 중복이라면
+          if (res.data === "아이디 중복") {
+            setError("id", { message: "해당 아이디가 이미 존재합니다." });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (e) {
-      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
-      if (error?.response?.status === 401) {
-        setError("result", { message: "해당 아이디가 이미 존재합니다." });
-      }
+      const error = e as AxiosError;
+      console.log(error);
     }
   };
 
   const nicknameValidation = () => {
-    console.log("닉네임 존재 에러");
+    const { nickname } = getValues();
     try {
       // api 연결 - 닉네임 중복 검사
+      apiCheckNickname(nickname)
+        .then((res) => {
+          if (res.data === "닉네임 중복") {
+            setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
+          }
+        })
+        .catch((err) => {
+          // 에러 처리 -> alert 처리?!
+          setError("result", { message: "해당 닉네임이 이미 존재합니다." });
+          console.log(err);
+        });
     } catch (e) {
       const error = e as AxiosError; //결과를 받아서 메시지 보여주기
-      if (error?.response?.status === 401) {
-        setError("result", { message: "해당 닉네임이 이미 존재합니다." });
-      }
+      console.log(error);
     }
   };
 
   const submitEmail = () => {};
-  
+
   const clearLoginError = () => {
     clearErrors("result");
   };
