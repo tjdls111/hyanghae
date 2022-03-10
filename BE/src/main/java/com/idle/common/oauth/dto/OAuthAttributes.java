@@ -1,6 +1,17 @@
-package com.ssafy.ej.config.auth.dto;
+/**
+ *
+ * OAuthAttributes
+ * 소셜로그인 정보를 저장할 Dto
+ *
+ * @author Davoid
+ * @version 1.0.0
+ * 생성일 2022-03-08
+ * 마지막 수정일 2022-03-10
+ **/
+package com.idle.common.oauth.dto;
 
-import com.ssafy.ej.db.User;
+
+import com.idle.db.entity.User;
 import lombok.Builder;
 import lombok.Getter;
 
