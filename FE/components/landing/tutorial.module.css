@@ -1,0 +1,96 @@
+.tutorial {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 15rem 5rem 5rem;
+}
+
+.introBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5rem;
+}
+
+.subHeading {
+  font-size: 3rem;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.mainHeading {
+  font-size: 5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+/* steps section */
+
+.steps {
+  width: 100%;
+  padding: 10rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.stepImgBox {
+  position: relative;
+  width: 50rem;
+  height: 50rem;
+}
+
+.stepImg {
+  border-radius: 10%;
+  object-fit: cover;
+}
+
+.stepNumber {
+  font-size: 8.6rem;
+  font-weight: 600;
+  color: #ccc;
+  margin-bottom: 4rem;
+}
+
+.stepHeading {
+  font-size: 4rem;
+  color: #333;
+  margin-bottom: 4rem;
+  font-weight: 700;
+}
+
+.stepDescription {
+  font-size: 2rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .stepImgBox {
+    width: 40rem;
+    height: 40rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+  .stepImgBox:nth-child(1) {
+    order: 2;
+  }
+  .stepTextBox:nth-child(2) {
+    order: 1;
+  }
+  .stepImgBox:nth-child(4) {
+    order: 4;
+  }
+  .stepTextBox:nth-child(3) {
+    order: 3;
+  }
+  .stepImgBox:nth-child(5) {
+    order: 6;
+  }
+  .stepTextBox:nth-child(6) {
+    order: 5;
+  }
+}
