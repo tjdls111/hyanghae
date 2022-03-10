@@ -38,3 +38,9 @@ body {
   font-weight: 400;
   color: var(--color-grey-dark-3);
 }
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 50%;
+  }
+}

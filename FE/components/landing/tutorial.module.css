@@ -1,7 +1,7 @@
 .tutorial {
   max-width: 120rem;
   margin: 0 auto;
-  padding-top: 15rem;
+  padding: 15rem 5rem 5rem;
 }
 
 .introBox {
@@ -62,4 +62,17 @@
 .stepDescription {
   font-size: 2rem;
   line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+  .stepImgBox {
+    width: 40rem;
+    height: 40rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
 }
