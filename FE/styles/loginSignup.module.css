@@ -72,6 +72,14 @@
   margin-top: 0.5em;
 }
 
+.signup {
+  cursor: pointer;
+}
+
+.main {
+  cursor: pointer;
+}
+
 .selectInput {
   width: 8em;
   height: 3em;
