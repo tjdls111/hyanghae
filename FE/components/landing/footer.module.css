@@ -30,3 +30,7 @@
 .footerContent {
   font-size: 1.6rem;
 }
+.footerLink {
+  font-size: 1.6rem;
+  cursor: pointer;
+}
