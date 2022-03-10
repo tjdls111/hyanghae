@@ -49,18 +49,18 @@ const Login: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={styles.message}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>{errors.result?.message}</div>
   ) : (
     <div />
   );
 
   const idError = errors.id?.message ? (
-    <div className={styles.message}>{errors.id?.message}</div>
+    <div className={`${styles.message} ${styles.idMessage}`}>{errors.id?.message}</div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={styles.message}>{errors.password?.message}</div>
+    <div className={`${styles.message} ${styles.pwMessage}`}>{errors.password?.message}</div>
   ) : (
     <div />
   );
