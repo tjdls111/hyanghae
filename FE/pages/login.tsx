@@ -49,18 +49,24 @@ const Login: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={`${styles.message} ${styles.resultMessage}`}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>
+      {errors.result?.message}
+    </div>
   ) : (
     <div />
   );
 
   const idError = errors.id?.message ? (
-    <div className={`${styles.message} ${styles.idMessage}`}>{errors.id?.message}</div>
+    <div className={`${styles.message} ${styles.idMessage}`}>
+      {errors.id?.message}
+    </div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={`${styles.message} ${styles.pwMessage}`}>{errors.password?.message}</div>
+    <div className={`${styles.message} ${styles.pwMessage}`}>
+      {errors.password?.message}
+    </div>
   ) : (
     <div />
   );
@@ -79,7 +85,8 @@ const Login: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message:
+                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -104,7 +111,8 @@ const Login: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,

@@ -6,6 +6,7 @@
 마지막 수정일 2022-03-10
 */
 import axios from "axios";
+import { BASE_URL } from "./utils";
 
 export const apiSignup = (
   userEmail: string,
@@ -15,11 +16,23 @@ export const apiSignup = (
 ) =>
   axios({
     method: "post",
-    url: "http://localhost:8181/user/signup",
+    url: `${BASE_URL}/user/signup`,
     data: {
       userEmail,
       userId,
       userNickname,
       userPw: password,
     },
+  });
+
+export const apiCheckNickname = (userNickname: string) =>
+  axios({
+    method: "get",
+    url: `${BASE_URL}/user/checkunickname/${userNickname}`,
+  });
+
+export const apiCheckId = (userId: string) =>
+  axios({
+    method: "get",
+    url: `${BASE_URL}/user/checkuid/${userId}`,
   });

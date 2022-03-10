@@ -100,6 +100,8 @@ const Signup: NextPage = () => {
     }
   };
 
+  const submitEmail = () => {};
+  
   const clearLoginError = () => {
     clearErrors("result");
   };
@@ -310,7 +312,11 @@ const Signup: NextPage = () => {
             <option value="gmail.com">지메일</option>
           </select>
           <span>
-            <button type="button" className={styles.smallInputBtn}>
+            <button
+              onClick={submitEmail}
+              type="button"
+              className={styles.smallInputBtn}
+            >
               검사
             </button>
           </span>
