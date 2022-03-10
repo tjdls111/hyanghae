@@ -29,6 +29,7 @@ const Signup: NextPage = () => {
   const isLoggedIn = false;
   const [isIdChecked, setIsIdChecked] = useState(false);
   const [isNicknameChecked, setisNicknameChecked] = useState(false);
+  const [isEmailChecked, setisEmailChecked] = useState(false);
 
   const {
     register,
@@ -97,12 +98,13 @@ const Signup: NextPage = () => {
     const { id } = getValues();
 
     try {
-      // api 연결 - 아이디 중복 검사
       apiCheckId(id)
         .then((res) => {
-          // 아이디 중복이라면
+          console.log(res);
+
           if (res.data === "아이디 중복") {
             setError("id", { message: "해당 아이디가 이미 존재합니다." });
+            setIsIdChecked(false);
           } else {
             setIsIdChecked(true);
           }
@@ -119,11 +121,13 @@ const Signup: NextPage = () => {
   const nicknameValidation = () => {
     const { nickname } = getValues();
     try {
-      // api 연결 - 닉네임 중복 검사
       apiCheckNickname(nickname)
         .then((res) => {
+          console.log(res);
+
           if (res.data === "닉네임 중복") {
             setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
+            setisNicknameChecked(false);
           } else {
             setisNicknameChecked(true);
           }
@@ -241,7 +245,7 @@ const Signup: NextPage = () => {
                 onClick={idValidation}
                 className={styles.smallInputBtn}
               >
-                검사
+                {isIdChecked ? "완료" : " 검사"}
               </button>
             </span>
           </label>
@@ -320,7 +324,7 @@ const Signup: NextPage = () => {
                 onClick={nicknameValidation}
                 className={styles.smallInputBtn}
               >
-                검사
+                {isNicknameChecked ? "완료" : " 검사"}
               </button>
             </span>
           </label>
