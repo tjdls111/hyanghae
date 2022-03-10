@@ -24,19 +24,26 @@ public class Survey1 extends BaseTimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "s_id")
     Long surveyId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "u_seq", nullable = false)
     User user;
+
     @Column(name="gender", nullable = false)
     int gender;
+
     @Column(name="age", nullable = false)
     int age;
+
     @Column(name="season", nullable = false)
     int season;
+
     @Column(name="tpo", nullable = false)
     int tpo;
+
     @Column(name="mood", nullable = false)
     int mood;
+
     @Column(name="s_title", nullable = false)
     String surveyTitle;
 
