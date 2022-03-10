@@ -12,6 +12,7 @@ package com.idle.api.controller;
 
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.service.UserService;
+import com.idle.db.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     /* Alice */
     @ApiOperation("회원가입")
     @PostMapping("/signup")
@@ -34,6 +38,17 @@ public class UserController {
             return new ResponseEntity<>("회원가입 실패", HttpStatus.OK);
         }
         return new ResponseEntity<>("회원가입 성공", HttpStatus.OK);
+    }
+
+    /* Alice */
+    @ApiOperation("아이디 중복 검사")
+    @PostMapping("/checkuid/{userId}")
+    public ResponseEntity<String> checkUserId(@PathVariable("userId") String userId){
+        String result = userService.checkUserId(userId);
+        if(result.equals("fail")){
+            return new ResponseEntity<>("아이디 중복", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("아이디 사용 가능", HttpStatus.OK);
     }
 
 }
