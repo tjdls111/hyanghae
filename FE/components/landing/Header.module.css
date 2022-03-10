@@ -77,3 +77,13 @@
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
+
+@media (max-width: 550px) {
+  .bigText {
+    font-size: 4rem;
+  }
+
+  .smallText {
+    font-size: 2rem;
+  }
+}
