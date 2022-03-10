@@ -71,7 +71,7 @@
 }
 
 .button:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
+  transform: scaleX(1.2) scaleY(1.4);
   opacity: 0;
 }
 
