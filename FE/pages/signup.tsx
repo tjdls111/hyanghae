@@ -1,16 +1,18 @@
 /*
 회원가입
-회원가입 폼
+회원가입 폼, 회원 가입 api 연결 중
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-08
+마지막 수정일 2022-03-10
 */
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../styles/loginSignup.module.css";
+import { apiSignup, apiCheckId, apiCheckNickname } from "../api/user";
+import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
   result: string;
@@ -25,6 +27,10 @@ interface SignupInput {
 
 const Signup: NextPage = () => {
   const isLoggedIn = false;
+  const [isIdChecked, setIsIdChecked] = useState(false);
+  const [isNicknameChecked, setisNicknameChecked] = useState(false);
+  const [isEmailChecked, setisEmailChecked] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -46,45 +52,92 @@ const Signup: NextPage = () => {
     const { id, password, passwordConfirmation, nickname, emailPartOne, emailPartTwo } =
       getValues();
 
-    if (password === passwordConfirmation) {
-      try {
-        // api 연결
-      } catch (e) {
-        const error = e as AxiosError;
-        if (error?.response?.status === 401) {
-          setError("result", { message: "일치하는 사용자 정보가 없습니다." });
+    if (isIdChecked) {
+      if (isNicknameChecked) {
+        if (password === passwordConfirmation) {
+          try {
+            apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          } catch (e) {
+            const error = e as AxiosError;
+            if (error?.response?.status === 401) {
+              setError("result", {
+                message: "일치하는 사용자 정보가 없습니다.",
+              });
+            }
+          }
+        } else {
+          setError("passwordConfirmation", {
+            message: "비밀번호가 일치하지 않습니다. 다시 확인해주세요.",
+          });
         }
+      } else {
+        setError("result", {
+          message: "닉네임 중복 검사를 해주세요!",
+        });
       }
     } else {
-      setError("passwordConfirmation", {
-        message: "비밀번호가 일치하지 않습니다. 다시 확인해주세요.",
+      setError("result", {
+        message: "아이디 중복 검사를 해주세요!",
       });
     }
   };
 
   const idValidation = () => {
-    console.log("아이디 존재 에러");
+    const { id } = getValues();
+
     try {
-      // api 연결 - 아이디 중복 검사
+      apiCheckId(id)
+        .then((res) => {
+          console.log(res);
+
+          if (res.data === "아이디 중복") {
+            setError("id", { message: "해당 아이디가 이미 존재합니다." });
+            setIsIdChecked(false);
+          } else {
+            setIsIdChecked(true);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (e) {
-      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
-      if (error?.response?.status === 401) {
-        setError("result", { message: "해당 아이디가 이미 존재합니다." });
-      }
+      const error = e as AxiosError;
+      console.log(error);
     }
   };
 
   const nicknameValidation = () => {
-    console.log("닉네임 존재 에러");
+    const { nickname } = getValues();
     try {
-      // api 연결 - 닉네임 중복 검사
+      apiCheckNickname(nickname)
+        .then((res) => {
+          console.log(res);
+
+          if (res.data === "닉네임 중복") {
+            setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
+            setisNicknameChecked(false);
+          } else {
+            setisNicknameChecked(true);
+          }
+        })
+        .catch((err) => {
+          // 에러 처리 -> alert 처리?!
+          setError("result", { message: "해당 닉네임이 이미 존재합니다." });
+          console.log(err);
+        });
     } catch (e) {
       const error = e as AxiosError; //결과를 받아서 메시지 보여주기
-      if (error?.response?.status === 401) {
-        setError("result", { message: "해당 닉네임이 이미 존재합니다." });
-      }
+      console.log(error);
     }
   };
+
+  const submitEmail = () => {};
 
   const clearLoginError = () => {
     clearErrors("result");
@@ -181,8 +234,12 @@ const Signup: NextPage = () => {
               aria-label="id"
             />
             <span>
-              <button type="button" onClick={idValidation} className={styles.smallInputBtn}>
-                검사
+              <button
+                type="button"
+                onClick={idValidation}
+                className={styles.smallInputBtn}
+              >
+                {isIdChecked ? "완료" : " 검사"}
               </button>
             </span>
           </label>
@@ -257,8 +314,12 @@ const Signup: NextPage = () => {
               aria-label="nickname"
             />
             <span>
-              <button type="button" onClick={nicknameValidation} className={styles.smallInputBtn}>
-                검사
+              <button
+                type="button"
+                onClick={nicknameValidation}
+                className={styles.smallInputBtn}
+              >
+                {isNicknameChecked ? "완료" : " 검사"}
               </button>
             </span>
           </label>
@@ -290,7 +351,11 @@ const Signup: NextPage = () => {
             <option value="gmail.com">지메일</option>
           </select>
           <span>
-            <button type="button" className={styles.smallInputBtn}>
+            <button
+              onClick={submitEmail}
+              type="button"
+              className={styles.smallInputBtn}
+            >
               검사
             </button>
           </span>

@@ -10,6 +10,7 @@
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
+  margin: 1em;
 }
 
 .inputContainer {
@@ -70,6 +71,14 @@
 .guide {
   color: var(--color-grey-light-1);
   margin-top: 0.5em;
+}
+
+.signup {
+  cursor: pointer;
+}
+
+.main {
+  cursor: pointer;
 }
 
 .selectInput {
