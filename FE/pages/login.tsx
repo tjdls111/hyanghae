@@ -12,6 +12,7 @@ import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../styles/loginsignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
+import Link from "next/link";
 
 interface LoginInput {
   result: string;
@@ -57,14 +58,14 @@ const Login: NextPage = () => {
   );
 
   const idError = errors.id?.message ? (
-    <div className={`${styles.message} ${styles.idMessage}`}>
+    <div className={`${styles.message} ${styles.idMessage}`} role="alert">
       {errors.id?.message}
     </div>
   ) : (
     <div />
   );
   const pwError = errors.password?.message ? (
-    <div className={`${styles.message} ${styles.pwMessage}`}>
+    <div className={`${styles.message} ${styles.pwMessage}`} role="alert">
       {errors.password?.message}
     </div>
   ) : (
@@ -141,8 +142,10 @@ const Login: NextPage = () => {
           </button>
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
-        <strong className={styles.guide}>지금 가입하세요</strong>
-        <p className={styles.guide}>그냥 둘러 볼게요.</p>
+        <Link href="/signup">
+          <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
+        </Link>
+        <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
       </div>
     </div>
   );
