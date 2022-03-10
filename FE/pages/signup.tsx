@@ -61,14 +61,13 @@ const Signup: NextPage = () => {
       if (isNicknameChecked) {
         if (password === passwordConfirmation) {
           try {
-            apiSignup(
-              `${emailPartOne}@${emailPartTwo}`,
-              id,
-              nickname,
-              password
-            ).catch((err) => {
-              console.log(err);
-            });
+            apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           } catch (e) {
             const error = e as AxiosError;
             if (error?.response?.status === 401) {
