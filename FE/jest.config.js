@@ -1,5 +1,6 @@
 // jest.config.js
 module.exports = {
+  setupFilesAfterEnv: ["<rootDir>/setup.ts"],
   collectCoverageFrom: ["**/*.{js,jsx,ts,tsx}", "!**/*.d.ts", "!**/node_modules/**"],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
