@@ -13,6 +13,7 @@ import com.idle.api.request.UserLoginRequest;
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.request.UserUpdateRequest;
 import com.idle.api.response.BaseResponseBody;
+import com.idle.api.response.UserEmailNumberResponse;
 import com.idle.api.response.UserLoginResponse;
 import com.idle.api.service.UserService;
 import com.idle.common.jwt.JwtTokenUtil;
@@ -47,55 +48,55 @@ public class UserController {
     /* Alice */
     @ApiOperation("회원가입")
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
+    public ResponseEntity<BaseResponseBody> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
         String user = userService.insertUser(userSignUpRequest);
 
         if (user.equals("fail")) {
-            return new ResponseEntity<>("회원가입 실패", HttpStatus.OK);
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"회원가입 실패"));
         }
-        return new ResponseEntity<>("회원가입 성공", HttpStatus.OK);
+        return ResponseEntity.ok(BaseResponseBody.of(200,"회원가입 성공"));
     }
 
     /* Alice */
     @ApiOperation("아이디 중복 검사")
     @GetMapping("/duplicateid/{userId}")
-    public ResponseEntity<String> checkDuplicateUserId(@PathVariable("userId") String userId) {
+    public ResponseEntity<BaseResponseBody> checkDuplicateUserId(@PathVariable("userId") String userId) {
         String result = userService.checkDuplicateUserId(userId);
         if (result.equals("fail")) {
-            return new ResponseEntity<>("아이디 중복", HttpStatus.OK);
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"아이디 중복"));
         }
-        return new ResponseEntity<>("아이디 사용 가능", HttpStatus.OK);
+        return ResponseEntity.ok(BaseResponseBody.of(200,"아이디 사용 가능"));
     }
 
     /* Alice */
     @ApiOperation("닉네임 중복 검사")
     @GetMapping("/duplicatenickname/{userNickname}")
-    public ResponseEntity<String> checkDuplicateUserNickname(@PathVariable("userNickname") String userNickname) {
+    public ResponseEntity<BaseResponseBody> checkDuplicateUserNickname(@PathVariable("userNickname") String userNickname) {
         String result = userService.checkDuplicateUserNickname(userNickname);
         if (result.equals("fail")) {
-            return new ResponseEntity<>("닉네임 중복", HttpStatus.OK);
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"닉네임 중복"));
         }
-        return new ResponseEntity<>("닉네임 사용 가능", HttpStatus.OK);
+        return ResponseEntity.ok(BaseResponseBody.of(200,"닉네임 사용 가능"));
     }
 
     /* Alice */
     @ApiOperation("이메일 인증번호 전송")
     @GetMapping(value = "/sendemailnum/{email}")
-    public ResponseEntity<String> sendUserEmailNumber(@PathVariable("email") String email) {
-        userService.sendUserEmailNumber(email);
+    public ResponseEntity<UserEmailNumberResponse> sendUserEmailNumber(@PathVariable("email") String email) {
+        String res = userService.sendUserEmailNumber(email);
 
-        return new ResponseEntity<>("인증 번호를 전송했습니다.", HttpStatus.OK);
+        return ResponseEntity.ok(UserEmailNumberResponse.of(200,"인증번호를 전송했습니다.", res));
     }
 
     /* Woody */
     @ApiOperation("마이페이지 비밀번호 검사")
     @PostMapping("/checkpw")
-    public ResponseEntity<String> checkUserPw(@RequestParam("userPw") String userPw) {
+    public ResponseEntity<BaseResponseBody> checkUserPw(@RequestParam("userPw") String userPw) {
         String result = userService.checkUserPw(userPw);
         if (result.equals("fail")) {
-            return new ResponseEntity<>("비밀번호가 맞지 않습니다!", HttpStatus.OK);
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"비밀번호가 맞지 않습니다."));
         }
-        return new ResponseEntity<>("비밀번호 인증 성공", HttpStatus.OK);
+        return ResponseEntity.ok(BaseResponseBody.of(200,"비밀번호 인증 성공"));
     }
 
     /* Alice, David */

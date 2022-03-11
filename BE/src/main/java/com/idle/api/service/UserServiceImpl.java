@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService{
 
     /* Alice : 이메일 인증번호 전송 */
     @Override
-    public void sendUserEmailNumber(String userEmail){
+    public String sendUserEmailNumber(String userEmail){
         // 이메일 인증번호 생성
         String tempEmailNumber = getRamdomNumber(10);
 
@@ -97,6 +97,8 @@ public class UserServiceImpl implements UserService{
 
         // 메일 발송
         javaMailSender.send(simpleMessage);
+
+        return tempEmailNumber;
     }
 
     /* Alice : 인증번호 생성 */
