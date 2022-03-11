@@ -13,6 +13,8 @@ import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
+import { apiLogin } from "../api/user";
+import Router from "next/router";
 
 interface LoginInput {
   result: string;
@@ -36,12 +38,16 @@ const Login: NextPage = () => {
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
     try {
-      // api 연결
+      apiLogin(id, password)
+        .then((res) => {
+          console.log(res);
+          // 토큰 저장
+          
+          Router.push("/");
+        })
+        .catch(console.log);
     } catch (e) {
       const error = e as AxiosError;
-      if (error?.response?.status === 401) {
-        setError("result", { message: "일치하는 사용자 정보가 없습니다." });
-      }
     }
   };
 

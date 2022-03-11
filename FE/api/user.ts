@@ -23,19 +23,37 @@ export const apiSignup = async (
       userNickname,
       userPw: password,
     },
-  });
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
 
 export const apiCheckNickname = async (userNickname: string) =>
   await axios({
     method: "get",
     url: `${BASE_URL}/user/duplicateunickname/${userNickname}`,
-  });
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
 
 export const apiCheckId = async (userId: string) =>
   await axios({
     method: "get",
     url: `${BASE_URL}/user/duplicateuid/${userId}`,
-  });
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
 
 export const apiLogin = async (userId: string, userPw: string) =>
   await axios({
@@ -45,4 +63,10 @@ export const apiLogin = async (userId: string, userPw: string) =>
       userId,
       userPw,
     },
-  });
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err;
+    });
