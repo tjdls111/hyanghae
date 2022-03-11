@@ -24,6 +24,8 @@ public interface UserService {
     String sendUserEmailNumber(String userEmail);
     String login(UserLoginRequest userLoginRequest);
     String passwordEncode(String userPw);
+    String findUserIdByUserEmail(String userEmail);
     User getUserByUserId(String userId);
     void updateUser(UserUpdateRequest userUpdateReq, User user);
+
 }

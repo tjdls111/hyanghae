@@ -54,6 +54,7 @@ public class OAuthAttributes {
                 .userPw("social")
                 .userNickname(name)
                 .userEmail(email)
+                .userType("social")
                 .build();
     }
 }

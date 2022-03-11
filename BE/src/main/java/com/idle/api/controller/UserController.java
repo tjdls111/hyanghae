@@ -123,4 +123,15 @@ public class UserController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
+    /* David */
+    @ApiOperation("아이디 찾기")
+    @GetMapping("/finduserid/{email}")
+    public ResponseEntity<BaseResponseBody> findUserId(@PathVariable("email") String email) {
+        String res = userService.findUserIdByUserEmail(email);
+
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"해당 이메일로 가입된 아이디가 없습니다."));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 아이디를 전송했습니다."));
+    }
 }
