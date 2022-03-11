@@ -3,7 +3,7 @@
 * UserServiceImpl
 * 회원가입, 아이디 중복 검사, 닉네임 중복 검사, 비밀번호 암호화, 로그인 함수 생성
 *
-* @author Alice,David
+* @author Alice,David, Woody
 * @version 1.0.0
 * 생성일 2022-03-10
 * 마지막 수정일 2022-03-11
@@ -12,6 +12,7 @@ package com.idle.api.service;
 
 import com.idle.api.request.UserLoginRequest;
 import com.idle.api.request.UserSignUpRequest;
+import com.idle.api.request.UserUpdateRequest;
 import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -104,5 +105,14 @@ public class UserServiceImpl implements UserService{
                 () -> assertTrue(passwordEncoder.matches(userPw, encodedPassword))
         );
         return encodedPassword;
+    }
+
+    /* Woody : 회원 정보 수정 */
+    @Override
+    public void updateUser(UserUpdateRequest userUpdateReq, User user) {
+        user.setUserPw(passwordEncoder.encode(userUpdateReq.getUserPw()));
+        user.setUserNickname(userUpdateReq.getUserNickname());
+
+        userRepository.save(user);
     }
 }
