@@ -8,13 +8,13 @@
 import axios from "axios";
 import { BASE_URL } from "./utils";
 
-export const apiSignup = (
+export const apiSignup = async (
   userEmail: string,
   userId: string,
   userNickname: string,
   password: string
 ) =>
-  axios({
+  await axios({
     method: "post",
     url: `${BASE_URL}/user/signup`,
     data: {
@@ -25,20 +25,20 @@ export const apiSignup = (
     },
   });
 
-export const apiCheckNickname = (userNickname: string) =>
-  axios({
+export const apiCheckNickname = async (userNickname: string) =>
+  await axios({
     method: "get",
     url: `${BASE_URL}/user/duplicateunickname/${userNickname}`,
   });
 
-export const apiCheckId = (userId: string) =>
-  axios({
+export const apiCheckId = async (userId: string) =>
+  await axios({
     method: "get",
     url: `${BASE_URL}/user/duplicateuid/${userId}`,
   });
 
-export const apiLogin = (userId: string, userPw: string) =>
-  axios({
+export const apiLogin = async (userId: string, userPw: string) =>
+  await axios({
     method: "post",
     url: `${BASE_URL}/user/login`,
     data: {

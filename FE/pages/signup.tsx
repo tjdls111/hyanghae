@@ -7,6 +7,7 @@
 마지막 수정일 2022-03-10
 */
 import type { NextPage } from "next";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
@@ -45,6 +46,7 @@ const Signup: NextPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       // 메인 페이지로 넘기기
+      Router.push("/");
     }
   }, [isLoggedIn]);
 
@@ -64,6 +66,7 @@ const Signup: NextPage = () => {
           try {
             apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
               .then((res) => {
+                Router.push("/login");
                 console.log(res);
               })
               .catch((err) => {
