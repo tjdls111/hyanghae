@@ -2,11 +2,12 @@
  *
  * SecurityConfig
  * 인증(authentication) 과 인가(authorization) 처리를 위한 스프링 시큐리티 설정 정의.
+ * 비밀번호 인코딩 소스 추가
  *
- * @author David
+ * @author David, Alice
  * @version 1.0.0
  * 생성일 2022-03-08
- * 마지막 수정일 2022-03-10
+ * 마지막 수정일 2022-03-11
  **/
 package com.idle.config;
 
@@ -38,6 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
@@ -48,6 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and().cors();
 
+        http.cors().disable()
+                .csrf().disable()
+                .formLogin().disable()
+                .headers().frameOptions().disable();
 
         http.oauth2Login()
                 .and()
