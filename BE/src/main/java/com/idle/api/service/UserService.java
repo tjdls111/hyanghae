@@ -21,7 +21,7 @@ public interface UserService {
     String checkUserPw(String userPw);
     String checkDuplicateUserId(String userId);
     String checkDuplicateUserNickname(String userNickname);
-    void sendUserEmailNumber(String userEmail);
+    String sendUserEmailNumber(String userEmail);
     String login(UserLoginRequest userLoginRequest);
     String passwordEncode(String userPw);
     User getUserByUserId(String userId);
