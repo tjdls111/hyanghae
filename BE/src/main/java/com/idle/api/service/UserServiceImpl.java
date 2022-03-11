@@ -45,6 +45,8 @@ public class UserServiceImpl implements UserService{
         String userPw = passwordEncode(user.getUserPw());   // 비밀번호 인코딩
         user.setUserPw(userPw);    // Security ver5 부터 명칭 해줘야함
         userRepository.save(user);
+        if(user.getUserId().equals("") || user.getUserPw().equals("") ||
+        user.getUserNickname().equals(""))
         return "success";
     }
 
