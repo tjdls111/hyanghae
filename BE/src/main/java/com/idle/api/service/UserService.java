@@ -3,7 +3,7 @@
 * UserService
 * 회원가입, 아이디 중복 검사, 닉네임 중복 검사, 비밀번호 암호화 함수 생성
 *
-* @author Alice,David, Woody
+* @author Alice, David, Woody
 * @version 1.0.0
 * 생성일 2022-03-08
 * 마지막 수정일 2022-03-11
@@ -21,6 +21,7 @@ public interface UserService {
     String checkUserPw(String userPw);
     String checkDuplicateUserId(String userId);
     String checkDuplicateUserNickname(String userNickname);
+    void sendUserEmailNumber(String userEmail);
     String login(UserLoginRequest userLoginRequest);
     String passwordEncode(String userPw);
     User getUserByUserId(String userId);
