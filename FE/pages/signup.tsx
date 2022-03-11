@@ -221,6 +221,9 @@ const Signup: NextPage = () => {
           {resultError}
           <label htmlFor="id">
             <input
+              onKeyUp={() => {
+                setIsIdChecked(false);
+              }}
               className={`${styles.smallInputForm} ${styles.idForm}`}
               {...register("id", {
                 required: "아이디를 입력하세요.",
@@ -394,7 +397,9 @@ const Signup: NextPage = () => {
           </div>
           {validationError}
           <button
-            className={`${styles.inputForm} ${styles.inputBtn}`}
+            className={`${styles.inputForm} ${styles.inputBtn} ${
+              isValid && isIdChecked && isNicknameChecked && styles.canClick
+            }`}
             type="submit"
             value="회원가입"
             disabled={!isValid}
