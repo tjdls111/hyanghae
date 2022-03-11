@@ -1,0 +1,96 @@
+.container {
+  background-color: var(--color-grey-dark-1);
+}
+
+.logo {
+  display: block;
+  margin: 0px auto;
+}
+
+.title {
+  color: var(--color-grey-light-1);
+  text-align: center;
+  margin: 1em;
+}
+
+.inputContainer {
+  text-align: center;
+  padding-bottom: 20em;
+}
+
+.inputForm {
+  width: 20.5em;
+  height: 3em;
+  background-color: var(--color-grey-light-2);
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.smallInputForm {
+  width: 17em;
+  height: 3em;
+  background-color: var(--color-grey-light-2);
+  border: 0.1em solid var(--color-grey-dark-1);
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.emailInputForm {
+  width: 8em;
+  height: 3em;
+  background-color: var(--color-grey-light-2);
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.inputBtn {
+  width: 21em;
+  height: 3em;
+
+  background: var(--color-grey-dark-3);
+  color: var(--color-grey-light-1);
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.smallInputBtn {
+  width: 3.5em;
+  height: 3em;
+  background-color: var(--color-primary-light-2);
+  color: var(--color-grey-light-1);
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+
+.message {
+  color: var(--color-grey-light-1);
+  padding: 0.8em;
+}
+
+.guide {
+  color: var(--color-grey-light-1);
+  margin-top: 0.5em;
+}
+
+.signup {
+  cursor: pointer;
+}
+
+.main {
+  cursor: pointer;
+}
+
+.selectInput {
+  width: 8em;
+  height: 3em;
+  border-radius: 0.2em;
+  outline: 0 none;
+  background: var(--color-grey-light-2);
+}
+
+.canClick {
+  background-color: var(--color-primary-light-2);
+  color: var(--color-grey-light-1);
+}

@@ -7,10 +7,11 @@
 마지막 수정일 2022-03-10
 */
 import type { NextPage } from "next";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/loginSignup.module.css";
+import styles from "../components/loginSignup/loginsignup.module.css";
 import { apiSignup, apiCheckId, apiCheckNickname } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
@@ -45,12 +46,19 @@ const Signup: NextPage = () => {
   useEffect(() => {
     if (isLoggedIn) {
       // 메인 페이지로 넘기기
+      Router.push("/");
     }
   }, [isLoggedIn]);
 
   const onValidSubmit: SubmitHandler<SignupInput> = async () => {
-    const { id, password, passwordConfirmation, nickname, emailPartOne, emailPartTwo } =
-      getValues();
+    const {
+      id,
+      password,
+      passwordConfirmation,
+      nickname,
+      emailPartOne,
+      emailPartTwo,
+    } = getValues();
 
     if (isIdChecked) {
       if (isNicknameChecked) {
@@ -58,6 +66,7 @@ const Signup: NextPage = () => {
           try {
             apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
               .then((res) => {
+                Router.push("/login");
                 console.log(res);
               })
               .catch((err) => {
@@ -166,7 +175,10 @@ const Signup: NextPage = () => {
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div className={`${styles.message} ${styles.pwConfirmationMessage}`} role="alert">
+    <div
+      className={`${styles.message} ${styles.pwConfirmationMessage}`}
+      role="alert"
+    >
       {errors.passwordConfirmation?.message}
     </div>
   ) : (
@@ -212,12 +224,16 @@ const Signup: NextPage = () => {
           {resultError}
           <label htmlFor="id">
             <input
+              onKeyUp={() => {
+                setIsIdChecked(false);
+              }}
               className={`${styles.smallInputForm} ${styles.idForm}`}
               {...register("id", {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message:
+                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -251,7 +267,8 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -276,7 +293,8 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -382,7 +400,9 @@ const Signup: NextPage = () => {
           </div>
           {validationError}
           <button
-            className={`${styles.inputForm} ${styles.inputBtn}`}
+            className={`${styles.inputForm} ${styles.inputBtn} ${
+              isValid && isIdChecked && isNicknameChecked && styles.canClick
+            }`}
             type="submit"
             value="회원가입"
             disabled={!isValid}

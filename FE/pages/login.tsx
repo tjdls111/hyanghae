@@ -4,15 +4,17 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-08
+마지막 수정일 2022-03-11
 */
 import type { NextPage } from "next";
 import { useEffect, useRef } from "react";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/loginsignup.module.css";
+import styles from "../components/loginSignup/loginsignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
+import { apiLogin } from "../api/user";
+import Router from "next/router";
 
 interface LoginInput {
   result: string;
@@ -36,12 +38,16 @@ const Login: NextPage = () => {
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
     try {
-      // api 연결
+      apiLogin(id, password)
+        .then((res) => {
+          console.log(res);
+          // 토큰 저장
+          
+          Router.push("/");
+        })
+        .catch(console.log);
     } catch (e) {
       const error = e as AxiosError;
-      if (error?.response?.status === 401) {
-        setError("result", { message: "일치하는 사용자 정보가 없습니다." });
-      }
     }
   };
 
@@ -143,7 +149,9 @@ const Login: NextPage = () => {
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
         <Link href="/signup">
-          <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
+          <strong className={`${styles.guide} ${styles.signup}`}>
+            지금 가입하세요
+          </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
       </div>
