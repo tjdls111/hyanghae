@@ -47,7 +47,8 @@
 .inputBtn {
   width: 21em;
   height: 3em;
-  background-color: var(--color-primary-light-2);
+
+  background: var(--color-grey-dark-3);
   color: var(--color-grey-light-1);
   border: 0.1em solid black;
   border-radius: 0.2em;
@@ -87,4 +88,9 @@
   border-radius: 0.2em;
   outline: 0 none;
   background: var(--color-grey-light-2);
+}
+
+.canClick {
+  background-color: var(--color-primary-light-2);
+  color: var(--color-grey-light-1);
 }

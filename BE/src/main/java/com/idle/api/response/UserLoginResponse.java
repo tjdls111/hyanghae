@@ -3,18 +3,26 @@
 * UserLoginResponse
 * 로그인 response 생성
 *
-* @author Alice
+* @author Alice,David
 * @version 1.0.0
 * 생성일 2022-03-11
 * 마지막 수정일 2022-03-11
 **/
 package com.idle.api.response;
 
-import com.idle.db.entity.User;
+
 import lombok.Data;
 
 @Data
-public class UserLoginResponse {
+public class UserLoginResponse extends BaseResponseBody{
     String token;
-    User user;
+
+    public static UserLoginResponse of(Integer statusCode, String message, String accessToken) {
+        UserLoginResponse res = new UserLoginResponse();
+        res.setStatusCode(statusCode);
+        res.setMessage(message);
+        res.setToken(accessToken);
+
+        return res;
+    }
 }
