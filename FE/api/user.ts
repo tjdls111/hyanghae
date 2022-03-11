@@ -28,13 +28,13 @@ export const apiSignup = (
 export const apiCheckNickname = (userNickname: string) =>
   axios({
     method: "get",
-    url: `${BASE_URL}/user/checkunickname/${userNickname}`,
+    url: `${BASE_URL}/user/duplicateunickname/${userNickname}`,
   });
 
 export const apiCheckId = (userId: string) =>
   axios({
     method: "get",
-    url: `${BASE_URL}/user/checkuid/${userId}`,
+    url: `${BASE_URL}/user/duplicateuid/${userId}`,
   });
 
 export const apiLogin = (userId: string, userPw: string) =>

@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-08
+마지막 수정일 2022-03-11
 */
 import type { NextPage } from "next";
 import { useEffect, useRef } from "react";
