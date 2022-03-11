@@ -54,7 +54,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
         System.out.println(token);
 
-        response.sendRedirect("/");
+//        response.sendRedirect("/");
         var writer = response.getWriter();
 
         writer.flush();
