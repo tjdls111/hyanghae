@@ -40,21 +40,19 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         OAuth2User oAuth2User = (OAuth2User)authentication.getPrincipal();
         var attributes = oAuth2User.getAttributes();
         String userId = (String) attributes.get("email");
-
-        response.setContentType("text/html;charset=UTF-8");
-
         String token = JwtTokenUtil.getToken(userId);
+//        response.setContentType("text/html;charset=UTF-8");
+//
+//        response.addHeader("Token:", JwtTokenUtil.getToken(userId));
+//        response.setContentType("application/json;charset=UTF-8");
+//
+//        // json 형태로 바꾸기
+//        String result = mapper.writeValueAsString(token);
+//        response.getWriter().write(result);
+//
+//        System.out.println(token);
 
-        response.addHeader("Token:", JwtTokenUtil.getToken(userId));
-        response.setContentType("application/json;charset=UTF-8");
-
-        // json 형태로 바꾸기
-        String result = mapper.writeValueAsString(token);
-        response.getWriter().write(result);
-
-        System.out.println(token);
-
-//        response.sendRedirect("/");
+        response.sendRedirect("http://localhost:3000/oauth/redirect?token="+token);
         var writer = response.getWriter();
 
         writer.flush();

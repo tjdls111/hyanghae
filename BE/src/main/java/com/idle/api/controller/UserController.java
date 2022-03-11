@@ -14,6 +14,7 @@ import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.UserLoginResponse;
 import com.idle.api.service.UserService;
+import com.idle.common.jwt.JwtTokenUtil;
 import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
@@ -84,28 +85,18 @@ public class UserController {
         return new ResponseEntity<>("비밀번호 인증 성공", HttpStatus.OK);
     }
 
-        /* Alice */
+    /* Alice, David */
     @ApiOperation("로그인")
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserLoginRequest userLoginRequest) {
+    public ResponseEntity<UserLoginResponse> login(@RequestBody UserLoginRequest userLoginRequest) {
         String user = userService.login(userLoginRequest);
 
         if (user.equals("fail")) {
-            return new ResponseEntity<>("아이디 및 비밀번호를 확인하세요.", HttpStatus.OK);
+            return ResponseEntity.status(401).body(UserLoginResponse.of(401,"아이디와 비밀번호를 확인 해 주세요",null));
         }
-        return new ResponseEntity<>("로그인 성공", HttpStatus.OK);
+        return ResponseEntity.ok(UserLoginResponse.of(200,"로그인 완료!", JwtTokenUtil.getToken(userLoginRequest.getUserId())));
 
-//        User user = userRepository.findByUserId(userLoginRequest.getUserId())
-//                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
-//        if (!passwordEncoder.matches(userLoginRequest.getUserPw(), user.getUserPw())) {
-//            throw new IllegalArgumentException("잘못된 비밀번호입니다.");
-//        }
-//
-//        UserLoginResponse userLoginResponse = new UserLoginResponse();
-//        userLoginResponse.setUser(user);
-//        userLoginResponse.setToken(jwtTokenProvider.createToken(user, user.getRoles()));
-//
-//        return userLoginResponse;
+
     }
 
 }
