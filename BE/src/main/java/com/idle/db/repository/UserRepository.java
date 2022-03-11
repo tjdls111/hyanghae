@@ -1,7 +1,7 @@
 /**
  *
  * UserRepository
- * findByUserId 함수 생성
+ * findByUserId, findByUserNickname 함수 생성
  *
  * @author David, Alice
  * @version 1.0.0
@@ -18,5 +18,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUserId(String userId);   // 유저 아이디로 검색
+    Optional<User> findByUserPw(String userPw);     // 유저 비밀번호 검색
     Optional<User> findByUserNickname(String userNickname); // 유저 닉네임 검색
+    Optional<User> findByUserEmail(String userEmail); // 유저 이메일 검색
 }
