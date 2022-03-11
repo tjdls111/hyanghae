@@ -164,34 +164,35 @@ public class UserServiceImpl implements UserService{
     public String findUserIdByUserEmail(String userEmail) {
 
         Optional<User> user = userRepository.findByUserEmailAndUserType(userEmail,"local");
-        if(user.isPresent()){
+        if(!user.isPresent()){
             return "fail";
+        } else{
+            // 수신 대상을 담을 ArrayList 생성
+            ArrayList<String> toUserList = new ArrayList<>();
+
+            // 수신 대상 추가
+            toUserList.add(userEmail);
+
+            // 수신 대상 개수
+            int toUserSize = toUserList.size();
+
+            // SimpleMailMessage (단순 텍스트 구성 메일 메시지 생성할 때 이용)
+            SimpleMailMessage simpleMessage = new SimpleMailMessage();
+
+            // 수신자 설정
+            simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
+
+            // 메일 제목
+            simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
+
+            // 메일 내용
+            simpleMessage.setText(user.get().getUserNickname()+"이 가입하신 아이디는 " + user.get().getUserId() + "입니다.");
+
+            // 메일 발송
+            javaMailSender.send(simpleMessage);
+
+            return "success";
         }
-        // 수신 대상을 담을 ArrayList 생성
-        ArrayList<String> toUserList = new ArrayList<>();
-
-        // 수신 대상 추가
-        toUserList.add(userEmail);
-
-        // 수신 대상 개수
-        int toUserSize = toUserList.size();
-
-        // SimpleMailMessage (단순 텍스트 구성 메일 메시지 생성할 때 이용)
-        SimpleMailMessage simpleMessage = new SimpleMailMessage();
-
-        // 수신자 설정
-        simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
-
-        // 메일 제목
-        simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
-
-        // 메일 내용
-        simpleMessage.setText(user.get().getUserNickname()+"이 가입하신 아이디는 " + user.get().getUserId() + "입니다.");
-
-        // 메일 발송
-        javaMailSender.send(simpleMessage);
-
-        return "success";
 
     }
 
