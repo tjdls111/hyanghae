@@ -1,7 +1,7 @@
 /**
  *
  * UserRepository
- * findByUserId 함수 생성
+ * findByUserId, findByUserNickname 함수 생성
  *
  * @author David, Alice
  * @version 1.0.0
