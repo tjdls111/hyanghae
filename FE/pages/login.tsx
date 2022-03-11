@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import { useEffect, useRef } from "react";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/loginsignup.module.css";
+import styles from "../components/loginSignup/loginsignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
 
@@ -143,7 +143,9 @@ const Login: NextPage = () => {
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
         <Link href="/signup">
-          <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
+          <strong className={`${styles.guide} ${styles.signup}`}>
+            지금 가입하세요
+          </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
       </div>

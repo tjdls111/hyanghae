@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../styles/loginSignup.module.css";
+import styles from "../components/loginSignup/loginsignup.module.css";
 import { apiSignup, apiCheckId, apiCheckNickname } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
@@ -49,8 +49,14 @@ const Signup: NextPage = () => {
   }, [isLoggedIn]);
 
   const onValidSubmit: SubmitHandler<SignupInput> = async () => {
-    const { id, password, passwordConfirmation, nickname, emailPartOne, emailPartTwo } =
-      getValues();
+    const {
+      id,
+      password,
+      passwordConfirmation,
+      nickname,
+      emailPartOne,
+      emailPartTwo,
+    } = getValues();
 
     if (isIdChecked) {
       if (isNicknameChecked) {
@@ -166,7 +172,10 @@ const Signup: NextPage = () => {
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div className={`${styles.message} ${styles.pwConfirmationMessage}`} role="alert">
+    <div
+      className={`${styles.message} ${styles.pwConfirmationMessage}`}
+      role="alert"
+    >
       {errors.passwordConfirmation?.message}
     </div>
   ) : (
@@ -217,7 +226,8 @@ const Signup: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message:
+                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -251,7 +261,8 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -276,7 +287,8 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
