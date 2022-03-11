@@ -47,7 +47,7 @@ dependencies {
 	implementation "io.springfox:springfox-boot-starter:3.0.0"	// swagger2와 swagger-ui 포함되어 있음
 
 	// jwt
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation("com.auth0:java-jwt:3.10.3")
 
 	// querydsl
 	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"

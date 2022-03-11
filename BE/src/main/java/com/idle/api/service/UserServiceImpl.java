@@ -64,4 +64,11 @@ public class UserServiceImpl implements UserService{
         return "success";
     }
 
+    /* David */
+    @Override
+    public User getUserByUserId(String userId) {
+        User user = userRepository.findByUserId(userId).get();
+        return user;
+    }
+
 }

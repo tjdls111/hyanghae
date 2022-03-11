@@ -12,6 +12,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.UserSignUpRequest;
+import com.idle.db.entity.User;
 
 
 public interface UserService {
@@ -20,4 +21,6 @@ public interface UserService {
     String checkUserNickname(String userNickname);
 
     String checkUserPw(String userPw);
+
+    User getUserByUserId(String userId);
 }
