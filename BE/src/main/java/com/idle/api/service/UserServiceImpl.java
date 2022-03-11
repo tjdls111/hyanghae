@@ -46,7 +46,8 @@ public class UserServiceImpl implements UserService{
         user.setUserPw(userPw);    // Security ver5 부터 명칭 해줘야함
         userRepository.save(user);
         if(user.getUserId().equals("") || user.getUserPw().equals("") ||
-        user.getUserNickname().equals(""))
+        user.getUserNickname().equals("") || user.getUserEmail().equals(""))
+            return "fail";  // 아이디, 비밀번ㅇ호, 닉네임, 이메일 중 하나라도 없으면 회원가입 실패
         return "success";
     }
 
