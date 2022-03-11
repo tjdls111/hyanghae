@@ -38,12 +38,13 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private JavaMailSender javaMailSender;
 
-    /* Alice : 회원가입 */
+    /* Alice,David : 회원가입 */
     @Override
     public String insertUser(UserSignUpRequest userSignUpRequest) {
         User user = userSignUpRequest.toEntity();
         String userPw = passwordEncode(user.getUserPw());   // 비밀번호 인코딩
         user.setUserPw(userPw);    // Security ver5 부터 명칭 해줘야함
+        user.setUserType("local");
         userRepository.save(user);
         return "success";
     }
@@ -156,6 +157,43 @@ public class UserServiceImpl implements UserService{
                 () -> assertTrue(passwordEncoder.matches(userPw, encodedPassword))
         );
         return encodedPassword;
+    }
+
+    /* David : 아이디를 이메일로 전송 */
+    @Override
+    public String findUserIdByUserEmail(String userEmail) {
+
+        Optional<User> user = userRepository.findByUserEmailAndUserType(userEmail,"local");
+        if(!user.isPresent()){
+            return "fail";
+        } else{
+            // 수신 대상을 담을 ArrayList 생성
+            ArrayList<String> toUserList = new ArrayList<>();
+
+            // 수신 대상 추가
+            toUserList.add(userEmail);
+
+            // 수신 대상 개수
+            int toUserSize = toUserList.size();
+
+            // SimpleMailMessage (단순 텍스트 구성 메일 메시지 생성할 때 이용)
+            SimpleMailMessage simpleMessage = new SimpleMailMessage();
+
+            // 수신자 설정
+            simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
+
+            // 메일 제목
+            simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
+
+            // 메일 내용
+            simpleMessage.setText(user.get().getUserNickname()+"이 가입하신 아이디는 " + user.get().getUserId() + "입니다.");
+
+            // 메일 발송
+            javaMailSender.send(simpleMessage);
+
+            return "success";
+        }
+
     }
 
     /* Woody : 회원 정보 수정 */

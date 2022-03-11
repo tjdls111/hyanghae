@@ -24,7 +24,6 @@ import com.idle.db.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,7 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
+
 
 @CrossOrigin
 @RestController
@@ -130,6 +129,19 @@ public class UserController {
         userService.updateUser(userUpdateReq, user);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+
+    /* David */
+    @ApiOperation("아이디 찾기")
+    @GetMapping("/finduserid/{email}")
+    public ResponseEntity<BaseResponseBody> findUserId(@PathVariable("email") String email) {
+        String res = userService.findUserIdByUserEmail(email);
+
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"해당 이메일로 가입된 아이디가 없습니다."));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 아이디를 전송했습니다."));
     }
 
     /* Woody */
