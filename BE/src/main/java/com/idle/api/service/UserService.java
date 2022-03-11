@@ -18,7 +18,7 @@ import com.idle.db.entity.User;
 
 public interface UserService {
     String insertUser(UserSignUpRequest userSignUpRequest);
-    String checkUserPw(String userPw);
+    boolean checkUserPw(User user, String userPw);
     String checkDuplicateUserId(String userId);
     String checkDuplicateUserNickname(String userNickname);
     String sendUserEmailNumber(String userEmail);
@@ -26,4 +26,6 @@ public interface UserService {
     String passwordEncode(String userPw);
     User getUserByUserId(String userId);
     void updateUser(UserUpdateRequest userUpdateReq, User user);
+    void deleteUser(User user);
+
 }

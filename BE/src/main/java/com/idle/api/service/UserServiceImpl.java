@@ -116,12 +116,12 @@ public class UserServiceImpl implements UserService{
 
     /* Woody */
     @Override
-    public String checkUserPw(String userPw) {
-        Optional<User> user = userRepository.findByUserPw(userPw);
-        if(user.isPresent()){
-            return "fail";
+    public boolean checkUserPw(User user, String userPw) {
+
+        if(passwordEncoder.matches(userPw, user.getUserPw())) {
+            return true;
         }
-        return "success";
+        return false;
     }
 
     /* David */
@@ -165,5 +165,11 @@ public class UserServiceImpl implements UserService{
         user.setUserNickname(userUpdateReq.getUserNickname());
 
         userRepository.save(user);
+    }
+
+    /* Woody : 회원 탈퇴 */
+    @Override
+    public void deleteUser(User user) {
+        userRepository.delete(user);
     }
 }

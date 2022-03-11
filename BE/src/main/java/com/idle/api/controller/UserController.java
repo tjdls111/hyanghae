@@ -9,6 +9,7 @@
  **/
 package com.idle.api.controller;
 
+import com.idle.api.request.UserCheckPwRequest;
 import com.idle.api.request.UserLoginRequest;
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.request.UserUpdateRequest;
@@ -30,6 +31,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @CrossOrigin
@@ -89,14 +91,21 @@ public class UserController {
     }
 
     /* Woody */
-    @ApiOperation("마이페이지 비밀번호 검사")
+    @ApiOperation("비밀번호 인증")
     @PostMapping("/checkpw")
-    public ResponseEntity<BaseResponseBody> checkUserPw(@RequestParam("userPw") String userPw) {
-        String result = userService.checkUserPw(userPw);
-        if (result.equals("fail")) {
-            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"비밀번호가 맞지 않습니다."));
+    public ResponseEntity<BaseResponseBody> checkUserPw(@ApiIgnore Authentication authentication,
+                                                        @RequestBody @ApiParam(value = "비밀번호", required = true) UserCheckPwRequest userCheckPwRequest) {
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+
+        try {
+            if(userService.checkUserPw(user, userCheckPwRequest.getUserPw())) {
+                return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+            }
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Invalid Password"));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(404).body(BaseResponseBody.of(404,"User Not Found"));
         }
-        return ResponseEntity.ok(BaseResponseBody.of(200,"비밀번호 인증 성공"));
     }
 
     /* Alice, David */
@@ -119,6 +128,19 @@ public class UserController {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
         userService.updateUser(userUpdateReq, user);
+
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+    /* Woody */
+    @ApiOperation("회원 탈퇴")
+    @DeleteMapping("/delete")
+    public ResponseEntity<? extends BaseResponseBody> deleteUser(@ApiIgnore Authentication authentication) {
+
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+
+        userService.deleteUser(user);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
