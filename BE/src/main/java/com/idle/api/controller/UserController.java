@@ -54,7 +54,7 @@ public class UserController {
 
     /* Alice */
     @ApiOperation("아이디 중복 검사")
-    @GetMapping("/duplicateuid/{userId}")
+    @GetMapping("/duplicateid/{userId}")
     public ResponseEntity<String> checkDuplicateUserId(@PathVariable("userId") String userId) {
         String result = userService.checkDuplicateUserId(userId);
         if (result.equals("fail")) {
@@ -65,13 +65,22 @@ public class UserController {
 
     /* Alice */
     @ApiOperation("닉네임 중복 검사")
-    @GetMapping("/duplicateunickname/{userNickname}")
+    @GetMapping("/duplicatenickname/{userNickname}")
     public ResponseEntity<String> checkDuplicateUserNickname(@PathVariable("userNickname") String userNickname) {
         String result = userService.checkDuplicateUserNickname(userNickname);
         if (result.equals("fail")) {
             return new ResponseEntity<>("닉네임 중복", HttpStatus.OK);
         }
         return new ResponseEntity<>("닉네임 사용 가능", HttpStatus.OK);
+    }
+
+    /* Alice */
+    @ApiOperation("이메일 인증번호 전송")
+    @GetMapping(value = "/sendemailnum/{email}")
+    public ResponseEntity<String> sendUserEmailNumber(@PathVariable("email") String email) {
+        userService.sendUserEmailNumber(email);
+
+        return new ResponseEntity<>("인증 번호를 전송했습니다.", HttpStatus.OK);
     }
 
     /* Woody */
@@ -95,8 +104,6 @@ public class UserController {
             return ResponseEntity.status(401).body(UserLoginResponse.of(401,"아이디와 비밀번호를 확인 해 주세요",null));
         }
         return ResponseEntity.ok(UserLoginResponse.of(200,"로그인 완료!", JwtTokenUtil.getToken(userLoginRequest.getUserId())));
-
-
     }
 
 }
