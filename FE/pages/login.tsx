@@ -41,9 +41,8 @@ const Login: NextPage = () => {
       apiLogin(id, password)
         .then((res) => {
           console.log(res);
-          // 토큰 저장
-          
-          Router.push("/");
+          localStorage.setItem("token", res.data.token);
+          Router.push("/landing");
         })
         .catch(console.log);
     } catch (e) {
