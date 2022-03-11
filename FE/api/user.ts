@@ -3,7 +3,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-10
-마지막 수정일 2022-03-10
+마지막 수정일 2022-03-11
 */
 import axios from "axios";
 import { BASE_URL } from "./utils";
@@ -35,4 +35,14 @@ export const apiCheckId = (userId: string) =>
   axios({
     method: "get",
     url: `${BASE_URL}/user/checkuid/${userId}`,
+  });
+
+export const apiLogin = (userId: string, userPw: string) =>
+  axios({
+    method: "post",
+    url: `${BASE_URL}/user/login`,
+    data: {
+      userId,
+      userPw,
+    },
   });
