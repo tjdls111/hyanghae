@@ -8,13 +8,17 @@ localStorage에 토큰을 저장하고, 홈으로 이동한다.
 마지막 수정일 lastdate$
 */
 
-import React from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { Router, useRouter } from "next/router";
+import { GetServerSideProps, NextPage } from "next";
+import { socialLogin } from "../../api/user";
 
-const Redirect = () => {
+const Redirect: NextPage = (props) => {
   const router = useRouter();
 
-  console.log(router.query.token);
+  useEffect(() => {
+    localStorage.setItem("token", router.query.token as string);
+  }, [router.isReady]);
 
   return (
     <div>
