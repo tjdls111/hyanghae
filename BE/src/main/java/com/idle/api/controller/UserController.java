@@ -9,7 +9,9 @@
  **/
 package com.idle.api.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.idle.api.request.UserLoginRequest;
+import com.idle.api.request.UserPwRequest;
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.request.UserUpdateRequest;
 import com.idle.api.response.BaseResponseBody;
@@ -121,6 +123,17 @@ public class UserController {
         userService.updateUser(userUpdateReq, user);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+    /* Alice */
+    @ApiOperation("비밀번호 찾기")
+    @PutMapping("/finduserpw/{email}")
+    public ResponseEntity<BaseResponseBody> findUserPw(@RequestBody UserPwRequest userPwRequest){
+        String result = userService.findUserPw(userPwRequest);
+        if (result.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"해당 이메일로 가입된 아이디가 없습니다."));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 새 비밀번호를 전송했습니다."));
     }
 
 }

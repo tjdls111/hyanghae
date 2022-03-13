@@ -11,6 +11,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.UserLoginRequest;
+import com.idle.api.request.UserPwRequest;
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.request.UserUpdateRequest;
 import com.idle.db.entity.User;
@@ -26,4 +27,5 @@ public interface UserService {
     String passwordEncode(String userPw);
     User getUserByUserId(String userId);
     void updateUser(UserUpdateRequest userUpdateReq, User user);
+    String findUserPw(UserPwRequest userPwRequest);
 }
