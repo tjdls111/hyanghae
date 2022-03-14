@@ -121,9 +121,15 @@ const Signup: NextPage = () => {
       // console.log(error);
     }
   };
-  const checkValidationCode = (e: any) => {
-    console.log(e);
+  const checkValidationCode = () => {
+    const { validationCode } = getValues();
+    if (confirmationNumber === validationCode) {
+      setisEmailChecked(true);
+    } else {
+      setisEmailChecked(false);
+    }
   };
+
   const nicknameValidation = () => {
     const { nickname } = getValues();
 
@@ -145,17 +151,11 @@ const Signup: NextPage = () => {
   };
 
   const submitEmail = () => {
-    const { emailPartOne, emailPartTwo, validationCode } = getValues();
+    const { emailPartOne, emailPartTwo } = getValues();
 
     apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
       .then((res) => {
-        console.log(res);
         setConfirmationNumber(res.data.number);
-        if (confirmationNumber === validationCode) {
-          setisEmailChecked(true);
-        } else {
-          setisEmailChecked(false);
-        }
       })
       .catch(console.log);
   };
@@ -386,7 +386,7 @@ const Signup: NextPage = () => {
               type="button"
               className={styles.smallInputBtn}
             >
-              검사
+              보내기
             </button>
           </span>
 
@@ -414,14 +414,18 @@ const Signup: NextPage = () => {
               type="button"
               className={styles.smallInputBtn}
             >
-              검사
+              {isEmailChecked ? "완료" : " 검사"}
             </button>
           </div>
 
           {validationError}
           <button
             className={`${styles.inputForm} ${styles.inputBtn} ${
-              isValid && isIdChecked && isNicknameChecked && styles.canClick
+              isValid &&
+              isIdChecked &&
+              isNicknameChecked &&
+              isEmailChecked &&
+              styles.canClick
             }`}
             type="submit"
             value="회원가입"
