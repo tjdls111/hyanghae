@@ -17,12 +17,10 @@ export const apiSignup = async (
   password: string
 ) =>
   await axios.post(`${BASE_URL}/user/signup`, {
-    data: {
-      userEmail,
-      userId,
-      userNickname,
-      userPw: password,
-    },
+    userEmail,
+    userId,
+    userNickname,
+    userPw: password,
   });
 
 export const apiCheckNickname = async (userNickname: string) =>
@@ -33,10 +31,8 @@ export const apiCheckId = async (userId: string) =>
 
 export const apiLogin = async (userId: string, userPw: string) =>
   await axios.post(`${BASE_URL}/user/login`, {
-    data: {
-      userId,
-      userPw,
-    },
+    userId,
+    userPw,
   });
 
 export const apiSendEmailNum = async (email: string) =>

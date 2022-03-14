@@ -73,7 +73,6 @@ const Signup: NextPage = () => {
             apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
               .then((res) => {
                 Router.push("/login");
-                console.log(res);
               })
               .catch((err) => {
                 console.log(err);
@@ -109,17 +108,13 @@ const Signup: NextPage = () => {
     try {
       apiCheckId(id)
         .then((res: AxiosResponse) => {
-          console.log(res);
-
           setIsIdChecked(true);
         })
         .catch((err) => {
           setError("id", { message: "해당 아이디가 이미 존재합니다." });
-          console.log(err);
         });
     } catch (e) {
       const error = e as AxiosError;
-      // console.log(error);
     }
   };
 
@@ -133,11 +128,9 @@ const Signup: NextPage = () => {
         })
         .catch((err) => {
           setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
-          console.log(err);
         });
     } catch (e) {
       const error = e as AxiosError;
-      console.log(error);
     }
   };
 
@@ -146,7 +139,6 @@ const Signup: NextPage = () => {
 
     apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
       .then((res) => {
-        console.log(res);
         setisEmailClicked(true);
         setConfirmationNumber(res.data.number);
       })
