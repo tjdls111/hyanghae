@@ -24,37 +24,19 @@ export const apiSignup = async (
       userNickname,
       userPw: password,
     },
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 
 export const apiCheckNickname = async (userNickname: string) =>
   await axios({
     method: "get",
     url: `${BASE_URL}/user/duplicatenickname/${userNickname}`,
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 
 export const apiCheckId = async (userId: string) =>
   await axios({
     method: "get",
     url: `${BASE_URL}/user/duplicateid/${userId}`,
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 
 export const apiLogin = async (userId: string, userPw: string) =>
   await axios({
@@ -64,25 +46,13 @@ export const apiLogin = async (userId: string, userPw: string) =>
       userId,
       userPw,
     },
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 
 export const apiSendEmailNum = async (email: string) =>
   await axios({
     method: "get",
     url: `${BASE_URL}/user/sendemailnum/${email}`,
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 
 export const socialLogin = () => {
   const router = useRouter();
