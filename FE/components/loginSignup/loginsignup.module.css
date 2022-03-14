@@ -108,10 +108,16 @@
 }
 
 .imageWrapper {
-  width: 10%;
+  width: 3rem;
+  height: 3rem;
+  position: relative;
 }
 
 .socialLoginText {
   color: #555;
   font-weight: 600;
+}
+
+.logoImage {
+  position: absolute;
 }
