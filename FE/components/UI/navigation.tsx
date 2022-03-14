@@ -21,13 +21,14 @@ const Navigation: React.FC = () => {
         </div>
         <nav className={styles.navContainer}>
           <ul className={styles.navigation}>
-            <li className={styles.navItem}>메뉴1</li>
-            <li className={styles.navItem}>메뉴2</li>
-            <li className={styles.navItem}>메뉴3</li>
+            <li className={styles.navItem}>향수추천</li>
+            <li className={styles.navItem}>클래스</li>
           </ul>
         </nav>
-        <input className={styles.searchBar} type="text" />
-        <button className={styles.loginButton}></button>
+        <form className={styles.searchBar} action="">
+          <input className={styles.searchInput} type="text" />
+        </form>
+        <button className={styles.loginButton}>로그인</button>
       </main>
     </div>
   );
