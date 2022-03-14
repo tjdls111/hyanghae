@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
 import {
   apiSignup,
@@ -108,8 +108,9 @@ const Signup: NextPage = () => {
 
     try {
       apiCheckId(id)
-        .then((res) => {
+        .then((res: AxiosResponse) => {
           console.log(res);
+
           setIsIdChecked(true);
         })
         .catch((err) => {
