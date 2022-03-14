@@ -1,5 +1,5 @@
 /*
-홈페이지
+테스트용 페이지
 여기에 개발 부분 설명 적기
 @author Jackson
 @version 1.0.0
