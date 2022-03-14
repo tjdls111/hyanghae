@@ -3,16 +3,36 @@ login.test.tsx
 @author scarlet
 @version 1.0.0
 생성일 2022-03-08
-마지막 수정일 2022-03-10
+마지막 수정일 2022-03-14
 */
 import React from "react";
 import Login from "../pages/login";
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import axios from "axios";
+import { apiLogin } from "../api/user";
+
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "",
+      query: "",
+      asPath: "",
+      push: jest.fn(),
+      events: {
+        on: jest.fn(),
+        off: jest.fn(),
+      },
+      beforePopState: jest.fn(() => null),
+      prefetch: jest.fn(() => null),
+    };
+  },
+}));
 
 configure({ adapter: new Adapter() });
-
+jest.mock("axios");
 describe("로그인 페이지 렌더링 테스트", () => {
   let wrapper: ShallowWrapper;
   beforeEach(() => {
@@ -103,5 +123,13 @@ describe("react Hook Form", () => {
     fireEvent.submit(screen.getByRole("button"));
 
     await waitFor(() => expect(screen.queryAllByRole("alert")).toHaveLength(0));
+
+    axios.post = jest.fn().mockResolvedValue({
+      response: "OK",
+    });
+
+    const sign = await apiLogin("now20412041", "now20412041");
+
+    expect(sign).toHaveProperty("response", "OK");
   });
 });

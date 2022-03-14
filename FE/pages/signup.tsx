@@ -10,14 +10,9 @@ import type { NextPage } from "next";
 import Router from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AxiosError } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import {
-  apiSignup,
-  apiCheckId,
-  apiCheckNickname,
-  apiSendEmailNum,
-} from "../api/user";
+import { apiSignup, apiCheckId, apiCheckNickname, apiSendEmailNum } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
@@ -57,14 +52,8 @@ const Signup: NextPage = () => {
   }, [isLoggedIn]);
 
   const onValidSubmit: SubmitHandler<SignupInput> = async () => {
-    const {
-      id,
-      password,
-      passwordConfirmation,
-      nickname,
-      emailPartOne,
-      emailPartTwo,
-    } = getValues();
+    const { id, password, passwordConfirmation, nickname, emailPartOne, emailPartTwo } =
+      getValues();
 
     if (isIdChecked) {
       if (isNicknameChecked) {
@@ -108,8 +97,9 @@ const Signup: NextPage = () => {
 
     try {
       apiCheckId(id)
-        .then((res) => {
+        .then((res: AxiosResponse) => {
           console.log(res);
+
           setIsIdChecked(true);
         })
         .catch((err) => {
@@ -187,10 +177,7 @@ const Signup: NextPage = () => {
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div
-      className={`${styles.message} ${styles.pwConfirmationMessage}`}
-      role="alert"
-    >
+    <div className={`${styles.message} ${styles.pwConfirmationMessage}`} role="alert">
       {errors.passwordConfirmation?.message}
     </div>
   ) : (
@@ -244,8 +231,7 @@ const Signup: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message:
-                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -262,11 +248,7 @@ const Signup: NextPage = () => {
               aria-label="id"
             />
             <span>
-              <button
-                type="button"
-                onClick={idValidation}
-                className={styles.smallInputBtn}
-              >
+              <button type="button" onClick={idValidation} className={styles.smallInputBtn}>
                 {isIdChecked ? "완료" : " 검사"}
               </button>
             </span>
@@ -279,8 +261,7 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -305,8 +286,7 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -344,11 +324,7 @@ const Signup: NextPage = () => {
               aria-label="nickname"
             />
             <span>
-              <button
-                type="button"
-                onClick={nicknameValidation}
-                className={styles.smallInputBtn}
-              >
+              <button type="button" onClick={nicknameValidation} className={styles.smallInputBtn}>
                 {isNicknameChecked ? "완료" : " 검사"}
               </button>
             </span>
@@ -381,11 +357,7 @@ const Signup: NextPage = () => {
             <option value="gmail.com">지메일</option>
           </select>
           <span>
-            <button
-              onClick={submitEmail}
-              type="button"
-              className={styles.smallInputBtn}
-            >
+            <button onClick={submitEmail} type="button" className={styles.smallInputBtn}>
               검사
             </button>
           </span>
@@ -409,11 +381,7 @@ const Signup: NextPage = () => {
                 aria-label="code"
               />
             </label>
-            <button
-              onClick={checkValidationCode}
-              type="button"
-              className={styles.smallInputBtn}
-            >
+            <button onClick={checkValidationCode} type="button" className={styles.smallInputBtn}>
               검사
             </button>
           </div>
