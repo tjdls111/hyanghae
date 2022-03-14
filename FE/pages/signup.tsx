@@ -12,7 +12,12 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import { apiSignup, apiCheckId, apiCheckNickname } from "../api/user";
+import {
+  apiSignup,
+  apiCheckId,
+  apiCheckNickname,
+  apiSendEmailNum,
+} from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
@@ -67,6 +72,7 @@ const Signup: NextPage = () => {
             apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
               .then((res) => {
                 Router.push("/login");
+                // document.location.href("/login");
                 console.log(res);
               })
               .catch((err) => {
@@ -146,7 +152,12 @@ const Signup: NextPage = () => {
     }
   };
 
-  const submitEmail = () => {};
+  const submitEmail = () => {
+    const { emailPartOne, emailPartTwo } = getValues();
+    apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
+      .then(console.log)
+      .catch(console.log);
+  };
 
   const clearLoginError = () => {
     clearErrors("result");
