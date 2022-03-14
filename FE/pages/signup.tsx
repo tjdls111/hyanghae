@@ -35,6 +35,7 @@ const Signup: NextPage = () => {
   const isLoggedIn = false;
   const [isIdChecked, setIsIdChecked] = useState(false);
   const [isNicknameChecked, setisNicknameChecked] = useState(false);
+  const [isEmailClicked, setisEmailClicked] = useState(false);
   const [isEmailChecked, setisEmailChecked] = useState(false);
   const [confirmationNumber, setConfirmationNumber] = useState("");
 
@@ -51,7 +52,6 @@ const Signup: NextPage = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      // 메인 페이지로 넘기기
       Router.push("/");
     }
   }, [isLoggedIn]);
@@ -122,14 +122,6 @@ const Signup: NextPage = () => {
       // console.log(error);
     }
   };
-  const checkValidationCode = () => {
-    const { validationCode } = getValues();
-    if (confirmationNumber === validationCode) {
-      setisEmailChecked(true);
-    } else {
-      setisEmailChecked(false);
-    }
-  };
 
   const nicknameValidation = () => {
     const { nickname } = getValues();
@@ -137,16 +129,14 @@ const Signup: NextPage = () => {
     try {
       apiCheckNickname(nickname)
         .then((res) => {
-          console.log(res);
           setisNicknameChecked(true);
         })
         .catch((err) => {
-          // 에러 처리 -> alert 처리?!
           setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
           console.log(err);
         });
     } catch (e) {
-      const error = e as AxiosError; //결과를 받아서 메시지 보여주기
+      const error = e as AxiosError;
       console.log(error);
     }
   };
@@ -156,9 +146,20 @@ const Signup: NextPage = () => {
 
     apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
       .then((res) => {
+        console.log(res);
+        setisEmailClicked(true);
         setConfirmationNumber(res.data.number);
       })
       .catch(console.log);
+  };
+
+  const checkValidationCode = () => {
+    const { validationCode } = getValues();
+    if (confirmationNumber === validationCode) {
+      setisEmailChecked(true);
+    } else {
+      setisEmailChecked(false);
+    }
   };
 
   const clearLoginError = () => {
@@ -393,31 +394,33 @@ const Signup: NextPage = () => {
 
           {emailPartOneError}
           {emailPartTwoError}
-          <div>
-            <label htmlFor="validationInput">
-              <input
-                className={`${styles.inputForm} ${styles.validationForm}`}
-                {...register("validationCode", {
-                  required: "인증 번호를 입력하세요.",
-                  minLength: {
-                    value: 1,
-                    message: "인증번호는 1글자 이상입니다",
-                  },
-                })}
-                type="text"
-                placeholder="인증번호를 입력하세요."
-                onInput={clearLoginError}
-                aria-label="code"
-              />
-            </label>
-            <button
-              onClick={checkValidationCode}
-              type="button"
-              className={styles.smallInputBtn}
-            >
-              {isEmailChecked ? "완료" : " 검사"}
-            </button>
-          </div>
+          {isEmailClicked && (
+            <div>
+              <label htmlFor="validationInput">
+                <input
+                  className={`${styles.smallInputForm} ${styles.validationForm}`}
+                  {...register("validationCode", {
+                    required: "인증 번호를 입력하세요.",
+                    minLength: {
+                      value: 1,
+                      message: "인증번호는 1글자 이상입니다",
+                    },
+                  })}
+                  type="text"
+                  placeholder="인증번호를 입력하세요."
+                  onInput={clearLoginError}
+                  aria-label="code"
+                />
+              </label>
+              <button
+                onClick={checkValidationCode}
+                type="button"
+                className={styles.smallInputBtn}
+              >
+                {isEmailChecked ? "완료" : " 검사"}
+              </button>
+            </div>
+          )}
 
           {validationError}
           <button
