@@ -224,7 +224,7 @@ public class UserServiceImpl implements UserService{
         Optional<User> user = userRepository.findByUserId(userId);
         
         // 아이디나 이메일이 맞지 않으면 fail 리턴
-        if(userId.equals(user.get().getUserId()) || userEmail.equals(user.get().getUserEmail()))
+        if(!userId.equals(user.get().getUserId()) || !userEmail.equals(user.get().getUserEmail()))
             return "fail";
         
         // 새 비밀번호 생성
