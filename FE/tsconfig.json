@@ -17,7 +17,8 @@
     "incremental": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["./node_modules/@types", "./@types"]
   },
   "include": ["next-env.d.ts", "./pages/*.tsx"],
   "exclude": ["node_modules", "./cypress"]
