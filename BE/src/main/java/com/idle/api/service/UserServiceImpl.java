@@ -226,9 +226,14 @@ public class UserServiceImpl implements UserService{
         // 아이디나 이메일이 맞지 않으면 fail 리턴
         if(!userId.equals(user.get().getUserId()) || !userEmail.equals(user.get().getUserEmail()))
             return "fail";
-        
+
         // 새 비밀번호 생성
-        String tempEmailNumber = getRamdomNumber(10);
+        String tempPw = getRamdomNumber(10);
+
+        // 새 비밀번호 DB에 저장
+        User tempUser = userPwRequest.toEntity();
+        tempUser.setUserPw(tempPw);
+        userRepository.save(tempUser);
 
         // 수신 대상을 담을 ArrayList 생성
         ArrayList<String> toUserList = new ArrayList<>();
@@ -249,7 +254,7 @@ public class UserServiceImpl implements UserService{
         simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
 
         // 메일 내용
-        simpleMessage.setText("새 비밀번호는 " + tempEmailNumber + " 입니다.");
+        simpleMessage.setText("새 비밀번호는 " + tempPw + " 입니다.");
 
         // 메일 발송
         javaMailSender.send(simpleMessage);
