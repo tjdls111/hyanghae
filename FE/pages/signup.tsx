@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-10
+마지막 수정일 2022-03-14
 */
 import type { NextPage } from "next";
 import Router from "next/router";
@@ -12,7 +12,12 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import { apiSignup, apiCheckId, apiCheckNickname } from "../api/user";
+import {
+  apiSignup,
+  apiCheckId,
+  apiCheckNickname,
+  apiSendEmailNum,
+} from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
@@ -31,6 +36,7 @@ const Signup: NextPage = () => {
   const [isIdChecked, setIsIdChecked] = useState(false);
   const [isNicknameChecked, setisNicknameChecked] = useState(false);
   const [isEmailChecked, setisEmailChecked] = useState(false);
+  const [confirmationNumber, setConfirmationNumber] = useState("");
 
   const {
     register,
@@ -104,40 +110,32 @@ const Signup: NextPage = () => {
       apiCheckId(id)
         .then((res) => {
           console.log(res);
-
-          if (res.data === "아이디 중복") {
-            setError("id", { message: "해당 아이디가 이미 존재합니다." });
-            setIsIdChecked(false);
-          } else {
-            setIsIdChecked(true);
-          }
+          setIsIdChecked(true);
         })
         .catch((err) => {
+          setError("id", { message: "해당 아이디가 이미 존재합니다." });
           console.log(err);
         });
     } catch (e) {
       const error = e as AxiosError;
-      console.log(error);
+      // console.log(error);
     }
   };
-
+  const checkValidationCode = (e: any) => {
+    console.log(e);
+  };
   const nicknameValidation = () => {
     const { nickname } = getValues();
+
     try {
       apiCheckNickname(nickname)
         .then((res) => {
           console.log(res);
-
-          if (res.data === "닉네임 중복") {
-            setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
-            setisNicknameChecked(false);
-          } else {
-            setisNicknameChecked(true);
-          }
+          setisNicknameChecked(true);
         })
         .catch((err) => {
           // 에러 처리 -> alert 처리?!
-          setError("result", { message: "해당 닉네임이 이미 존재합니다." });
+          setError("nickname", { message: "해당 닉네임이 이미 존재합니다." });
           console.log(err);
         });
     } catch (e) {
@@ -146,7 +144,21 @@ const Signup: NextPage = () => {
     }
   };
 
-  const submitEmail = () => {};
+  const submitEmail = () => {
+    const { emailPartOne, emailPartTwo, validationCode } = getValues();
+
+    apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
+      .then((res) => {
+        console.log(res);
+        setConfirmationNumber(res.data.number);
+        if (confirmationNumber === validationCode) {
+          setisEmailChecked(true);
+        } else {
+          setisEmailChecked(false);
+        }
+      })
+      .catch(console.log);
+  };
 
   const clearLoginError = () => {
     clearErrors("result");
@@ -397,7 +409,15 @@ const Signup: NextPage = () => {
                 aria-label="code"
               />
             </label>
+            <button
+              onClick={checkValidationCode}
+              type="button"
+              className={styles.smallInputBtn}
+            >
+              검사
+            </button>
           </div>
+
           {validationError}
           <button
             className={`${styles.inputForm} ${styles.inputBtn} ${

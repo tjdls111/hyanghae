@@ -1,5 +1,5 @@
 /*
-유저 관련 api
+유저 관련 api(회원가입, 로그인 등)
 @author Wendy
 @version 1.0.0
 생성일 2022-03-10
@@ -24,37 +24,19 @@ export const apiSignup = async (
       userNickname,
       userPw: password,
     },
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
 
 export const apiCheckNickname = async (userNickname: string) =>
   await axios({
     method: "get",
-    url: `${BASE_URL}/user/duplicateunickname/${userNickname}`,
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+    url: `${BASE_URL}/user/duplicatenickname/${userNickname}`,
+  });
 
 export const apiCheckId = async (userId: string) =>
   await axios({
     method: "get",
-    url: `${BASE_URL}/user/duplicateuid/${userId}`,
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+    url: `${BASE_URL}/user/duplicateid/${userId}`,
+  });
 
 export const apiLogin = async (userId: string, userPw: string) =>
   await axios({
@@ -64,13 +46,13 @@ export const apiLogin = async (userId: string, userPw: string) =>
       userId,
       userPw,
     },
-  })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      return err;
-    });
+  });
+
+export const apiSendEmailNum = async (email: string) =>
+  await axios({
+    method: "get",
+    url: `${BASE_URL}/user/sendemailnum/${email}`,
+  });
 
 export const socialLogin = () => {
   const router = useRouter();
