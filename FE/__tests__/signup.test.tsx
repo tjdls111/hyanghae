@@ -3,6 +3,8 @@ import SignUp from "../pages/signup";
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import axios from "axios";
+import { apiSignup } from "../api/user";
 
 configure({ adapter: new Adapter() });
 
@@ -32,7 +34,7 @@ describe("회원가입 페이지 렌더링 테스트", () => {
   });
 
   it("로그인form 안의 버튼 4개가 정상적으로 렌더링", () => {
-    expect(wrapper.find("button").length).toEqual(4);
+    expect(wrapper.find("button").length).toEqual(5);
   });
 });
 
@@ -408,5 +410,12 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
 
     expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
+
+    axios.post = jest.fn().mockResolvedValue({
+      response: "OK",
+    });
+    const sign = await apiSignup("test12312", "password", "password", "nickname");
+
+    expect(sign).toHaveProperty("response", "OK");
   });
 });
