@@ -41,15 +41,19 @@ public class User extends BaseTimeEntity {
     @Column(name = "u_email", nullable = false)
     String userEmail;
 
+    @Column(name = "u_type", nullable = false)
+    String userType;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<Survey1> Survey1List = new HashSet<>();
 
     @Builder
-    public User(String userId, String userNickname, String userPw, String userEmail) {
+    public User(String userId, String userNickname, String userPw, String userEmail, String userType) {
         this.userId = userId;
         this.userNickname = userNickname;
         this.userPw = userPw;
         this.userEmail = userEmail;
+        this.userType = userType;
     }
 
     public User updateUserNickname(String userNickname) {

@@ -11,6 +11,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.UserLoginRequest;
+import com.idle.api.request.UserPwRequest;
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.request.UserUpdateRequest;
 import com.idle.db.entity.User;
@@ -18,12 +19,15 @@ import com.idle.db.entity.User;
 
 public interface UserService {
     String insertUser(UserSignUpRequest userSignUpRequest);
-    String checkUserPw(String userPw);
+    boolean checkUserPw(User user, String userPw);
     String checkDuplicateUserId(String userId);
     String checkDuplicateUserNickname(String userNickname);
     String sendUserEmailNumber(String userEmail);
     String login(UserLoginRequest userLoginRequest);
     String passwordEncode(String userPw);
+    String findUserIdByUserEmail(String userEmail);
     User getUserByUserId(String userId);
     void updateUser(UserUpdateRequest userUpdateReq, User user);
+    void deleteUser(User user);
+    String findUserPw(UserPwRequest userPwRequest);
 }
