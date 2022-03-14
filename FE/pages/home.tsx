@@ -9,9 +9,14 @@
 
 import React from "react";
 import { NextPage } from "next";
+import Navigation from "../components/UI/navigation";
 
 const HomePage: NextPage = () => {
-  return <div> home</div>;
+  return (
+    <>
+      <Navigation />
+    </>
+  );
 };
 
 export default HomePage;
