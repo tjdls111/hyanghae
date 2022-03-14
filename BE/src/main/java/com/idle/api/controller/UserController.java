@@ -156,7 +156,7 @@ public class UserController {
 
     /* Alice */
     @ApiOperation("비밀번호 찾기")
-    @PutMapping("/finduserpw/{email}")
+    @PutMapping("/finduserpw")
     public ResponseEntity<BaseResponseBody> findUserPw(@RequestBody UserPwRequest userPwRequest){
         String result = userService.findUserPw(userPwRequest);
         if (result.equals("fail")) {

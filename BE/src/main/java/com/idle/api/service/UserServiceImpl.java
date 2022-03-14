@@ -221,19 +221,19 @@ public class UserServiceImpl implements UserService{
         
         String userId = userPwRequest.getUserId();
         String userEmail = userPwRequest.getUserEmail();
-        Optional<User> user = userRepository.findByUserId(userId);
+        User user = userRepository.findByUserId(userId).get();
         
         // 아이디나 이메일이 맞지 않으면 fail 리턴
-        if(!userId.equals(user.get().getUserId()) || !userEmail.equals(user.get().getUserEmail()))
+        if(!userId.equals(user.getUserId()) || !userEmail.equals(user.getUserEmail()))
             return "fail";
 
         // 새 비밀번호 생성
         String tempPw = getRamdomNumber(10);
 
         // 새 비밀번호 DB에 저장
-        User tempUser = userPwRequest.toEntity();
-        tempUser.setUserPw(tempPw);
-        userRepository.save(tempUser);
+
+        user.setUserPw(passwordEncoder.encode(tempPw));
+        userRepository.save(user);
 
         // 수신 대상을 담을 ArrayList 생성
         ArrayList<String> toUserList = new ArrayList<>();
