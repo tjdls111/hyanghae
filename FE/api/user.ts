@@ -7,6 +7,7 @@
 */
 import axios from "axios";
 import { BASE_URL } from "./utils";
+import { useRouter } from "next/router";
 
 export const apiSignup = async (
   userEmail: string,
@@ -70,3 +71,9 @@ export const apiLogin = async (userId: string, userPw: string) =>
     .catch((err) => {
       return err;
     });
+
+export const socialLogin = () => {
+  const router = useRouter();
+  const token = router.query.token as string;
+  localStorage.setItem("token", token);
+};

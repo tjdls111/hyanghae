@@ -1,3 +1,12 @@
+/*
+리셋 CSS
+컬러 셋팅, 박스사이징, 기본 폰트 적용
+@author Jackson
+@version 1.0.0
+생성일 2022-03-07
+마지막 수정일 2022-03-14
+*/
+
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
 
 :root {
