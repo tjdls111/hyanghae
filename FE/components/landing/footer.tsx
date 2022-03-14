@@ -1,3 +1,12 @@
+/*
+랜딩페이지 푸터
+랜딩페이지 푸터의 tsx파일
+@author Jackson
+@version 1.0.0
+생성일 2022-03-11
+마지막 수정일 2022-03-14
+*/
+
 import React from "react";
 import styles from "./footer.module.css";
 import Link from "next/link";

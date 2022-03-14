@@ -15,6 +15,8 @@ import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
 import Router from "next/router";
+import googleLogo from "../public/images/googleLogo.png";
+import Image from "next/image";
 
 interface LoginInput {
   result: string;
@@ -42,7 +44,10 @@ const Login: NextPage = () => {
         .then((res) => {
           console.log(res);
           localStorage.setItem("token", res.data.token);
-          Router.push("/landing");
+          // Router.push("/landing");
+          // 토큰 저장
+
+          Router.push("/");
         })
         .catch(console.log);
     } catch (e) {
@@ -153,6 +158,14 @@ const Login: NextPage = () => {
           </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        <Link href="http://localhost:8181/oauth2/authorization/google">
+          <button className={styles.socialLogin}>
+            <div className={styles.imageWrapper}>
+              <Image src={googleLogo} />
+            </div>
+            <p className={styles.socialLoginText}>구글 로그인</p>
+          </button>
+        </Link>
       </div>
     </div>
   );
