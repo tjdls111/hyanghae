@@ -31,7 +31,7 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.util.NoSuchElementException;
 
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
