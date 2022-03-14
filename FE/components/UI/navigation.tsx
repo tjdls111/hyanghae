@@ -10,15 +10,24 @@
 import React from "react";
 import styles from "./navigation.module.css";
 import Image from "next/image";
-import 
+import mainLogo from "../../public/logos/mainLogo.png";
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   return (
     <div className={styles.container}>
-      <main className={styles.navigationBox}>
-        <section className={styles.logoWrapper}>
-          <Image src={} />
-        </section>
+      <main className={styles.layout}>
+        <div className={styles.logoWrapper}>
+          <Image className={styles.logoImage} layout="fill" src={mainLogo} />
+        </div>
+        <nav className={styles.navContainer}>
+          <ul className={styles.navigation}>
+            <li className={styles.navItem}>메뉴1</li>
+            <li className={styles.navItem}>메뉴2</li>
+            <li className={styles.navItem}>메뉴3</li>
+          </ul>
+        </nav>
+        <input className={styles.searchBar} type="text" />
+        <button className={styles.loginButton}></button>
       </main>
     </div>
   );
