@@ -11,6 +11,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.UserLoginRequest;
+import com.idle.api.request.UserPwRequest;
 import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.request.UserUpdateRequest;
 import com.idle.db.entity.User;
@@ -38,13 +39,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private JavaMailSender javaMailSender;
 
-    /* Alice : 회원가입 */
+    /* Alice,David : 회원가입 */
     @Override
     public String insertUser(UserSignUpRequest userSignUpRequest) {
         User user = userSignUpRequest.toEntity();
         String userPw = passwordEncode(user.getUserPw());   // 비밀번호 인코딩
         user.setUserPw(userPw);    // Security ver5 부터 명칭 해줘야함
+        user.setUserType("local");
         userRepository.save(user);
+        if(user.getUserId().equals("") || user.getUserPw().equals("") ||
+        user.getUserNickname().equals("") || user.getUserEmail().equals(""))
+            return "fail";  // 아이디, 비밀번ㅇ호, 닉네임, 이메일 중 하나라도 없으면 회원가입 실패
         return "success";
     }
 
@@ -93,7 +98,7 @@ public class UserServiceImpl implements UserService{
         simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
 
         // 메일 내용
-        simpleMessage.setText("이메일 인증번호는 " + tempEmailNumber + "입니다.");
+        simpleMessage.setText("인증번호는 " + tempEmailNumber + " 입니다.");
 
         // 메일 발송
         javaMailSender.send(simpleMessage);
@@ -116,12 +121,12 @@ public class UserServiceImpl implements UserService{
 
     /* Woody */
     @Override
-    public String checkUserPw(String userPw) {
-        Optional<User> user = userRepository.findByUserPw(userPw);
-        if(user.isPresent()){
-            return "fail";
+    public boolean checkUserPw(User user, String userPw) {
+
+        if(passwordEncoder.matches(userPw, user.getUserPw())) {
+            return true;
         }
-        return "success";
+        return false;
     }
 
     /* David */
@@ -158,6 +163,43 @@ public class UserServiceImpl implements UserService{
         return encodedPassword;
     }
 
+    /* David : 아이디를 이메일로 전송 */
+    @Override
+    public String findUserIdByUserEmail(String userEmail) {
+
+        Optional<User> user = userRepository.findByUserEmailAndUserType(userEmail,"local");
+        if(!user.isPresent()){
+            return "fail";
+        } else{
+            // 수신 대상을 담을 ArrayList 생성
+            ArrayList<String> toUserList = new ArrayList<>();
+
+            // 수신 대상 추가
+            toUserList.add(userEmail);
+
+            // 수신 대상 개수
+            int toUserSize = toUserList.size();
+
+            // SimpleMailMessage (단순 텍스트 구성 메일 메시지 생성할 때 이용)
+            SimpleMailMessage simpleMessage = new SimpleMailMessage();
+
+            // 수신자 설정
+            simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
+
+            // 메일 제목
+            simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
+
+            // 메일 내용
+            simpleMessage.setText(user.get().getUserNickname()+"이 가입하신 아이디는 " + user.get().getUserId() + "입니다.");
+
+            // 메일 발송
+            javaMailSender.send(simpleMessage);
+
+            return "success";
+        }
+
+    }
+
     /* Woody : 회원 정보 수정 */
     @Override
     public void updateUser(UserUpdateRequest userUpdateReq, User user) {
@@ -165,5 +207,53 @@ public class UserServiceImpl implements UserService{
         user.setUserNickname(userUpdateReq.getUserNickname());
 
         userRepository.save(user);
+    }
+
+    /* Woody : 회원 탈퇴 */
+    @Override
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    /* Alice : 비밀번호 찾기 */
+    @Override
+    public String findUserPw(UserPwRequest userPwRequest){
+        
+        String userId = userPwRequest.getUserId();
+        String userEmail = userPwRequest.getUserEmail();
+        Optional<User> user = userRepository.findByUserId(userId);
+        
+        // 아이디나 이메일이 맞지 않으면 fail 리턴
+        if(userId.equals(user.get().getUserId()) || userEmail.equals(user.get().getUserEmail()))
+            return "fail";
+        
+        // 새 비밀번호 생성
+        String tempEmailNumber = getRamdomNumber(10);
+
+        // 수신 대상을 담을 ArrayList 생성
+        ArrayList<String> toUserList = new ArrayList<>();
+
+        // 수신 대상 추가
+        toUserList.add(userEmail);
+
+        // 수신 대상 개수
+        int toUserSize = toUserList.size();
+
+        // SimpleMailMessage (단순 텍스트 구성 메일 메시지 생성할 때 이용)
+        SimpleMailMessage simpleMessage = new SimpleMailMessage();
+
+        // 수신자 설정
+        simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize]));
+
+        // 메일 제목
+        simpleMessage.setSubject("[이메일 인증번호 안내] 향:해 서비스입니다.");
+
+        // 메일 내용
+        simpleMessage.setText("새 비밀번호는 " + tempEmailNumber + " 입니다.");
+
+        // 메일 발송
+        javaMailSender.send(simpleMessage);
+
+        return "success";
     }
 }

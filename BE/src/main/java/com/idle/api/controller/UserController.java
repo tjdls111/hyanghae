@@ -9,9 +9,8 @@
  **/
 package com.idle.api.controller;
 
-import com.idle.api.request.UserLoginRequest;
-import com.idle.api.request.UserSignUpRequest;
-import com.idle.api.request.UserUpdateRequest;
+import com.fasterxml.jackson.databind.ser.Serializers;
+import com.idle.api.request.*;
 import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.UserEmailNumberResponse;
 import com.idle.api.response.UserLoginResponse;
@@ -23,16 +22,16 @@ import com.idle.db.repository.UserRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
-@CrossOrigin
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -89,14 +88,21 @@ public class UserController {
     }
 
     /* Woody */
-    @ApiOperation("마이페이지 비밀번호 검사")
+    @ApiOperation("비밀번호 인증")
     @PostMapping("/checkpw")
-    public ResponseEntity<BaseResponseBody> checkUserPw(@RequestParam("userPw") String userPw) {
-        String result = userService.checkUserPw(userPw);
-        if (result.equals("fail")) {
-            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"비밀번호가 맞지 않습니다."));
+    public ResponseEntity<BaseResponseBody> checkUserPw(@ApiIgnore Authentication authentication,
+                                                        @RequestBody @ApiParam(value = "비밀번호", required = true) UserCheckPwRequest userCheckPwRequest) {
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+
+        try {
+            if(userService.checkUserPw(user, userCheckPwRequest.getUserPw())) {
+                return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+            }
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "Invalid Password"));
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(404).body(BaseResponseBody.of(404,"User Not Found"));
         }
-        return ResponseEntity.ok(BaseResponseBody.of(200,"비밀번호 인증 성공"));
     }
 
     /* Alice, David */
@@ -123,4 +129,39 @@ public class UserController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
+    /* David */
+    @ApiOperation("아이디 찾기")
+    @GetMapping("/finduserid/{email}")
+    public ResponseEntity<BaseResponseBody> findUserId(@PathVariable("email") String email) {
+        String res = userService.findUserIdByUserEmail(email);
+
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"해당 이메일로 가입된 아이디가 없습니다."));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 아이디를 전송했습니다."));
+    }
+
+    /* Woody */
+    @ApiOperation("회원 탈퇴")
+    @DeleteMapping("/delete")
+    public ResponseEntity<? extends BaseResponseBody> deleteUser(@ApiIgnore Authentication authentication) {
+
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+
+        userService.deleteUser(user);
+
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+        /* Alice */
+    @ApiOperation("비밀번호 찾기")
+    @PutMapping("/finduserpw/{email}")
+    public ResponseEntity<BaseResponseBody> findUserPw(@RequestBody UserPwRequest userPwRequest){
+        String result = userService.findUserPw(userPwRequest);
+        if (result.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"해당 이메일로 가입된 아이디가 없습니다."));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 새 비밀번호를 전송했습니다."));
+    }
 }
