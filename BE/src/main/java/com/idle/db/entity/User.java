@@ -10,17 +10,15 @@
  **/
 package com.idle.db.entity;
 
-import lombok.Builder;
-import lombok.Data;
-
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data   // Getter, Setter 등 lombok
+@Getter
+@Setter
 @Table(name = "user")
 @NoArgsConstructor
 public class User extends BaseTimeEntity {
