@@ -16,6 +16,7 @@ import Link from "next/link";
 import { apiFindUserId } from "../api/user";
 import Router from "next/router";
 import googleLogo from "../public/images/googleLogo.png";
+import logo from "../public/logo.jpg";
 import Image from "next/image";
 
 interface FindIdInput {
@@ -57,7 +58,9 @@ const FindId: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
+      <div className={styles.imageWrapper2}>
+        <Image className={styles.logoImage} src={logo} layout="fill" />
+      </div>
       <h1 className={styles.title}>아이디 찾기</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>

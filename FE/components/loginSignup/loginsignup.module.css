@@ -1,11 +1,6 @@
 .container {
   background-color: var(--color-grey-dark-1);
 }
-
-.logo {
-  position: absolute;
-}
-
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
@@ -110,6 +105,12 @@
 .imageWrapper {
   width: 10%;
   height: 80%;
+  position: relative;
+}
+
+.imageWrapper2 {
+  width: 50rem;
+  height: 50rem;
   position: relative;
 }
 

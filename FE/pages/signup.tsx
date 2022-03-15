@@ -225,7 +225,7 @@ const Signup: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imageWrapper}>
+      <div className={styles.imageWrapper2}>
         <Image className={styles.logoImage} src={logo} layout="fill" />
       </div>
       <h1 className={styles.title}>회원가입</h1>

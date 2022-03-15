@@ -1,17 +1,15 @@
 /*
 로그인
-로그인 폼
+로그인 폼, 기능
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-11
+마지막 수정일 2022-03-15
 */
 import type { NextPage } from "next";
-import { useEffect, useRef } from "react";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
 import Router from "next/router";
@@ -82,7 +80,7 @@ const Login: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.imageWrapper}>
+      <div className={styles.imageWrapper2}>
         <Image className={styles.logoImage} src={logo} layout="fill" />
       </div>
       <h1 className={styles.title}>로그인</h1>
