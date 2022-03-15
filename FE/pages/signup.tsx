@@ -20,6 +20,7 @@ import {
 } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 import Image from "next/image";
+import logo from "../public/logo.jpg";
 
 interface SignupInput {
   result: string;
@@ -225,7 +226,7 @@ const Signup: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>
-        <Image src={"/logo.jpg"} layout="fill" />
+        <Image className={styles.logoImage} src={logo} layout="fill" />
       </div>
       <h1 className={styles.title}>회원가입</h1>
       <div className={styles.inputContainer}>

@@ -3,8 +3,7 @@
 }
 
 .logo {
-  display: block;
-  margin: 0px auto;
+  position: absolute;
 }
 
 .title {
@@ -110,9 +109,15 @@
 
 .imageWrapper {
   width: 10%;
+  height: 80%;
+  position: relative;
 }
 
 .socialLoginText {
   color: #555;
   font-weight: 600;
+}
+
+.logoImage {
+  position: absolute;
 }

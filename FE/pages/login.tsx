@@ -16,6 +16,7 @@ import Link from "next/link";
 import { apiLogin } from "../api/user";
 import Router from "next/router";
 import googleLogo from "../public/images/googleLogo.png";
+import logo from "../public/logo.jpg";
 import Image from "next/image";
 
 interface LoginInput {
@@ -81,7 +82,9 @@ const Login: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
+      <div className={styles.imageWrapper}>
+        <Image className={styles.logoImage} src={logo} layout="fill" />
+      </div>
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
@@ -155,6 +158,17 @@ const Login: NextPage = () => {
           </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        <Link href="/findId">
+          <span className={`${styles.guide} ${styles.signup}`}>
+            아이디 찾기
+          </span>
+        </Link>{" "}
+        |{" "}
+        <Link href="/findPw">
+          <span className={`${styles.guide} ${styles.signup}`}>
+            비밀번호 찾기
+          </span>
+        </Link>
         <Link href="http://localhost:8181/oauth2/authorization/google">
           <button className={styles.socialLogin}>
             <div className={styles.imageWrapper}>
