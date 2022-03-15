@@ -19,6 +19,7 @@ import {
   apiSendEmailNum,
 } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
+import Image from "next/image";
 
 interface SignupInput {
   result: string;
@@ -223,7 +224,9 @@ const Signup: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
+      <div className={styles.imageWrapper}>
+        <Image src={"/logo.jpg"} layout="fill" />
+      </div>
       <h1 className={styles.title}>회원가입</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>

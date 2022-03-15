@@ -13,7 +13,7 @@ import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
-import { apiLogin } from "../api/user";
+import { apiFindUserId } from "../api/user";
 import Router from "next/router";
 import googleLogo from "../public/images/googleLogo.png";
 import Image from "next/image";
@@ -42,7 +42,18 @@ const FindId: NextPage = () => {
     <div />
   );
 
-  const onValidSubmit: SubmitHandler<FindIdInput> = async () => {};
+  const onValidSubmit: SubmitHandler<FindIdInput> = async () => {
+    const { email } = getValues();
+
+    apiFindUserId(email)
+      .then((res) => {
+        alert("이메일로 아이디를 보냈습니다. 메일을 확인해주세요~");
+        Router.push("/login");
+      })
+      .catch((err) => {
+        alert("잘못된 이메일입니다. 다시 한번 확인해주세요.");
+      });
+  };
 
   return (
     <div className={styles.container}>
@@ -74,10 +85,11 @@ const FindId: NextPage = () => {
           ></input>
           {emailError}
           <button
-            className={`${styles.inputForm} ${styles.inputBtn}`}
+            className={`${styles.inputForm} ${styles.inputBtn}  ${
+              isValid && styles.canClick
+            }`}
             type="submit"
             value="아이디 찾기"
-            disabled={!isValid}
             aria-label="loginBtn"
           >
             찾기
