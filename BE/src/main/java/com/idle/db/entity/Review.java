@@ -42,6 +42,8 @@ public class Review extends BaseTimeEntity implements Serializable {
     @Column(name = "r_content", nullable = false)
     String reviewContent;
 
+    @Column(name = "r_score", nullable = false)
+    float reviewScore;
 
     @Builder
     public Review(User user, Perfume perfume, String reviewTitle, String reviewContent){
