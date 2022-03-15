@@ -6,21 +6,19 @@
  * @author David
  * @version 1.0.0
  * 생성일 2022-03-07
- * 마지막 수정일 2022-03-07
+ * 마지막 수정일 2022-03-15
  **/
 package com.idle.db.entity;
 
-import lombok.Builder;
-import lombok.Data;
-
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data   // Getter, Setter 등 lombok
+@Getter
+@Setter
 @Table(name = "user")
 @NoArgsConstructor
 public class User extends BaseTimeEntity {
@@ -46,6 +44,18 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Set<Survey1> Survey1List = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Set<Survey2> survey2List = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Set<Survey3> survey3List = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Set<Review> reviewList = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Set<LikePerfume> likePerfumeList = new HashSet<>();
 
     @Builder
     public User(String userId, String userNickname, String userPw, String userEmail, String userType) {

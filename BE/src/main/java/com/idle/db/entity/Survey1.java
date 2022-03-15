@@ -9,15 +9,14 @@
  **/
 package com.idle.db.entity;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "survey1")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Survey1 extends BaseTimeEntity{
     @Id
@@ -48,7 +47,8 @@ public class Survey1 extends BaseTimeEntity{
     String surveyTitle;
 
     @Builder
-    public Survey1(int gender, int age, int season, int tpo, int mood, String surveyTitle){
+    public Survey1(User user, int gender, int age, int season, int tpo, int mood, String surveyTitle){
+        this.user = user;
         this.gender = gender;
         this.age = age;
         this.season = season;
