@@ -46,11 +46,12 @@ public class Review extends BaseTimeEntity implements Serializable {
     float reviewScore;
 
     @Builder
-    public Review(User user, Perfume perfume, String reviewTitle, String reviewContent){
+    public Review(User user, Perfume perfume, String reviewTitle, String reviewContent, float reviewScore){
         this.user = user;
         this.perfume = perfume;
         this.reviewTitle = reviewTitle;
         this.reviewContent = reviewContent;
+        this.reviewScore = reviewScore;
     }
 
 }
