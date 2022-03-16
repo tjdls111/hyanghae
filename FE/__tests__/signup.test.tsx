@@ -2,12 +2,23 @@ import React from "react";
 import SignUp from "../pages/signup";
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import { render, fireEvent, screen, waitFor } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor, cleanup } from "@testing-library/react";
 import axios from "axios";
-import { apiSignup } from "../api/user";
-
+import { signUpType, apiSignup } from "../api/user";
+import { BASE_URL } from "../api/utils";
+jest.mock("next/router", () => ({
+  useRouter() {
+    return {
+      route: "/",
+      pathname: "",
+      query: "",
+      asPath: "",
+    };
+  },
+}));
+jest.mock("axios");
+const useRouter = jest.spyOn(require("next/router"), "useRouter");
 configure({ adapter: new Adapter() });
-
 describe("회원가입 페이지 렌더링 테스트", () => {
   let wrapper: ShallowWrapper;
   beforeEach(() => {
@@ -25,8 +36,8 @@ describe("회원가입 페이지 렌더링 테스트", () => {
     expect(wrapper.find("form").length).toEqual(1);
   });
 
-  it("로그인form 안의 input태그 6개가 정상적으로 렌더링", () => {
-    expect(wrapper.find("input").length).toEqual(6);
+  it("로그인form 안의 input태그 5개가 정상적으로 렌더링", () => {
+    expect(wrapper.find("input").length).toEqual(5);
   });
 
   it("로그인form 안의 select태그 1개가 정상적으로 렌더링", () => {
@@ -34,18 +45,18 @@ describe("회원가입 페이지 렌더링 테스트", () => {
   });
 
   it("로그인form 안의 버튼 4개가 정상적으로 렌더링", () => {
-    expect(wrapper.find("button").length).toEqual(5);
+    expect(wrapper.find("button").length).toEqual(4);
   });
+  afterEach(cleanup);
 });
-
 describe("react Hook Form", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     render(<SignUp />);
   });
 
   it("전부 유효하지않을때(에러메시지 렌더링)", async () => {
     fireEvent.submit(screen.getByLabelText("signupBtn"));
-    expect(await screen.findAllByRole("alert")).toHaveLength(6);
+    expect(await screen.findAllByRole("alert")).toHaveLength(5);
   });
 
   it("아이디가 유효하지 않을때 에러 메시지", async () => {
@@ -78,11 +89,6 @@ describe("react Hook Form", () => {
         value: "email",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "code",
-      },
-    });
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
@@ -95,8 +101,6 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
-
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
   });
   it("비밀번호가 유효하지 않을때 에러 메시지", async () => {
     fireEvent.input(screen.getByLabelText("id"), {
@@ -128,11 +132,6 @@ describe("react Hook Form", () => {
         value: "email",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "code",
-      },
-    });
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
@@ -146,8 +145,6 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
-
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
   });
 
   it("비밀번호와 비밀번호 확인이 유효하지만 다를 때", async () => {
@@ -180,11 +177,6 @@ describe("react Hook Form", () => {
         value: "email",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "code",
-      },
-    });
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
@@ -198,8 +190,6 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
-
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
   });
 
   it("닉네임을 입력안했을 때", async () => {
@@ -232,11 +222,6 @@ describe("react Hook Form", () => {
         value: "email",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "code",
-      },
-    });
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
@@ -250,8 +235,6 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("");
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
-
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
   });
 
   it("이메일을 입력안했을 때", async () => {
@@ -284,11 +267,6 @@ describe("react Hook Form", () => {
         value: "",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "code",
-      },
-    });
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
@@ -302,8 +280,6 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("");
-
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
   });
 
   it("인증번호를 입력안했을 때", async () => {
@@ -336,11 +312,6 @@ describe("react Hook Form", () => {
         value: "email",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "",
-      },
-    });
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
@@ -354,8 +325,6 @@ describe("react Hook Form", () => {
     expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
-
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("");
   });
 
   it("모두 유효할 때", async () => {
@@ -389,11 +358,6 @@ describe("react Hook Form", () => {
         value: "email",
       },
     });
-    fireEvent.input(screen.getByLabelText("code"), {
-      target: {
-        value: "code",
-      },
-    });
 
     expect(await screen.findByLabelText("signupBtn")).toBeEnabled();
     fireEvent.submit(screen.getByLabelText("signupBtn"));
@@ -409,13 +373,31 @@ describe("react Hook Form", () => {
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
 
-    expect((screen.getByLabelText("code") as HTMLInputElement).value).toBe("code");
+    const res = {
+      message: "ok",
+      statusCode: 0,
+    } as signUpType;
 
     axios.post = jest.fn().mockResolvedValue({
-      response: "OK",
+      message: "ok",
+      statusCode: 0,
     });
-    const sign = await apiSignup("test12312", "password", "password", "nickname");
+    const result = await apiSignup("start12@naver.com", "sdfsdfds", "sdfsdsd", "Sdfdsfsd");
+    expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/user/signup`, {
+      userEmail: "start12@naver.com",
+      userId: "sdfsdfds",
+      userNickname: "sdfsdsd",
+      userPw: "Sdfdsfsd",
+    });
+    expect(axios.post).toBeCalledTimes(1);
+    expect(result).toEqual(res);
 
-    expect(sign).toHaveProperty("response", "OK");
+    useRouter.mockImplementation(() => ({
+      route: "/login",
+      pathname: "/login",
+      query: "",
+      asPath: "",
+    }));
   });
+  afterEach(cleanup);
 });
