@@ -156,17 +156,19 @@ const Login: NextPage = () => {
           </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
-        <Link href="/findid">
-          <span className={`${styles.guide} ${styles.signup}`}>
-            아이디 찾기
-          </span>
-        </Link>{" "}
-        |{" "}
-        <Link href="/findpw">
-          <span className={`${styles.guide} ${styles.signup}`}>
-            비밀번호 찾기
-          </span>
-        </Link>
+        <div className={styles.find}>
+          <Link href="/findid">
+            <span className={`${styles.guide} ${styles.signup}`}>
+              아이디 찾기
+            </span>
+          </Link>{" "}
+          |{" "}
+          <Link href="/findpw">
+            <span className={`${styles.guide} ${styles.signup}`}>
+              비밀번호 찾기
+            </span>
+          </Link>
+        </div>
         <Link href="http://localhost:8181/oauth2/authorization/google">
           <button className={styles.socialLogin}>
             <div className={styles.imageWrapper}>
