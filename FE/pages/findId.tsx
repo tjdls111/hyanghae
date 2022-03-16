@@ -6,6 +6,7 @@
 생성일 2022-03-14
 마지막 수정일 2022-03-15
 */
+import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
@@ -22,6 +23,7 @@ interface FindIdInput {
 }
 
 const FindId: NextPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const isLoggedIn = false;
   const {
     register,
@@ -40,7 +42,7 @@ const FindId: NextPage = () => {
 
   const onValidSubmit: SubmitHandler<FindIdInput> = async () => {
     const { email } = getValues();
-
+    setIsLoading(true);
     apiFindUserId(email)
       .then((res) => {
         alert("이메일로 아이디를 보냈습니다. 메일을 확인해주세요~");
@@ -48,6 +50,7 @@ const FindId: NextPage = () => {
       })
       .catch((err) => {
         alert("잘못된 이메일입니다. 다시 한번 확인해주세요.");
+        setIsLoading(false);
       });
   };
 
@@ -90,11 +93,12 @@ const FindId: NextPage = () => {
           {emailError}
           <button
             className={`${styles.inputForm} ${styles.inputBtn}  ${
-              isValid && styles.canClick
+              isValid && !isLoading && styles.canClick
             }`}
             type="submit"
             value="아이디 찾기"
             aria-label="findBtn"
+            disabled={isLoading}
           >
             찾기
           </button>
