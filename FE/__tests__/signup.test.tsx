@@ -1,3 +1,11 @@
+/*
+signup.test.tsx
+@author scarlet
+@version 1.0.0
+생성일 2022-03-08
+마지막 수정일 2022-03-16
+*/
+
 import React from "react";
 import SignUp from "../pages/signup";
 import { configure, shallow, ShallowWrapper } from "enzyme";
