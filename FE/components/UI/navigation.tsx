@@ -11,6 +11,7 @@ import React from "react";
 import styles from "./navigation.module.css";
 import Image from "next/image";
 import mainLogo from "../../public/logos/mainLogo.png";
+import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 
 const Navigation: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const Navigation: React.FC = () => {
         </nav>
         <form className={styles.searchBar} action="">
           <input className={styles.searchInput} type="text" />
+          <MagnifyingGlass className={styles.searchIcon} />
         </form>
         <button className={styles.loginButton}>로그인</button>
       </main>

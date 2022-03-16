@@ -29,16 +29,32 @@
 
 .navItem {
   list-style: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #333;
+}
+
+.searchBar {
+  display: flex;
+  flex: 0 0 30%;
+  position: relative;
 }
 
 .searchInput {
   border: 1px solid rgba(119, 119, 119, 0.294);
   border-radius: 3rem;
-  padding: 1rem 2rem;
+  padding: 1rem 1rem 1rem 4rem;
   outline: none;
+  width: 100%;
+  font-size: 1.6rem;
+}
+
+.searchIcon {
+  fill: #777;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
 }
 
 .loginButton {
@@ -47,7 +63,7 @@
   border-radius: 1rem;
   padding: 1rem 2rem;
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   transition: all 0.3s;
 }
 
