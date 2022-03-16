@@ -156,13 +156,13 @@ const Login: NextPage = () => {
           </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
-        <Link href="/findId">
+        <Link href="/findid">
           <span className={`${styles.guide} ${styles.signup}`}>
             아이디 찾기
           </span>
         </Link>{" "}
         |{" "}
-        <Link href="/findPw">
+        <Link href="/findpw">
           <span className={`${styles.guide} ${styles.signup}`}>
             비밀번호 찾기
           </span>
