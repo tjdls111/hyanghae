@@ -7,15 +7,12 @@
 마지막 수정일 2022-03-15
 */
 import type { NextPage } from "next";
-import { useEffect, useRef } from "react";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
 import { apiFindUserId } from "../api/user";
 import Router from "next/router";
-import googleLogo from "../public/images/googleLogo.png";
 import logo from "../public/logo.jpg";
 import Image from "next/image";
 
@@ -31,8 +28,6 @@ const FindId: NextPage = () => {
     handleSubmit,
     formState: { errors, isValid },
     getValues,
-    setError,
-    clearErrors,
   } = useForm<FindIdInput>({
     mode: "onChange",
   });

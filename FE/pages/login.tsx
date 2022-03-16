@@ -81,7 +81,8 @@ const Login: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper2}>
-        <Image className={styles.logoImage} src={logo} layout="fill" />
+        {/* <Image className={styles.logoImage} src={logo} layout="fill" /> */}
+        <Image src={logo} alt="dd" />
       </div>
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.inputContainer}>
