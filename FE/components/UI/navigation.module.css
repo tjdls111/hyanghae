@@ -1,0 +1,72 @@
+.container {
+  border-bottom: 1px solid rgba(119, 119, 119, 0.294);
+}
+
+.layout {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 0 2rem;
+  height: 10rem;
+}
+
+.logoWrapper {
+  width: 8rem;
+  height: 8rem;
+  position: relative;
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
+.navigation {
+  display: flex;
+  column-gap: 8rem;
+}
+
+.navItem {
+  list-style: none;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.searchBar {
+  display: flex;
+  flex: 0 0 30%;
+  position: relative;
+}
+
+.searchInput {
+  border: 1px solid rgba(119, 119, 119, 0.294);
+  border-radius: 3rem;
+  padding: 1rem 1rem 1rem 4rem;
+  outline: none;
+  width: 100%;
+  font-size: 1.6rem;
+}
+
+.searchIcon {
+  fill: #777;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+.loginButton {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 1rem;
+  padding: 1rem 2rem;
+  color: #fff;
+  font-size: 1.6rem;
+  transition: all 0.3s;
+}
+
+.loginButton:hover {
+  background-color: var(--color-primary-dark);
+}
