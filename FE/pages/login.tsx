@@ -170,7 +170,11 @@ const Login: NextPage = () => {
         <Link href="http://localhost:8181/oauth2/authorization/google">
           <button className={styles.socialLogin}>
             <div className={styles.imageWrapper}>
-              <Image src={googleLogo} />
+              <Image
+                className={styles.logoImage}
+                layout="fill"
+                src={googleLogo}
+              />
             </div>
             <p className={styles.socialLoginText}>구글 로그인</p>
           </button>
