@@ -150,8 +150,10 @@ const Login: NextPage = () => {
             <div className={styles.imageWrapper}>
               <Image
                 className={styles.logoImage}
+                alt="googleLogo"
+                src="/images/login_files/googleLogo.png"
                 layout="fill"
-                src={"/public/images/googleLogo.png"}
+                objectFit="contain"
               />
             </div>
             <p className={styles.socialLoginText}>구글 로그인</p>
