@@ -12,12 +12,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError, AxiosResponse } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import {
-  apiSignup,
-  apiCheckId,
-  apiCheckNickname,
-  apiSendEmailNum,
-} from "../api/user";
+import { apiSignup, apiCheckId, apiCheckNickname, apiSendEmailNum } from "../api/user";
 import { LocationSearchingOutlined } from "@mui/icons-material";
 
 interface SignupInput {
@@ -57,26 +52,16 @@ const Signup: NextPage = () => {
   }, [isLoggedIn]);
 
   const onValidSubmit: SubmitHandler<SignupInput> = async () => {
-    const {
-      id,
-      password,
-      passwordConfirmation,
-      nickname,
-      emailPartOne,
-      emailPartTwo,
-    } = getValues();
+    const { id, password, passwordConfirmation, nickname, emailPartOne, emailPartTwo } =
+      getValues();
 
     if (isIdChecked) {
       if (isNicknameChecked) {
         if (password === passwordConfirmation) {
           try {
-            apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password)
-              .then((res) => {
-                Router.push("/login");
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+            await apiSignup(`${emailPartOne}@${emailPartTwo}`, id, nickname, password);
+
+            Router.push("/login");
           } catch (e) {
             const error = e as AxiosError;
             if (error?.response?.status === 401) {
@@ -181,10 +166,7 @@ const Signup: NextPage = () => {
     <div />
   );
   const pwConfirmationError = errors.passwordConfirmation?.message ? (
-    <div
-      className={`${styles.message} ${styles.pwConfirmationMessage}`}
-      role="alert"
-    >
+    <div className={`${styles.message} ${styles.pwConfirmationMessage}`} role="alert">
       {errors.passwordConfirmation?.message}
     </div>
   ) : (
@@ -238,8 +220,7 @@ const Signup: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message:
-                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -256,11 +237,7 @@ const Signup: NextPage = () => {
               aria-label="id"
             />
             <span>
-              <button
-                type="button"
-                onClick={idValidation}
-                className={styles.smallInputBtn}
-              >
+              <button type="button" onClick={idValidation} className={styles.smallInputBtn}>
                 {isIdChecked ? "완료" : " 검사"}
               </button>
             </span>
@@ -273,8 +250,7 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -299,8 +275,7 @@ const Signup: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message:
-                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -338,11 +313,7 @@ const Signup: NextPage = () => {
               aria-label="nickname"
             />
             <span>
-              <button
-                type="button"
-                onClick={nicknameValidation}
-                className={styles.smallInputBtn}
-              >
+              <button type="button" onClick={nicknameValidation} className={styles.smallInputBtn}>
                 {isNicknameChecked ? "완료" : " 검사"}
               </button>
             </span>
@@ -375,11 +346,7 @@ const Signup: NextPage = () => {
             <option value="gmail.com">지메일</option>
           </select>
           <span>
-            <button
-              onClick={submitEmail}
-              type="button"
-              className={styles.smallInputBtn}
-            >
+            <button onClick={submitEmail} type="button" className={styles.smallInputBtn}>
               보내기
             </button>
           </span>
@@ -404,11 +371,7 @@ const Signup: NextPage = () => {
                   aria-label="code"
                 />
               </label>
-              <button
-                onClick={checkValidationCode}
-                type="button"
-                className={styles.smallInputBtn}
-              >
+              <button onClick={checkValidationCode} type="button" className={styles.smallInputBtn}>
                 {isEmailChecked ? "완료" : " 검사"}
               </button>
             </div>
@@ -417,11 +380,7 @@ const Signup: NextPage = () => {
           {validationError}
           <button
             className={`${styles.inputForm} ${styles.inputBtn} ${
-              isValid &&
-              isIdChecked &&
-              isNicknameChecked &&
-              isEmailChecked &&
-              styles.canClick
+              isValid && isIdChecked && isNicknameChecked && isEmailChecked && styles.canClick
             }`}
             type="submit"
             value="회원가입"

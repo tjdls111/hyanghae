@@ -11,28 +11,11 @@ import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
-import { apiLogin } from "../api/user";
-
-jest.mock("next/router", () => ({
-  useRouter() {
-    return {
-      route: "/",
-      pathname: "",
-      query: "",
-      asPath: "",
-      push: jest.fn(),
-      events: {
-        on: jest.fn(),
-        off: jest.fn(),
-      },
-      beforePopState: jest.fn(() => null),
-      prefetch: jest.fn(() => null),
-    };
-  },
-}));
+import { apiLogin, tokenType } from "../api/user";
+import { BASE_URL } from "../api/utils";
 
 configure({ adapter: new Adapter() });
-jest.mock("axios");
+
 describe("로그인 페이지 렌더링 테스트", () => {
   let wrapper: ShallowWrapper;
   beforeEach(() => {
@@ -61,7 +44,7 @@ describe("react Hook Form", () => {
   });
 
   it("아이디와 비밀번호 둘다 유효하지 않을때", async () => {
-    fireEvent.submit(screen.getByRole("button"));
+    fireEvent.submit(screen.getByLabelText("loginBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(2);
   });
 
@@ -78,7 +61,7 @@ describe("react Hook Form", () => {
       },
     });
 
-    fireEvent.submit(screen.getByRole("button"));
+    fireEvent.submit(screen.getByLabelText("loginBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
     expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test");
     expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password");
@@ -97,7 +80,7 @@ describe("react Hook Form", () => {
       },
     });
 
-    fireEvent.submit(screen.getByRole("button"));
+    fireEvent.submit(screen.getByLabelText("loginBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
 
     expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12345");
@@ -120,16 +103,27 @@ describe("react Hook Form", () => {
 
     expect(await screen.findByLabelText("loginBtn")).toBeEnabled();
 
-    fireEvent.submit(screen.getByRole("button"));
+    fireEvent.submit(screen.getByLabelText("loginBtn"));
 
     await waitFor(() => expect(screen.queryAllByRole("alert")).toHaveLength(0));
 
+    const res = {
+      message: "ok",
+      statusCode: 0,
+      token: "star",
+    } as tokenType;
+
     axios.post = jest.fn().mockResolvedValue({
-      response: "OK",
+      message: "ok",
+      statusCode: 0,
+      token: "star",
     });
-
-    const sign = await apiLogin("now20412041", "now20412041");
-
-    expect(sign).toHaveProperty("response", "OK");
+    const result = await apiLogin("sdfsdfds", "Sdfdsfsd");
+    expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/user/login`, {
+      userId: "sdfsdfds",
+      userPw: "Sdfdsfsd",
+    });
+    expect(axios.post).toBeCalledTimes(1);
+    expect(result).toEqual(res);
   });
 });
