@@ -13,9 +13,8 @@ import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
-import { apiFindUserId } from "../api/user";
+import { apiFindpw } from "../api/user";
 import Router from "next/router";
-import googleLogo from "../public/images/googleLogo.png";
 import logo from "../public/logo.jpg";
 import Image from "next/image";
 
@@ -52,9 +51,9 @@ const FindPw: NextPage = () => {
   const onValidSubmit: SubmitHandler<FindPwInput> = async () => {
     const { email, id } = getValues();
 
-    apiFindUserId(email)
+    apiFindpw(email, id)
       .then((res) => {
-        alert("이메일로 비밀번호를 보냈습니다. 메일을 확인해주세요~");
+        alert("이메일로 새로운 비밀번호를 보냈습니다. 메일을 확인해주세요~");
         Router.push("/login");
       })
       .catch((err) => {
