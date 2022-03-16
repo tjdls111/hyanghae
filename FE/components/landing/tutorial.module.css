@@ -34,7 +34,6 @@
 /* steps section */
 
 .steps {
-  width: 100%;
   padding: 10rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -45,7 +44,6 @@
 
 .stepImgBox {
   position: relative;
-  width: 50rem;
   height: 50rem;
 }
 

@@ -93,9 +93,10 @@
 .socialLogin {
   margin: 3rem auto 0;
   width: 27rem;
+  height: 5rem;
   border: none;
   border-radius: 0.5rem;
-  padding: 1rem 0;
+  padding: 1rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
