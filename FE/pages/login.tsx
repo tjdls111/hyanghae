@@ -51,7 +51,9 @@ const Login: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={`${styles.message} ${styles.resultMessage}`}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>
+      {errors.result?.message}
+    </div>
   ) : (
     <div />
   );
@@ -74,8 +76,13 @@ const Login: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper2}>
-        {/* <Image className={styles.logoImage} src={logo} layout="fill" /> */}
-        <Image src={logo} alt="dd" />
+        <Image
+          className={styles.logoImage}
+          alt="logo"
+          src="/logo.jpg"
+          layout="fill"
+          objectFit="contain"
+        />
       </div>
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.inputContainer}>
@@ -88,7 +95,8 @@ const Login: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message:
+                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -113,7 +121,8 @@ const Login: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -143,7 +152,9 @@ const Login: NextPage = () => {
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
         <Link href="/signup">
-          <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
+          <strong className={`${styles.guide} ${styles.signup}`}>
+            지금 가입하세요
+          </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
         <div className={styles.find}>

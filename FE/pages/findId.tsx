@@ -54,7 +54,13 @@ const FindId: NextPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper2}>
-        <Image className={styles.logoImage} src={logo} layout="fill" />
+        <Image
+          className={styles.logoImage}
+          alt="logo"
+          src="/logo.jpg"
+          layout="fill"
+          objectFit="contain"
+        />
       </div>
       <h1 className={styles.title}>아이디 찾기</h1>
       <div className={styles.inputContainer}>
