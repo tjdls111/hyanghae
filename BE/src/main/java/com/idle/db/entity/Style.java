@@ -22,28 +22,13 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name = "clothes")
+@Table(name = "style")
 @NoArgsConstructor
-public class Clothes {
+public class Style {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto increment
-    @Column(name = "c_id")
-    Long clothesId;
-
-    @Column(name = "c_type")
-    String clothesType;
-
-    @Column(name = "c_url")
-    String clothesUrl;
-
-    @Column(name="gender", nullable = false)
-    int gender;
-
-    @Column(name="age", nullable = false)
-    int age;
-
-    @Column(name="season", nullable = false)
-    int season;
+    @Column(name = "st_id")
+    Long styleId;
 
     @Column(name="tpo", nullable = false)
     int tpo;
@@ -51,6 +36,6 @@ public class Clothes {
     @Column(name="mood", nullable = false)
     int mood;
 
-    @OneToMany(mappedBy = "clothes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Set<Survey3> Survey3List = new HashSet<>();
+    @OneToMany(mappedBy = "style", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Set<Survey3> survey3List = new HashSet<>();
 }

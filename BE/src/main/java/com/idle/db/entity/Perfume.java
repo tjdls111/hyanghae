@@ -54,8 +54,8 @@ public class Perfume  {
     @Column(name="gender", nullable = false)
     int gender;
 
-    @Column(name="age", nullable = false)
-    int age;
+    @Column(name="daynight", nullable = false)
+    boolean daynight;
 
     @Column(name="season", nullable = false)
     int season;

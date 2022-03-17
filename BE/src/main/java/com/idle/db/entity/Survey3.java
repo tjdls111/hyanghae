@@ -32,7 +32,7 @@ public class Survey3 extends BaseTimeEntity{
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "c_id", nullable = false)
-    Clothes clothes;
+    Style style;
 
     @Column(name = "s_title", nullable = false)
     String surveyTitle;
