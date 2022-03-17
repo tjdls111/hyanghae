@@ -18,6 +18,10 @@
   position: relative;
 }
 
+.logoWrapper:hover {
+  cursor: pointer;
+}
+
 .logoImage {
   object-fit: contain;
 }
@@ -42,7 +46,6 @@
   display: flex;
   align-items: center;
   flex: 0 0 30%;
-  position: relative;
 }
 
 .searchInput {
@@ -57,11 +60,10 @@
 
 .searchIcon {
   fill: #777;
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
   width: 1.8rem;
+  height: 1.8rem;
+  margin-right: -3rem;
+  z-index: 1;
 }
 
 .deleteIcon {
