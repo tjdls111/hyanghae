@@ -34,6 +34,10 @@
   color: #333;
 }
 
+.navItem:hover {
+  cursor: pointer;
+}
+
 .searchBar {
   display: flex;
   align-items: center;
@@ -47,7 +51,8 @@
   padding: 1rem 1rem 1rem 4rem;
   outline: none;
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  color: #555;
 }
 
 .searchIcon {
@@ -74,7 +79,7 @@
   background-color: var(--color-primary);
   border: none;
   border-radius: 1rem;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1rem;
   color: #fff;
   font-size: 1.6rem;
   transition: all 0.3s;

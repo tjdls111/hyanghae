@@ -13,16 +13,24 @@ import Image from "next/image";
 import mainLogo from "../../public/logos/mainLogo.png";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 import DeleteIcon from "../../public/SVG/circle-with-cross.svg";
+import { useRouter } from "next/router";
 
 const Navigation: React.FC = () => {
   const [keyword, setKeyword] = useState("");
+  const router = useRouter();
 
   const keywordDeleteHandler = function () {
     setKeyword("");
   };
 
-  const keywordChangeHandler = function (e) {
+  const keywordChangeHandler = function (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) {
     setKeyword(e.target.value);
+  };
+
+  const requestLoginHandler = function () {
+    router.push("/login");
   };
 
   return (
@@ -50,7 +58,9 @@ const Navigation: React.FC = () => {
             className={styles.deleteIcon}
           />
         </form>
-        <button className={styles.loginButton}>로그인</button>
+        <button onClick={requestLoginHandler} className={styles.loginButton}>
+          로그인
+        </button>
       </main>
     </div>
   );
