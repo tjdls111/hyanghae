@@ -36,6 +36,7 @@
 
 .searchBar {
   display: flex;
+  align-items: center;
   flex: 0 0 30%;
   position: relative;
 }
@@ -55,6 +56,18 @@
   top: 50%;
   left: 1rem;
   transform: translateY(-50%);
+  width: 1.8rem;
+}
+
+.deleteIcon {
+  fill: #777;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-left: -3rem;
+}
+
+.deleteIcon:hover {
+  fill: #555;
 }
 
 .loginButton {

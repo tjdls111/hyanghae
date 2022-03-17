@@ -7,13 +7,24 @@
 마지막 수정일 2022-03-15
 */
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./navigation.module.css";
 import Image from "next/image";
 import mainLogo from "../../public/logos/mainLogo.png";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
+import DeleteIcon from "../../public/SVG/circle-with-cross.svg";
 
 const Navigation: React.FC = () => {
+  const [keyword, setKeyword] = useState("");
+
+  const keywordDeleteHandler = function () {
+    setKeyword("");
+  };
+
+  const keywordChangeHandler = function (e) {
+    setKeyword(e.target.value);
+  };
+
   return (
     <div className={styles.container}>
       <main className={styles.layout}>
@@ -27,8 +38,17 @@ const Navigation: React.FC = () => {
           </ul>
         </nav>
         <form className={styles.searchBar} action="">
-          <input className={styles.searchInput} type="text" />
+          <input
+            onChange={keywordChangeHandler}
+            value={keyword}
+            className={styles.searchInput}
+            type="text"
+          />
           <MagnifyingGlass className={styles.searchIcon} />
+          <DeleteIcon
+            onClick={keywordDeleteHandler}
+            className={styles.deleteIcon}
+          />
         </form>
         <button className={styles.loginButton}>로그인</button>
       </main>

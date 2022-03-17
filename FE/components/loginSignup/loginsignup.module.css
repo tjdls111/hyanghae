@@ -109,8 +109,8 @@
 }
 
 .imageWrapper {
-  width: 10%;
-  height: 80%;
+  width: 2rem;
+  height: 2rem;
   position: relative;
 }
 
@@ -119,6 +119,6 @@
   font-weight: 600;
 }
 
-.logoImage {
+/* .logoImage {
   position: absolute;
-}
+} */
