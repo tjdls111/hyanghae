@@ -8,13 +8,11 @@
 */
 import { useState } from "react";
 import type { NextPage } from "next";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
-import { AxiosError } from "axios";
+import { SubmitHandler, useForm } from "react-hook-form";
 import styles from "../components/loginSignup/loginsignup.module.css";
 import Link from "next/link";
 import { apiFindUserId } from "../api/user";
 import Router from "next/router";
-import logo from "../public/logo.jpg";
 import Image from "next/image";
 
 interface FindIdInput {
