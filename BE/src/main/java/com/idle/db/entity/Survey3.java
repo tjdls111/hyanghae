@@ -34,7 +34,7 @@ public class Survey3 extends BaseTimeEntity{
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JsonManagedReference
-    @JoinColumn(name = "c_id", nullable = false)
+    @JoinColumn(name = "st_id", nullable = false)
     Style style;
 
     @Column(name = "s_title", nullable = false)
