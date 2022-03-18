@@ -47,4 +47,12 @@ public class PerfumeServiceImpl implements PerfumeService{
         Page<Perfume> perfumes = perfumeRepository.findAll(pageable);
         return perfumes;
     }
+
+    /* Woody */
+    @Override
+    public Perfume getPerfumeByPerfumeId(Long perfumeId) {
+        Perfume perfume = perfumeRepository.findByPerfumeId(perfumeId).orElse(null);
+        return perfume;
+    }
+
 }

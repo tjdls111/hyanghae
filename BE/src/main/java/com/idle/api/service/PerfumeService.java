@@ -19,4 +19,5 @@ public interface PerfumeService {
 
     Map<String, Object> getPerfumeSearchPage(String keyword, String content, Pageable pageable);
     Page<Perfume> getPerfumeList(Pageable pageable);
+    Perfume getPerfumeByPerfumeId(Long perfumeId);
 }
