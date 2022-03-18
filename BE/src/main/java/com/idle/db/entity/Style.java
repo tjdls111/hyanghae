@@ -11,6 +11,7 @@
 package com.idle.db.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,5 +38,6 @@ public class Style {
     int mood;
 
     @OneToMany(mappedBy = "style", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     Set<Survey3> survey3List = new HashSet<>();
 }
