@@ -1,6 +1,6 @@
 /**
 * PerfumeServiceImpl
-* 향수 이름, 브랜드별 검색 기능 구현
+* 향수 검색, 향수 조회 기능 구현
 *
 * @author Woody
 * @version 1.0.0
@@ -9,6 +9,7 @@
 **/
 package com.idle.api.service;
 
+import com.idle.db.entity.Perfume;
 import com.idle.db.repository.PerfumeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -38,5 +39,12 @@ public class PerfumeServiceImpl implements PerfumeService{
             map.put("isLast",page.isLast());
         }
         return map;
+    }
+
+    /* David : 향수 목록 조회 */
+    @Override
+    public Page<Perfume> getPerfumeList(Pageable pageable) {
+        Page<Perfume> perfumes = perfumeRepository.findAll(pageable);
+        return perfumes;
     }
 }
