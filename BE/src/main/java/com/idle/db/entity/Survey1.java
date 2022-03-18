@@ -9,6 +9,7 @@
  **/
 package com.idle.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,14 +26,15 @@ public class Survey1 extends BaseTimeEntity{
     Long surveyId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonManagedReference
     @JoinColumn(name = "u_seq", nullable = false)
     User user;
 
     @Column(name="gender", nullable = false)
     int gender;
 
-    @Column(name="age", nullable = false)
-    int age;
+    @Column(name="daynight", nullable = false)
+    boolean daynight;
 
     @Column(name="season", nullable = false)
     int season;
@@ -47,10 +49,10 @@ public class Survey1 extends BaseTimeEntity{
     String surveyTitle;
 
     @Builder
-    public Survey1(User user, int gender, int age, int season, int tpo, int mood, String surveyTitle){
+    public Survey1(User user, int gender, boolean daynight, int season, int tpo, int mood, String surveyTitle){
         this.user = user;
         this.gender = gender;
-        this.age = age;
+        this.daynight = daynight;
         this.season = season;
         this.tpo = tpo;
         this.mood = mood;

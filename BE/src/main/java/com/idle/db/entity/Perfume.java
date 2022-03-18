@@ -12,6 +12,7 @@ package com.idle.db.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -54,8 +55,8 @@ public class Perfume  {
     @Column(name="gender", nullable = false)
     int gender;
 
-    @Column(name="age", nullable = false)
-    int age;
+    @Column(name="daynight", nullable = false)
+    boolean daynight;
 
     @Column(name="season", nullable = false)
     int season;
@@ -67,12 +68,15 @@ public class Perfume  {
     int mood;
 
     @OneToMany(mappedBy = "perfume", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Set<Survey2> Survey2List = new HashSet<>();
+    @JsonBackReference
+    Set<Survey2> survey2List = new HashSet<>();
 
     @OneToMany(mappedBy = "perfume", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     Set<Review> reviewList = new HashSet<>();
 
     @OneToMany(mappedBy = "perfume", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     Set<LikePerfume> likePerfumeList = new HashSet<>();
 
 }
