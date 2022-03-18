@@ -13,6 +13,7 @@ import com.idle.api.request.*;
 import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.UserEmailNumberResponse;
 import com.idle.api.response.UserLoginResponse;
+import com.idle.api.response.UserResponse;
 import com.idle.api.service.UserService;
 import com.idle.common.jwt.JwtTokenUtil;
 import com.idle.common.jwt.dto.IdleUserDetails;
@@ -165,4 +166,16 @@ public class UserController {
         }
         return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 새 비밀번호를 전송했습니다."));
     }
+
+    /* Woody */
+    @ApiOperation("회원 정보 조회")
+    @GetMapping("/info")
+    public ResponseEntity<UserResponse> getUserInfo(@ApiIgnore Authentication authentication) {
+
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+
+        return ResponseEntity.status(200).body(UserResponse.of(user));
+    }
+
 }
