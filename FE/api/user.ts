@@ -3,7 +3,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-10
-마지막 수정일 2022-03-11
+마지막 수정일 2022-03-14
 */
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -52,6 +52,15 @@ export const socialLogin = () => {
   localStorage.setItem("token", token);
 };
 
+export const apiFindUserId = async (email: string) =>
+  await axios.get(`${BASE_URL}/user/finduserid/${email}`);
+
+export const apiFindpw = async (userEmail: string, userId: string) =>
+  await axios.put(`${BASE_URL}/user/finduserpw`, {
+    userEmail,
+    userId,
+  });
+  
 export const apiLogin = async (userId: string, userPw: string): Promise<tokenType> => {
   try {
     return await axios.post(`${BASE_URL}/user/login`, {
