@@ -231,7 +231,6 @@ public class UserServiceImpl implements UserService{
         String tempPw = getRamdomNumber(10);
 
         // 새 비밀번호 DB에 저장
-
         user.setUserPw(passwordEncoder.encode(tempPw));
         userRepository.save(user);
 
