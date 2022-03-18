@@ -9,7 +9,6 @@
  **/
 package com.idle.api.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.idle.api.request.*;
 import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.UserEmailNumberResponse;
@@ -19,6 +18,7 @@ import com.idle.common.jwt.JwtTokenUtil;
 import com.idle.common.jwt.dto.IdleUserDetails;
 import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +32,7 @@ import java.util.NoSuchElementException;
 
 
 @CrossOrigin("*")
+@Api(value = "유저 API", tags = {"User"})
 @RestController
 @RequestMapping("/user")
 public class UserController {
