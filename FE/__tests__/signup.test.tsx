@@ -1,10 +1,18 @@
+/*
+signup.test.tsx
+@author scarlet
+@version 1.0.0
+생성일 2022-03-08
+마지막 수정일 2022-03-16
+*/
+
 import React from "react";
 import SignUp from "../pages/signup";
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor, cleanup } from "@testing-library/react";
 import axios from "axios";
-import { signUpType, apiSignup } from "../api/user";
+import { resType, apiSignup } from "../api/user";
 import { BASE_URL } from "../api/utils";
 jest.mock("next/router", () => ({
   useRouter() {
@@ -373,10 +381,10 @@ describe("react Hook Form", () => {
 
     expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
 
-    const res = {
-      message: "ok",
-      statusCode: 0,
-    } as signUpType;
+    // const res = {
+    //   message: "ok",
+    //   statusCode: 0,
+    // } as resType;
 
     axios.post = jest.fn().mockResolvedValue({
       message: "ok",
@@ -390,7 +398,7 @@ describe("react Hook Form", () => {
       userPw: "Sdfdsfsd",
     });
     expect(axios.post).toBeCalledTimes(1);
-    expect(result).toEqual(res);
+    // expect(result).toEqual(res);
 
     useRouter.mockImplementation(() => ({
       route: "/login",
