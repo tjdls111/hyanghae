@@ -41,7 +41,7 @@ public class PerfumeListRes extends BaseResponseBody {
             perfumeInfo.put("perfumeUrl", perfume.getPerfumeUrl());
             perfumeInfo.put("perfumeDate", perfume.getPerfumeDate());
             perfumeInfo.put("gender", perfume.getGender());
-            perfumeInfo.put("age", perfume.getAge());
+            //perfumeInfo.put("age", perfume.getAge());
             perfumeInfo.put("season", perfume.getSeason());
             perfumeInfo.put("tpo", perfume.getTpo());
             perfumeInfo.put("mood", perfume.getMood());

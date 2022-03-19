@@ -11,6 +11,7 @@
 package com.idle.db.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +29,13 @@ import java.io.Serializable;
 public class Review extends BaseTimeEntity implements Serializable {
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name="u_seq")
     private User user;
 
     @Id
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name="p_id")
     private Perfume perfume;
 
