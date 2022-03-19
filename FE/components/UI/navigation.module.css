@@ -9,7 +9,7 @@
   align-items: center;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 10rem;
+  height: 8rem;
 }
 
 .logoWrapper {
@@ -33,24 +33,35 @@
 
 .navItem {
   list-style: none;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #333;
 }
 
-.navItem:hover {
-  cursor: pointer;
+.navLink:link,
+.navLink:visited {
+  text-decoration: none;
+  color: #555;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.navLink:hover,
+.navLink:active {
+  color: var(--color-primary);
+}
+
+.navLinkActive:link,
+.navLinkActive:visited {
+  color: var(--color-primary);
 }
 
 .searchBar {
   display: flex;
   align-items: center;
-  flex: 0 0 30%;
+  flex: 0 0 20%;
 }
 
 .searchInput {
   border: 1px solid rgba(119, 119, 119, 0.294);
-  border-radius: 3rem;
+  border-radius: 1rem;
   padding: 1rem 1rem 1rem 4rem;
   outline: none;
   width: 100%;
@@ -58,10 +69,13 @@
   color: #555;
 }
 
+.searchInput::placeholder {
+  color: #999;
+}
+
 .searchIcon {
   fill: #777;
   width: 1.8rem;
-  height: 1.8rem;
   margin-right: -3rem;
   z-index: 1;
 }
@@ -69,7 +83,7 @@
 .deleteIcon {
   fill: #777;
   width: 1.8rem;
-  height: 1.8rem;
+
   margin-left: -3rem;
 }
 
@@ -77,7 +91,7 @@
   fill: #555;
 }
 
-.loginButton {
+/* .loginButton {
   background-color: var(--color-primary);
   border: none;
   border-radius: 1rem;
@@ -85,8 +99,25 @@
   color: #fff;
   font-size: 1.6rem;
   transition: all 0.3s;
-}
+} */
 
 .loginButton:hover {
   background-color: var(--color-primary-dark);
+}
+
+.authGuide {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.authText {
+  text-decoration: none;
+  color: #777;
+  font-size: 1.6rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.authText:hover {
+  color: var(--color-primary);
 }
