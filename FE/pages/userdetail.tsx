@@ -15,12 +15,7 @@ const UserDetail: NextPage = () => {
   return (
     <>
       <Navigation />
-      <aside>
-        <DetailSide />
-      </aside>
-      <main>
-        <DetailMain />
-      </main>
+      <DetailSide />
       <footer>
         <footer />
       </footer>

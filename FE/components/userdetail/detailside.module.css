@@ -1,2 +1,41 @@
+
+/*
+마이페이지 왼쪽 슬라이드 컴포넌트 css
+@author scarlet
+@version 1.0.0
+생성일 2022-03-12
+마지막 수정일 2022-03-14
+*/
+
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.listwrapper {
+  margin-left: 1rem;
+  margin-right: auto;
+}
+
+.mylist {
+  cursor: pointer;
+  list-style: none;
+}
+
+.mylist > li {
+  margin-bottom: 8em;
+}
+
+.demain {
+  position: absolute;
+  margin-bottom: 40rem;
+}
+
+.mylist :hover {
+  background-color: black;
 }
