@@ -9,7 +9,7 @@
 
 import React, { useRef, useState } from "react";
 import styles from "./authmodify.module.css";
-import { apiCheckMod } from "../../../api/user";
+import { apiCheckMod } from "../../../../api/user";
 import { useEffect } from "react";
 interface stateProps {
   setState: (value: boolean) => void;

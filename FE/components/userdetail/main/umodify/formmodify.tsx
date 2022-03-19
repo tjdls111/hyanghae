@@ -8,8 +8,8 @@
 
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { apiUserLookUp } from "../../../api/user";
-import UserDestroy from "./userdestroy";
+import { apiUserLookUp } from "../../../../api/user";
+import UserDestroy from "../userdestroy";
 
 const FormModify = () => {
   const [state, setState] = useState({
