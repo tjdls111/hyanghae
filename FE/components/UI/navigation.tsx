@@ -27,11 +27,29 @@ const navItemData = [
     name: "PERFUMES",
     path: "/perfumes",
   },
+  {
+    id: "navItem02",
+    name: "Recommeded",
+    path: "/recommended",
+  },
+  {
+    id: "navItem02",
+    name: "About",
+    path: "/about",
+  },
 ];
 
 const Navigation: React.FC = () => {
+  const [mobileNav, setMobileNav] = useState(false);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
+
+  const mobileNavOpenHandler = function () {
+    setMobileNav(true);
+  };
+  const mobileNavCloseHandler = function () {
+    setMobileNav(false);
+  };
 
   const keywordDeleteHandler = function () {
     setKeyword("");
@@ -57,12 +75,34 @@ const Navigation: React.FC = () => {
   return (
     <div className={styles.container}>
       <main className={styles.layout}>
-        <Link href="/home">
-          <div className={styles.logoWrapper}>
-            <Image className={styles.logoImage} layout="fill" src={mainLogo} />
+        {/* 모바일에서만 보이는 햄버거 버튼 */}
+        <button onClick={mobileNavOpenHandler} className={styles.hamburger}>
+          <span className={styles.hamburgerBar}></span>
+          <span className={styles.hamburgerBar}></span>
+          <span className={styles.hamburgerBar}></span>
+        </button>
+        <nav
+          className={`${styles.navContainer} ${
+            mobileNav && styles.mobileNavActive
+          }`}
+        >
+          {/* 모바일에서 햄버거 버튼을 열었을 때 보이는 X */}
+          <button
+            onClick={mobileNavCloseHandler}
+            className={styles.navCloseButton}
+          >
+            X
+          </button>
+          {/* 모바일에서만 보이는 로그인 / 회원가입 */}
+          <div className={styles.mobileAuthGuide}>
+            <Link href="/login">
+              <button className={`${styles.mobileLoginButton}`}>LOG IN</button>
+            </Link>
+            <Link href="/signup">
+              <button className={styles.mobileSignupButton}>JOIN US</button>
+            </Link>
           </div>
-        </Link>
-        <nav className={styles.navContainer}>
+
           <ul className={styles.navigation}>
             {navItemData.map((navItem) => {
               return (
@@ -81,36 +121,44 @@ const Navigation: React.FC = () => {
             })}
           </ul>
         </nav>
-        <form
-          onSubmit={searchSubmitHandler}
-          className={styles.searchBar}
-          action=""
-        >
-          <MagnifyingGlass className={styles.searchIcon} />
-          <input
-            onChange={keywordChangeHandler}
-            value={keyword}
-            className={styles.searchInput}
-            type="text"
-            placeholder="향해 통합검색"
-          />
+        <Link href="/home">
+          <div className={styles.logoWrapper}>
+            <Image className={styles.logoImage} layout="fill" src={mainLogo} />
+          </div>
+        </Link>
+        <div className={styles.wrapper}>
+          <form
+            onSubmit={searchSubmitHandler}
+            className={styles.searchBar}
+            action=""
+          >
+            <MagnifyingGlass className={styles.searchIcon} />
+            <input
+              onChange={keywordChangeHandler}
+              value={keyword}
+              className={styles.searchInput}
+              type="text"
+              placeholder="향해 통합검색"
+            />
 
-          <DeleteIcon
-            onClick={keywordDeleteHandler}
-            className={styles.deleteIcon}
-          />
-        </form>
-        {/* <button onClick={requestLoginHandler} className={styles.loginButton}>
+            <DeleteIcon
+              onClick={keywordDeleteHandler}
+              className={styles.deleteIcon}
+            />
+          </form>
+
+          {/* <button onClick={requestLoginHandler} className={styles.loginButton}>
           로그인
         </button> */}
-        <div className={styles.authGuide}>
-          <Link href="/login">
-            <a className={`${styles.authText}`}>로그인</a>
-          </Link>
-          <span>|</span>
-          <Link href="/signup">
-            <a className={styles.authText}>회원가입</a>
-          </Link>
+          <div className={styles.authGuide}>
+            <Link href="/login">
+              <a className={`${styles.authText}`}>로그인</a>
+            </Link>
+            <span>|</span>
+            <Link href="/signup">
+              <a className={styles.authText}>회원가입</a>
+            </Link>
+          </div>
         </div>
       </main>
     </div>
