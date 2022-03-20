@@ -15,7 +15,10 @@
 .logoWrapper {
   width: 8rem;
   height: 8rem;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .logoWrapper:hover {
@@ -28,7 +31,7 @@
 
 .navigation {
   display: flex;
-  column-gap: 8rem;
+  column-gap: 4rem;
 }
 
 .navItem {
@@ -39,7 +42,7 @@
 .navLink:visited {
   text-decoration: none;
   color: #555;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
 }
 
@@ -53,18 +56,21 @@
   color: var(--color-primary);
 }
 
+/* 검색창 */
+
 .searchBar {
   display: flex;
   align-items: center;
+  flex-grow: 1;
 }
 
 .searchInput {
   border: 1px solid rgba(119, 119, 119, 0.294);
-  border-radius: 1rem;
-  padding: 1rem 1rem 1rem 4rem;
+  border-radius: 0.5rem;
+  padding: 1rem 1.2rem 0.8rem 4rem;
   outline: none;
   width: 100%;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #555;
 }
 
@@ -75,6 +81,7 @@
 .searchIcon {
   fill: #777;
   width: 1.8rem;
+  height: 1.8rem;
   margin-right: -3rem;
   z-index: 1;
 }
@@ -82,7 +89,6 @@
 .deleteIcon {
   fill: #777;
   width: 1.8rem;
-
   margin-left: -3rem;
 }
 
@@ -125,7 +131,8 @@
 .wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  flex-basis: 20%;
 }
 
 /* 햄버거 내브바 닫기 버튼 */
@@ -175,10 +182,9 @@
 .hamburger {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  row-gap: 0.8rem;
-  width: 3rem;
-  height: 3rem;
+  justify-content: space-between;
+  width: 2.5rem;
+  height: 2rem;
   border: none;
   background: none;
   display: none;
@@ -187,11 +193,124 @@
 .hamburgerBar {
   width: 100%;
   background-color: #777;
-  height: 2px;
+  height: 0.3rem;
   border-radius: 0.2rem;
 }
 
-@media (max-width: 600px) {
+.mobileSearchToggle {
+  fill: #777;
+  width: 2.5rem;
+  margin-left: 1rem;
+  display: none;
+}
+
+.accountIcon {
+  fill: #777;
+  width: 3rem;
+}
+
+.mobileSearch {
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: all 0.2s ease-out;
+}
+
+.mobileSearchActive {
+  transform: translateX(0%);
+}
+
+.mobileSearchBar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.mobileSearchInput {
+  border: none;
+  outline: none;
+  border: 1px solid rgba(119, 119, 119, 0.294);
+  border-radius: 0.5rem;
+  padding: 1rem 0rem 1rem 5rem;
+  font-size: 2rem;
+  color: #333;
+  flex-grow: 1;
+}
+
+.mobileSearchIcon {
+  height: 3rem;
+  width: 3rem;
+  fill: #777;
+  z-index: 2000;
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+.mobileSearchCancel {
+  margin-left: 3rem;
+  color: #555;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.mobileRecent {
+  width: 100%;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 3rem;
+}
+
+.mobileRecentHeader {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.8rem;
+}
+
+.mobileRecentBox {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding-left: 1rem;
+}
+
+.mobileRecentItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobileRecentTitle {
+  font-size: 1.6rem;
+}
+
+.mobileRecentDelete {
+  font-size: 1.6rem;
+  border: none;
+  background: none;
+  color: #777;
+}
+
+@media (max-width: 800px) {
+  .searchBar {
+    display: none;
+  }
+
+  .mobileSearchToggle {
+    display: block;
+  }
+  .authGuide {
+    display: none;
+  }
+
   .navContainer {
     position: fixed;
     inset: 0;
@@ -202,7 +321,7 @@
     row-gap: 5rem;
     align-items: center;
     transform: translateX(-100%);
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
   }
 
   .mobileNavActive {

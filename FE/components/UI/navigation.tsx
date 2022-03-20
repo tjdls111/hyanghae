@@ -10,9 +10,10 @@
 import React, { useState } from "react";
 import styles from "./navigation.module.css";
 import Image from "next/image";
-import mainLogo from "../../public/logos/mainLogo.png";
+import letterLogo from "../../public/logos/letterLogo.png";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 import DeleteIcon from "../../public/SVG/circle-with-cross.svg";
+import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -40,6 +41,7 @@ const navItemData = [
 ];
 
 const Navigation: React.FC = () => {
+  const [mobileSearch, setMobileSearch] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
@@ -49,6 +51,14 @@ const Navigation: React.FC = () => {
   };
   const mobileNavCloseHandler = function () {
     setMobileNav(false);
+  };
+
+  const mobileSearchCloseHandler = function () {
+    setMobileSearch(false);
+  };
+
+  const mobileSearchOpenHandler = function () {
+    setMobileSearch(true);
   };
 
   const keywordDeleteHandler = function () {
@@ -123,7 +133,11 @@ const Navigation: React.FC = () => {
         </nav>
         <Link href="/home">
           <div className={styles.logoWrapper}>
-            <Image className={styles.logoImage} layout="fill" src={mainLogo} />
+            <Image
+              className={styles.logoImage}
+              layout="fill"
+              src={letterLogo}
+            />
           </div>
         </Link>
         <div className={styles.wrapper}>
@@ -147,17 +161,46 @@ const Navigation: React.FC = () => {
             />
           </form>
 
-          {/* <button onClick={requestLoginHandler} className={styles.loginButton}>
-          로그인
-        </button> */}
-          <div className={styles.authGuide}>
-            <Link href="/login">
-              <a className={`${styles.authText}`}>로그인</a>
-            </Link>
-            <span>|</span>
-            <Link href="/signup">
-              <a className={styles.authText}>회원가입</a>
-            </Link>
+          <AccountIcon
+            onClick={keywordDeleteHandler}
+            className={styles.accountIcon}
+          />
+          <MagnifyingGlass
+            onClick={mobileSearchOpenHandler}
+            className={styles.mobileSearchToggle}
+          />
+        </div>
+        {/* 모바일 검색창 */}
+        <div
+          className={`${styles.mobileSearch} ${
+            mobileSearch && styles.mobileSearchActive
+          }`}
+        >
+          <form className={styles.mobileSearchBar} action="submit">
+            <MagnifyingGlass className={styles.mobileSearchIcon} />
+            <input className={styles.mobileSearchInput} type="text" />
+            <div
+              onClick={mobileSearchCloseHandler}
+              className={styles.mobileSearchCancel}
+            >
+              취소
+            </div>
+          </form>
+          <div className={styles.mobileRecent}>
+            <header className={styles.mobileRecentHeader}>
+              <p className={styles.mobileRecentHeading}>최근 검색어</p>
+              <p className={styles.mobileRecentDeleteAll}>전체 삭제</p>
+            </header>
+            <ul className={styles.mobileRecentBox}>
+              <li className={styles.mobileRecentItem}>
+                <p className={styles.mobileRecentTitle}>샤넬 넘버5</p>
+                <button className={styles.mobileRecentDelete}>X</button>
+              </li>
+              <li className={styles.mobileRecentItem}>
+                <p className={styles.mobileRecentTitle}>조말론</p>
+                <button className={styles.mobileRecentDelete}>X</button>
+              </li>
+            </ul>
           </div>
         </div>
       </main>

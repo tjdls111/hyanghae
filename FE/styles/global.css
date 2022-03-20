@@ -53,6 +53,6 @@ body {
 @media (max-width: 1200px) {
   html {
     /* 1rem = 8px */
-    font-size: 55%;
+    font-size: 50%;
   }
 }
