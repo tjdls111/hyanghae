@@ -6,14 +6,11 @@
 * @author Alice, David, Woody
 * @version 1.0.0
 * 생성일 2022-03-08
-* 마지막 수정일 2022-03-11
+* 마지막 수정일 2022-03-21
 **/
 package com.idle.api.service;
 
-import com.idle.api.request.UserLoginRequest;
-import com.idle.api.request.UserPwRequest;
-import com.idle.api.request.UserSignUpRequest;
-import com.idle.api.request.UserUpdateRequest;
+import com.idle.api.request.*;
 import com.idle.db.entity.User;
 
 
@@ -27,7 +24,9 @@ public interface UserService {
     String passwordEncode(String userPw);
     String findUserIdByUserEmail(String userEmail);
     User getUserByUserId(String userId);
+    String updateUserNickname(UserNicknameUpdateRequest userNicknameUpdateRequest, User user);
     void updateUser(UserUpdateRequest userUpdateReq, User user);
+    void updateUserPw(UserCheckPwRequest userCheckPwRequest, User user);
     void deleteUser(User user);
     String findUserPw(UserPwRequest userPwRequest);
 }
