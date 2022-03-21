@@ -120,26 +120,6 @@
   font-size: 2rem;
 }
 
-/* 햄버거 버튼 */
-
-.hamburger {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 2.5rem;
-  height: 2rem;
-  border: none;
-  background: none;
-  display: none;
-}
-
-.hamburgerBar {
-  width: 100%;
-  background-color: #777;
-  height: 0.3rem;
-  border-radius: 0.2rem;
-}
-
 .mobileSearchToggle {
   fill: #777;
   width: 2.5rem;
@@ -197,10 +177,6 @@
   }
 
   .mobileAuthGuide {
-    display: flex;
-  }
-
-  .hamburger {
     display: flex;
   }
 }

@@ -9,12 +9,12 @@
 
 import React, { useState } from "react";
 import styles from "./navigation.module.css";
-
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import LinkedLogo from "./linkedlogo";
+import MobileHamburger from "./mobilehamburger";
 import DesktopSearch from "./desktopsearch";
 import MobileSearch from "./mobilesearch";
 
@@ -87,11 +87,7 @@ const Navigation: React.FC = () => {
     <div className={styles.container}>
       <main className={styles.layout}>
         {/* 모바일에서만 보이는 햄버거 버튼 */}
-        <button onClick={mobileNavOpenHandler} className={styles.hamburger}>
-          <span className={styles.hamburgerBar}></span>
-          <span className={styles.hamburgerBar}></span>
-          <span className={styles.hamburgerBar}></span>
-        </button>
+        <MobileHamburger mobileNavOpenHandler={mobileNavOpenHandler} />
         <nav
           className={`${styles.navContainer} ${
             mobileNav && styles.mobileNavActive
