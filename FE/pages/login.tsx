@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-15
+마지막 수정일 2022-03-21
 */
 import type { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -44,7 +44,8 @@ const Login: NextPage = () => {
       Router.push("/");
     } catch (e) {
       const error = e as AxiosError;
-      console.error(error);
+      // console.error(error);
+      window.alert('아이디, 비밀번호 정보가 없습니다. 확인해주세요.')
     }
   };
 
