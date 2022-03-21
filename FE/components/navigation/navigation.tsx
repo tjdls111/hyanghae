@@ -9,12 +9,12 @@
 
 import React, { useState } from "react";
 import styles from "./navigation.module.css";
-import Image from "next/image";
-import letterLogo from "../../public/logos/letterLogo.png";
+
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import LinkedLogo from "./linkedlogo";
 import DesktopSearch from "./desktopsearch";
 import MobileSearch from "./mobilesearch";
 
@@ -132,15 +132,8 @@ const Navigation: React.FC = () => {
             })}
           </ul>
         </nav>
-        <Link href="/home">
-          <div className={styles.logoWrapper}>
-            <Image
-              className={styles.logoImage}
-              layout="fill"
-              src={letterLogo}
-            />
-          </div>
-        </Link>
+        {/* Home으로 링크된 로고 */}
+        <LinkedLogo />
         <div className={styles.wrapper}>
           {/* 데스크탑 검색창, 800px 이하 display: none */}
           <DesktopSearch

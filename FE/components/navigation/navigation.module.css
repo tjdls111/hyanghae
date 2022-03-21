@@ -12,23 +12,6 @@
   height: 8rem;
 }
 
-.logoWrapper {
-  width: 8rem;
-  height: 8rem;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.logoWrapper:hover {
-  cursor: pointer;
-}
-
-.logoImage {
-  object-fit: contain;
-}
-
 .navigation {
   display: flex;
   column-gap: 4rem;
