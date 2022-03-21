@@ -38,12 +38,16 @@ const FindPw: NextPage = () => {
   });
 
   const emailError = errors.email?.message ? (
-    <div className={`${styles.message}`}>{errors.email.message}</div>
+    <div className={`${styles.message}`} role="alert">
+      {errors.email.message}
+    </div>
   ) : (
     <div />
   );
   const idError = errors.id?.message ? (
-    <div className={`${styles.message}`}>{errors.id.message}</div>
+    <div className={`${styles.message}`} role="alert">
+      {errors.id.message}
+    </div>
   ) : (
     <div />
   );
@@ -97,6 +101,7 @@ const FindPw: NextPage = () => {
               type="text"
               placeholder="아이디를 입력하세요."
               aria-label="id"
+              data-testid="id-test"
             />
           </label>
           {idError}
@@ -121,20 +126,23 @@ const FindPw: NextPage = () => {
               })}
               type="email"
               placeholder="이메일을 입력하세요"
-              area-aria-label="email"
+              aria-label="email"
+              data-testid="email-test"
             ></input>
           </label>
           {emailError}
-          <button
-            className={`${styles.inputForm} ${styles.inputBtn}  ${
-              isValid && styles.canClick
-            }`}
-            type="submit"
-            value="비밀번호 찾기"
-            aria-label="findBtn"
-          >
-            찾기
-          </button>
+          <label htmlFor="findBtn">
+            <button
+              className={`${styles.inputForm} ${styles.inputBtn}  ${
+                isValid && styles.canClick
+              }`}
+              type="submit"
+              value="비밀번호 찾기"
+              aria-label="findBtn"
+            >
+              찾기
+            </button>
+          </label>
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
         <Link href="/signup">
