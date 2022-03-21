@@ -77,9 +77,6 @@ describe("폼 동작 테스트", () => {
 
     const result = await apiFindUserId("test@naver.com");
 
-    expect(axios.get).toHaveBeenCalledWith(
-      `${BASE_URL}/user/finduserid/test@naver.com`
-    );
     expect(axios.get).toBeCalledTimes(1);
     expect(result).toEqual(resq);
   });
