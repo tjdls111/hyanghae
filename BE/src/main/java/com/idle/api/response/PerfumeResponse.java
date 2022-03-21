@@ -29,7 +29,7 @@ public class PerfumeResponse {
     String perfumeUrl;
     LocalDateTime perfumeDate;
     int gender;
-    boolean dayNight;
+    int dayNight;
     int season;
     int tpo;
     int mood;
@@ -44,7 +44,7 @@ public class PerfumeResponse {
         res.setPerfumeUrl(perfume.getPerfumeUrl());
         res.setPerfumeDate(perfume.getPerfumeDate());
         res.setGender(perfume.getGender());
-        res.setDayNight(perfume.isDaynight());
+        res.setDayNight(perfume.getDaynight());
         res.setSeason(perfume.getSeason());
         res.setTpo(perfume.getTpo());
         res.setMood(perfume.getMood());

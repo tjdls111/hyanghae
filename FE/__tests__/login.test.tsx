@@ -11,7 +11,7 @@ import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
-import { apiLogin, tokenType } from "../api/user";
+import { apiLogin, resType } from "../api/user";
 import { BASE_URL } from "../api/utils";
 
 configure({ adapter: new Adapter() });
@@ -119,7 +119,7 @@ describe("react Hook Form", () => {
       message: "ok",
       statusCode: 0,
       token: "star",
-    } as tokenType;
+    };
 
     axios.post = jest.fn().mockResolvedValue({
       message: "ok",
