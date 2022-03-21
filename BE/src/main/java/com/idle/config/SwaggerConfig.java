@@ -9,11 +9,19 @@
  **/
 package com.idle.config;
 
+import com.fasterxml.classmate.TypeResolver;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.data.domain.Pageable;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.AuthorizationScope;
 import springfox.documentation.service.SecurityReference;
@@ -27,12 +35,29 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
+@RequiredArgsConstructor
 public class SwaggerConfig {
+    @Getter
+    @Setter
+    @ApiModel
+    static class Page {
+        @ApiModelProperty(value = "페이지 번호(0..N)")
+        private Integer page;
 
+        @ApiModelProperty(value = "페이지 크기", allowableValues = "range[0, 100]")
+        private Integer size;
+
+        @ApiModelProperty(value = "정렬(사용법: 컬럼명,ASC|DESC)")
+        private List<String> sort;
+    }
+
+    private final TypeResolver typeResolver;
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .alternateTypeRules(
+                        AlternateTypeRules.newRule(typeResolver.resolve(Pageable.class), typeResolver.resolve(Page.class)))
                 .select()
                 .apis(RequestHandlerSelectors.any()) // 현재 RequestMapping으로 할당된 모든 URL 리스트를 추출
 //                .paths(PathSelectors.ant("/**"))// 그중 /api/** 인 URL들만 필터링
@@ -45,6 +70,7 @@ public class SwaggerConfig {
     private ApiKey apiKey() {
         return new ApiKey(SECURITY_SCHEMA_NAME, "Authorization", "header");
     }
+
 
     private SecurityContext securityContext() {
         return SecurityContext.builder()

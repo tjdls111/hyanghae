@@ -1,17 +1,15 @@
 /*
 로그인
-로그인 폼
+로그인 폼, 기능
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-11
+마지막 수정일 2022-03-21
 */
 import type { NextPage } from "next";
-import { useEffect, useRef } from "react";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginsignup.module.css";
-import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
 import Router from "next/router";
@@ -40,11 +38,14 @@ const Login: NextPage = () => {
     const { id, password } = getValues();
     try {
       const res = await apiLogin(id, password);
-      localStorage.setItem("id", res.token);
+      if (res.data?.token) {
+        localStorage.setItem("token", res.data?.token);
+      }
       Router.push("/");
     } catch (e) {
       const error = e as AxiosError;
-      console.error(error);
+      // console.error(error);
+      window.alert('아이디, 비밀번호 정보가 없습니다. 확인해주세요.')
     }
   };
 
@@ -75,7 +76,15 @@ const Login: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={`/logo.jpg`} alt="logo" />
+      <div className={styles.imageWrapper2}>
+        <Image
+          className={styles.logoImage}
+          alt="logo"
+          src="/logo.jpg"
+          layout="fill"
+          objectFit="contain"
+        />
+      </div>
       <h1 className={styles.title}>로그인</h1>
       <div className={styles.inputContainer}>
         <form onSubmit={handleSubmit(onValidSubmit)}>
@@ -145,6 +154,15 @@ const Login: NextPage = () => {
           <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        <div className={styles.find}>
+          <Link href="/findid">
+            <span className={`${styles.guide} ${styles.signup}`}>아이디 찾기</span>
+          </Link>{" "}
+          |{" "}
+          <Link href="/findpw">
+            <span className={`${styles.guide} ${styles.signup}`}>비밀번호 찾기</span>
+          </Link>
+        </div>
         <Link href="http://localhost:8181/oauth2/authorization/google">
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>

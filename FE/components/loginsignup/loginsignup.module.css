@@ -1,12 +1,6 @@
 .container {
   background-color: var(--color-grey-dark-1);
 }
-
-.logo {
-  display: block;
-  margin: 0px auto;
-}
-
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
@@ -114,6 +108,13 @@
   position: relative;
 }
 
+.imageWrapper2 {
+  width: 50rem;
+  height: 50rem;
+  margin: 0px auto;
+  position: relative;
+}
+
 .socialLoginText {
   color: #555;
   font-weight: 600;
@@ -121,4 +122,8 @@
 
 .logoImage {
   position: absolute;
+}
+
+.find {
+  margin: 0.5rem 0;
 }

@@ -5,20 +5,21 @@
  * @author Alice, David, Woody
  * @version 1.0.0
  * 생성일 2022-03-08
- * 마지막 수정일 2022-03-11
+ * 마지막 수정일 2022-03-21
  **/
 package com.idle.api.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.idle.api.request.*;
 import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.UserEmailNumberResponse;
 import com.idle.api.response.UserLoginResponse;
+import com.idle.api.response.UserResponse;
 import com.idle.api.service.UserService;
 import com.idle.common.jwt.JwtTokenUtil;
 import com.idle.common.jwt.dto.IdleUserDetails;
 import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import java.util.NoSuchElementException;
 
 
 @CrossOrigin("*")
+@Api(value = "유저 API", tags = {"User"})
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -130,6 +132,32 @@ public class UserController {
     }
 
     /* David */
+    @ApiOperation("회원 닉네임 수정")
+    @PutMapping("/update-nickname")
+    public ResponseEntity<? extends BaseResponseBody> updateUserNickname(@ApiIgnore Authentication authentication,
+                                                                         @RequestBody UserNicknameUpdateRequest userNicknameUpdateRequest) {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+        String res = userService.updateUserNickname(userNicknameUpdateRequest, user);
+        if(res.equals("fail")){
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"닉네임 변경 실패"));
+        }
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "닉네임 변경 성공"));
+    }
+
+    /* David */
+    @ApiOperation("회원 비밀번호 수정")
+    @PutMapping("/update-pw")
+    public ResponseEntity<? extends BaseResponseBody> updateUserPw(@ApiIgnore Authentication authentication,
+                                                                   @RequestBody UserCheckPwRequest userCheckPwRequest) {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+        userService.updateUserPw(userCheckPwRequest, user);
+
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "비밀번호 변경 성공"));
+    }
+
+    /* David */
     @ApiOperation("아이디 찾기")
     @GetMapping("/finduserid/{email}")
     public ResponseEntity<BaseResponseBody> findUserId(@PathVariable("email") String email) {
@@ -164,4 +192,16 @@ public class UserController {
         }
         return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 새 비밀번호를 전송했습니다."));
     }
+
+    /* Woody */
+    @ApiOperation("회원 정보 조회")
+    @GetMapping("/info")
+    public ResponseEntity<UserResponse> getUserInfo(@ApiIgnore Authentication authentication) {
+
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+
+        return ResponseEntity.status(200).body(UserResponse.of(user));
+    }
+
 }

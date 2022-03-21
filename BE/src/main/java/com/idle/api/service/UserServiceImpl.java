@@ -6,14 +6,11 @@
 * @author Alice, David, Woody
 * @version 1.0.0
 * 생성일 2022-03-10
-* 마지막 수정일 2022-03-11
+* 마지막 수정일 2022-03-21
 **/
 package com.idle.api.service;
 
-import com.idle.api.request.UserLoginRequest;
-import com.idle.api.request.UserPwRequest;
-import com.idle.api.request.UserSignUpRequest;
-import com.idle.api.request.UserUpdateRequest;
+import com.idle.api.request.*;
 import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -209,6 +206,28 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
+    /* David : 회원 닉네임 수정 */
+    @Override
+    public String updateUserNickname(UserNicknameUpdateRequest userNicknameUpdateRequest, User user) {
+        String res = checkDuplicateUserNickname(userNicknameUpdateRequest.getUserNickname());
+        if(res.equals("success")){
+            user.setUserNickname(userNicknameUpdateRequest.getUserNickname());
+
+            userRepository.save(user);
+            return "success";
+        }else{
+            return "fail";
+        }
+    }
+
+    /* David : 회원 비밀번호 수정 */
+    @Override
+    public void updateUserPw(UserCheckPwRequest userCheckPwRequest, User user) {
+        user.setUserPw(passwordEncoder.encode(userCheckPwRequest.getUserPw()));
+
+        userRepository.save(user);
+    }
+
     /* Woody : 회원 탈퇴 */
     @Override
     public void deleteUser(User user) {
@@ -231,7 +250,6 @@ public class UserServiceImpl implements UserService{
         String tempPw = getRamdomNumber(10);
 
         // 새 비밀번호 DB에 저장
-
         user.setUserPw(passwordEncoder.encode(tempPw));
         userRepository.save(user);
 

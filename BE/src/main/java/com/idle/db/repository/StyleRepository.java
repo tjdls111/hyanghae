@@ -10,12 +10,12 @@
  **/
 package com.idle.db.repository;
 
-import com.idle.db.entity.Clothes;
+import com.idle.db.entity.Style;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
 
 
-public interface ClothesRepository extends JpaRepository<Clothes, Long> {
+public interface StyleRepository extends JpaRepository<Style, Long> {
 
 }
