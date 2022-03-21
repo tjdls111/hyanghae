@@ -10,10 +10,14 @@
 package com.idle.db.repository;
 
 
+import com.idle.db.entity.Perfume;
 import com.idle.db.entity.Review;
 import com.idle.db.entity.ReviewId;
+import com.idle.db.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ReviewRepository extends JpaRepository<Review, ReviewId> {
+import java.util.Optional;
 
+public interface ReviewRepository extends JpaRepository<Review, ReviewId> {
+    Optional<Review> findByUserAndPerfume(User user, Perfume perfume);
 }

@@ -5,7 +5,7 @@
  * @author Alice, David, Woody
  * @version 1.0.0
  * 생성일 2022-03-08
- * 마지막 수정일 2022-03-11
+ * 마지막 수정일 2022-03-21
  **/
 package com.idle.api.controller;
 
@@ -129,6 +129,32 @@ public class UserController {
         userService.updateUser(userUpdateReq, user);
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+    /* David */
+    @ApiOperation("회원 닉네임 수정")
+    @PutMapping("/update-nickname")
+    public ResponseEntity<? extends BaseResponseBody> updateUserNickname(@ApiIgnore Authentication authentication,
+                                                                         @RequestBody UserNicknameUpdateRequest userNicknameUpdateRequest) {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+        String res = userService.updateUserNickname(userNicknameUpdateRequest, user);
+        if(res.equals("fail")){
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"닉네임 변경 실패"));
+        }
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "닉네임 변경 성공"));
+    }
+
+    /* David */
+    @ApiOperation("회원 비밀번호 수정")
+    @PutMapping("/update-pw")
+    public ResponseEntity<? extends BaseResponseBody> updateUserPw(@ApiIgnore Authentication authentication,
+                                                                   @RequestBody UserCheckPwRequest userCheckPwRequest) {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+        userService.updateUserPw(userCheckPwRequest, user);
+
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "비밀번호 변경 성공"));
     }
 
     /* David */
