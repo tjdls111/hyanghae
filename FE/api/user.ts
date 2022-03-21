@@ -1,9 +1,9 @@
 /*
 유저 관련 api(회원가입, 로그인 등)
-@author Wendy
+@author Wendy,scarlet
 @version 1.0.0
 생성일 2022-03-10
-마지막 수정일 2022-03-19
+마지막 수정일 2022-03-21
 */
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
@@ -67,13 +67,24 @@ export const socialLogin = () => {
 export const apiFindUserId = async (email: string) =>
   await axios.get(`${BASE_URL}/user/finduserid/${email}`);
 
-export const apiFindpw = async (userEmail: string, userId: string) =>
-  await axios.put(`${BASE_URL}/user/finduserpw`, {
-    userEmail,
-    userId,
-  });
+export const apiFindpw = async (
+  userEmail: string,
+  userId: string
+): Promise<resType> => {
+  try {
+    return await axios.put(`${BASE_URL}/user/finduserpw`, {
+      userEmail,
+      userId,
+    });
+  } catch (e) {
+    throw new Error("서버 에러");
+  }
+};
 
-export const apiLogin = async (userId: string, userPw: string): Promise<resType> => {
+export const apiLogin = async (
+  userId: string,
+  userPw: string
+): Promise<resType> => {
   try {
     return await axios.post(`${BASE_URL}/user/login`, {
       userId,
@@ -85,7 +96,10 @@ export const apiLogin = async (userId: string, userPw: string): Promise<resType>
 };
 
 // @author scarlet
-export const apiCheckMod = async (userPw: string, accessToken: string): Promise<resType> => {
+export const apiCheckMod = async (
+  userPw: string,
+  accessToken: string
+): Promise<resType> => {
   try {
     return await axios.post(
       `${BASE_URL}/user/checkpw`,
@@ -104,7 +118,9 @@ export const apiCheckMod = async (userPw: string, accessToken: string): Promise<
 };
 
 // @author scarlet
-export const apiUserLookUp = async (accessToken: string): Promise<resLookUpType> => {
+export const apiUserLookUp = async (
+  accessToken: string
+): Promise<resLookUpType> => {
   try {
     return await axios.get(`${BASE_URL}/user/info`, {
       headers: {

@@ -30,7 +30,7 @@ jest.mock("next/router", () => ({
     };
   },
 }));
-jest.mock("axios");
+
 const useRouter = jest.spyOn(require("next/router"), "useRouter");
 configure({ adapter: new Adapter() });
 describe("회원가입 페이지 렌더링 테스트", () => {

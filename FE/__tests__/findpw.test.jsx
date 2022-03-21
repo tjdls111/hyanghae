@@ -4,16 +4,17 @@ findPw.test.jsx
 @author wendy
 @version 1.0.0
 생성일 2022-03-18
-마지막 수정일 2022-03-18
+마지막 수정일 2022-03-21
 */
 
 import React from "react";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import FindPw from "../pages/findpw";
 import { configure, shallow, ShallowWrapper } from "enzyme";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { apiFindpw } from "../api/user";
+import { BASE_URL } from "../api/utils";
 
 configure({ adapter: new Adapter() });
 
@@ -99,10 +100,26 @@ describe("폼 동작 테스트", () => {
 
     fireEvent.input(screen.getByTestId("email-test"), {
       target: {
-        value: "test@test.com",
+        value: "test@naver.com",
       },
     });
 
     fireEvent.submit(screen.getByLabelText("findBtn"));
+
+    await waitFor(() => expect(screen.queryAllByRole("alert")).toHaveLength(0));
+
+    const resq = { message: "ok", statusCode: 200 };
+
+    axios.put = jest.fn().mockResolvedValue({ message: "ok", statusCode: 200 });
+
+    const result = await apiFindpw("test@naver.com", "testtest");
+
+    expect(axios.put).toHaveBeenCalledWith(`${BASE_URL}/user/finduserpw`, {
+      userEmail: "test@naver.com",
+      userId: "testtest",
+    });
+
+    expect(axios.put).toBeCalledTimes(1);
+    expect(result).toEqual(resq);
   });
 });
