@@ -16,6 +16,12 @@ const counterReducer = (
     };
   }
 
+  if (action.type === "increase") {
+    return {
+      counter: state.counter + action.amount,
+    };
+  }
+
   return state;
 };
 

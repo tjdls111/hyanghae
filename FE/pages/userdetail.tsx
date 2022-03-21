@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import Navigation from "../components/ui/navigation";
+import Navigation from "../components/navigation/navigation";
 import DetailMain from "../components/userdetail/detailmain";
 import DetailSide from "../components/userdetail/detailside";
 

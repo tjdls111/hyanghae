@@ -16,6 +16,7 @@ import DeleteIcon from "../../public/SVG/circle-with-cross.svg";
 import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import MobileSearch from "./mobilesearch";
 
 const navItemData = [
   {
@@ -171,38 +172,10 @@ const Navigation: React.FC = () => {
           />
         </div>
         {/* 모바일 검색창 */}
-        <div
-          className={`${styles.mobileSearch} ${
-            mobileSearch && styles.mobileSearchActive
-          }`}
-        >
-          <form className={styles.mobileSearchBar} action="submit">
-            <MagnifyingGlass className={styles.mobileSearchIcon} />
-            <input className={styles.mobileSearchInput} type="text" />
-            <div
-              onClick={mobileSearchCloseHandler}
-              className={styles.mobileSearchCancel}
-            >
-              취소
-            </div>
-          </form>
-          <div className={styles.mobileRecent}>
-            <header className={styles.mobileRecentHeader}>
-              <p className={styles.mobileRecentHeading}>최근 검색어</p>
-              <p className={styles.mobileRecentDeleteAll}>전체 삭제</p>
-            </header>
-            <ul className={styles.mobileRecentBox}>
-              <li className={styles.mobileRecentItem}>
-                <p className={styles.mobileRecentTitle}>샤넬 넘버5</p>
-                <button className={styles.mobileRecentDelete}>X</button>
-              </li>
-              <li className={styles.mobileRecentItem}>
-                <p className={styles.mobileRecentTitle}>조말론</p>
-                <button className={styles.mobileRecentDelete}>X</button>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <MobileSearch
+          mobileSearch={mobileSearch}
+          mobileSearchCloseHandler={mobileSearchCloseHandler}
+        />
       </main>
     </div>
   );

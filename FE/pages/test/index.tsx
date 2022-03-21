@@ -13,11 +13,16 @@ const test: NextPage = () => {
   const handleDecrement = function () {
     dispatch({ type: "decrement" });
   };
+  const handleIncrease = function () {
+    dispatch({ type: "increase", amount: 10 });
+  };
+
   return (
     <>
       <div>{counter}</div>
       <button onClick={handleIncrement}>Increment</button>
       <button onClick={handleDecrement}>Decrement</button>
+      <button onClick={handleIncrease}>Increase By 10</button>
     </>
   );
 };
