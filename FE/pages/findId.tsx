@@ -90,6 +90,7 @@ const FindId: NextPage = () => {
               type="email"
               placeholder="이메일을 입력하세요"
               area-aria-label="email"
+              data-testid='email-test'
             ></input>
           </label>
           {emailError}
