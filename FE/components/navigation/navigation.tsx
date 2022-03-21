@@ -12,10 +12,10 @@ import styles from "./navigation.module.css";
 import Image from "next/image";
 import letterLogo from "../../public/logos/letterLogo.png";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
-import DeleteIcon from "../../public/SVG/circle-with-cross.svg";
 import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import DesktopSearch from "./desktopsearch";
 import MobileSearch from "./mobilesearch";
 
 const navItemData = [
@@ -142,26 +142,13 @@ const Navigation: React.FC = () => {
           </div>
         </Link>
         <div className={styles.wrapper}>
-          <form
-            onSubmit={searchSubmitHandler}
-            className={styles.searchBar}
-            action=""
-          >
-            <MagnifyingGlass className={styles.searchIcon} />
-            <input
-              onChange={keywordChangeHandler}
-              value={keyword}
-              className={styles.searchInput}
-              type="text"
-              placeholder="향해 통합검색"
-            />
-
-            <DeleteIcon
-              onClick={keywordDeleteHandler}
-              className={styles.deleteIcon}
-            />
-          </form>
-
+          {/* 데스크탑 검색창, 800px 이하 display: none */}
+          <DesktopSearch
+            keyword={keyword}
+            searchSubmitHandler={searchSubmitHandler}
+            keywordChangeHandler={keywordChangeHandler}
+            keywordDeleteHandler={keywordDeleteHandler}
+          />
           <AccountIcon
             onClick={keywordDeleteHandler}
             className={styles.accountIcon}
