@@ -10,8 +10,8 @@ import type { NextPage } from "next";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
 import Navigation from "../../components/navigation/navigation";
-import Review from "../../components/perfumedetail/review";
-import Item from "../../components/perfumedetail/item";
+import Review from "../../components/perfumeDetail/review";
+import Item from "../../components/perfumeDetail/item";
 
 const Detail: NextPage = () => {
   return (
