@@ -6,7 +6,7 @@
 마지막 수정일 2022-03-22
 */
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import type { NextPage } from "next";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
@@ -15,14 +15,15 @@ import Link from "next/link";
 import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
+import { rmSync } from "fs";
 
-interface PerfumeData {
+interface PerfumeResult {
   dayNight: string;
   gender: string;
   mood: string;
   perfumeBrand: string;
   perfumeCost: string;
-  perfumeData: string;
+  perfumeDate: string;
   perfumeId: string;
   perfumeName: string;
   perfumeScore: string;
@@ -31,37 +32,56 @@ interface PerfumeData {
   tpo: string;
 }
 
+interface PerfumeData {
+  name: string;
+  score: string;
+  price: string;
+  note: string;
+  imgPath: string;
+  season: string;
+  style: string;
+}
+
 const Detail: NextPage = () => {
-  const [data, setData] = useState(Object);
-  const [perfumeId, setPerfumeId] = useState(null);
+  const [data, setData] = useState({} as PerfumeData);
   const router = useRouter();
-  console.log(router.query.id);
 
   useEffect(() => {
-    setPerfumeId(router.query.id);
-    console.log(router.query.id);
-    // api로 향수 상세 정보를 가져오기
-    apiPerfumeDetail(perfumeId)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    setData(
-      {
-        name: "Coco madmoajel o de parpe enti",
-        score: 4.3,
-        price: 242000,
-        note: "woody",
-        imgPath:
-          "https://photo.akmall.com/image4/goods/78/58/60/94/78586094_M_350.jpg",
-        season: "spring",
-        style: "lovely",
-      },
-      []
-    );
+    (async () => {
+      // api로 향수 상세 정보를 가져오기
+      apiPerfumeDetail(router.query.id as string)
+        .then((res) => {
+          console.log(res.data);
+          let myres: PerfumeResult = {
+            dayNight: "",
+            gender: "",
+            mood: "",
+            perfumeBrand: "",
+            perfumeCost: "",
+            perfumeDate: "",
+            perfumeId: "",
+            perfumeName: "",
+            perfumeScore: "",
+            perfumeUrl: "",
+            season: "",
+            tpo: "",
+          };
+          myres = res.data as PerfumeResult;
+          setData({
+            name: myres.perfumeName,
+            score: myres.perfumeScore,
+            price: myres.perfumeCost,
+            note: "",
+            imgPath:
+              "https://photo.akmall.com/image4/goods/78/58/60/94/78586094_M_350.jpg",
+            season: myres.season,
+            style: myres.tpo,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    })();
 
     // 검색 api 로 검색 결과 가져오기 -> 결과가 있으면 연결되도록!
     // apiShoppingSearch()
@@ -71,7 +91,7 @@ const Detail: NextPage = () => {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-  }, []);
+  }, [useRouter().isReady]);
 
   return (
     <>

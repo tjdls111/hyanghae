@@ -14,8 +14,8 @@ import Image from "next/image";
 interface InnerProps {
   data: {
     name: string;
-    score: number;
-    price: number;
+    score: string;
+    price: string;
     note: string;
     imgPath: string;
     season: string;
