@@ -10,11 +10,10 @@ import { useRouter } from "next/router";
 import type { NextPage } from "next";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../components/perfumedetail/perfumedetail.module.css";
 import Navigation from "../../components/navigation/navigation";
 import Link from "next/link";
-import Review from "../../components/perfumedetail/reviewlist";
-import Item from "../../components/perfumedetail/item";
+import Review from "../../components/perfumeDetail/review";
+import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
 
 interface PerfumeData {

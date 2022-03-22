@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import styles from "./linkedlogo.module.css";
+import styles from "./linkedLogo.module.css";
 import Image from "next/image";
 import letterLogo from "../../public/logos/letterLogo.png";
 

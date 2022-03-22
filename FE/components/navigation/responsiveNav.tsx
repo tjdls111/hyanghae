@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./responsivenav.module.css";
+import styles from "./responsiveNav.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 

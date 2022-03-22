@@ -9,7 +9,7 @@
 import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
-import styles from "../components/loginSignup/loginsignup.module.css";
+import styles from "../components/loginSignup/loginSignup.module.css";
 import Link from "next/link";
 import { apiFindUserId } from "../api/user";
 import Router from "next/router";
@@ -90,7 +90,7 @@ const FindId: NextPage = () => {
               type="email"
               placeholder="이메일을 입력하세요"
               area-aria-label="email"
-              data-testid='email-test'
+              data-testid="email-test"
             ></input>
           </label>
           {emailError}
