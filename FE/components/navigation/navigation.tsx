@@ -13,11 +13,11 @@ import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import ResponsiveNav from "./responsivenav";
-import LinkedLogo from "./linkedlogo";
-import MobileHamburger from "./mobilehamburger";
-import DesktopSearch from "./desktopsearch";
-import MobileSearch from "./mobilesearch";
+import ResponsiveNav from "./responsiveNav";
+import LinkedLogo from "./linkedLogo";
+import MobileHamburger from "./mobileHamburger";
+import DesktopSearch from "./desktopSearch";
+import MobileSearch from "./mobileSearch";
 
 const Navigation: React.FC = () => {
   const [mobileSearch, setMobileSearch] = useState(false);

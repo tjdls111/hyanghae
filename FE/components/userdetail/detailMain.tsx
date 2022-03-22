@@ -7,10 +7,10 @@
 */
 
 import React, { ReactNode } from "react";
-import UserTest from "./main/usertest";
+import UserTest from "./main/userTest";
 import UserModify from "./main/modify";
-import UserPurchase from "./main/userpurchase";
-import UserDestroy from "./main/userdestroy";
+import UserPurchase from "./main/userPurchase";
+import UserDestroy from "./main/userDestroy";
 interface stateProps {
   state: string;
 }

@@ -9,7 +9,7 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { apiUserLookUp } from "../../../../api/user";
-import UserDestroy from "../userdestroy";
+import UserDestroy from "../userDestroy";
 
 const FormModify = () => {
   const [state, setState] = useState({
@@ -59,7 +59,9 @@ const FormModify = () => {
         </span>
         <div>이메일</div>
         <div>{email}</div>
-        <strong onClick={() => setState({ ...state, isShow: true })}>회원탈퇴</strong>
+        <strong onClick={() => setState({ ...state, isShow: true })}>
+          회원탈퇴
+        </strong>
         <div>{isShow ? <UserDestroy /> : null}</div>
       </main>
     </>
