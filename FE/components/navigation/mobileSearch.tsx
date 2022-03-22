@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./mobilesearch.module.css";
+import styles from "./mobileSearch.module.css";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 
 const MobileSearch: React.FC<{

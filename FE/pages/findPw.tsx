@@ -10,7 +10,7 @@ import type { NextPage } from "next";
 import { useEffect, useRef } from "react";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../components/loginSignup/loginsignup.module.css";
+import styles from "../components/loginSignup/loginSignup.module.css";
 import { SettingsInputAntennaTwoTone } from "@mui/icons-material";
 import Link from "next/link";
 import { apiFindpw } from "../api/user";

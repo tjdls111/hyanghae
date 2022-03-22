@@ -9,8 +9,8 @@
 import React, { useState } from "react";
 import DetailMain from "./detailMain";
 import styles from "./detail.module.css";
-import { NoEncryption } from "@mui/icons-material";
-const DetailSide: React.FC = () => {
+
+const Detail: React.FC = () => {
   const [state, setState] = useState("");
   const userTest = "usertest";
   const userModify = "usermodify";
@@ -87,4 +87,4 @@ const DetailSide: React.FC = () => {
   );
 };
 
-export default DetailSide;
+export default Detail;

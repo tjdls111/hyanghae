@@ -12,7 +12,6 @@ import styles from "./navigation.module.css";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
 import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import ResponsiveNav from "./responsiveNav";
 import LinkedLogo from "./linkedLogo";
 import MobileHamburger from "./mobileHamburger";
