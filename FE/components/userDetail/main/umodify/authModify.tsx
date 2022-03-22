@@ -6,9 +6,8 @@
 마지막 수정일 2022-03-19
 */
 
-
 import React, { useRef, useState } from "react";
-import styles from "./authmodify.module.css";
+import styles from "./authModify.module.css";
 import { apiCheckMod } from "../../../../api/user";
 import { useEffect } from "react";
 interface stateProps {

@@ -8,7 +8,7 @@
 
 import React, { useState } from "react";
 import DetailMain from "./detailMain";
-import styles from "./detailside.module.css";
+import styles from "./detailSide.module.css";
 const DetailSide: React.FC = () => {
   const [state, setState] = useState("");
 

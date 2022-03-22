@@ -9,9 +9,7 @@ import { useState } from "react";
 import type { NextPage } from "next";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { AxiosError } from "axios";
-import styles from "../components/perfumedetail/perfumedetail.module.css";
 import Navigation from "../../components/navigation/navigation";
-import Link from "next/link";
 import Review from "../../components/perfumedetail/review";
 import Item from "../../components/perfumedetail/item";
 

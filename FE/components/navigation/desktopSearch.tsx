@@ -1,6 +1,6 @@
 import React from "react";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
-import styles from "./desktopsearch.module.css";
+import styles from "./desktopSearch.module.css";
 import DeleteIcon from "../../public/SVG/circle-with-cross.svg";
 
 const DesktopSearch: React.FC<{
