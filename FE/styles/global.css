@@ -50,6 +50,10 @@ body {
   color: var(--color-grey-dark-3);
 }
 
+body > button {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
 @media (max-width: 1200px) {
   html {
     /* 1rem = 8px */
