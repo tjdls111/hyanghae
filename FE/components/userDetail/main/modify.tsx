@@ -7,7 +7,7 @@
 */
 
 import React from "react";
-import styles from "./usermodify.module.css";
+import styles from "./modify.module.css";
 import { useState } from "react";
 import AuthModify from "./umodify/authModify";
 import FormModify from "./umodify/formModify";
