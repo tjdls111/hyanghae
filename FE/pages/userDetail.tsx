@@ -1,7 +1,7 @@
 import { NextPage } from "next";
-import Navigation from "../components/ui/navigation";
-import DetailMain from "../components/userdetail/detailmain";
-import DetailSide from "../components/userdetail/detailside";
+import Navigation from "../components/navigation/navigation";
+import DetailMain from "../components/userdetail/detailMain";
+import DetailSide from "../components/userdetail/detailSide";
 
 /*
 마이 페이지

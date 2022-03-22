@@ -7,7 +7,7 @@
 */
 
 import React, { useState } from "react";
-import DetailMain from "./detailmain";
+import DetailMain from "./detailMain";
 import styles from "./detailside.module.css";
 const DetailSide: React.FC = () => {
   const [state, setState] = useState("");
@@ -19,10 +19,16 @@ const DetailSide: React.FC = () => {
           <li onClick={() => setState("usertest")} className={styles.usertest}>
             나의 테스트 내역
           </li>
-          <li onClick={() => setState("usermodify")} className={styles.usermodify}>
+          <li
+            onClick={() => setState("usermodify")}
+            className={styles.usermodify}
+          >
             회원 정보 수정
           </li>
-          <li onClick={() => setState("userpurchase")} className={styles.userpurchase}>
+          <li
+            onClick={() => setState("userpurchase")}
+            className={styles.userpurchase}
+          >
             구매 내역
           </li>
         </ul>

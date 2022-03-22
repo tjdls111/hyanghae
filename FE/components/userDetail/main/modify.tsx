@@ -9,8 +9,8 @@
 import React from "react";
 import styles from "./usermodify.module.css";
 import { useState } from "react";
-import AuthModify from "./umodify/authmodify";
-import FormModify from "./umodify/formmodify";
+import AuthModify from "./umodify/authModify";
+import FormModify from "./umodify/formModify";
 
 const Modify: React.FC = () => {
   const [state, setState] = useState(false);
