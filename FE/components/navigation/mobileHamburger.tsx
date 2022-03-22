@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./mobilehamburger.module.css";
+import styles from "./mobileHamburger.module.css";
 
 const MobileHamburger: React.FC<{ mobileNavOpenHandler: () => void }> = ({
   mobileNavOpenHandler,

@@ -8,10 +8,9 @@ localStorage에 토큰을 저장하고, 홈으로 이동한다.
 마지막 수정일 lastdate$
 */
 
-import React, { useEffect, useState } from "react";
-import { Router, useRouter } from "next/router";
-import { GetServerSideProps, NextPage } from "next";
-import { socialLogin } from "../../api/user";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { NextPage } from "next";
 
 const Redirect: NextPage = (props) => {
   const router = useRouter();
