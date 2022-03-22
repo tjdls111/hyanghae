@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-21
+마지막 수정일 2022-03-22
 */
 import type { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -44,7 +44,6 @@ const Login: NextPage = () => {
       Router.push("/");
     } catch (e) {
       const error = e as AxiosError;
-      // console.error(error);
       window.alert("아이디, 비밀번호 정보가 없습니다. 확인해주세요.");
     }
   };
@@ -161,13 +160,13 @@ const Login: NextPage = () => {
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
         <div className={styles.find}>
-          <Link href="/findid">
+          <Link href="/findId">
             <span className={`${styles.guide} ${styles.signup}`}>
               아이디 찾기
             </span>
           </Link>{" "}
           |{" "}
-          <Link href="/findpw">
+          <Link href="/findPw">
             <span className={`${styles.guide} ${styles.signup}`}>
               비밀번호 찾기
             </span>
