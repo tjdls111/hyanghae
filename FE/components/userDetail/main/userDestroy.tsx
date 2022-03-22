@@ -6,11 +6,11 @@
 마지막 수정일 2022-03-19
 */
 
-
 import React from "react";
 import { useRef, useState } from "react";
 import { apiDist } from "../../../api/user";
 import router from "next/router";
+import styles from "./userDestroy.module.css";
 const UserDestroy = () => {
   const [state, setState] = useState({
     isValid: true,
@@ -18,6 +18,8 @@ const UserDestroy = () => {
   const dangerString = "개인 정보 및 모든 정보를 삭제합니다";
   const alertString = "정말로 탈퇴하시겠습니까?";
   const { isValid } = state;
+  const distMsg = "#eb2f64";
+
   const changeInput = () => {
     if (!ref.current?.value) {
       setState({
@@ -60,13 +62,15 @@ const UserDestroy = () => {
   };
   return (
     <>
-      <strong>밑 글을 입력하고 탈퇴 버튼을 누르시면 탈퇴가 완료됩니다.</strong>
-      <form onSubmit={onValidSubmit}>
-        <div>개인 정보 및 모든 정보를 삭제합니다</div>
+      <strong style={{ color: distMsg }}>
+        밑 글을 입력하고 탈퇴 버튼을 누르시면 탈퇴가 완료됩니다.
+      </strong>
+      <form className={styles.distForm} onSubmit={onValidSubmit}>
+        <div style={{ textAlign: "center" }}>개인 정보 및 모든 정보를 삭제합니다</div>
         <input hidden={true} />
-        <input type="text" ref={ref} onChange={changeInput} />
+        <input autoFocus type="text" ref={ref} onChange={changeInput} />
         <div>
-          <button type="submit" disabled={isValid} aria-label="distBtn">
+          <button className={styles.distBtn} type="submit" disabled={isValid} aria-label="distBtn">
             탈퇴
           </button>
         </div>

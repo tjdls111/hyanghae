@@ -9,16 +9,18 @@
 import React from "react";
 import styles from "./modify.module.css";
 import { useState } from "react";
-import AuthModify from "./umodify/authModify";
-import FormModify from "./umodify/formModify";
+import AuthModify from "./authModify";
+import FormModify from "./formModify";
 
 const Modify: React.FC = () => {
   const [state, setState] = useState(false);
 
   return (
     <>
-      <header>회원정보 수정</header>
       <div className={styles.container}>
+        <header>
+          <div>회원정보 수정</div>
+        </header>
         {state ? <FormModify /> : <AuthModify setState={setState} />}
       </div>
     </>

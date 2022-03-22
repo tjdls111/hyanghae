@@ -8,7 +8,7 @@
 
 import React, { ReactNode } from "react";
 import UserTest from "./main/userTest";
-import UserModify from "./main/modify";
+import UserModify from "./main/umodify/modify";
 import UserPurchase from "./main/userPurchase";
 import UserDestroy from "./main/userDestroy";
 interface stateProps {
