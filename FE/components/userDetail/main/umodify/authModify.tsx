@@ -6,9 +6,8 @@
 마지막 수정일 2022-03-19
 */
 
-
 import React, { useRef, useState } from "react";
-import styles from "./authmodify.module.css";
+import styles from "./modify.module.css";
 import { apiCheckMod } from "../../../../api/user";
 import { useEffect } from "react";
 interface stateProps {
@@ -55,19 +54,34 @@ const AuthModify: React.FC<stateProps> = ({ setState }) => {
 
   return (
     <>
-      <header>비밀번호를 입력하세요</header>
+      <div className={styles.subPw}>비밀번호를 입력하세요</div>
       <form onSubmit={onValidsubmit}>
         <input hidden={true} />
-        <input type="password" ref={inputRef} onChange={changeInput} />
-        <button
-          className={styles.inputForm}
-          type="submit"
-          value="확인"
-          disabled={isValid}
-          aria-label="passwordAuth"
-        >
-          확인
-        </button>
+        <div className={styles.pwInput}>
+          <input
+            className={styles.input}
+            autoFocus
+            type="password"
+            ref={inputRef}
+            onChange={changeInput}
+          />
+        </div>
+        <div>
+          <button
+            className={styles.sbBtn}
+            type="submit"
+            value="확인"
+            disabled={isValid}
+            style={
+              !isValid
+                ? { color: "#777", cursor: "pointer", backgroundColor: "#ffebf0" }
+                : { color: "#ccc" }
+            }
+            aria-label="passwordAuth"
+          >
+            확인
+          </button>
+        </div>
       </form>
     </>
   );
