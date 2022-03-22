@@ -51,7 +51,6 @@ const ResponsiveNav: React.FC<{
           <button className={styles.mobileSignupButton}>JOIN US</button>
         </Link>
       </div>
-
       <ul className={styles.navigation}>
         {navItemData.map((navItem) => {
           return (
