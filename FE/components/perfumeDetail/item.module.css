@@ -1,15 +1,16 @@
 .container {
-    display: flex;
-    margin: 5em;
-  }
-  
-  .imageContainer {
-    width: 30rem;
-    height: 30rem;
-    position: relative;
-  }
-  
-  .image {
-    position: absolute;
-  }
-  
+  display: flex;
+  justify-content: space-evenly;
+  max-width: 1200px;
+  margin: 5em auto;
+}
+
+.imageContainer {
+  width: 30rem;
+  height: 30rem;
+  position: relative;
+}
+
+.image {
+  position: absolute;
+}

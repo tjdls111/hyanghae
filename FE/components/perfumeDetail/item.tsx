@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-17
+마지막 수정일 2022-03-23
 */
 
 import React from "react";
@@ -49,8 +49,7 @@ const Item = ({ data }: InnerProps) => {
       <div>
         <h1>{data.name}</h1>
         <h2>(Score: {data.score})</h2>
-        <h2>Price: {data.price}</h2>
-        <p>Note: {data.note}</p>
+        <h2>Note: {data.note}</h2>
       </div>
     </main>
   );
