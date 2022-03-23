@@ -1,6 +1,6 @@
 const sliderData: { path: string; header: string; description: string }[] = [
   {
-    path: "/images/homePage-Banner/firstImage.jpg",
+    path: "/images/homePage-Banner/firstImage.webp",
     header: "다가오는 봄을 위한 준비",
     description: "향해가 준비한 봄을 위한 향수",
   },
