@@ -6,17 +6,19 @@ const UserPwChange = () => {
   const [isValid, setValid] = useState(false);
   const [isMsg1, setMsg1] = useState("");
   const [isMsg2, setMsg2] = useState("");
+  // 세개 인풋 값 확인할 ref
   const pwRef = useRef<HTMLInputElement>(null);
   const ref1 = useRef<HTMLInputElement>(null);
   const ref2 = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  
   const bool1 = useRef(false);
   const txt1 = useRef("");
   const txt2 = useRef("");
   const bool2 = useRef(false);
+
   const onValid = (domNum: number) => {
     const regExp = new RegExp(/^[A-Za-z0-9]+$/);
-
     if (domNum === 1) {
       const pw = ref1.current?.value;
       if (pw) {
@@ -84,15 +86,18 @@ const UserPwChange = () => {
     const token = localStorage.getItem("token");
     const currentPw = pwRef.current?.value;
     const changePw = ref2.current?.value;
-
     if (currentPw === changePw) {
       alert("현재 비밀번호와 바꾸려는 비밀번호가 같습니다");
+      return;
+    }
+    if (currentPw === "") {
+      alert("현재 비밀번호를 입력해주세요");
       return;
     }
 
     if (confirm("변경하시겠습니까?")) {
       try {
-        if (currentPw && token) {
+        if (token && currentPw) {
           await apiCheckMod(currentPw, token);
         }
       } catch (e) {
