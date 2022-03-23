@@ -16,6 +16,7 @@ import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
 import { rmSync } from "fs";
+import ReviewList from "../../components/perfumedetail/reviewlist";
 
 interface PerfumeResult {
   dayNight: string;
@@ -97,6 +98,7 @@ const Detail: NextPage = () => {
       <Navigation />
       <Item data={data} />
       <Review />
+      <ReviewList/>
     </>
   );
 };

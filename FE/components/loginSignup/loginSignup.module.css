@@ -1,6 +1,7 @@
 .container {
   background-color: var(--color-grey-dark-1);
 }
+
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
