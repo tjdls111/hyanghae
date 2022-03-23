@@ -41,7 +41,7 @@ const Login: NextPage = () => {
       if (res.data?.token) {
         localStorage.setItem("token", res.data?.token);
       }
-      Router.push("/");
+      Router.replace("/home");
     } catch (e) {
       const error = e as AxiosError;
       window.alert("아이디, 비밀번호 정보가 없습니다. 확인해주세요.");
@@ -160,13 +160,13 @@ const Login: NextPage = () => {
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
         <div className={styles.find}>
-          <Link href="/findId">
+          <Link href="/findid">
             <span className={`${styles.guide} ${styles.signup}`}>
               아이디 찾기
             </span>
           </Link>{" "}
           |{" "}
-          <Link href="/findPw">
+          <Link href="/findpw">
             <span className={`${styles.guide} ${styles.signup}`}>
               비밀번호 찾기
             </span>
