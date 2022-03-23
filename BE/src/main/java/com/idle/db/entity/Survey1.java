@@ -5,7 +5,7 @@
  * @author David
  * @version 1.0.0
  * 생성일 2022-03-07
- * 마지막 수정일 2022-03-07
+ * 마지막 수정일 2022-03-23
  **/
 package com.idle.db.entity;
 
@@ -33,8 +33,8 @@ public class Survey1 extends BaseTimeEntity{
     @Column(name="gender", nullable = false)
     int gender;
 
-    @Column(name="daynight", nullable = false)
-    boolean daynight;
+    @Column(name="time", nullable = false)
+    int time;
 
     @Column(name="season", nullable = false)
     int season;
@@ -49,10 +49,10 @@ public class Survey1 extends BaseTimeEntity{
     String surveyTitle;
 
     @Builder
-    public Survey1(User user, int gender, boolean daynight, int season, int tpo, int mood, String surveyTitle){
+    public Survey1(User user, int gender, int time, int season, int tpo, int mood, String surveyTitle){
         this.user = user;
         this.gender = gender;
-        this.daynight = daynight;
+        this.time = time;
         this.season = season;
         this.tpo = tpo;
         this.mood = mood;

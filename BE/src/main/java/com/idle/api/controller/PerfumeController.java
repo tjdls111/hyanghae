@@ -50,11 +50,11 @@ public class PerfumeController {
     /* Woody */
     @ApiOperation("향수 검색")
     @GetMapping("/search")
-    public ResponseEntity<PerfumeListRes> perfumeSearchList(@RequestParam(value = "keyword") String keyword,
+    public ResponseEntity<PerfumeListResponse> perfumeSearchList(@RequestParam(value = "keyword") String keyword,
                                                           @RequestParam(value = "content") String content,
                                                           @PageableDefault(size=4, sort = "perfumeName", direction = Sort.Direction.ASC) Pageable pageable) {
-        Map<String,Object> map = perfumeService.getPerfumeSearchPage(keyword, content, pageable);
-        return ResponseEntity.status(200).body(PerfumeListRes.of(200, "Success", (List<Perfume>) map.get("perfumeList"), (Boolean) map.get("isLast")));
+        Page<Perfume> page = perfumeService.getPerfumeSearchPage(keyword, content, pageable);
+        return ResponseEntity.ok(PerfumeListResponse.of(200,"Success",page));
     }
 
     /* Woody */

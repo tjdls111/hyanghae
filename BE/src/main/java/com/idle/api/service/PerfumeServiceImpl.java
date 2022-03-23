@@ -16,8 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 @Service("perfumeService")
 public class PerfumeServiceImpl implements PerfumeService{
@@ -26,19 +25,16 @@ public class PerfumeServiceImpl implements PerfumeService{
     PerfumeRepository perfumeRepository;
 
     @Override
-    public Map<String, Object> getPerfumeSearchPage(String keyword, String content, Pageable pageable) {
-        Map<String, Object> map = new HashMap<>();
-
+    public Page<Perfume> getPerfumeSearchPage(String keyword, String content, Pageable pageable) {
+        Page<Perfume> page = null;
         if(keyword.equals("perfumeName")){
-            Page page = perfumeRepository.findByPerfumeNameContaining(content, pageable);
-            map.put("perfumeList",page.getContent());
-            map.put("isLast",page.isLast());
+            page = perfumeRepository.findByPerfumeNameContaining(content, pageable);
+
         } else if(keyword.equals("brand")) {
-            Page page = perfumeRepository.findByPerfumeBrandContaining(content, pageable);
-            map.put("perfumeList",page.getContent());
-            map.put("isLast",page.isLast());
+            page = perfumeRepository.findByPerfumeBrandContaining(content, pageable);
+
         }
-        return map;
+        return page;
     }
 
     /* David : 향수 목록 조회 */
