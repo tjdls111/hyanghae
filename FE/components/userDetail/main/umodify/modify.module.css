@@ -61,8 +61,14 @@
 
 .distTxt {
   cursor: pointer;
+  margin-bottom: 1em;
 }
 
 .distTxt :hover {
   color: var(--color-primary-light-2);
+}
+.validTxt {
+  margin-top: 1em;
+  text-align: center;
+  font-size: 0.7em;
 }

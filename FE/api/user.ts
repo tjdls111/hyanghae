@@ -67,10 +67,7 @@ export const socialLogin = () => {
 export const apiFindUserId = async (email: string) =>
   await axios.get(`${BASE_URL}/user/finduserid/${email}`);
 
-export const apiFindpw = async (
-  userEmail: string,
-  userId: string
-): Promise<resType> => {
+export const apiFindpw = async (userEmail: string, userId: string): Promise<resType> => {
   try {
     return await axios.put(`${BASE_URL}/user/finduserpw`, {
       userEmail,
@@ -81,10 +78,7 @@ export const apiFindpw = async (
   }
 };
 
-export const apiLogin = async (
-  userId: string,
-  userPw: string
-): Promise<resType> => {
+export const apiLogin = async (userId: string, userPw: string): Promise<resType> => {
   try {
     return await axios.post(`${BASE_URL}/user/login`, {
       userId,
@@ -96,10 +90,7 @@ export const apiLogin = async (
 };
 
 // @author scarlet
-export const apiCheckMod = async (
-  userPw: string,
-  accessToken: string
-): Promise<resType> => {
+export const apiCheckMod = async (userPw: string, accessToken: string): Promise<resType> => {
   try {
     return await axios.post(
       `${BASE_URL}/user/checkpw`,
@@ -118,9 +109,7 @@ export const apiCheckMod = async (
 };
 
 // @author scarlet
-export const apiUserLookUp = async (
-  accessToken: string
-): Promise<resLookUpType> => {
+export const apiUserLookUp = async (accessToken: string): Promise<resLookUpType> => {
   try {
     return await axios.get(`${BASE_URL}/user/info`, {
       headers: {
@@ -140,6 +129,44 @@ export const apiDist = async (accessToken: string): Promise<resType> => {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+  } catch (e) {
+    throw new Error("Unable to get a response to server");
+  }
+};
+
+// @author scarlet
+export const apiNickCh = async (userNickname: string, accessToken: string) => {
+  try {
+    return axios.put(
+      `${BASE_URL}/user/update-nickname`,
+      {
+        userNickname,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } catch (e) {
+    throw new Error("Unable to get a response to server");
+  }
+};
+
+// @author scarlet
+export const apiPwCh = async (userPw: string, accessToken: string) => {
+  try {
+    return axios.put(
+      `${BASE_URL}/user/update-pw`,
+      {
+        userPw,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
   } catch (e) {
     throw new Error("Unable to get a response to server");
   }

@@ -11,6 +11,7 @@ import UserTest from "./main/userTest";
 import UserModify from "./main/umodify/modify";
 import UserPurchase from "./main/userPurchase";
 import UserDestroy from "./main/userDestroy";
+import UserPwChange from "./main/userPwChange";
 interface stateProps {
   state: string;
 }
@@ -26,7 +27,11 @@ const DetailMain: React.FC<stateProps> = ({ state }) => {
         <UserPurchase />
       ) : state === "userdestroy" ? (
         <UserDestroy />
-      ) : null}
+      ) : state === "userpwchange" ? (
+        <UserPwChange />
+      ) : (
+        <UserTest />
+      )}
     </div>
   );
 };

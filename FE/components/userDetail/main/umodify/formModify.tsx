@@ -8,7 +8,8 @@
 
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
-import { apiUserLookUp } from "../../../../api/user";
+import { apiCheckNickname, apiNickCh, apiUserLookUp } from "../../../../api/user";
+import { useRouter } from "next/router";
 import UserDestroy from "../userDestroy";
 import styles from "./modify.module.css";
 
@@ -20,19 +21,42 @@ const FormModify = () => {
     isShow: false,
   });
   const [isValid, setValid] = useState(false);
+  const [alertMsg, setAlert] = useState("");
   const distTxtC = "#f382a2";
   const nickRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
-  const nickChange = () => {
+  const nickChange = async () => {
     const value = nickRef.current?.value;
     if (value && value.length > 0 && value.length < 11) {
-      setValid(true);
+      try {
+        await apiCheckNickname(value);
+        setValid(true);
+      } catch (e) {
+        setValid(false);
+        setAlert("중복 된 닉네임입니다.");
+        return;
+      }
     } else {
       setValid(false);
+      setAlert("1글자 이상 10글자 미만");
     }
   };
 
-  const onSubmit = () => {};
+  const onSubmit = async () => {
+    const value = nickRef.current?.value;
+    const token = localStorage.getItem("token");
+    try {
+      if (value && token) {
+        await apiNickCh(value, token);
+        alert("수정이 완료 되었습니다.");
+        setState({ ...state, nickName: value });
+        router.replace("/home");
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const { isShow, id, nickName, email } = state;
   useEffect(() => {
@@ -81,18 +105,11 @@ const FormModify = () => {
             />
           </span>
           <span>
-            <button
-              style={{
-                marginLeft: "1em",
-                borderRadius: "10px",
-              }}
-              onClick={onSubmit}
-              disabled={!isValid}
-            >
+            <button onClick={onSubmit} disabled={!isValid}>
               수정
             </button>
           </span>
-          <div>{}</div>
+          <div className={styles.validTxt}>{!isValid ? alertMsg : ""}</div>
         </section>
         <section>
           <span>이메일 : </span>

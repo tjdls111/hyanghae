@@ -62,7 +62,7 @@ const UserDestroy = () => {
   };
   return (
     <>
-      <strong style={{ color: distMsg }}>
+      <strong style={{ color: distMsg, fontSize: "0.8em" }}>
         밑 글을 입력하고 탈퇴 버튼을 누르시면 탈퇴가 완료됩니다.
       </strong>
       <form className={styles.distForm} onSubmit={onValidSubmit}>
