@@ -5,3 +5,8 @@
 생성일 2022-03-24
 마지막 수정일 2022-03-24
 */
+
+.btn {
+  background-color: var(--color-primary-shade);
+  cursor: pointer;
+}
