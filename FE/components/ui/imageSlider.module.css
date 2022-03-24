@@ -40,7 +40,7 @@
 }
 
 .descriptionBtn {
-  z-index: 9999;
+  z-index: 500;
   position: absolute;
   top: 55%;
   left: 50%;
@@ -59,7 +59,7 @@
 }
 
 .imgHeader {
-  z-index: 9999;
+  z-index: 500;
   position: absolute;
   top: 40%;
   left: 50%;
