@@ -9,11 +9,14 @@
 **/
 package com.idle.api.service;
 
+import com.idle.api.request.ReviewInsertRequest;
 import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
+import com.idle.db.entity.Review;
 import com.idle.db.entity.User;
 import com.idle.db.repository.LikePerfumeRepository;
 import com.idle.db.repository.PerfumeRepository;
+import com.idle.db.repository.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +30,10 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     @Autowired
     PerfumeRepository perfumeRepository;
+
+    @Autowired
+    ReviewRepository reviewRepository;
+
     @Autowired
     LikePerfumeRepository likePerfumeRepository;
 
@@ -55,6 +62,27 @@ public class PerfumeServiceImpl implements PerfumeService{
     public Perfume getPerfumeByPerfumeId(Long perfumeId) {
         Perfume perfume = perfumeRepository.findByPerfumeId(perfumeId).orElse(null);
         return perfume;
+    }
+
+    /* David : 향수 리뷰 작성 */
+    @Override
+    public String insertReview(User user, ReviewInsertRequest reviewInsertRequest) {
+        Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(reviewInsertRequest.getPerfumeId());
+        Optional<Review> checkReview = reviewRepository.findByUserAndPerfume(user, checkPerfume.get());
+        if (!checkPerfume.isPresent() || checkReview.isPresent()) {
+            return "fail";
+        } else {
+            Review review = Review.builder()
+                    .user(user)
+                    .perfume(checkPerfume.get())
+                    .reviewTitle(reviewInsertRequest.getReviewTitle())
+                    .reviewContent(reviewInsertRequest.getReviewContent())
+                    .reviewScore(reviewInsertRequest.getReviewScore())
+                    .build();
+            reviewRepository.save(review);
+            return "success";
+        }
+
     }
 
     /* David : 향수 좋아요 등록/해제 */
