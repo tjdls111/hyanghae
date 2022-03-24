@@ -17,6 +17,7 @@ import LinkedLogo from "./linkedLogo";
 import MobileHamburger from "./mobileHamburger";
 import DesktopSearch from "./desktopSearch";
 import MobileSearch from "./mobileSearch";
+import Link from "next/link";
 
 const Navigation: React.FC = () => {
   const [mobileSearch, setMobileSearch] = useState(false);
@@ -76,10 +77,12 @@ const Navigation: React.FC = () => {
             keywordChangeHandler={keywordChangeHandler}
             keywordDeleteHandler={keywordDeleteHandler}
           />
-          <AccountIcon
-            onClick={keywordDeleteHandler}
-            className={styles.accountIcon}
-          />
+          <Link href="/userDetail">
+            <AccountIcon
+              onClick={keywordDeleteHandler}
+              className={styles.accountIcon}
+            />
+          </Link>
           <MagnifyingGlass
             onClick={mobileSearchOpenHandler}
             className={styles.mobileSearchToggle}

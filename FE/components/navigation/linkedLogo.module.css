@@ -1,7 +1,7 @@
 .logoWrapper {
   width: 8rem;
   height: 8rem;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);

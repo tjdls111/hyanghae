@@ -11,7 +11,7 @@ const UserPwChange = () => {
   const ref1 = useRef<HTMLInputElement>(null);
   const ref2 = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  
+
   const bool1 = useRef(false);
   const txt1 = useRef("");
   const txt2 = useRef("");
@@ -122,16 +122,25 @@ const UserPwChange = () => {
     <>
       <div className={styles.container}>
         <header>비밀번호 변경</header>
-        <input autoFocus type="password" placeholder="현재 비밀번호" ref={pwRef} />
-        <input type="password" placeholder="새 비밀번호" onChange={() => onValid(1)} ref={ref1} />
-        <div>{isMsg1}</div>
-        <input
-          type="password"
-          placeholder="새 비밀번호 확인"
-          ref={ref2}
-          onChange={() => onValid(2)}
-        />
-        <div>{isMsg2}</div>
+
+        <div>
+          <input autoFocus type="password" placeholder="현재 비밀번호" ref={pwRef} />
+        </div>
+
+        <div>
+          <input type="password" placeholder="새 비밀번호" onChange={() => onValid(1)} ref={ref1} />
+          <div>{isMsg1}</div>
+        </div>
+        <div>
+          <input
+            type="password"
+            placeholder="새 비밀번호 확인"
+            ref={ref2}
+            onChange={() => onValid(2)}
+          />
+          <div>{isMsg2}</div>
+        </div>
+
         <button disabled={!isValid} onClick={onSubmit}>
           변경
         </button>
