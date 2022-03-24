@@ -20,7 +20,7 @@ export const apiShoppingSearch = async (
 ): Promise<searchResult> => {
   try {
     return await axios.get(
-      `https://openapi.naver.com/v1/search/shop.json?query=${keyword}`,
+      `https://api.ebay.com/buy/browse/v1/item_summary/search?${keyword}&limit=3`,
       {
         headers: {
           // "X-Naver-Client-Id": "",

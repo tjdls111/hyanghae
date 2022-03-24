@@ -34,11 +34,8 @@ const Item = ({ data }: InnerProps) => {
         <div className={styles.imageContainer}>
           <Image
             className={styles.image}
-            loader={myLoader}
-            // src={`${data.imgPath}`}
-            // src={data.imgPath}
-            src="imgPath"
-            // src="https://photo.akmall.com/image4/goods/78/58/60/94/78586094_M_350.jpg"
+            loader={myLoader}  
+            src="imgPath"      
             alt="perfume image"
             layout="fill"
           />
