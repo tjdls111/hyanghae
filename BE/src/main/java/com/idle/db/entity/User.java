@@ -11,6 +11,7 @@
 package com.idle.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -60,7 +61,7 @@ public class User extends BaseTimeEntity {
     Set<Review> reviewList = new HashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonManagedReference
     Set<LikePerfume> likePerfumeList = new HashSet<>();
 
     @Builder

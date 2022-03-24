@@ -6,7 +6,7 @@
  * @author David
  * @version 1.0.0
  * 생성일 2022-03-14
- * 마지막 수정일 2022-03-14
+ * 마지막 수정일 2022-03-23
  **/
 package com.idle.db.entity;
 
@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,26 +36,29 @@ public class Perfume  {
     @Column(name = "p_name", nullable = false)
     String perfumeName;
 
-    @Column(name = "p_score", nullable = false)
-    float perfumeScore;
-
-    @Column(name = "p_cost", nullable = false)
-    int perfumeCost;
-
     @Column(name = "p_brand", nullable = false)
     String perfumeBrand;
 
-    @Column(name = "p_url", nullable = false)
-    String perfumeUrl;
+    @Column(name = "p_score", nullable = false)
+    float perfumeScore;
 
-    @Column(name="p_date", nullable = false)
-    LocalDateTime perfumeDate;
+    @Column(name = "p_group", nullable = false)
+    String group;
+
+    @Column(name = "note1", nullable = false)
+    String note1;
+
+    @Column(name = "note2", nullable = false)
+    String note2;
+
+    @Column(name = "note3", nullable = false)
+    String note3;
+
+    @Column(name="time", nullable = false)
+    int time;
 
     @Column(name="gender", nullable = false)
     int gender;
-
-    @Column(name="daynight", nullable = false)
-    int daynight;
 
     @Column(name="season", nullable = false)
     int season;
