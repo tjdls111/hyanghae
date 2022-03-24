@@ -8,7 +8,19 @@
 */
 
 .container {
-    max-width: 1200px;
-    margin: 3em auto;
-  }
-  
+  max-width: 1200px;
+  margin: 3em auto;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 3em;
+}
+
+.btn {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary-shade);
+}

@@ -3,7 +3,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-22
-마지막 수정일 2022-03-22
+마지막 수정일 2022-03-23
 */
 
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
@@ -42,13 +42,31 @@ export interface PerfumeResult {
 export const apiPerfumeDetail = async (
   perfumeId: string
 ): Promise<PerfumeResult> => {
-  try{
-return await axios.get(
-  `${BASE_URL}/perfume/${perfumeId}/`)
-  } 
-  catch(e){
-    throw new Error('server error')
+  try {
+    return await axios.get(`${BASE_URL}/perfume/${perfumeId}/`);
+  } catch (e) {
+    throw new Error("server error");
   }
+};
 
-
+export const apiPostPerfumeReview = async (
+  accessToken: string,
+  perfumeId: number,
+  reviewContent: string,
+  reviewScore: string,
+  reviewTitle: string
+): Promise<PerfumeResult> => {
+  try {
+    return await axios.post(
+      `${BASE_URL}/review`,
+      { perfumeId, reviewContent, reviewScore, reviewTitle },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  } catch (e) {
+    throw new Error("server error");
+  }
 };
