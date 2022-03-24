@@ -6,3 +6,11 @@
 생성일 2022-03-24
 마지막 수정일 2022-03-24
 */
+
+import React from "react";
+
+function EbayList() {
+  return <div>EbayList</div>;
+}
+
+export default EbayList;

@@ -10,6 +10,8 @@
 import React from "react";
 import styles from "./item.module.css";
 import Image from "next/image";
+import EbayBtn from "./ebayBtn";
+import EbayList from "./ebayList";
 
 interface InnerProps {
   data: {
@@ -34,8 +36,8 @@ const Item = ({ data }: InnerProps) => {
         <div className={styles.imageContainer}>
           <Image
             className={styles.image}
-            loader={myLoader}  
-            src="imgPath"      
+            loader={myLoader}
+            src="imgPath"
             alt="perfume image"
             layout="fill"
           />
@@ -47,6 +49,8 @@ const Item = ({ data }: InnerProps) => {
         <h1>{data.name}</h1>
         <h2>(Score: {data.score})</h2>
         <h2>Note: {data.note}</h2>
+        <EbayList />
+        <EbayBtn keyword={data.name} />
       </div>
     </main>
   );
