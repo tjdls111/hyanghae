@@ -1,0 +1,69 @@
+.carousel {
+  width: 100vw;
+  height: 80vh;
+  position: relative;
+}
+
+.imageWrapper {
+  position: relative;
+  opacity: 0.6;
+  transition: opacity 1s ease-in-out;
+}
+
+.imageWrapper.active {
+  width: 100vw;
+  height: 80vh;
+  opacity: 0.8;
+}
+
+.image {
+  object-fit: cover;
+  position: absolute;
+}
+
+.leftButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5rem;
+  font-size: 4rem;
+  color: #fff;
+}
+
+.rightButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5rem;
+  font-size: 4rem;
+  color: #fff;
+}
+
+.descriptionBtn {
+  z-index: 500;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 2rem;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
+  background: none;
+  font-size: 2rem;
+  color: #000;
+}
+
+.descriptionBtn:hover {
+  background: #000;
+  color: #fff;
+}
+
+.imgHeader {
+  z-index: 500;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 5rem;
+}
