@@ -26,7 +26,7 @@ const Detail: React.FC = () => {
             onClick={() => setState(userTest)}
             className={styles.usertest}
             style={
-              state === userTest
+              state === userTest || state === ""
                 ? {
                     color: listColor,
                     cursor: "default",
