@@ -11,10 +11,12 @@ package com.idle.api.controller;
 
 import com.idle.api.request.ReviewInsertRequest;
 import com.idle.api.response.BaseResponseBody;
+import com.idle.api.response.LikePerfumeListResponse;
 import com.idle.api.response.PerfumeListResponse;
 import com.idle.api.response.PerfumeResponse;
 import com.idle.api.service.PerfumeService;
 import com.idle.common.jwt.dto.IdleUserDetails;
+import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
 import com.idle.db.entity.User;
 import io.swagger.annotations.Api;
@@ -29,6 +31,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 
 @CrossOrigin("*")
@@ -108,13 +112,12 @@ public class PerfumeController {
     /* David */
     @ApiOperation("향수 좋아요 목록 조회")
     @GetMapping("/like/list")
-    public ResponseEntity<? extends BaseResponseBody> getLikePerfumeList(@ApiIgnore Authentication authentication) {
+    public ResponseEntity<? extends BaseResponseBody> getLikePerfumeList(@ApiIgnore Authentication authentication, Pageable pageable) {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
-        System.out.println(user.getUserNickname());
 
+        Page<LikePerfume> res = perfumeService.getLikePerfumeList(user, pageable);
 
-
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "좋아요 등록"));
+        return ResponseEntity.status(200).body(LikePerfumeListResponse.of(200, "Success",res));
     }
 }

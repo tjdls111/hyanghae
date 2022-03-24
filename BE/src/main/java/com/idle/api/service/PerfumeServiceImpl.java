@@ -9,6 +9,7 @@
 **/
 package com.idle.api.service;
 
+import com.google.common.collect.Lists;
 import com.idle.api.request.ReviewInsertRequest;
 import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
@@ -17,16 +18,22 @@ import com.idle.db.entity.User;
 import com.idle.db.repository.LikePerfumeRepository;
 import com.idle.db.repository.PerfumeRepository;
 import com.idle.db.repository.ReviewRepository;
+import com.idle.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
 @Service("perfumeService")
 public class PerfumeServiceImpl implements PerfumeService{
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     PerfumeRepository perfumeRepository;
@@ -100,6 +107,13 @@ public class PerfumeServiceImpl implements PerfumeService{
         LikePerfume likePerfume = new LikePerfume(user,checkPerfume.get());
         likePerfumeRepository.save(likePerfume);
         return "register";
+    }
+
+    /* David : 향수 좋아요 목록 조회 */
+    @Override
+    public Page<LikePerfume> getLikePerfumeList(User user, Pageable pageable) {
+        Page<LikePerfume> likePerfumes = likePerfumeRepository.findByUser(user, pageable);
+        return likePerfumes;
     }
 
 }

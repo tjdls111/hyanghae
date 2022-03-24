@@ -10,6 +10,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.ReviewInsertRequest;
+import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
 import com.idle.db.entity.User;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,6 @@ public interface PerfumeService {
 
     //향수 좋아요
     String likePerfume(User user, Long perfumeId);
-
+    Page<LikePerfume> getLikePerfumeList(User user, Pageable pageable);
 
 }
