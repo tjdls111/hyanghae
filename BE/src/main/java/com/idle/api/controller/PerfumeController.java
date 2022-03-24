@@ -5,15 +5,17 @@
 * @author Woody, David
 * @version 1.0.0
 * 생성일 2022/03/16
-* 마지막 수정일 2022/03/16
+* 마지막 수정일 2022/03/24
 **/
 package com.idle.api.controller;
 
-import com.idle.api.response.PerfumeListRes;
+import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.PerfumeListResponse;
 import com.idle.api.response.PerfumeResponse;
 import com.idle.api.service.PerfumeService;
+import com.idle.common.jwt.dto.IdleUserDetails;
 import com.idle.db.entity.Perfume;
+import com.idle.db.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -27,8 +29,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import java.util.List;
-import java.util.Map;
 
 @CrossOrigin("*")
 @Api(value = "향수 API", tags = {"Perfume"})
@@ -68,5 +68,24 @@ public class PerfumeController {
             return ResponseEntity.status(404).body(null);
         }
         return ResponseEntity.status(200).body(PerfumeResponse.of(perfume));
+    }
+
+    /* David */
+    @ApiOperation("향수 좋아요 등록/해제")
+    @GetMapping("/like/{perfumeId}")
+    public ResponseEntity<? extends BaseResponseBody> likePerfume(@ApiIgnore Authentication authentication,
+                                                                  @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId){
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+        System.out.println(user.getUserNickname());
+
+        String res = perfumeService.likePerfume(user, perfumeId);
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401,"좋아요 등록 실패"));
+        } else if( res.equals("clear")){
+            return ResponseEntity.status(401).body(BaseResponseBody.of(200,"좋아요 해제"));
+        }
+
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200,"좋아요 등록"));
     }
 }
