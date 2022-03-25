@@ -24,6 +24,7 @@ public interface PerfumeService {
     Perfume getPerfumeByPerfumeId(Long perfumeId);
     //향수 리뷰
     String insertReview(User user, ReviewInsertRequest reviewInsertRequest);
+    String updateReview(User user, ReviewInsertRequest reviewInsertRequest);
     String deleteReview(User user, Long perfumeId);
     //향수 좋아요
     String likePerfume(User user, Long perfumeId);

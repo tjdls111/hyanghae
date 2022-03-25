@@ -92,6 +92,22 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     }
 
+    /* David : 향수 리뷰 수정 */
+    @Override
+    public String updateReview(User user, ReviewInsertRequest reviewInsertRequest) {
+        Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(reviewInsertRequest.getPerfumeId());
+        Optional<Review> checkReview = reviewRepository.findByUserAndPerfume(user, checkPerfume.get());
+        if (!checkPerfume.isPresent() || !checkReview.isPresent()) {
+            return "fail";
+        } else {
+            checkReview.get().setReviewScore(reviewInsertRequest.getReviewScore());
+            checkReview.get().setReviewTitle(reviewInsertRequest.getReviewTitle());
+            checkReview.get().setReviewContent(reviewInsertRequest.getReviewContent());
+            reviewRepository.save(checkReview.get());
+            return "success";
+        }
+    }
+
     /* David : 향수 리뷰 삭제 */
     @Override
     public String deleteReview(User user, Long perfumeId) {
