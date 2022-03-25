@@ -10,6 +10,7 @@
  **/
 package com.idle.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,7 +29,7 @@ import java.io.Serializable;
 public class LikePerfume implements Serializable {
     @Id
     @ManyToOne
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name="u_seq")
     private User user;
 

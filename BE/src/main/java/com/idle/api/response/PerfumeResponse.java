@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter
@@ -23,13 +24,14 @@ public class PerfumeResponse {
 
     Long perfumeId;
     String perfumeName;
-    float perfumeScore;
-    int perfumeCost;
     String perfumeBrand;
-    String perfumeUrl;
-    LocalDateTime perfumeDate;
+    float perfumeScore;
+    String group;
+    String note1;
+    String note2;
+    String note3;
+    int time;
     int gender;
-    int dayNight;
     int season;
     int tpo;
     int mood;
@@ -38,13 +40,14 @@ public class PerfumeResponse {
         PerfumeResponse res = new PerfumeResponse();
         res.setPerfumeId(perfume.getPerfumeId());
         res.setPerfumeName(perfume.getPerfumeName());
-        res.setPerfumeScore(perfume.getPerfumeScore());
-        res.setPerfumeCost(perfume.getPerfumeCost());
         res.setPerfumeBrand(perfume.getPerfumeBrand());
-        res.setPerfumeUrl(perfume.getPerfumeUrl());
-        res.setPerfumeDate(perfume.getPerfumeDate());
+        res.setPerfumeScore(perfume.getPerfumeScore());
+        res.setGroup(perfume.getGroup());
+        res.setNote1(perfume.getNote1());
+        res.setNote2(perfume.getNote2());
+        res.setNote3(perfume.getNote3());
+        res.setTime(perfume.getTime());
         res.setGender(perfume.getGender());
-        res.setDayNight(perfume.getDaynight());
         res.setSeason(perfume.getSeason());
         res.setTpo(perfume.getTpo());
         res.setMood(perfume.getMood());

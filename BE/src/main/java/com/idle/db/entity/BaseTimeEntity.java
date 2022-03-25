@@ -5,7 +5,7 @@
  * @author David
  * @version 1.0.0
  * 생성일 2022-03-07
- * 마지막 수정일 2022-03-07
+ * 마지막 수정일 2022-03-23
  **/
 package com.idle.db.entity;
 
@@ -25,5 +25,7 @@ import java.time.LocalDateTime;
 public abstract class BaseTimeEntity {
 
     @CreatedDate
-    private LocalDateTime time;
+    private LocalDateTime createDate;
+
+
 }
