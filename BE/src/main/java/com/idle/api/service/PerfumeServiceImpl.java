@@ -5,7 +5,7 @@
 * @author Woody
 * @version 1.0.0
 * 생성일 2022/03/16
-* 마지막 수정일 2022/03/24
+* 마지막 수정일 2022/03/25
 **/
 package com.idle.api.service;
 
@@ -21,7 +21,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.*;
 
 
 @Service("perfumeService")
@@ -154,6 +154,33 @@ public class PerfumeServiceImpl implements PerfumeService{
     public Page<LikePerfume> getLikePerfumeList(User user, Pageable pageable) {
         Page<LikePerfume> likePerfumes = likePerfumeRepository.findByUser(user, pageable);
         return likePerfumes;
+    }
+
+    /* David : 향수 추천 결과 목록 조회 (설문조사1, 2, 3의 결과) */
+    @Override
+    public Map<String, List<Perfume>> getRecommendPerfumeList(User user) {
+
+        User targetUser = userRepository.findByUserId(user.getUserId()).get();
+        //유저의 설문조사 1,2,3 리스트
+        List<Survey1> list1 = new ArrayList<Survey1>(targetUser.getSurvey1List());
+        List<Survey2> list2 = new ArrayList<Survey2>(targetUser.getSurvey2List());
+        List<Survey3> list3 = new ArrayList<Survey3>(targetUser.getSurvey3List());
+        //확인
+        System.out.println("설문조사1-1 상태값 : "+list1.get(0).getGender()+","+list1.get(0).getTime()+","+list1.get(0).getSeason()+","+list1.get(0).getTpo()+","+list1.get(0).getMood());
+
+
+        //여기서 설문조사의 상태값을 전달하고 그에 따른 결과 값을 받아야함 지금은 더미데이터(설문조사1보다 mood가 높은 향수 리스트)
+        List<Perfume> recommendPerfumeList1 = perfumeRepository.findByMoodGreaterThan(list1.get(0).getMood());
+        List<Perfume> recommendPerfumeList2 = perfumeRepository.findByMoodGreaterThan(list1.get(0).getMood());
+        List<Perfume> recommendPerfumeList3 = perfumeRepository.findByMoodGreaterThan(list1.get(0).getMood());
+
+        //추천결과 리스트 리턴
+        Map<String,List<Perfume>> map = new HashMap<>();
+        map.put("recommendPerfumeList1",recommendPerfumeList1);
+        map.put("recommendPerfumeList2",recommendPerfumeList2);
+        map.put("recommendPerfumeList3",recommendPerfumeList3);
+
+        return map;
     }
 
 }

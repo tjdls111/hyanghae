@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Map;
 
 
 @CrossOrigin("*")
@@ -153,5 +154,15 @@ public class PerfumeController {
         Page<LikePerfume> res = perfumeService.getLikePerfumeList(user, pageable);
 
         return ResponseEntity.status(200).body(LikePerfumeListResponse.of(200, "Success",res));
+    }
+
+    /* David */
+    @ApiOperation("추천 향수 목록 조회")
+    @GetMapping("/recommend/list")
+    public ResponseEntity<RecommendPerfumeListResponse> getRecommendPerfumeList(@ApiIgnore Authentication authentication) {
+        IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
+        User user = userDetails.getUser();
+        Map<String,List<Perfume>> map = perfumeService.getRecommendPerfumeList(user);
+        return ResponseEntity.status(200).body(RecommendPerfumeListResponse.of(200, "Success",map));
     }
 }

@@ -17,6 +17,9 @@ import com.idle.db.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+import java.util.Map;
+
 
 public interface PerfumeService {
     //향수
@@ -31,5 +34,7 @@ public interface PerfumeService {
     //향수 좋아요
     String likePerfume(User user, Long perfumeId);
     Page<LikePerfume> getLikePerfumeList(User user, Pageable pageable);
+    //향수 추천
+    Map<String, List<Perfume>> getRecommendPerfumeList(User user);
 
 }
