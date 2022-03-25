@@ -20,7 +20,6 @@ interface InnerProps {
     score: string;
     price: string;
     note: string;
-    imgPath: string;
     season: string;
     style: string;
   };
@@ -56,11 +55,15 @@ const Item = ({ data }: InnerProps) => {
   let myLoader;
 
   useEffect(() => {
-    myLoader = () => {
-      return `${lists[0].image.imageUrl}`;
-    };
+    if (lists && lists.length > 0) {
+      console.log(lists);
+      console.log(lists[0].image?.imageUrl);
+      myLoader = () => {
+        // return `${lists[0].image?.imageUrl}`;
+        return `https://i.ebayimg.com/thumbs/images/g/k8cAAOSwccRg8j3m/s-l225.jpg`;
+      };
+    }
   }, [lists]);
-
 
   return (
     <main className={styles.container}>

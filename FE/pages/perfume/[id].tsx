@@ -6,16 +6,12 @@
 마지막 수정일 2022-03-22
 */
 import { useEffect, useState } from "react";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import type { NextPage } from "next";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
-import { AxiosError } from "axios";
 import Navigation from "../../components/navigation/navigation";
-import Link from "next/link";
 import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
-import { rmSync } from "fs";
 import ReviewList from "../../components/perfumedetail/reviewlist";
 
 interface PerfumeResult {
@@ -28,7 +24,6 @@ interface PerfumeResult {
   perfumeId: string;
   perfumeName: string;
   perfumeScore: string;
-  perfumeUrl: string;
   season: string;
   tpo: string;
 }
@@ -38,7 +33,6 @@ interface PerfumeData {
   score: string;
   price: string;
   note: string;
-  imgPath: string;
   season: string;
   style: string;
 }
@@ -62,7 +56,6 @@ const Detail: NextPage = () => {
               perfumeId: "",
               perfumeName: "",
               perfumeScore: "",
-              perfumeUrl: "",
               season: "",
               tpo: "",
             };
@@ -72,8 +65,6 @@ const Detail: NextPage = () => {
               score: myres.perfumeScore,
               price: myres.perfumeCost,
               note: "",
-              imgPath:
-                "https://photo.akmall.com/image4/goods/78/58/60/94/78586094_M_350.jpg",
               season: myres.season,
               style: myres.tpo,
             });
@@ -83,7 +74,7 @@ const Detail: NextPage = () => {
           });
       })();
     }
-  }, [router.isReady]);
+  }, [router]);
 
   return (
     <>

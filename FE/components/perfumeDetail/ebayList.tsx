@@ -28,12 +28,12 @@ function EbayList({ lists }) {
       <ul>
         {lists.map((list) => (
           <div key={list.itemId}>
-            <h1>
+            <h2>
               {list.title} ({list.price.value} $){"    "}
               <Link href={list.itemWebUrl}>
                 <button className={styles.btn}>Buy</button>
               </Link>
-            </h1>
+            </h2>
           </div>
         ))}
       </ul>
