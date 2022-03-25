@@ -25,9 +25,9 @@ const ImageSlider: React.FC = function () {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  useEffect(() => {
-    setTimeout(nextSlide, 7000);
-  }, [current]);
+  // useEffect(() => {
+  //   setTimeout(nextSlide, 7000);
+  // }, [current]);
 
   return (
     <section className={styles.carousel}>
@@ -44,6 +44,8 @@ const ImageSlider: React.FC = function () {
                   className={`${styles.image} ${
                     idx === current && styles.activeImage
                   }`}
+                  width="1000"
+                  height="1000"
                   layout="fill"
                   src={data.path}
                   alt="test"
