@@ -11,10 +11,7 @@ package com.idle.api.service;
 
 import com.google.common.collect.Lists;
 import com.idle.api.request.ReviewInsertRequest;
-import com.idle.db.entity.LikePerfume;
-import com.idle.db.entity.Perfume;
-import com.idle.db.entity.Review;
-import com.idle.db.entity.User;
+import com.idle.db.entity.*;
 import com.idle.db.repository.LikePerfumeRepository;
 import com.idle.db.repository.PerfumeRepository;
 import com.idle.db.repository.ReviewRepository;
@@ -80,11 +77,13 @@ public class PerfumeServiceImpl implements PerfumeService{
             Review review = Review.builder()
                     .user(user)
                     .perfume(checkPerfume.get())
-                    .reviewTitle(reviewInsertRequest.getReviewTitle())
                     .reviewContent(reviewInsertRequest.getReviewContent())
                     .reviewScore(reviewInsertRequest.getReviewScore())
                     .build();
             reviewRepository.save(review);
+            float r = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId());
+            checkPerfume.get().setPerfumeScore(r);
+            perfumeRepository.save(checkPerfume.get());
             return "success";
         }
 
@@ -107,9 +106,11 @@ public class PerfumeServiceImpl implements PerfumeService{
             return "fail";
         } else {
             checkReview.get().setReviewScore(reviewInsertRequest.getReviewScore());
-            checkReview.get().setReviewTitle(reviewInsertRequest.getReviewTitle());
             checkReview.get().setReviewContent(reviewInsertRequest.getReviewContent());
             reviewRepository.save(checkReview.get());
+            float r = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId());
+            checkPerfume.get().setPerfumeScore(r);
+            perfumeRepository.save(checkPerfume.get());
             return "success";
         }
     }
@@ -123,6 +124,9 @@ public class PerfumeServiceImpl implements PerfumeService{
             return "fail";
         }else{
             reviewRepository.delete(checkReview.get());
+            float r = reviewRepository.findAvgWithJPQL(checkPerfume.get().getPerfumeId());
+            checkPerfume.get().setPerfumeScore(r);
+            perfumeRepository.save(checkPerfume.get());
             return "success";
         }
 

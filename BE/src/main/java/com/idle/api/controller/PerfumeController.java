@@ -105,9 +105,9 @@ public class PerfumeController {
 
         String res = perfumeService.updateReview(user, reviewInsertRequest);
         if (res.equals("fail")) {
-            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "리뷰 삭제 실패"));
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "리뷰 수정 실패"));
         }
-        return ResponseEntity.ok(BaseResponseBody.of(200,"리뷰 삭제 성공"));
+        return ResponseEntity.ok(BaseResponseBody.of(200,"리뷰 수정 성공"));
     }
 
     /* David */
