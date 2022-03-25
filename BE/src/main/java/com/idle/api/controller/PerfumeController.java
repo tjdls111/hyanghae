@@ -10,14 +10,12 @@
 package com.idle.api.controller;
 
 import com.idle.api.request.ReviewInsertRequest;
-import com.idle.api.response.BaseResponseBody;
-import com.idle.api.response.LikePerfumeListResponse;
-import com.idle.api.response.PerfumeListResponse;
-import com.idle.api.response.PerfumeResponse;
+import com.idle.api.response.*;
 import com.idle.api.service.PerfumeService;
 import com.idle.common.jwt.dto.IdleUserDetails;
 import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
+import com.idle.db.entity.Review;
 import com.idle.db.entity.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -88,6 +86,42 @@ public class PerfumeController {
         }
         return ResponseEntity.ok(BaseResponseBody.of(200,"리뷰 등록 성공"));
 
+    }
+
+    /* David  */
+    @ApiOperation("향수 리뷰 목록 조회")
+    @GetMapping("/review/list/{perfumeId}")
+    public ResponseEntity<ReviewListResponse> getReviewList(Pageable pageable,@PathVariable("perfumeId")Long perfumeId) {
+        Page<Review> reviews = perfumeService.getReviewList(pageable,perfumeId);
+        return ResponseEntity.ok(ReviewListResponse.of(200, "Success", reviews));
+    }
+
+    /* David */
+    @ApiOperation("향수 리뷰 수정")
+    @PutMapping("/review")
+    public ResponseEntity<? extends BaseResponseBody> updateReview(@ApiIgnore Authentication authentication, @RequestBody ReviewInsertRequest reviewInsertRequest){
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+
+        String res = perfumeService.updateReview(user, reviewInsertRequest);
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "리뷰 수정 실패"));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"리뷰 수정 성공"));
+    }
+
+    /* David */
+    @ApiOperation("향수 리뷰 삭제")
+    @DeleteMapping("/review/{perfumeId}")
+    public ResponseEntity<? extends BaseResponseBody> deleteReview(@ApiIgnore Authentication authentication, @PathVariable("perfumeId") Long perfumeId){
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+
+        String res = perfumeService.deleteReview(user, perfumeId);
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "리뷰 삭제 실패"));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"리뷰 삭제 성공"));
     }
 
     /* David */

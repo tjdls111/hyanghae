@@ -21,8 +21,6 @@ public class ReviewInsertRequest {
     @NotNull
     Long perfumeId;
     @NotNull
-    String reviewTitle;
-    @NotNull
     String reviewContent;
     @NotNull
     float reviewScore;

@@ -11,21 +11,16 @@ package com.idle.api.service;
 
 import com.google.common.collect.Lists;
 import com.idle.api.request.ReviewInsertRequest;
-import com.idle.db.entity.LikePerfume;
-import com.idle.db.entity.Perfume;
-import com.idle.db.entity.Review;
-import com.idle.db.entity.User;
+import com.idle.db.entity.*;
 import com.idle.db.repository.LikePerfumeRepository;
 import com.idle.db.repository.PerfumeRepository;
 import com.idle.db.repository.ReviewRepository;
 import com.idle.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -82,11 +77,56 @@ public class PerfumeServiceImpl implements PerfumeService{
             Review review = Review.builder()
                     .user(user)
                     .perfume(checkPerfume.get())
-                    .reviewTitle(reviewInsertRequest.getReviewTitle())
                     .reviewContent(reviewInsertRequest.getReviewContent())
                     .reviewScore(reviewInsertRequest.getReviewScore())
                     .build();
             reviewRepository.save(review);
+            float r = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId());
+            checkPerfume.get().setPerfumeScore(r);
+            perfumeRepository.save(checkPerfume.get());
+            return "success";
+        }
+
+    }
+
+    /* David : 향수 리뷰 목록 조회 */
+    @Override
+    public Page<Review> getReviewList(Pageable pageable,Long perfumeId) {
+        Perfume perfume = perfumeRepository.findByPerfumeId(perfumeId).get();
+        Page<Review> reviews = reviewRepository.findByPerfume(pageable, perfume);
+        return reviews;
+    }
+
+    /* David : 향수 리뷰 수정 */
+    @Override
+    public String updateReview(User user, ReviewInsertRequest reviewInsertRequest) {
+        Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(reviewInsertRequest.getPerfumeId());
+        Optional<Review> checkReview = reviewRepository.findByUserAndPerfume(user, checkPerfume.get());
+        if (!checkPerfume.isPresent() || !checkReview.isPresent()) {
+            return "fail";
+        } else {
+            checkReview.get().setReviewScore(reviewInsertRequest.getReviewScore());
+            checkReview.get().setReviewContent(reviewInsertRequest.getReviewContent());
+            reviewRepository.save(checkReview.get());
+            float r = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId());
+            checkPerfume.get().setPerfumeScore(r);
+            perfumeRepository.save(checkPerfume.get());
+            return "success";
+        }
+    }
+
+    /* David : 향수 리뷰 삭제 */
+    @Override
+    public String deleteReview(User user, Long perfumeId) {
+        Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(perfumeId);
+        Optional<Review> checkReview = reviewRepository.findByUserAndPerfume(user, checkPerfume.get());
+        if (!checkPerfume.isPresent() || !checkReview.isPresent()) {
+            return "fail";
+        }else{
+            reviewRepository.delete(checkReview.get());
+            float r = reviewRepository.findAvgWithJPQL(checkPerfume.get().getPerfumeId());
+            checkPerfume.get().setPerfumeScore(r);
+            perfumeRepository.save(checkPerfume.get());
             return "success";
         }
 
