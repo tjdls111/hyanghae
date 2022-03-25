@@ -21,7 +21,7 @@ export const apiShoppingSearch = async (
 ): Promise<searchResult> => {
   try {
     return await axios.get(
-      `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}`,
+      `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}&limit=5`,
       {
         headers: {
           Authorization: `Bearer ${process.env.EBAY_API_KEY}`,

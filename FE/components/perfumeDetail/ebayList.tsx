@@ -7,14 +7,10 @@
 마지막 수정일 2022-03-24
 */
 
-import React, { useEffect, useState } from "react";
-import { apiShoppingSearch } from "../../api/perfume";
+import React from "react";
+
 import Link from "next/link";
 interface Props {
-  keyword: string;
-}
-
-interface Item {
   itemId: string;
   title: string;
   image: {
@@ -22,94 +18,11 @@ interface Item {
   };
   price: {
     value: string;
-    currency: string;
   };
-  itemHref: string;
   itemWebUrl: string;
 }
-interface Item2 {
-  itemId: string;
-  title: string;
-  image: {
-    imageUrl: string;
-  };
-  price: {
-    value: string;
-    currency: string;
-  };
-  itemHref: string;
-  seller: {
-    username: string;
-    feedbackPercentage: string;
-    feedbackScore: number;
-  };
-  marketingPrice: {
-    originalPrice: {
-      value: string;
-      currency: string;
-    };
-    discountPercentage: string;
-    discountAmount: {
-      value: string;
-      currency: string;
-    };
-  };
-  condition: string;
-  conditionId: string;
-  thumbnailImages: [
-    {
-      imageUrl: string;
-    }
-  ];
-  shippingOptions: [
-    {
-      shippingCostType: string;
-      shippingCost: {
-        value: string;
-        currency: string;
-      };
-    }
-  ];
-  buyingOptions: string[];
-  currentBidPrice: {
-    value: string;
-    currency: string;
-  };
-  epid: string;
-  itemWebUrl: string;
-  itemLocation: {
-    postalCode: string;
-    country: string;
-  };
-  categories: [{ categoryId: string }];
-  additionalImages: [
-    {
-      imageUrl: string;
-    }
-  ];
-  adultOnly: boolean;
-  availableCoupons: boolean;
-  priorityListing: boolean;
-  legacyItemId: string;
-}
 
-function EbayList({ keyword }: Props) {
-  const [lists, setLists] = useState([] as Array<Item>);
-  // const [lists, setLists] = useState({});
-  // const [lists, setLists] = useState([]);
-
-  console.log(lists);
-  useEffect(() => {
-    // 이베이 쇼핑 검색 api 로 검색 결과 가져오기
-    apiShoppingSearch(keyword)
-      .then((res) => {
-        setLists(res.data.itemSummaries);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
+function EbayList({ lists }): Array<Props> {
   return (
     <section>
       <h1>Lists</h1>

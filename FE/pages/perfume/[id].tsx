@@ -45,6 +45,7 @@ interface PerfumeData {
 
 const Detail: NextPage = () => {
   const [data, setData] = useState({} as PerfumeData);
+
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
