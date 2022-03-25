@@ -21,11 +21,9 @@ import com.idle.db.repository.ReviewRepository;
 import com.idle.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 
@@ -90,6 +88,14 @@ public class PerfumeServiceImpl implements PerfumeService{
             return "success";
         }
 
+    }
+
+    /* David : 향수 리뷰 목록 조회 */
+    @Override
+    public Page<Review> getReviewList(Pageable pageable,Long perfumeId) {
+        Perfume perfume = perfumeRepository.findByPerfumeId(perfumeId).get();
+        Page<Review> reviews = reviewRepository.findByPerfume(pageable, perfume);
+        return reviews;
     }
 
     /* David : 향수 리뷰 수정 */
