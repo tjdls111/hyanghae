@@ -16,13 +16,13 @@ import Link from "next/link";
 const Review = () => {
   const review = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState("5");
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const perfumeId = Number(router.query.id as string);
-
+    console.log(selected);
     if (review.current?.value) {
       try {
         await apiPostPerfumeReview(

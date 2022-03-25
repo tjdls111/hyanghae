@@ -81,15 +81,6 @@ const Detail: NextPage = () => {
             console.log(err);
           });
       })();
-
-      // 이베이/ 네이버 등 쇼핑 검색 api 로 검색 결과 가져오기 -> 결과가 있으면 연결되도록!
-      // apiShoppingSearch()
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
     }
   }, [router.isReady]);
 
@@ -98,7 +89,7 @@ const Detail: NextPage = () => {
       <Navigation />
       <Item data={data} />
       <Review />
-      <ReviewList/>
+      <ReviewList />
     </>
   );
 };

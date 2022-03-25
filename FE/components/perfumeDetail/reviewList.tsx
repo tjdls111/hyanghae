@@ -11,7 +11,11 @@ import React from "react";
 import styles from "./reviewList.module.css";
 
 const ReviewList = () => {
-  return <article className={styles.container}>ReviewList</article>;
+  return <article className={styles.container}>
+    
+
+
+  </article>;
 };
 
 export default ReviewList;
