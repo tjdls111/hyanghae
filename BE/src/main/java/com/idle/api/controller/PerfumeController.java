@@ -91,6 +91,20 @@ public class PerfumeController {
     }
 
     /* David */
+    @ApiOperation("향수 리뷰 삭제")
+    @DeleteMapping("/review/{perfumeId}")
+    public ResponseEntity<? extends BaseResponseBody> deleteReview(@ApiIgnore Authentication authentication, @PathVariable("perfumeId") Long perfumeId){
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+
+        String res = perfumeService.deleteReview(user, perfumeId);
+        if (res.equals("fail")) {
+            return ResponseEntity.status(401).body(BaseResponseBody.of(401, "리뷰 삭제 실패"));
+        }
+        return ResponseEntity.ok(BaseResponseBody.of(200,"리뷰 삭제 성공"));
+    }
+
+    /* David */
     @ApiOperation("향수 좋아요 등록/해제")
     @GetMapping("/like/{perfumeId}")
     public ResponseEntity<? extends BaseResponseBody> likePerfume(@ApiIgnore Authentication authentication,

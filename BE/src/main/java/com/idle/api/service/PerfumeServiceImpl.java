@@ -92,6 +92,20 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     }
 
+    /* David : 향수 리뷰 삭제 */
+    @Override
+    public String deleteReview(User user, Long perfumeId) {
+        Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(perfumeId);
+        Optional<Review> checkReview = reviewRepository.findByUserAndPerfume(user, checkPerfume.get());
+        if (!checkPerfume.isPresent() || !checkReview.isPresent()) {
+            return "fail";
+        }else{
+            reviewRepository.delete(checkReview.get());
+            return "success";
+        }
+
+    }
+
     /* David : 향수 좋아요 등록/해제 */
     @Override
     public String likePerfume(User user, Long perfumeId) {
