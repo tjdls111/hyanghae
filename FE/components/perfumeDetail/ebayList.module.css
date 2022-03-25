@@ -3,5 +3,12 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-24
-마지막 수정일 2022-03-24
+마지막 수정일 2022-03-25
 */
+
+.btn {
+  border-radius: 5px;
+  width: 3em;
+  height: 100%;
+  background-color: var(--color-primary-shade);
+}

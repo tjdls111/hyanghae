@@ -4,12 +4,12 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-24
-마지막 수정일 2022-03-24
+마지막 수정일 2022-03-25
 */
 
 import React from "react";
-
 import Link from "next/link";
+import styles from "./ebayList.module.css";
 interface Props {
   itemId: string;
   title: string;
@@ -22,18 +22,18 @@ interface Props {
   itemWebUrl: string;
 }
 
-function EbayList({ lists }): Array<Props> {
+function EbayList({ lists }) {
   return (
     <section>
-      <h1>Lists</h1>
       <ul>
         {lists.map((list) => (
           <div key={list.itemId}>
-            <h1>{list.title}</h1>
-            <h1>price: {list.price.value} $</h1>
-            <Link href={list.itemWebUrl}>
-              <button>Buy</button>
-            </Link>
+            <h1>
+              {list.title} ({list.price.value} $){"    "}
+              <Link href={list.itemWebUrl}>
+                <button className={styles.btn}>Buy</button>
+              </Link>
+            </h1>
           </div>
         ))}
       </ul>

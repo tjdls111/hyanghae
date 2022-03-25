@@ -53,9 +53,7 @@ const Item = ({ data }: InnerProps) => {
       });
   }, [data]);
 
-  let myLoader = () => {
-    return ``;
-  };
+  let myLoader;
 
   useEffect(() => {
     myLoader = () => {
@@ -63,7 +61,6 @@ const Item = ({ data }: InnerProps) => {
     };
   }, [lists]);
 
-  console.log(lists);
 
   return (
     <main className={styles.container}>
