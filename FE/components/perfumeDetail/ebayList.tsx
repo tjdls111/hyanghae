@@ -7,9 +7,24 @@
 마지막 수정일 2022-03-24
 */
 
-import React from "react";
+import React, { useEffect } from "react";
+import { apiShoppingSearch } from "../../api/perfume";
 
-function EbayList() {
+interface Props {
+  keyword: string;
+}
+
+function EbayList({ keyword }: Props) {
+  useEffect(() => {
+    apiShoppingSearch(keyword)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [keyword]);
+
   return <div>EbayList</div>;
 }
 

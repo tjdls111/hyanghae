@@ -49,7 +49,7 @@ const Item = ({ data }: InnerProps) => {
         <h1>{data.name}</h1>
         <h2>(Score: {data.score})</h2>
         <h2>Note: {data.note}</h2>
-        <EbayList />
+        <EbayList keyword={data.name} />
         <EbayBtn keyword={data.name} />
       </div>
     </main>
