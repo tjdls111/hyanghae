@@ -55,10 +55,12 @@ const Item = ({ data }: InnerProps) => {
   let myLoader;
 
   useEffect(() => {
-    myLoader = () => {
-      return `${lists[0].image?.imageUrl}`;
-      // return `https://i.ebayimg.com/thumbs/images/g/k8cAAOSwccRg8j3m/s-l225.jpg`;
-    };
+    if (lists) {
+      myLoader = () => {
+        return `${lists[0].image?.imageUrl}`;
+        // return `https://i.ebayimg.com/thumbs/images/g/k8cAAOSwccRg8j3m/s-l225.jpg`;
+      };
+    }
     // if (lists && lists.length > 0) {
     //   console.log(lists);
     // }
@@ -77,8 +79,9 @@ const Item = ({ data }: InnerProps) => {
               layout="fill"
             />
           )}
-
-          <img src={`${lists[0]?.image?.imageUrl}`} />
+          {lists && lists.length > 0 && (
+            <img src={`${lists[0]?.image?.imageUrl}`} />
+          )}
         </div>
         <p>Seasonal: {data.season}</p>
         <p>Style: {data.style}</p>

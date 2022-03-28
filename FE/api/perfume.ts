@@ -73,7 +73,7 @@ export const apiPostPerfumeReview = async (
 
 export const apiGetPerfumeReview = async (perfumeId: String) => {
   try {
-    return await axios.get(`${BASE_URL}/review/list/${perfumeId}`);
+    return await axios.get(`${BASE_URL}/perfume/review/list/${perfumeId}`);
   } catch (e) {
     throw new Error("server error");
   }
