@@ -20,6 +20,7 @@ interface Review {
 const ReviewList = () => {
   const [data, setData] = useState([] as Array<Review>);
   const router = useRouter();
+  const userName = "aaaaaaaa"; //실제 유저 닉네임 받아오는 걸로 바꿔주기
 
   useEffect(() => {
     if (router.isReady) {
@@ -53,9 +54,11 @@ const ReviewList = () => {
           data.map((d) => (
             <li key={d.userNickname}>
               {d.userNickname} : {d.reviewContent}
-              <form onSubmit={onDelete}>
-                <button>Delete</button>
-              </form>
+              {d.userNickname === userName && (
+                <form onSubmit={onDelete}>
+                  <button>Delete</button>
+                </form>
+              )}
             </li>
           ))}
       </ul>
