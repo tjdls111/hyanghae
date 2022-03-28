@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -8,10 +9,28 @@ import clsx from "clsx";
 
 import styles from "./survey.module.css";
 import { useRouter } from "next/router";
+import { useEffect } from 'react';
 const SelectSurvey = () => {
   const router = useRouter();
   const nextStep = (num: number) => {
     router.push(`survey/${num}`);
+  };
+
+  const transformCard = () => {
+
+  }
+
+  useEffect(() => {
+    transformCard();
+  }, [])
+
+
+  const prevCard = () => {
+
+  };
+
+  const nextCard = () => {
+    
   };
 
   return (
@@ -20,7 +39,7 @@ const SelectSurvey = () => {
       <div className={styles.container}>
         <div className="inner-cont">
           <div className={styles.cardsWrapper}>
-            <Card className={clsx(styles.card, styles.now)} onClick={() => nextStep(1)}>
+            <Card className={styles.card} onClick={() => nextStep(1)}>
               <CardActionArea>
                 <CardMedia component="img" image="/images/survey/survey1.png" alt="survey1" />
                 <CardContent>
@@ -34,7 +53,7 @@ const SelectSurvey = () => {
               </CardActionArea>
             </Card>
 
-            <Card className={styles.card} onClick={() => nextStep(2)}>
+            <Card className={clsx(styles.card, styles.now)} onClick={() => nextStep(2)}>
               <CardActionArea>
                 <CardMedia component="img" image="/images/survey/survey2.png" alt="survey2" />
                 <CardContent>
@@ -63,12 +82,19 @@ const SelectSurvey = () => {
             </Card>
           </div>
         </div>
-        <button type="button" className="prev-btn">
-          Prev
-        </button>
-        <button type="button" className="next-btn">
-          Next
-        </button>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Button onClick={prevCard} size="large" variant="contained">
+          이전
+        </Button>
+        <Button onClick={nextCard} size="large" variant="contained">
+          다음
+        </Button>
       </div>
     </>
   );
