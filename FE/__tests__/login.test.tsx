@@ -1,10 +1,13 @@
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 /*
 login.test.tsx
-@author scarlet, wendy 
+@author scarlet
 @version 1.0.0
 생성일 2022-03-08
-마지막 수정일 2022-03-18
+마지막 수정일 2022-03-16
 */
 import React from "react";
 import Login from "../pages/login";
@@ -16,7 +19,6 @@ import { apiLogin, resType } from "../api/user";
 import { BASE_URL } from "../api/utils";
 
 configure({ adapter: new Adapter() });
-
 describe("로그인 페이지 렌더링 테스트", () => {
   let wrapper: ShallowWrapper;
   beforeEach(() => {
@@ -27,7 +29,7 @@ describe("로그인 페이지 렌더링 테스트", () => {
     expect(wrapper.length).toBe(1);
   });
   it("logo가 성공적으로 렌더링", () => {
-    expect(wrapper.find(".logoImage").length).toEqual(2);
+    expect(wrapper.find(".logo").length).toEqual(1);
   });
 
   it("로그인 form이 렌더링", () => {
@@ -64,12 +66,8 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("loginBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "password"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password");
   });
 
   it("비밀번호가 유효하지 않을때 에러 메시지", async () => {
@@ -88,12 +86,8 @@ describe("react Hook Form", () => {
     fireEvent.submit(screen.getByLabelText("loginBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
 
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12345"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "pass"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12345");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("pass");
   });
   it("아이디와 비밀번호 둘다 유효할 때", async () => {
     expect(await screen.findByLabelText("loginBtn")).toBeDisabled();
@@ -135,4 +129,8 @@ describe("react Hook Form", () => {
     expect(axios.post).toBeCalledTimes(1);
     expect(result).toEqual(res);
   });
+<<<<<<< Updated upstream
 });
+=======
+});
+>>>>>>> Stashed changes
