@@ -1,1 +1,1 @@
-export const BASE_URL = `http://j6d104.p.ssafy.io:8443`;
+export const BASE_URL = `https://j6d104.p.ssafy.io:8443`;
