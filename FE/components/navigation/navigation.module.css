@@ -69,3 +69,35 @@
     display: none;
   }
 }
+
+.profileContainer {
+  position: relative;
+}
+
+.profileMenu {
+  position: absolute;
+  top: 6rem;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  row-gap: 1rem;
+  border: 1px solid #dbdbdb;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 4px 6px 0 rgb(0 0 0 / 18%);
+  width: 12rem;
+}
+
+.profileMenu.active {
+  display: flex;
+}
+
+.profileMenuItem {
+  font-size: 1.6rem;
+  padding: 1rem;
+  color: #555;
+}
+
+.profileMenuItem:hover {
+  background-color: rgba(153, 153, 153, 0.103);
+}

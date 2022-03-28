@@ -22,6 +22,7 @@ import Link from "next/link";
 const Navigation: React.FC = () => {
   const [mobileSearch, setMobileSearch] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [profileMenuOpen, toggleProfileMenu] = useState(false);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
 
@@ -61,6 +62,10 @@ const Navigation: React.FC = () => {
       // 검색 api
     };
 
+  const toggleProfileHandler = function () {
+    toggleProfileMenu((prev) => !prev);
+  };
+
   return (
     <div className={styles.container}>
       <main className={styles.layout}>
@@ -77,12 +82,21 @@ const Navigation: React.FC = () => {
             keywordChangeHandler={keywordChangeHandler}
             keywordDeleteHandler={keywordDeleteHandler}
           />
-          <Link href="/userDetail">
+          <div className={styles.profileContainer}>
             <AccountIcon
-              onClick={keywordDeleteHandler}
+              onClick={toggleProfileHandler}
               className={styles.accountIcon}
             />
-          </Link>
+            {/* profile menu */}
+            <div
+              className={`${styles.profileMenu} ${
+                profileMenuOpen && styles.active
+              }`}
+            >
+              <p className={styles.profileMenuItem}>Logout</p>
+              <p className={styles.profileMenuItem}>MyPage</p>
+            </div>
+          </div>
           <MagnifyingGlass
             onClick={mobileSearchOpenHandler}
             className={styles.mobileSearchToggle}
