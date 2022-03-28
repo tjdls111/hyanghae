@@ -29,8 +29,7 @@ const Review = () => {
           token,
           perfumeId,
           review.current?.value,
-          selected,
-          "I don't need a title."
+          selected
         ).then((res) => {
           console.log(res);
           review.current.value = "";

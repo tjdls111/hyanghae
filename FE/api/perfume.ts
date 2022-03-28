@@ -53,13 +53,12 @@ export const apiPostPerfumeReview = async (
   accessToken: string,
   perfumeId: number,
   reviewContent: string,
-  reviewScore: string,
-  reviewTitle: string
+  reviewScore: string
 ): Promise<PerfumeResult> => {
   try {
     return await axios.post(
-      `${BASE_URL}/review`,
-      { perfumeId, reviewContent, reviewScore, reviewTitle },
+      `${BASE_URL}/perfume/review`,
+      { perfumeId, reviewContent, reviewScore },
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -71,7 +70,7 @@ export const apiPostPerfumeReview = async (
   }
 };
 
-export const apiGetPerfumeReview = async (perfumeId: String) => {
+export const apiGetPerfumeReview = async (perfumeId: string) => {
   try {
     return await axios.get(`${BASE_URL}/perfume/review/list/${perfumeId}`);
   } catch (e) {
@@ -79,4 +78,17 @@ export const apiGetPerfumeReview = async (perfumeId: String) => {
   }
 };
 
-// export const apiDeletePerfumeReview = async ()
+export const apiDeletePerfumeReview = async (
+  perfumeId: string,
+  token: string
+) => {
+  try {
+    return await axios.delete(`${BASE_URL}/perfume/review/${perfumeId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
+  }
+};

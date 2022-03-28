@@ -9,7 +9,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { apiGetPerfumeReview } from "../../api/perfume";
+import { apiDeletePerfumeReview, apiGetPerfumeReview } from "../../api/perfume";
 import styles from "./reviewList.module.css";
 
 interface Review {
@@ -20,6 +20,7 @@ interface Review {
 const ReviewList = () => {
   const [data, setData] = useState([] as Array<Review>);
   const router = useRouter();
+
   useEffect(() => {
     if (router.isReady) {
       apiGetPerfumeReview(router.query.id as string)
@@ -33,6 +34,17 @@ const ReviewList = () => {
     }
   }, [router]);
 
+  const onDelete = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    apiDeletePerfumeReview(router.query.id as string, token)
+      .then((res) => {
+        alert("삭제되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <article className={styles.container}>
       <h1>Review</h1>
@@ -41,6 +53,9 @@ const ReviewList = () => {
           data.map((d) => (
             <li key={d.userNickname}>
               {d.userNickname} : {d.reviewContent}
+              <form onSubmit={onDelete}>
+                <button>Delete</button>
+              </form>
             </li>
           ))}
       </ul>

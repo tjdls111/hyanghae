@@ -58,12 +58,8 @@ const Item = ({ data }: InnerProps) => {
     if (lists) {
       myLoader = () => {
         return `${lists[0].image?.imageUrl}`;
-        // return `https://i.ebayimg.com/thumbs/images/g/k8cAAOSwccRg8j3m/s-l225.jpg`;
       };
     }
-    // if (lists && lists.length > 0) {
-    //   console.log(lists);
-    // }
   }, [lists]);
 
   return (
