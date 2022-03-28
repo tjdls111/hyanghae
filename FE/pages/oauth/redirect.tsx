@@ -17,12 +17,9 @@ const Redirect: NextPage = (props) => {
 
   useEffect(() => {
     localStorage.setItem("token", router.query.token as string);
+    router.replace("/home");
   }, [router.isReady]);
-  return (
-    <div>
-      <h1>소셜 로그인 Redirect URL</h1>
-    </div>
-  );
+  return <></>;
 };
 
 export default Redirect;

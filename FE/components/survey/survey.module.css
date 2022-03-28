@@ -1,0 +1,26 @@
+.container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  margin: auto;
+}
+
+.header {
+  margin-top: 20rem;
+  margin-bottom: 5rem;
+  text-align: center;
+  font-size: 3rem;
+}
+
+.cardsWrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: space-around;
+}
+.card {
+  width: 15rem;
+  height: auto;
+}
