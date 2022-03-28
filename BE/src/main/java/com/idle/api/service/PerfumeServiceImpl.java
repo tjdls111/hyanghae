@@ -80,10 +80,14 @@ public class PerfumeServiceImpl implements PerfumeService{
                     .reviewContent(reviewInsertRequest.getReviewContent())
                     .reviewScore(reviewInsertRequest.getReviewScore())
                     .build();
-            reviewRepository.save(review);
-            float r = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId());
-            checkPerfume.get().setPerfumeScore(r);
-            perfumeRepository.save(checkPerfume.get());
+            reviewRepository.save(review); // 리뷰 저장
+
+            float avg = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId()); // 리뷰 평점 평균값
+            checkPerfume.get().setPerfumeScore(avg);
+            int reviewCnt = reviewRepository.countByPerfume(checkPerfume.get()); //리뷰 개수
+            checkPerfume.get().setReviewCnt(reviewCnt);
+            perfumeRepository.save(checkPerfume.get()); // 향수 정보 업데이트
+
             return "success";
         }
 
@@ -107,10 +111,13 @@ public class PerfumeServiceImpl implements PerfumeService{
         } else {
             checkReview.get().setReviewScore(reviewInsertRequest.getReviewScore());
             checkReview.get().setReviewContent(reviewInsertRequest.getReviewContent());
-            reviewRepository.save(checkReview.get());
-            float r = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId());
-            checkPerfume.get().setPerfumeScore(r);
-            perfumeRepository.save(checkPerfume.get());
+            reviewRepository.save(checkReview.get()); // 리뷰 저장
+
+            float avg = reviewRepository.findAvgWithJPQL(reviewInsertRequest.getPerfumeId()); // 리뷰 평점 평균값
+            checkPerfume.get().setPerfumeScore(avg);
+            int reviewCnt = reviewRepository.countByPerfume(checkPerfume.get()); //리뷰 개수
+            checkPerfume.get().setReviewCnt(reviewCnt);
+            perfumeRepository.save(checkPerfume.get()); // 향수 정보 업데이트
             return "success";
         }
     }
@@ -142,10 +149,17 @@ public class PerfumeServiceImpl implements PerfumeService{
         Optional<LikePerfume> checkLikePerfume  = likePerfumeRepository.findByUserAndPerfume(user, checkPerfume.get());
         if(checkLikePerfume.isPresent()){
             likePerfumeRepository.delete(checkLikePerfume.get());
+            int likeCnt = likePerfumeRepository.countByPerfume(checkPerfume.get()); // 좋아요 개수
+            checkPerfume.get().setLikeCnt(likeCnt);
+            perfumeRepository.save(checkPerfume.get()); // 향수 정보 업데이트
+
             return "clear";
         }
         LikePerfume likePerfume = new LikePerfume(user,checkPerfume.get());
         likePerfumeRepository.save(likePerfume);
+        int likeCnt = likePerfumeRepository.countByPerfume(checkPerfume.get()); // 좋아요 개수
+        checkPerfume.get().setLikeCnt(likeCnt);
+        perfumeRepository.save(checkPerfume.get()); // 향수 정보 업데이트
         return "register";
     }
 

@@ -24,5 +24,6 @@ public interface LikePerfumeRepository extends JpaRepository<LikePerfume, Review
 
     Optional<LikePerfume> findByUserAndPerfume(User user, Perfume perfume);
     Page<LikePerfume> findByUser(User user, Pageable pageable);
+    int countByPerfume(Perfume perfume);
 
 }

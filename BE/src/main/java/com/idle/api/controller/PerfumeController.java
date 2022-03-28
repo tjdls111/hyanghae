@@ -47,7 +47,7 @@ public class PerfumeController {
     /* David  */
     @ApiOperation("향수 목록 조회")
     @GetMapping("/list")
-    public ResponseEntity<PerfumeListResponse> getPerfumeList(Pageable pageable) {
+    public ResponseEntity<? extends BaseResponseBody> getPerfumeList(Pageable pageable) {
         Page<Perfume> perfumes = perfumeService.getPerfumeList(pageable);
         return ResponseEntity.ok(PerfumeListResponse.of(200, "Success", perfumes));
     }
@@ -55,7 +55,7 @@ public class PerfumeController {
     /* Woody */
     @ApiOperation("향수 검색")
     @GetMapping("/search")
-    public ResponseEntity<PerfumeListResponse> perfumeSearchList(@RequestParam(value = "keyword") String keyword,
+    public ResponseEntity<? extends BaseResponseBody> perfumeSearchList(@RequestParam(value = "keyword") String keyword,
                                                                  @RequestParam(value = "content") String content,
                                                                  @PageableDefault(size = 4, sort = "perfumeName", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Perfume> page = perfumeService.getPerfumeSearchPage(keyword, content, pageable);
@@ -92,7 +92,7 @@ public class PerfumeController {
     /* David  */
     @ApiOperation("향수 리뷰 목록 조회")
     @GetMapping("/review/list/{perfumeId}")
-    public ResponseEntity<ReviewListResponse> getReviewList(Pageable pageable,@PathVariable("perfumeId")Long perfumeId) {
+    public ResponseEntity<? extends BaseResponseBody> getReviewList(Pageable pageable,@PathVariable("perfumeId")Long perfumeId) {
         Page<Review> reviews = perfumeService.getReviewList(pageable,perfumeId);
         return ResponseEntity.ok(ReviewListResponse.of(200, "Success", reviews));
     }
@@ -132,7 +132,6 @@ public class PerfumeController {
                                                                   @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
-        System.out.println(user.getUserNickname());
 
         String res = perfumeService.likePerfume(user, perfumeId);
         if (res.equals("fail")) {
@@ -159,7 +158,7 @@ public class PerfumeController {
     /* David */
     @ApiOperation("추천 향수 목록 조회")
     @GetMapping("/recommend/list")
-    public ResponseEntity<RecommendPerfumeListResponse> getRecommendPerfumeList(@ApiIgnore Authentication authentication) {
+    public ResponseEntity<? extends BaseResponseBody> getRecommendPerfumeList(@ApiIgnore Authentication authentication) {
         IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
         User user = userDetails.getUser();
         Map<String,List<Perfume>> map = perfumeService.getRecommendPerfumeList(user);
