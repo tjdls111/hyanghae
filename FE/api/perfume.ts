@@ -70,3 +70,13 @@ export const apiPostPerfumeReview = async (
     throw new Error("server error");
   }
 };
+
+export const apiGetPerfumeReview = async (perfumeId: String) => {
+  try {
+    return await axios.get(`${BASE_URL}/review/list/${perfumeId}`);
+  } catch (e) {
+    throw new Error("server error");
+  }
+};
+
+// export const apiDeletePerfumeReview = async ()
