@@ -55,14 +55,13 @@ const Item = ({ data }: InnerProps) => {
   let myLoader;
 
   useEffect(() => {
-    if (lists && lists.length > 0) {
-      console.log(lists);
-      console.log(lists[0].image?.imageUrl);
-      myLoader = () => {
-        // return `${lists[0].image?.imageUrl}`;
-        return `https://i.ebayimg.com/thumbs/images/g/k8cAAOSwccRg8j3m/s-l225.jpg`;
-      };
-    }
+    myLoader = () => {
+      return `${lists[0].image?.imageUrl}`;
+      // return `https://i.ebayimg.com/thumbs/images/g/k8cAAOSwccRg8j3m/s-l225.jpg`;
+    };
+    // if (lists && lists.length > 0) {
+    //   console.log(lists);
+    // }
   }, [lists]);
 
   return (
@@ -73,11 +72,13 @@ const Item = ({ data }: InnerProps) => {
             <Image
               className={styles.image}
               loader={myLoader}
-              src="imgPath"
+              src="img"
               alt="perfume image"
               layout="fill"
             />
           )}
+
+          <img src={`${lists[0]?.image?.imageUrl}`} />
         </div>
         <p>Seasonal: {data.season}</p>
         <p>Style: {data.style}</p>
