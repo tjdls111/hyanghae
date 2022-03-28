@@ -8,21 +8,35 @@
 */
 
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, {
+  TextareaHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { apiPostPerfumeReview } from "../../api/perfume";
 import styles from "./review.module.css";
 import Link from "next/link";
 
-const Review = () => {
+interface Props {
+  star: string;
+  content: string;
+}
+
+const Review = (Props: Props) => {
   const review = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
-  const [selected, setSelected] = useState("5");
+  const [selected, setSelected] = useState(Props.star || "5");
+
+  useEffect(() => {
+    review.current.value = Props.content;
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const perfumeId = Number(router.query.id as string);
-    console.log(selected);
+
     if (review.current?.value) {
       try {
         await apiPostPerfumeReview(

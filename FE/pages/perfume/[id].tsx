@@ -80,7 +80,7 @@ const Detail: NextPage = () => {
     <>
       <Navigation />
       <Item data={data} />
-      <Review />
+      <Review star="5" content="" />
       <ReviewList />
     </>
   );

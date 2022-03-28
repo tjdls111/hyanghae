@@ -92,3 +92,24 @@ export const apiDeletePerfumeReview = async (
     throw new Error("server error");
   }
 };
+
+export const apiPOSTPerfumeReview = async (
+  token: string,
+  perfumeId: number,
+  reviewContent: string,
+  reviewScore: string
+) => {
+  try {
+    return await axios.put(
+      `${BASE_URL}/perfume/review`,
+      { perfumeId, reviewContent, reviewScore },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  } catch (e) {
+    throw new Error("server error");
+  }
+};

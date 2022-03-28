@@ -13,6 +13,7 @@ import Image from "next/image";
 import EbayBtn from "./ebayBtn";
 import EbayList from "./ebayList";
 import { apiShoppingSearch } from "../../api/perfume";
+import Review from "./review";
 
 interface InnerProps {
   data: {
@@ -87,6 +88,7 @@ const Item = ({ data }: InnerProps) => {
         <h2>(Score: {data.score})</h2>
         <h2>Note: {data.note}</h2>
         {lists && <EbayList lists={lists} />}
+
         <EbayBtn keyword={data.name} />
       </div>
     </main>

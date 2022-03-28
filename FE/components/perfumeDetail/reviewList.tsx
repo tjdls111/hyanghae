@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { apiDeletePerfumeReview, apiGetPerfumeReview } from "../../api/perfume";
 import styles from "./reviewList.module.css";
+import Review from "./review";
 
 interface Review {
   reviewContent: string;
@@ -20,6 +21,7 @@ interface Review {
 const ReviewList = () => {
   const [data, setData] = useState([] as Array<Review>);
   const router = useRouter();
+  const [editMode, setEditMode] = useState(false);
   const userName = "aaaaaaaa"; //실제 유저 닉네임 받아오는 걸로 바꿔주기
 
   useEffect(() => {
@@ -46,6 +48,11 @@ const ReviewList = () => {
         console.log(err);
       });
   };
+
+  const changeEditMode = (e) => {
+    e.preventDefault();
+    setEditMode(!editMode);
+  };
   return (
     <article className={styles.container}>
       <h1>Review</h1>
@@ -55,9 +62,15 @@ const ReviewList = () => {
             <li key={d.userNickname}>
               {d.userNickname} : {d.reviewContent}
               {d.userNickname === userName && (
-                <form onSubmit={onDelete}>
-                  <button>Delete</button>
-                </form>
+                <div>
+                  <form onSubmit={onDelete}>
+                    <button>Delete</button>
+                  </form>
+                  <button onClick={changeEditMode}>Edit</button>
+                </div>
+              )}
+              {editMode && (
+                <Review star={`${d.reviewScore}`} content={d.reviewContent} />
               )}
             </li>
           ))}
