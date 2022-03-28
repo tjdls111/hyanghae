@@ -39,8 +39,6 @@ public class Review extends BaseTimeEntity implements Serializable {
     @JoinColumn(name="p_id")
     private Perfume perfume;
 
-    @Column(name = "r_title", nullable = false)
-    String reviewTitle;
 
     @Column(name = "r_content", nullable = false)
     String reviewContent;
@@ -49,10 +47,9 @@ public class Review extends BaseTimeEntity implements Serializable {
     float reviewScore;
 
     @Builder
-    public Review(User user, Perfume perfume, String reviewTitle, String reviewContent, float reviewScore){
+    public Review(User user, Perfume perfume, String reviewContent, float reviewScore){
         this.user = user;
         this.perfume = perfume;
-        this.reviewTitle = reviewTitle;
         this.reviewContent = reviewContent;
         this.reviewScore = reviewScore;
     }
