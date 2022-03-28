@@ -8,26 +8,20 @@
 
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-import { BASE_URL } from "./utils";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export interface searchResult {
   message: string;
   statusCode: number;
 }
 
-export const apiShoppingSearch = async (
-  keyword: string
-): Promise<searchResult> => {
+export const apiShoppingSearch = async (keyword: string): Promise<searchResult> => {
   try {
-    return await axios.get(
-      `https://openapi.naver.com/v1/search/shop.json?query=${keyword}`,
-      {
-        headers: {
-          // "X-Naver-Client-Id": "",
-          // "X-Naver-Client-Secret": "",
-        },
-      }
-    );
+    return await axios.get(`https://openapi.naver.com/v1/search/shop.json?query=${keyword}`, {
+      headers: {
+        // "X-Naver-Client-Id": "",
+        // "X-Naver-Client-Secret": "",
+      },
+    });
   } catch (e) {
     throw new Error("server Error");
   }
@@ -39,16 +33,10 @@ export interface PerfumeResult {
   data: object;
 }
 
-export const apiPerfumeDetail = async (
-  perfumeId: string
-): Promise<PerfumeResult> => {
-  try{
-return await axios.get(
-  `${BASE_URL}/perfume/${perfumeId}/`)
-  } 
-  catch(e){
-    throw new Error('server error')
+export const apiPerfumeDetail = async (perfumeId: string): Promise<PerfumeResult> => {
+  try {
+    return await axios.get(`${BASE_URL}/perfume/${perfumeId}/`);
+  } catch (e) {
+    throw new Error("server error");
   }
-
-
 };
