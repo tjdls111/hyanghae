@@ -20,6 +20,6 @@
     "strictNullChecks": true,
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
-  "include": ["next-env.d.ts", "./pages/*.tsx"],
+  "include": ["next-env.d.ts", "./pages/*.tsx", "additional.d.ts"],
   "exclude": ["node_modules", "./cypress"]
 }

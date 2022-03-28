@@ -10,21 +10,26 @@
 import React, { useState } from "react";
 import styles from "./navigation.module.css";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
-import AccountIcon from "../../public/SVG/account_circle.svg";
+// import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import ResponsiveNav from "./responsiveNav";
 import LinkedLogo from "./linkedLogo";
 import MobileHamburger from "./mobileHamburger";
 import DesktopSearch from "./desktopSearch";
 import MobileSearch from "./mobileSearch";
-import Link from "next/link";
+import { useAppSelector } from "../../reducers/hooks";
+import { useAppDispatch } from "../../reducers/hooks";
+import { logout } from "../../reducers/authSlice";
 
 const Navigation: React.FC = () => {
   const [mobileSearch, setMobileSearch] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const [profileMenuOpen, toggleProfileMenu] = useState(false);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const dispatch = useAppDispatch();
 
   const mobileNavOpenHandler = function () {
     setMobileNavOpen(true);
@@ -62,8 +67,8 @@ const Navigation: React.FC = () => {
       // 검색 api
     };
 
-  const toggleProfileHandler = function () {
-    toggleProfileMenu((prev) => !prev);
+  const onLogoutHandler = function () {
+    dispatch(logout());
   };
 
   return (
@@ -82,20 +87,20 @@ const Navigation: React.FC = () => {
             keywordChangeHandler={keywordChangeHandler}
             keywordDeleteHandler={keywordDeleteHandler}
           />
-          <div className={styles.profileContainer}>
-            <AccountIcon
+          <div className={styles.profileMenu}>
+            {/* <AccountIcon
               onClick={toggleProfileHandler}
               className={styles.accountIcon}
-            />
-            {/* profile menu */}
-            <div
-              className={`${styles.profileMenu} ${
-                profileMenuOpen && styles.active
-              }`}
-            >
-              <p className={styles.profileMenuItem}>Logout</p>
-              <p className={styles.profileMenuItem}>MyPage</p>
-            </div>
+            /> */}
+            {isAuthenticated && (
+              <>
+                <p onClick={onLogoutHandler} className={styles.profileMenuItem}>
+                  로그아웃
+                </p>
+                <span>|</span>
+                <p className={styles.profileMenuItem}>마이페이지</p>
+              </>
+            )}
           </div>
           <MagnifyingGlass
             onClick={mobileSearchOpenHandler}

@@ -44,7 +44,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex-basis: 20%;
+  flex-basis: 33%;
 }
 
 /* 햄버거 내브바 닫기 버튼 */
@@ -70,34 +70,16 @@
   }
 }
 
-.profileContainer {
-  position: relative;
-}
-
 .profileMenu {
-  position: absolute;
-  top: 6rem;
-  right: 0;
-  display: none;
-  flex-direction: column;
-  row-gap: 1rem;
-  border: 1px solid #dbdbdb;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  box-shadow: 0 4px 6px 0 rgb(0 0 0 / 18%);
-  width: 12rem;
-}
-
-.profileMenu.active {
   display: flex;
+  column-gap: 0.5rem;
 }
 
 .profileMenuItem {
-  font-size: 1.6rem;
-  padding: 1rem;
-  color: #555;
+  font-size: 1.4rem;
 }
 
 .profileMenuItem:hover {
-  background-color: rgba(153, 153, 153, 0.103);
+  color: var(--color-primary);
+  cursor: pointer;
 }
