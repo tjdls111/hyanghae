@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 /*
 signup.test.tsx
 @author scarlet
@@ -11,13 +14,7 @@ import React from "react";
 import SignUp from "../pages/signup";
 import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import {
-  render,
-  fireEvent,
-  screen,
-  waitFor,
-  cleanup,
-} from "@testing-library/react";
+import { render, fireEvent, screen, waitFor, cleanup } from "@testing-library/react";
 import axios from "axios";
 import { resType, apiSignup } from "../api/user";
 import { BASE_URL } from "../api/utils";
@@ -107,23 +104,15 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password");
+
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
       "password"
     );
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      "nickname"
-    );
-
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("email");
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
   });
   it("비밀번호가 유효하지 않을때 에러 메시지", async () => {
     fireEvent.input(screen.getByLabelText("id"), {
@@ -158,24 +147,16 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12312"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "pass"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12312");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("pass");
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
-
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      "nickname"
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
+      "password"
     );
 
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("email");
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
+
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
   });
 
   it("비밀번호와 비밀번호 확인이 유효하지만 다를 때", async () => {
@@ -211,24 +192,16 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12312"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "password1"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12312");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password1");
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
-
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      "nickname"
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
+      "password"
     );
 
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("email");
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
+
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
   });
 
   it("닉네임을 입력안했을 때", async () => {
@@ -264,24 +237,16 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12312"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "password1"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12312");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password1");
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
-
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      ""
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
+      "password"
     );
 
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("email");
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("");
+
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
   });
 
   it("이메일을 입력안했을 때", async () => {
@@ -317,24 +282,16 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12312"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "password1"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12312");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password1");
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
-
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      "nickname"
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
+      "password"
     );
 
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("");
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
+
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("");
   });
 
   it("인증번호를 입력안했을 때", async () => {
@@ -370,24 +327,16 @@ describe("react Hook Form", () => {
 
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     expect(await screen.findAllByRole("alert")).toHaveLength(1);
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12312"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
-      "password1"
-    );
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12312");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password1");
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
-
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      "nickname"
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
+      "password"
     );
 
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("email");
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
+
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
   });
 
   it("모두 유효할 때", async () => {
@@ -425,24 +374,16 @@ describe("react Hook Form", () => {
     expect(await screen.findByLabelText("signupBtn")).toBeEnabled();
     fireEvent.submit(screen.getByLabelText("signupBtn"));
     await waitFor(() => expect(screen.queryAllByRole("alert")).toHaveLength(0));
-    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe(
-      "test12312"
-    );
-    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe(
+    expect((screen.getByLabelText("id") as HTMLInputElement).value).toBe("test12312");
+    expect((screen.getByLabelText("password") as HTMLInputElement).value).toBe("password");
+
+    expect((screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value).toBe(
       "password"
     );
 
-    expect(
-      (screen.getByLabelText("passwordConfirmation") as HTMLInputElement).value
-    ).toBe("password");
+    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe("nickname");
 
-    expect((screen.getByLabelText("nickname") as HTMLInputElement).value).toBe(
-      "nickname"
-    );
-
-    expect(
-      (screen.getByLabelText("emailPartOne") as HTMLInputElement).value
-    ).toBe("email");
+    expect((screen.getByLabelText("emailPartOne") as HTMLInputElement).value).toBe("email");
 
     // const res = {
     //   message: "ok",
@@ -453,12 +394,7 @@ describe("react Hook Form", () => {
       message: "ok",
       statusCode: 0,
     });
-    const result = await apiSignup(
-      "start12@naver.com",
-      "sdfsdfds",
-      "sdfsdsd",
-      "Sdfdsfsd"
-    );
+    const result = await apiSignup("start12@naver.com", "sdfsdfds", "sdfsdsd", "Sdfdsfsd");
     expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/user/signup`, {
       userEmail: "start12@naver.com",
       userId: "sdfsdfds",
@@ -477,4 +413,7 @@ describe("react Hook Form", () => {
   });
   afterEach(cleanup);
 });
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
