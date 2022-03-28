@@ -132,7 +132,6 @@ public class PerfumeController {
                                                                   @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
-        System.out.println(user.getUserNickname());
 
         String res = perfumeService.likePerfume(user, perfumeId);
         if (res.equals("fail")) {

@@ -22,6 +22,7 @@ import java.util.Optional;
 public interface ReviewRepository extends JpaRepository<Review, ReviewId> {
     Optional<Review> findByUserAndPerfume(User user, Perfume perfume);
     Page<Review> findByPerfume(Pageable pageable, Perfume perfume);
+    int countByPerfume(Perfume perfume);
 
     @Query(value ="SELECT AVG(r_score) FROM Review r WHERE r.p_id = ?1",nativeQuery = true)
     float findAvgWithJPQL(Long perfumeId);
