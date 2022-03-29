@@ -9,8 +9,6 @@
 
 .imageWrapper {
   position: relative;
-  opacity: 0.6;
-  transition: opacity 1s ease-in-out;
 }
 
 .imageWrapper.active {
