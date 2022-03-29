@@ -12,11 +12,12 @@ import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginSignup.module.css";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
-import Router from "next/router";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../reducers/hooks";
 import { login } from "../reducers/authSlice";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface LoginInput {
   result: string;
@@ -36,11 +37,17 @@ const Login: NextPage = () => {
   } = useForm<LoginInput>({
     mode: "onChange",
   });
-  // Redux
   const dispatch = useDispatch();
   const isAuthenticated = useAppSelector(
     (state) => state.authReducer.isAuthenticated
   );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/home");
+    }
+  }, []);
 
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
@@ -49,7 +56,7 @@ const Login: NextPage = () => {
       if (res.data?.token) {
         dispatch(login(res.data.token));
       }
-      Router.replace("/home");
+      router.replace("/home");
     } catch (e) {
       const error = e as AxiosError;
       // console.error(error);
