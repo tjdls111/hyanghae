@@ -14,13 +14,15 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { apiPostPerfumeReview } from "../../api/perfume";
+import { apiPostPerfumeReview, apiPutPerfumeReview } from "../../api/perfume";
 import styles from "./review.module.css";
 import Link from "next/link";
 
 interface Props {
   star: string;
   content: string;
+  isEditMode: boolean;
+  setEdit: Function;
 }
 
 const Review = (Props: Props) => {
@@ -39,17 +41,36 @@ const Review = (Props: Props) => {
 
     if (review.current?.value) {
       try {
-        await apiPostPerfumeReview(
-          token,
-          perfumeId,
-          review.current?.value,
-          selected
-        ).then((res) => {
-          console.log(res);
-          review.current.value = "";
-        });
+        if (Props.isEditMode === true) {
+          // 수정
+          await apiPutPerfumeReview(
+            token,
+            perfumeId,
+            review.current?.value,
+            selected
+          )
+            .then((res) => {
+              console.log("수정");
+              Props.setEdit(true);
+              review.current.value = "";
+            })
+            .catch((err) => {
+              Props.setEdit(true);
+            });
+        } else {
+          // 새로 만들기
+          await apiPostPerfumeReview(
+            token,
+            perfumeId,
+            review.current?.value,
+            selected
+          ).then((res) => {
+            console.log(res);
+            review.current.value = "";
+          });
+        }
       } catch (e) {
-        alert("You can leave only one review.");
+        alert("에러 ㅠㅠ");
         review.current.value = "";
         console.error(e);
       }

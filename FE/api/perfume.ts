@@ -93,7 +93,7 @@ export const apiDeletePerfumeReview = async (
   }
 };
 
-export const apiPOSTPerfumeReview = async (
+export const apiPutPerfumeReview = async (
   token: string,
   perfumeId: number,
   reviewContent: string,

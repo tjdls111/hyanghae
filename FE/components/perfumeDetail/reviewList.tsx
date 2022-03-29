@@ -60,17 +60,26 @@ const ReviewList = () => {
         {data &&
           data.map((d) => (
             <li key={d.userNickname}>
-              {d.userNickname} : {d.reviewContent}
-              {d.userNickname === userName && (
+              {!editMode && (
                 <div>
-                  <form onSubmit={onDelete}>
-                    <button>Delete</button>
-                  </form>
-                  <button onClick={changeEditMode}>Edit</button>
+                  {d.userNickname} : {`${d.reviewContent}`}
+                  {d.userNickname === userName && (
+                    <div>
+                      <form onSubmit={onDelete}>
+                        <button>Delete</button>
+                      </form>
+                      <button onClick={changeEditMode}>Edit</button>
+                    </div>
+                  )}
                 </div>
               )}
               {editMode && (
-                <Review star={`${d.reviewScore}`} content={d.reviewContent} />
+                <Review
+                  isEditMode={false}
+                  setEdit={setEditMode}
+                  star={`${d.reviewScore}`}
+                  content={d.reviewContent}
+                />
               )}
             </li>
           ))}
