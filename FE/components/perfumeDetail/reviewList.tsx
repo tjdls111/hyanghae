@@ -39,8 +39,7 @@ const ReviewList = () => {
           .catch((err) => {
             console.log(err);
           });
-      
-        })
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -84,12 +83,22 @@ const ReviewList = () => {
                 </div>
               )}
               {editMode && (
-                <Review
-                  isEditMode="true"
-                  setEdit={setEditMode}
-                  star={`${d.reviewScore}`}
-                  content={d.reviewContent}
-                />
+                <div>
+                  {d.userNickname === userName && (
+                    <Review
+                      isEditMode="true"
+                      setEdit={setEditMode}
+                      star={`${d.reviewScore}`}
+                      content={d.reviewContent}
+                    />
+                  )}
+                  {d.userNickname !== userName && (
+                    <div>
+                      {d.userNickname} : ${d.reviewScore}:{" "}
+                      {`${d.reviewContent}`}
+                    </div>
+                  )}
+                </div>
               )}
             </li>
           ))}
