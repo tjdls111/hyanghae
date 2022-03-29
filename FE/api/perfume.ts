@@ -8,17 +8,14 @@
 
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-import { BASE_URL } from "./utils";
-
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 export interface searchResult {
   data(data: any);
   message: string;
   statusCode: number;
 }
 
-export const apiShoppingSearch = async (
-  keyword: string
-): Promise<searchResult> => {
+export const apiShoppingSearch = async (keyword: string): Promise<searchResult> => {
   try {
     return await axios.get(
       `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}&limit=5`,
@@ -39,9 +36,7 @@ export interface PerfumeResult {
   data: object;
 }
 
-export const apiPerfumeDetail = async (
-  perfumeId: string
-): Promise<PerfumeResult> => {
+export const apiPerfumeDetail = async (perfumeId: string): Promise<PerfumeResult> => {
   try {
     return await axios.get(`${BASE_URL}/perfume/${perfumeId}/`);
   } catch (e) {

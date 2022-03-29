@@ -7,7 +7,6 @@
 */
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-import { BASE_URL } from "./utils";
 import { useRouter } from "next/router";
 
 // @author scarlet
@@ -30,6 +29,7 @@ export interface resType {
 export interface resLookUpType {
   data?: userLookUpType;
 }
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const apiSignup = async (
   userEmail: string,
