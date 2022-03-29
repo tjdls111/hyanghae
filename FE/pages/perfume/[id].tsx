@@ -80,7 +80,7 @@ const Detail: NextPage = () => {
     <>
       <Navigation />
       <Item data={data} />
-      <Review isEditMode={false} setEdit={()=>{}} star="5" content="" />
+      <Review isEditMode='false' setEdit={()=>{}} star="5" content="" />
       <ReviewList />
     </>
   );

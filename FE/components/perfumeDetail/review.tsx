@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-23
+마지막 수정일 2022-03-29
 */
 
 import { useRouter } from "next/router";
@@ -16,12 +16,10 @@ import React, {
 } from "react";
 import { apiPostPerfumeReview, apiPutPerfumeReview } from "../../api/perfume";
 import styles from "./review.module.css";
-import Link from "next/link";
-
 interface Props {
   star: string;
   content: string;
-  isEditMode: boolean;
+  isEditMode: string;
   setEdit: Function;
 }
 
@@ -39,40 +37,43 @@ const Review = (Props: Props) => {
     const token = localStorage.getItem("token");
     const perfumeId = Number(router.query.id as string);
 
+    console.log(Props.isEditMode)
     if (review.current?.value) {
-      try {
-        if (Props.isEditMode === true) {
-          // 수정
-          await apiPutPerfumeReview(
-            token,
-            perfumeId,
-            review.current?.value,
-            selected
-          )
-            .then((res) => {
-              console.log("수정");
-              Props.setEdit(true);
-              review.current.value = "";
-            })
-            .catch((err) => {
-              Props.setEdit(true);
-            });
-        } else {
-          // 새로 만들기
-          await apiPostPerfumeReview(
-            token,
-            perfumeId,
-            review.current?.value,
-            selected
-          ).then((res) => {
-            console.log(res);
+      if (Props.isEditMode === 'true') {
+        // 수정
+        await apiPutPerfumeReview(
+          token,
+          perfumeId,
+          review.current?.value,
+          selected
+        )
+          .then((res) => {
+            console.log("수정");
+            Props.setEdit(true);
             review.current.value = "";
+          })
+          .catch((err) => {
+            alert("수정하려다가 에러..");
+            review.current.value = "";
+            console.log("수정");
+            Props.setEdit(true);
           });
-        }
-      } catch (e) {
-        alert("에러 ㅠㅠ");
-        review.current.value = "";
-        console.error(e);
+      } else {
+        // 새로 만들기
+        await apiPostPerfumeReview(
+          token,
+          perfumeId,
+          review.current?.value,
+          selected
+        )
+          .then((res) => {
+            review.current.value = "";
+          })
+          .catch((err) => {
+            alert("Sorry.. You can write only one review.");
+            review.current.value = "";
+            console.log(err);
+          });
       }
     } else {
       alert("You have to write at least one text.");

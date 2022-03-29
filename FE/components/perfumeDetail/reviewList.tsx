@@ -62,7 +62,7 @@ const ReviewList = () => {
             <li key={d.userNickname}>
               {!editMode && (
                 <div>
-                  {d.userNickname} : {`${d.reviewContent}`}
+                  {d.userNickname} : ${d.reviewScore}: {`${d.reviewContent}`}
                   {d.userNickname === userName && (
                     <div>
                       <form onSubmit={onDelete}>
@@ -75,7 +75,7 @@ const ReviewList = () => {
               )}
               {editMode && (
                 <Review
-                  isEditMode={false}
+                  isEditMode="true"
                   setEdit={setEditMode}
                   star={`${d.reviewScore}`}
                   content={d.reviewContent}
