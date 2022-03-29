@@ -12,7 +12,7 @@ import Navigation from "../../components/navigation/navigation";
 import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
-import ReviewList from "../../components/perfumedetail/reviewlist";
+import ReviewList from "../../components/perfumeDetail/reviewList";
 
 interface PerfumeResult {
   dayNight: string;

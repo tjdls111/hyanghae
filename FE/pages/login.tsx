@@ -34,7 +34,7 @@ const Login: NextPage = () => {
     mode: "onChange",
   });
   const url = process.env.NEXT_PUBLIC_BASE_URL;
-  console.log(url);
+
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
     try {

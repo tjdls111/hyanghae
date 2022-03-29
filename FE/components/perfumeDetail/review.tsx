@@ -9,7 +9,6 @@
 
 import { useRouter } from "next/router";
 import React, {
-  TextareaHTMLAttributes,
   useEffect,
   useRef,
   useState,

@@ -24,6 +24,28 @@ const ReviewList = () => {
   const [editMode, setEditMode] = useState(false);
   const userName = "aaaaaaaa"; //실제 유저 닉네임 받아오는 걸로 바꿔주기
 
+  const onDelete = (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    apiDeletePerfumeReview(router.query.id as string, token)
+      .then((res) => {
+        alert("삭제되었습니다.");
+
+        apiGetPerfumeReview(router.query.id as string)
+          .then((res) => {
+            console.log(res);
+            setData(res.data.reviewList);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      
+        })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     if (router.isReady) {
       apiGetPerfumeReview(router.query.id as string)
@@ -35,19 +57,7 @@ const ReviewList = () => {
           console.log(err);
         });
     }
-  }, [router]);
-
-  const onDelete = (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    apiDeletePerfumeReview(router.query.id as string, token)
-      .then((res) => {
-        alert("삭제되었습니다.");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  }, [router, editMode]);
 
   const changeEditMode = (e) => {
     e.preventDefault();
