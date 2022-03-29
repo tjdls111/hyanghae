@@ -64,20 +64,31 @@ const ReviewList = () => {
   };
   return (
     <article className={styles.container}>
-      <h1>Review</h1>
-      <ul>
+      <h1 className={styles.title}>Reviews</h1>
+      {data.length == 0 && (
+        <h2 className={styles.content}>There are no review.. </h2>
+      )}
+      <ul className={styles.myList}>
         {data &&
           data.map((d) => (
             <li key={d.userNickname}>
               {!editMode && (
-                <div>
-                  {d.userNickname} : ${d.reviewScore}: {`${d.reviewContent}`}
+                <div className={styles.oneReview}>
+                  <p className={styles.content}>
+                    {d.userNickname} : {`${d.reviewContent}`} (
+                    {`${d.reviewScore}`})
+                  </p>
                   {d.userNickname === userName && (
-                    <div>
+                    <div className={styles.oneReview}>
+                      <button
+                        className={styles.editBtn}
+                        onClick={changeEditMode}
+                      >
+                        Edit
+                      </button>
                       <form onSubmit={onDelete}>
-                        <button>Delete</button>
+                        <button className={styles.delBtn}>Delete</button>
                       </form>
-                      <button onClick={changeEditMode}>Edit</button>
                     </div>
                   )}
                 </div>

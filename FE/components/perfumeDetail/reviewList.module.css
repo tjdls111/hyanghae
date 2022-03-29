@@ -4,10 +4,46 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-17
+마지막 수정일 2022-03-29
 */
 
 .container {
   max-width: 1200px;
-  margin: 3em auto;
+  margin: 5rem;
+}
+
+.myList {
+  list-style: none;
+  margin: 2rem 1rem;
+}
+
+.delBtn {
+  border-radius: 5px;
+  border: 0;
+  padding: 1rem;
+  background-color: red;
+  color: var(--color-grey-light-3);
+  cursor: pointer;
+}
+
+.editBtn {
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 1rem;
+  background-color: yellow;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.content {
+  font-size: 3rem;
+}
+
+.oneReview {
+  display: flex;
+  margin-right: 1rem;
 }
