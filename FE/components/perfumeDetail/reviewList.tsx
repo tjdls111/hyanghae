@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-28
+마지막 수정일 2022-03-29
 */
 
 import React, { useEffect, useState } from "react";
@@ -13,13 +13,13 @@ import { apiDeletePerfumeReview, apiGetPerfumeReview } from "../../api/perfume";
 import styles from "./reviewList.module.css";
 import Review from "./review";
 
-interface Review {
+interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
   userNickname: string;
 }
 const ReviewList = () => {
-  const [data, setData] = useState([] as Array<Review>);
+  const [data, setData] = useState([] as Array<ReviewInterface>);
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
   const userName = "aaaaaaaa"; //실제 유저 닉네임 받아오는 걸로 바꿔주기
