@@ -1,0 +1,102 @@
+.navCloseButton {
+  border: none;
+  font-size: 3rem;
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  background: none;
+  color: #333;
+  display: none;
+}
+.mobileAuthGuide {
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 3rem;
+  margin-top: 5rem;
+  display: none;
+}
+
+.mobileLoginButton {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 1rem;
+  padding: 1.2rem 1.5rem;
+  color: #fff;
+  font-size: 2rem;
+}
+
+.mobileSignupButton {
+  background-color: #fff;
+  border: 1px solid var(--color-primary);
+  border-radius: 1rem;
+  padding: 1.2rem 1.5rem;
+  color: var(--color-primary);
+  font-size: 2rem;
+}
+
+.navigation {
+  display: flex;
+  column-gap: 4rem;
+}
+
+.navItem {
+  list-style: none;
+}
+
+.navLink:link,
+.navLink:visited {
+  text-decoration: none;
+  color: #555;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.navLink:hover,
+.navLink:active {
+  color: var(--color-primary);
+}
+
+.navLinkActive:link,
+.navLinkActive:visited {
+  color: var(--color-primary);
+}
+
+@media (max-width: 800px) {
+  .navContainer {
+    position: fixed;
+    inset: 0;
+    background-color: #fff;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5rem;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: all 0.3s ease-out;
+  }
+  .mobileNavActive {
+    transform: translate(0%);
+  }
+  .navCloseButton {
+    display: block;
+  }
+  .mobileAuthGuide {
+    display: flex;
+  }
+  .navigation {
+    flex-direction: column;
+    row-gap: 5rem;
+  }
+  .navItem {
+    text-align: center;
+  }
+  .navLink:link,
+  .navLink:visited,
+  .navLink:hover,
+  .navLink:active {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,45 @@
+/*
+마이페이지 왼쪽 슬라이드 컴포넌트 css
+@author scarlet
+@version 1.0.0
+생성일 2022-03-12
+마지막 수정일 2022-03-14
+*/
+
+.container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  margin-top: 8rem;
+}
+
+.listwrapper {
+  padding: 2em;
+  width: 100%;
+}
+
+.mylist {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mylist > * {
+  float: left;
+  cursor: pointer;
+  margin-right: 2rem;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.mylist :hover {
+  color: var(--color-primary-light-3);
+}
+
+.demain {
+  position: absolute;
+  top: 30%;
+}
