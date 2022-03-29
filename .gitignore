@@ -39,4 +39,5 @@ yarn-error.log*
 
 # ML
 ML/datas/
+ML/kfashion_ai_model/
 .idea/
