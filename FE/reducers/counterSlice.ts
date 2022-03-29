@@ -1,4 +1,3 @@
-import { RootState } from "./store";
 import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -17,16 +16,6 @@ export const counterSlice = createSlice({
     },
     decrement(state) {
       state.value--;
-    },
-  },
-  // 이해가 필요한 부분
-  extraReducers: {
-    [HYDRATE]: (state, action) => {
-      console.log("HYDRATE", action.payload);
-      return {
-        ...state,
-        ...action.payload,
-      };
     },
   },
 });

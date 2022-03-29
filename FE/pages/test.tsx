@@ -1,29 +1,29 @@
-import { NextPage } from "next";
 import React from "react";
-import { useAppSelector, useAppDispatch } from "../reducers/hooks";
+import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "../reducers/authSlice";
 
-const TestPage: NextPage = () => {
-  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const dispatch = useAppDispatch();
+const test = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
-  const onLoginHandler = function () {
+  const loginHandler = function () {
     dispatch(login());
   };
-
-  const onLogoutHandler = function () {
+  const logoutHandler = function () {
     dispatch(logout());
   };
 
   return (
     <div>
-      <h1>Testing Reducer</h1>
-      <h2>{isAuthenticated && "로그인 되었습니다."}</h2>
-      <h2>{isAuthenticated || "로그아웃 되었습니다."}</h2>
-      <button onClick={onLoginHandler}>login</button>
-      <button onClick={onLogoutHandler}>logout</button>
+      <h1>Redux-test</h1>
+      <h2>{isAuthenticated && "loggedIn"}</h2>
+      <h2>{isAuthenticated || "loggedOut"}</h2>
+      <button onClick={loginHandler}>login</button>
+      <button onClick={logoutHandler}>logout</button>
     </div>
   );
 };
 
-export default TestPage;
+export default test;

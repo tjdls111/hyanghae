@@ -11,11 +11,15 @@ localStorage에 토큰을 저장하고, 홈으로 이동한다.
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import { NextPage } from "next";
+import { useDispatch } from "react-redux";
+import { login } from "../../reducers/authSlice";
 
 const Redirect: NextPage = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
 
   useEffect(() => {
+    dispatch(login(router.query.token));
     localStorage.setItem("token", router.query.token as string);
     router.replace("/home");
   }, [router.isReady]);

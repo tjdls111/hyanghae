@@ -18,18 +18,19 @@ import MobileHamburger from "./mobileHamburger";
 import DesktopSearch from "./desktopSearch";
 import MobileSearch from "./mobileSearch";
 import { useAppSelector } from "../../reducers/hooks";
-import { useAppDispatch } from "../../reducers/hooks";
 import { logout } from "../../reducers/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Navigation: React.FC = () => {
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const dispatch = useDispatch();
+
   const [mobileSearch, setMobileSearch] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [keyword, setKeyword] = useState("");
   const router = useRouter();
-  const isAuthenticated = useAppSelector(
-    (state) => state.authReducer.isAuthenticated
-  );
-  const dispatch = useAppDispatch();
 
   const mobileNavOpenHandler = function () {
     setMobileNavOpen(true);
@@ -73,6 +74,7 @@ const Navigation: React.FC = () => {
 
   return (
     <div className={styles.container}>
+      <h1>{isAuthenticated && "isloggedIn"}</h1>
       <main className={styles.layout}>
         <MobileHamburger mobileNavOpenHandler={mobileNavOpenHandler} />
         <ResponsiveNav

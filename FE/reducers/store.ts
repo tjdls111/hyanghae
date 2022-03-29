@@ -1,30 +1,35 @@
 import counterReducer from "./counterSlice";
-import { configureStore } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
 import authReducer from "./authSlice";
-import { combineReducers } from "redux";
+import { createWrapper } from "next-redux-wrapper";
+import { combineReducers, createStore } from "redux";
 import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
+import persistReducer from "redux-persist/lib/persistReducer";
+import persistStore from "redux-persist/lib/persistStore";
+import { configureStore } from "@reduxjs/toolkit";
 
-// reducer 합치기
 const rootReducer = combineReducers({ counterReducer, authReducer });
 
-// redux-persist 설정
 const persistConfig = {
-  key: "root", // reducer 객체의 어디부터 스토리지에 저장할지 설정
-  storage, // localStorage로 설정
+  key: "root",
+  storage,
 };
 
-persistReducer(persistConfig, rootReducer);
+const makeStore = () => {
+  const isServer = typeof window === "undefined";
 
-const store = configureStore({
-  reducer: rootReducer,
-  devTools: true,
-});
-
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-
-const makeStore = () => store;
+  if (isServer) {
+    const store = createStore(rootReducer);
+    return store;
+  } else {
+    const persistedReducer = persistReducer(persistConfig, rootReducer);
+    const store = createStore(persistedReducer);
+    // store.__persistor = persistStore(store);
+    persistStore(store);
+    return store;
+  }
+};
 
 export const wrapper = createWrapper(makeStore);
+
+// RootState의 타입
+export type RootState = ReturnType<typeof rootReducer>;
