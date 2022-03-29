@@ -69,7 +69,6 @@ const Navigation: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1>{isAuthenticated && "isloggedIn"}</h1>
       <main className={styles.layout}>
         <MobileHamburger mobileNavOpenHandler={mobileNavOpenHandler} />
         <ResponsiveNav
