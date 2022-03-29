@@ -13,7 +13,7 @@ import Image from "next/image";
 import EbayBtn from "./ebayBtn";
 import EbayList from "./ebayList";
 import { apiShoppingSearch } from "../../api/perfume";
-import Review from "./review";
+import ReviewForm from "./review";
 
 interface InnerProps {
   data: {
