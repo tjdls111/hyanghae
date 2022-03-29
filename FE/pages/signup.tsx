@@ -80,8 +80,7 @@ const Signup: NextPage = () => {
               nickname,
               password
             );
-
-            Router.push("/login");
+            router.push("/login");
           } catch (e) {
             const error = e as AxiosError;
             if (error?.response?.status === 401) {

@@ -19,6 +19,7 @@ import DesktopSearch from "./desktopSearch";
 import MobileSearch from "./mobileSearch";
 import { useAppSelector } from "../../reducers/hooks";
 import { logout } from "../../reducers/authSlice";
+import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 const Navigation: React.FC = () => {
@@ -56,15 +57,9 @@ const Navigation: React.FC = () => {
       setKeyword(e.target.value);
     };
 
-  const requestLoginHandler: React.MouseEventHandler<HTMLButtonElement> =
-    function () {
-      router.push("/login");
-    };
-
   const searchSubmitHandler: React.FormEventHandler<HTMLFormElement> =
     function (e) {
       e.preventDefault();
-
       // 검색 api
     };
 
@@ -101,6 +96,17 @@ const Navigation: React.FC = () => {
                 </p>
                 <span>|</span>
                 <p className={styles.profileMenuItem}>마이페이지</p>
+              </>
+            )}
+            {isAuthenticated || (
+              <>
+                <Link href="/login">
+                  <p className={styles.profileMenuItem}>로그인</p>
+                </Link>
+                <span>|</span>
+                <Link href="/signup">
+                  <p className={styles.profileMenuItem}>회원가입</p>
+                </Link>
               </>
             )}
           </div>
