@@ -1,0 +1,62 @@
+/*
+리셋 CSS
+컬러 셋팅, 박스사이징, 기본 폰트 적용
+@author Jackson
+@version 1.0.0
+생성일 2022-03-07
+마지막 수정일 2022-03-14
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap");
+
+:root {
+  --color-primary: #eb2f64;
+  --color-primary-dark-transparent: #rgba(235, 47, 100, 0.794);
+  --color-primay-light-transparent: hsla(343, 77%, 59%, 0.787);
+  --color-primary-light-1: #ef5983;
+  --color-primary-light-2: #f382a2;
+  --color-primary-light-3: #f7acc1;
+  --color-primary-dark: #ba265d;
+  --color-primary-shade: #ffebf0;
+  --color-grey-light-1: #faf9f9;
+  --color-grey-light-2: #f4f2f2;
+  --color-grey-light-3: #f0eeee;
+  --color-grey-light-4: #ccc;
+  --color-grey-dark-1: #333;
+  --color-grey-dark-2: #555;
+  --color-grey-dark-3: #777;
+  --color-grey-dark-4: #999;
+}
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  /* 1rem = 16px font-size: 100% */
+  /* 1rem = 10px */
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--color-grey-dark-3);
+}
+
+body > button {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+@media (max-width: 1200px) {
+  html {
+    /* 1rem = 8px */
+    font-size: 50%;
+  }
+}

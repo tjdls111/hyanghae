@@ -1,0 +1,13 @@
+/*
+향수 상세 페이지의 ebay 검색 결과로 가는 버튼에 관한 css
+@author Wendy
+@version 1.0.0
+생성일 2022-03-24
+마지막 수정일 2022-03-24
+*/
+
+.btn {
+  border-radius: 5px;
+  background-color: var(--color-primary-shade);
+  cursor: pointer;
+}
