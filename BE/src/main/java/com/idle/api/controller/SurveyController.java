@@ -14,6 +14,7 @@ package com.idle.api.controller;
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
 import com.idle.api.response.BaseResponseBody;
+import com.idle.api.response.SurveyListResponse;
 import com.idle.api.response.SurveyResultResponse;
 import com.idle.api.service.SurveyService;
 import com.idle.common.jwt.dto.IdleUserDetails;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @Api(value = "설문조사 API", tags = {"Survey"})
@@ -39,6 +41,15 @@ public class SurveyController {
 
     @Autowired
     SurveyService surveyService;
+
+    @ApiOperation("설문조사 목록 조회")
+    @GetMapping("/list")
+    public ResponseEntity<? extends BaseResponseBody> getSurveyList(@ApiIgnore Authentication authentication) {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+        Map<String,List<?>> surveyList = surveyService.getSurveyList(user);
+        return ResponseEntity.ok(SurveyListResponse.of(200,"success",surveyList));
+    }
 
     @ApiOperation("설문조사1 저장")
     @PostMapping("/1")

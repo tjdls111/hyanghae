@@ -18,8 +18,12 @@ import com.idle.db.entity.Survey2;
 import com.idle.db.entity.User;
 
 import java.util.List;
+import java.util.Map;
+
 
 public interface SurveyService {
+    Map<String,List<?>> getSurveyList(User user);
+
     Survey1 getSurvey1ByUserAndSurveyId(User user,Long surveyId);
     List<Perfume> insertSurvey1(User user, Survey1InsertRequest survey1InsertRequest);
     List<Perfume> recommendPerfumeBySurvey1(Survey1 survey1);

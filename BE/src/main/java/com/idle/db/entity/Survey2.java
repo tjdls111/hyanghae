@@ -10,6 +10,8 @@
 package com.idle.db.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,12 +32,12 @@ public class Survey2 extends BaseTimeEntity{
     Long surveyId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "u_seq", nullable = false)
     User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JsonManagedReference
+    @JsonIgnore
     @JoinColumn(name = "p_id", nullable = false)
     Perfume perfume;
 

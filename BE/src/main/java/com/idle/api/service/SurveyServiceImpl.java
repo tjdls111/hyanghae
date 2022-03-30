@@ -13,15 +13,11 @@ package com.idle.api.service;
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
 import com.idle.db.entity.*;
-import com.idle.db.repository.PerfumeRepository;
-import com.idle.db.repository.Survey1Repository;
-import com.idle.db.repository.Survey2Repository;
-import com.idle.db.repository.Survey3Repository;
+import com.idle.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service("surveyService")
 public class SurveyServiceImpl implements SurveyService{
@@ -34,6 +30,27 @@ public class SurveyServiceImpl implements SurveyService{
     Survey3Repository survey3Repository;
     @Autowired
     PerfumeRepository perfumeRepository;
+    @Autowired
+    UserRepository userRepository;
+
+
+    @Override
+    public Map<String, List<?>> getSurveyList(User user) {
+        User targetUser = userRepository.findByUserId(user.getUserId()).get();
+        //유저의 설문조사 1,2,3 리스트
+        List<Survey1> survey1List = new ArrayList<Survey1>(targetUser.getSurvey1List());
+        List<Survey2> survey2List = new ArrayList<Survey2>(targetUser.getSurvey2List());
+        List<Survey3> survey3List = new ArrayList<Survey3>(targetUser.getSurvey3List());
+
+        //추천결과 리스트 리턴
+        Map<String,List<?>> map = new HashMap<>();
+        map.put("survey1List", Collections.singletonList(survey1List));
+        map.put("survey2List", Collections.singletonList(survey2List));
+        map.put("survey3List", Collections.singletonList(survey3List));
+
+        return map;
+
+    }
 
     /* David : 설문조사1 조회 */
     @Override
