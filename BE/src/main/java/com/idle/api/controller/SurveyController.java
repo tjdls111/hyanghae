@@ -82,7 +82,7 @@ public class SurveyController {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
-        //설문조사1 저장 and 추천 (Service 안에서 설문조사 저장하고 recommendPerfumeBySurvey1 호출)
+        //설문조사1 저장 and 추천 (Service 안에서 설문조사 저장하고 recommendPerfumeBySurvey2 호출)
         List<Perfume> recommendList = surveyService.insertSurvey2(user,survey2InsertRequest);
 
         return ResponseEntity.ok(SurveyResultResponse.of(200,"설문조사2 등록 성공",recommendList));

@@ -19,4 +19,6 @@ import java.util.Optional;
 public interface Survey1Repository extends JpaRepository<Survey1, Long> {
 
     Optional<Survey1> getSurvey1ByUserAndSurveyId(User user, Long surveyId);
+    Long countByUser(User user);
+    Survey1 findTop1ByUserOrderByCreateDateAsc(User user);
 }

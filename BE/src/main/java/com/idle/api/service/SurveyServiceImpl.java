@@ -62,6 +62,11 @@ public class SurveyServiceImpl implements SurveyService{
     /* David : 설문조사1 저장 */
     @Override
     public List<Perfume> insertSurvey1(User user, Survey1InsertRequest req) {
+        Long count = survey1Repository.countByUser(user);
+        if( count >= 3 ){
+            Survey1 orderSurvey1 = survey1Repository.findTop1ByUserOrderByCreateDateAsc(user);
+            survey1Repository.delete(orderSurvey1);
+        }
 
         Survey1 survey1 = Survey1.builder()
                 .user(user)
@@ -99,6 +104,12 @@ public class SurveyServiceImpl implements SurveyService{
     public List<Perfume> insertSurvey2(User user, Survey2InsertRequest survey2InsertRequest) {
         Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(survey2InsertRequest.getPerfumeId());
 
+        Long count = survey2Repository.countByUser(user);
+        if( count >= 3 ){
+            Survey2 orderSurvey2 = survey2Repository.findTop1ByUserOrderByCreateDateAsc(user);
+            survey2Repository.delete(orderSurvey2);
+        }
+
         Survey2 survey2 = Survey2.builder()
                 .user(user)
                 .surveyTitle(survey2InsertRequest.getSurveyTitle())
@@ -115,6 +126,7 @@ public class SurveyServiceImpl implements SurveyService{
     /* David : 설문조사2 기반 향수 추천 */
     @Override
     public List<Perfume> recommendPerfumeBySurvey2(Survey2 survey2) {
+
         return null;
     }
 
