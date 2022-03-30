@@ -8,7 +8,6 @@
     "build:production": "env-cmd -f ./env/production.env next build",
     "start:dev": "env-cmd -f ./env/development.env next start",
     "start:production": "env-cmd -f ./env/production.env next start -p 3001 -H 0.0.0.0",
-    "cypress": "cypress open",
     "test": "jest --watch",
     "coverage": "jest --coverage"
   },
@@ -43,7 +42,6 @@
     "@types/jest": "^27.4.1",
     "@types/node": "17.0.21",
     "@types/react": "17.0.39",
-    "cypress": "^9.5.1",
     "eslint": "8.10.0",
     "eslint-config-next": "12.1.0",
     "identity-obj-proxy": "^3.0.0",
