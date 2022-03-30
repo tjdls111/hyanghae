@@ -15,7 +15,7 @@
   align-items: center;
   margin: 0 auto;
   padding: 0 2rem;
-  height: 8rem;
+  height: 10rem;
 }
 
 .loginButton:hover {
@@ -44,7 +44,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex-basis: 20%;
+  flex-basis: 33%;
 }
 
 /* 햄버거 내브바 닫기 버튼 */
@@ -68,4 +68,18 @@
   .authGuide {
     display: none;
   }
+}
+
+.profileMenu {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+.profileMenuItem {
+  font-size: 1.4rem;
+}
+
+.profileMenuItem:hover {
+  color: var(--color-primary);
+  cursor: pointer;
 }

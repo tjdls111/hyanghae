@@ -67,7 +67,10 @@ export const socialLogin = () => {
 export const apiFindUserId = async (email: string) =>
   await axios.get(`${BASE_URL}/user/finduserid/${email}`);
 
-export const apiFindpw = async (userEmail: string, userId: string): Promise<resType> => {
+export const apiFindpw = async (
+  userEmail: string,
+  userId: string
+): Promise<resType> => {
   try {
     return await axios.put(`${BASE_URL}/user/finduserpw`, {
       userEmail,
@@ -78,7 +81,10 @@ export const apiFindpw = async (userEmail: string, userId: string): Promise<resT
   }
 };
 
-export const apiLogin = async (userId: string, userPw: string): Promise<resType> => {
+export const apiLogin = async (
+  userId: string,
+  userPw: string
+): Promise<resType> => {
   try {
     return await axios.post(`${BASE_URL}/user/login`, {
       userId,
@@ -90,7 +96,10 @@ export const apiLogin = async (userId: string, userPw: string): Promise<resType>
 };
 
 // @author scarlet
-export const apiCheckMod = async (userPw: string, accessToken: string): Promise<resType> => {
+export const apiCheckMod = async (
+  userPw: string,
+  accessToken: string
+): Promise<resType> => {
   try {
     return await axios.post(
       `${BASE_URL}/user/checkpw`,
@@ -109,7 +118,9 @@ export const apiCheckMod = async (userPw: string, accessToken: string): Promise<
 };
 
 // @author scarlet
-export const apiUserLookUp = async (accessToken: string): Promise<resLookUpType> => {
+export const apiUserLookUp = async (
+  accessToken: string
+): Promise<resLookUpType> => {
   try {
     return await axios.get(`${BASE_URL}/user/info`, {
       headers: {
