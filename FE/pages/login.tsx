@@ -49,6 +49,8 @@ const Login: NextPage = () => {
     }
   }, []);
 
+  const url = process.env.NEXT_PUBLIC_BASE_URL;
+  console.log(url);
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
     try {
@@ -188,7 +190,7 @@ const Login: NextPage = () => {
             </span>
           </Link>
         </div>
-        <Link href="http://localhost:8181/oauth2/authorization/google">
+        <Link href={`${url}/oauth2/authorization/google`}>
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>
               <Image

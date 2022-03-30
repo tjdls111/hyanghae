@@ -45,6 +45,12 @@ public class Perfume  {
     @Column(name = "p_group", nullable = false)
     String group;
 
+    @Column(name = "reviewCnt", nullable = false)
+    int reviewCnt;
+
+    @Column(name = "likeCnt", nullable = false)
+    int likeCnt;
+
     @Column(name = "note1", nullable = false)
     String note1;
 

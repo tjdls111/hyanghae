@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -9,28 +9,57 @@ import clsx from "clsx";
 
 import styles from "./survey.module.css";
 import { useRouter } from "next/router";
-import { useEffect } from 'react';
+import { useEffect } from "react";
+
 const SelectSurvey = () => {
   const router = useRouter();
+  const [state, setState] = useState(1);
   const nextStep = (num: number) => {
     router.push(`survey/${num}`);
   };
-
+  const innerCardRef = useRef<HTMLDivElement[]>([]);
+  const firstNum = 0;
+  const lastNum = 2;
   const transformCard = () => {
+    const nodeList = innerCardRef.current;
 
-  }
+    nodeList.forEach((item, i) => {
+      const degree = 360 / nodeList.length;
+
+      if (i === 0) {
+        item.style.transform = "rotateY(0deg) translateZ(250px)";
+        item.style.filter = "brightness(100%)";
+      } else {
+        item.style.transform = `rotateY(${degree * i}deg) translateZ(250px) rotateY(-${
+          degree * i
+        }deg)`;
+        item.style.filter = "brightness(60%)";
+      }
+      //  0 1 2  1 2 0 [2 0 1 ]
+    });
+  };
 
   useEffect(() => {
-    transformCard();
-  }, [])
-
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    if (!mediaQuery.matches) {
+      transformCard();
+    }
+  }, [state]);
 
   const prevCard = () => {
-
+    if (state === firstNum) {
+      setState(() => lastNum);
+      return;
+    }
+    setState((prevState) => prevState - 1);
   };
 
   const nextCard = () => {
-    
+    if (state === lastNum) {
+      setState(() => firstNum);
+      return;
+    }
+    setState((prevState) => prevState + 1);
   };
 
   return (
@@ -38,8 +67,21 @@ const SelectSurvey = () => {
       <header className={styles.header}>당신을 위한 3가지 선택지</header>
       <div className={styles.container}>
         <div className="inner-cont">
-          <div className={styles.cardsWrapper}>
-            <Card className={styles.card} onClick={() => nextStep(1)}>
+          <div className={clsx(styles.cardsWrapper, "cardList")}>
+            <Card
+              className={clsx(
+                {
+                  [styles.card]: true,
+                  [styles.now]: state === 0,
+                },
+                "card"
+              )}
+              ref={(elem) =>
+                ((innerCardRef.current as HTMLDivElement[])[state === 0 ? 0 : state === 1 ? 2 : 1] =
+                  elem as HTMLDivElement)
+              }
+              onClick={() => nextStep(firstNum)}
+            >
               <CardActionArea>
                 <CardMedia component="img" image="/images/survey/survey1.png" alt="survey1" />
                 <CardContent>
@@ -53,7 +95,20 @@ const SelectSurvey = () => {
               </CardActionArea>
             </Card>
 
-            <Card className={clsx(styles.card, styles.now)} onClick={() => nextStep(2)}>
+            <Card
+              className={clsx(
+                {
+                  [styles.card]: true,
+                  [styles.now]: state === 1,
+                },
+                "card"
+              )}
+              ref={(elem) =>
+                ((innerCardRef.current as HTMLDivElement[])[state === 0 ? 1 : state === 1 ? 0 : 2] =
+                  elem as HTMLDivElement)
+              }
+              onClick={() => nextStep(firstNum + 1)}
+            >
               <CardActionArea>
                 <CardMedia component="img" image="/images/survey/survey2.png" alt="survey2" />
                 <CardContent>
@@ -67,7 +122,20 @@ const SelectSurvey = () => {
               </CardActionArea>
             </Card>
 
-            <Card className={styles.card} onClick={() => nextStep(3)}>
+            <Card
+              className={clsx(
+                {
+                  [styles.card]: true,
+                  [styles.now]: state === 2,
+                },
+                "card"
+              )}
+              ref={(elem) =>
+                ((innerCardRef.current as HTMLDivElement[])[state === 0 ? 2 : state === 1 ? 1 : 0] =
+                  elem as HTMLDivElement)
+              }
+              onClick={() => nextStep(lastNum)}
+            >
               <CardActionArea>
                 <CardMedia component="img" image="/images/survey/survey3.png" alt="survey3" />
                 <CardContent>
