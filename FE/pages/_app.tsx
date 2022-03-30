@@ -9,9 +9,10 @@ _app.tsx
 
 import "../styles/global.css";
 import type { AppProps } from "next/app";
+import { wrapper } from "../reducers/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

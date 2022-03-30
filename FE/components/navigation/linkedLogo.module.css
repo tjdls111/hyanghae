@@ -2,9 +2,9 @@
   width: 8rem;
   height: 8rem;
   position: absolute;
-  top: 0;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .logoWrapper:hover {

@@ -11,6 +11,7 @@ import React from "react";
 import Header from "../components/landing/header";
 import Tutorial from "../components/landing/tutorial";
 import Footer from "../components/landing/footer";
+import Link from "next/link";
 
 const LandingPage: NextPage = () => {
   return (

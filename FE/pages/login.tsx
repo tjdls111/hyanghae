@@ -12,8 +12,12 @@ import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginSignup.module.css";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
-import Router from "next/router";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../reducers/hooks";
+import { login } from "../reducers/authSlice";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface LoginInput {
   result: string;
@@ -33,15 +37,26 @@ const Login: NextPage = () => {
   } = useForm<LoginInput>({
     mode: "onChange",
   });
+  const dispatch = useDispatch();
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/home");
+    }
+  }, []);
 
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
     try {
       const res = await apiLogin(id, password);
       if (res.data?.token) {
-        localStorage.setItem("token", res.data?.token);
+        dispatch(login(res.data.token));
       }
-      Router.replace("/home");
+      router.replace("/home");
     } catch (e) {
       const error = e as AxiosError;
       // console.error(error);
@@ -54,7 +69,9 @@ const Login: NextPage = () => {
   };
 
   const resultError = errors.result?.message ? (
-    <div className={`${styles.message} ${styles.resultMessage}`}>{errors.result?.message}</div>
+    <div className={`${styles.message} ${styles.resultMessage}`}>
+      {errors.result?.message}
+    </div>
   ) : (
     <div />
   );
@@ -96,7 +113,8 @@ const Login: NextPage = () => {
                 required: "아이디를 입력하세요.",
                 pattern: {
                   value: /^[a-z0-9]+$/,
-                  message: "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
+                  message:
+                    "잘못된 아이디 형식입니다. 영소문자나 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -121,7 +139,8 @@ const Login: NextPage = () => {
                 required: "비밀번호를 입력하세요.",
                 pattern: {
                   value: /^[A-Za-z0-9]+$/,
-                  message: "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
+                  message:
+                    "잘못된 비밀번호 형식입니다. 영어, 숫자만 가능합니다.",
                 },
                 minLength: {
                   value: 8,
@@ -151,16 +170,22 @@ const Login: NextPage = () => {
         </form>
         <span className={styles.guide}>향해 회원이 아니신가요?</span>{" "}
         <Link href="/signup">
-          <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
+          <strong className={`${styles.guide} ${styles.signup}`}>
+            지금 가입하세요
+          </strong>
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
         <div className={styles.find}>
           <Link href="/findid">
-            <span className={`${styles.guide} ${styles.signup}`}>아이디 찾기</span>
+            <span className={`${styles.guide} ${styles.signup}`}>
+              아이디 찾기
+            </span>
           </Link>{" "}
           |{" "}
           <Link href="/findpw">
-            <span className={`${styles.guide} ${styles.signup}`}>비밀번호 찾기</span>
+            <span className={`${styles.guide} ${styles.signup}`}>
+              비밀번호 찾기
+            </span>
           </Link>
         </div>
         <Link href="http://localhost:8181/oauth2/authorization/google">
