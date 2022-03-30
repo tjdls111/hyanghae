@@ -7,7 +7,7 @@
 마지막 수정일 2022-03-14
 */
 import type { NextPage } from "next";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AxiosError, AxiosResponse } from "axios";
@@ -18,9 +18,8 @@ import {
   apiCheckNickname,
   apiSendEmailNum,
 } from "../api/user";
-import { LocationSearchingOutlined } from "@mui/icons-material";
 import Image from "next/image";
-import logo from "../public/logo.jpg";
+import { useAppSelector } from "../reducers/hooks";
 
 interface SignupInput {
   result: string;
@@ -34,12 +33,15 @@ interface SignupInput {
 }
 
 const Signup: NextPage = () => {
-  const isLoggedIn = false;
   const [isIdChecked, setIsIdChecked] = useState(false);
   const [isNicknameChecked, setisNicknameChecked] = useState(false);
   const [isEmailClicked, setisEmailClicked] = useState(false);
   const [isEmailChecked, setisEmailChecked] = useState(false);
   const [confirmationNumber, setConfirmationNumber] = useState("");
+  const router = useRouter();
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   const {
     register,
@@ -53,10 +55,10 @@ const Signup: NextPage = () => {
   });
 
   useEffect(() => {
-    if (isLoggedIn) {
-      Router.push("/");
+    if (isAuthenticated) {
+      router.replace("/home");
     }
-  }, [isLoggedIn]);
+  }, []);
 
   const onValidSubmit: SubmitHandler<SignupInput> = async () => {
     const {
@@ -78,8 +80,7 @@ const Signup: NextPage = () => {
               nickname,
               password
             );
-
-            Router.push("/login");
+            router.push("/login");
           } catch (e) {
             const error = e as AxiosError;
             if (error?.response?.status === 401) {

@@ -12,8 +12,12 @@ import { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginSignup.module.css";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
-import Router from "next/router";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../reducers/hooks";
+import { login } from "../reducers/authSlice";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 interface LoginInput {
   result: string;
@@ -33,6 +37,18 @@ const Login: NextPage = () => {
   } = useForm<LoginInput>({
     mode: "onChange",
   });
+  const dispatch = useDispatch();
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/home");
+    }
+  }, []);
+
   const url = process.env.NEXT_PUBLIC_BASE_URL;
 
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
@@ -40,9 +56,9 @@ const Login: NextPage = () => {
     try {
       const res = await apiLogin(id, password);
       if (res.data?.token) {
-        localStorage.setItem("token", res.data?.token);
+        dispatch(login(res.data.token));
       }
-      Router.replace("/home");
+      router.replace("/home");
     } catch (e) {
       const error = e as AxiosError;
       window.alert("아이디, 비밀번호 정보가 없습니다. 확인해주세요.");

@@ -19,15 +19,15 @@ const ImageSlider: React.FC = function () {
 
   const nextSlide = function () {
     setCurrent(current === length - 1 ? 0 : current + 1);
+    clearInterval(autoRun);
   };
 
   const prevSlide = function () {
     setCurrent(current === 0 ? length - 1 : current - 1);
+    clearInterval(autoRun);
   };
 
-  // useEffect(() => {
-  //   setTimeout(nextSlide, 7000);
-  // }, [current]);
+  const autoRun = setInterval(nextSlide, 5000);
 
   return (
     <section className={styles.carousel}>
