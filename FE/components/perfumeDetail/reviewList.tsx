@@ -26,38 +26,37 @@ const ReviewList = () => {
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(null);
 
-  const dispatch = useDispatch();
   const token = useAppSelector((state) => state.authReducer.token);
 
-  //실제 유저 닉네임 받아오기
+  // 유저 닉네임 받아오기
   useEffect(() => {
-    apiUserLookUp(token)
-      .then((res) => {
-        console.log(res);
-        setUserName(res.data.userNickName);
-      })
-      .catch((err) => {});
-  }, []);
-
-  
+    if (token) {
+      apiUserLookUp(token)
+        .then((res) => {
+          setUserName(res.data.userNickName);
+        })
+        .catch((err) => {});
+    }
+  }, [token]);
 
   const onDelete = (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
-    apiDeletePerfumeReview(router.query.id as string, token)
-      .then((res) => {
-        apiGetPerfumeReview(router.query.id as string)
-          .then((res) => {
-            alert("삭제되었습니다.");
-            setData(res.data.reviewList);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (token) {
+      e.preventDefault();
+      apiDeletePerfumeReview(router.query.id as string, token)
+        .then((res) => {
+          apiGetPerfumeReview(router.query.id as string)
+            .then((res) => {
+              alert("삭제되었습니다.");
+              setData(res.data.reviewList);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   useEffect(() => {
