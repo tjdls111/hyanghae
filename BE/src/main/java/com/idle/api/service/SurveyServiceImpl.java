@@ -80,6 +80,7 @@ public class SurveyServiceImpl implements SurveyService{
 
         survey1Repository.save(survey1);
 
+        //향수 추천
         List<Perfume> recommendList = recommendPerfumeBySurvey1(survey1);
 
         return recommendList;
@@ -118,6 +119,7 @@ public class SurveyServiceImpl implements SurveyService{
 
         survey2Repository.save(survey2);
 
+        //향수 추천
         List<Perfume> recommendList = recommendPerfumeBySurvey2(survey2);
 
         return recommendList;
