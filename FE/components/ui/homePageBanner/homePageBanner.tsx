@@ -6,10 +6,10 @@
 생성일 2022-03-24$
 마지막 수정일 2022-03-24$
 */
-import React, { useEffect, useState } from "react";
-import styles from "./imageSlider.module.css";
+import React, { useState } from "react";
+import styles from "./homePageBanner.module.css";
 import Image from "next/image";
-import sliderData from "./sliderData";
+import sliderData from "./homePageBannerData";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 

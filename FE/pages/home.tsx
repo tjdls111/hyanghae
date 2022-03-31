@@ -10,7 +10,7 @@
 import React from "react";
 import { NextPage } from "next";
 import Navigation from "../components/navigation/navigation";
-import ImageSlider from "../components/ui/homePageBanner/imageSlider";
+import ImageSlider from "../components/ui/homePageBanner/homePageBanner";
 
 const HomePage: NextPage = () => {
   return (
