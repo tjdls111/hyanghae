@@ -65,7 +65,7 @@ export const socialLogin = () => {
 };
 
 export const apiFindUserId = async (email: string) =>
-await axios.get(`${BASE_URL}/user/finduserid/${email}`);
+  await axios.get(`${BASE_URL}/user/finduserid/${email}`);
 
 export const apiFindpw = async (
   userEmail: string,

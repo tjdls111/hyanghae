@@ -26,7 +26,6 @@ interface LoginInput {
 }
 
 const Login: NextPage = () => {
-  const isLoggedIn = false;
   const {
     register,
     handleSubmit,

@@ -10,9 +10,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { apiDeletePerfumeReview, apiGetPerfumeReview } from "../../api/perfume";
+import { apiUserLookUp } from "../../api/user";
 import styles from "./reviewList.module.css";
 import Review from "./review";
-
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../reducers/hooks";
 interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
@@ -22,18 +24,31 @@ const ReviewList = () => {
   const [data, setData] = useState([] as Array<ReviewInterface>);
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
-  const userName = "aaaaaaaa"; //실제 유저 닉네임 받아오는 걸로 바꿔주기
+  const [userName, setUserName] = useState(null);
+
+  const dispatch = useDispatch();
+  const token = useAppSelector((state) => state.authReducer.token);
+
+  //실제 유저 닉네임 받아오기
+  useEffect(() => {
+    apiUserLookUp(token)
+      .then((res) => {
+        console.log(res);
+        setUserName(res.data.userNickName);
+      })
+      .catch((err) => {});
+  }, []);
+
+  
 
   const onDelete = (e) => {
     e.preventDefault();
     const token = localStorage.getItem("token");
     apiDeletePerfumeReview(router.query.id as string, token)
       .then((res) => {
-        alert("삭제되었습니다.");
-
         apiGetPerfumeReview(router.query.id as string)
           .then((res) => {
-            console.log(res);
+            alert("삭제되었습니다.");
             setData(res.data.reviewList);
           })
           .catch((err) => {
