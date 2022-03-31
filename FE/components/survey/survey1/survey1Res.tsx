@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import Loading from "../../loading/loading";
 import { useEffect } from 'react';
 
 interface dataProp {
@@ -15,17 +16,19 @@ interface resultProp {
 
 const Survey1Res = ({ prop }: resultProp) => {
 
+  const [loading, setLoading] = useState(true);
+  const { oneState, twoState, threeState, fourState, fiveState } = prop;
   useEffect(() => {
+    let isCompleted = false;
+
+    (async )
+
 
   }, [])
 
   return (
     <div>
-      {prop.oneState}
-      {prop.twoState}
-      {prop.threeState}
-      {prop.fourState}
-      {prop.fiveState}
+      {loading ? <Loading /> : <}
     </div>
   );
 };

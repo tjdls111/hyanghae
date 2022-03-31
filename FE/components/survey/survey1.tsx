@@ -5,7 +5,6 @@ import Survey1Of3 from "./survey1/survey1Of3";
 import Survey1Of4 from "./survey1/survey1Of4";
 import Survey1Of5 from "./survey1/survey1Of5";
 import Survey1Res from "./survey1/survey1Res";
-import styles from "./survey.module.css";
 const Servey1 = () => {
   const [oneState, setOneState] = useState(-1);
   const [twoState, setTwoState] = useState(-1);
@@ -15,7 +14,7 @@ const Servey1 = () => {
 
   const resultProp = { oneState, twoState, threeState, fourState, fiveState };
   return (
-    <div className={styles.container}>
+    <>
       {oneState === -1 ? (
         <Survey1Of1 setState={setOneState} />
       ) : twoState === -1 ? (
@@ -29,7 +28,7 @@ const Servey1 = () => {
       ) : (
         <Survey1Res prop={resultProp} />
       )}
-    </div>
+    </>
   );
 };
 
