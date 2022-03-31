@@ -21,7 +21,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 //import ai.djl.translate.*;
 //import ai.djl.training.util.*;
 
-
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)    // Security 자동으로 넘어가기
 @EnableJpaAuditing    // BaseTimeEntity 에서 사용하는 JPA Auditing을 사용할 수 있게 함
 public class IdleApplication {
