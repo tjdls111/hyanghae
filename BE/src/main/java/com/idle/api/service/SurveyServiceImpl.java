@@ -151,7 +151,7 @@ public class SurveyServiceImpl implements SurveyService {
             if (cnt == 5) break;
 //            System.out.println(i+1 + "번 향수의 클러스터 번호 : " + dd.get(i).get(temp.size() - 1));
             if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
-                list.add(perfumeRepository.findByPerfumeId((long) i).get());
+                list.add(perfumeRepository.findByPerfumeId((long) i+1).get());
                 cnt++;
             }
         }
@@ -248,7 +248,7 @@ public class SurveyServiceImpl implements SurveyService {
         for (int i = 0; i < dd.size() - 1; i++) {
             if (cnt == 5) break;
             if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
-                list.add(perfumeRepository.findByPerfumeId((long) i).get());
+                list.add(perfumeRepository.findByPerfumeId((long) i+1).get());
                 cnt++;
             }
         }
