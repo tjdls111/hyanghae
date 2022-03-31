@@ -6,27 +6,27 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 // Pytorch
-import java.io.IOException;
-import java.nio.file.*;
-import java.awt.image.*;
-
-import ai.djl.*;
-import ai.djl.inference.*;
-import ai.djl.modality.*;
-import ai.djl.modality.cv.*;
-import ai.djl.modality.cv.util.*;
-import ai.djl.modality.cv.transform.*;
-import ai.djl.modality.cv.translator.*;
-import ai.djl.repository.zoo.*;
-import ai.djl.translate.*;
-import ai.djl.training.util.*;
+//import java.io.IOException;
+//import java.nio.file.*;
+//import java.awt.image.*;
+//
+//import ai.djl.*;
+//import ai.djl.inference.*;
+//import ai.djl.modality.*;
+//import ai.djl.modality.cv.*;
+//import ai.djl.modality.cv.util.*;
+//import ai.djl.modality.cv.transform.*;
+//import ai.djl.modality.cv.translator.*;
+//import ai.djl.repository.zoo.*;
+//import ai.djl.translate.*;
+//import ai.djl.training.util.*;
 
 
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)    // Security 자동으로 넘어가기
 @EnableJpaAuditing    // BaseTimeEntity 에서 사용하는 JPA Auditing을 사용할 수 있게 함
 public class IdleApplication {
 
-    public static void main(String[] args) throws ModelNotFoundException, MalformedModelException, IOException, TranslateException {
+    public static void main(String[] args) {
 
 		SpringApplication.run(IdleApplication.class, args);
 
@@ -57,6 +57,7 @@ public class IdleApplication {
 //        Classifications classifications = predictor.predict(img);
 //
 //        System.out.println("classifications\n" + classifications);
+
     }
 
 }
