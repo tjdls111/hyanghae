@@ -1,7 +1,5 @@
 /**
- *
  * SurveyServiceImpl
- *
  *
  * @author David, Alice
  * @version 1.0.0
@@ -29,7 +27,7 @@ import java.io.IOException;
 import java.util.*;
 
 @Service("surveyService")
-public class SurveyServiceImpl implements SurveyService{
+public class SurveyServiceImpl implements SurveyService {
 
     @Autowired
     Survey1Repository survey1Repository;
@@ -52,7 +50,7 @@ public class SurveyServiceImpl implements SurveyService{
         List<Survey3> survey3List = new ArrayList<Survey3>(targetUser.getSurvey3List());
 
         //추천결과 리스트 리턴
-        Map<String,List<?>> map = new HashMap<>();
+        Map<String, List<?>> map = new HashMap<>();
         map.put("survey1List", Collections.singletonList(survey1List));
         map.put("survey2List", Collections.singletonList(survey2List));
         map.put("survey3List", Collections.singletonList(survey3List));
@@ -72,7 +70,7 @@ public class SurveyServiceImpl implements SurveyService{
     @Override
     public List<Perfume> insertSurvey1(User user, Survey1InsertRequest req) throws IOException {
         Long count = survey1Repository.countByUser(user);
-        if( count >= 3 ){
+        if (count >= 3) {
             Survey1 orderSurvey1 = survey1Repository.findTop1ByUserOrderByCreateDateAsc(user);
             survey1Repository.delete(orderSurvey1);
         }
@@ -112,7 +110,7 @@ public class SurveyServiceImpl implements SurveyService{
         XSSFCell cell = null;
 
         // 탐색에 사용할 sheet 객체
-        for(int i = 1; i < sheet.getLastRowNum(); i++) {
+        for (int i = 1; i < sheet.getLastRowNum(); i++) {
             row = sheet.getRow(i);
             ArrayList<Double> cluster = new ArrayList<Double>();
             for (int j = 0; j < 5; j++) {
@@ -129,7 +127,7 @@ public class SurveyServiceImpl implements SurveyService{
 
             dataSet.add(cluster);   // 데이터셋 list에 데이터(Season, Time, Gender, TPO, Mood) 추가
         }
-        
+
         // 설문조사 데이터를 dataSet 리스트에 추가
         ArrayList<Double> cluster = new ArrayList<Double>();
         cluster.add((double) survey1.getSeason());
@@ -148,10 +146,12 @@ public class SurveyServiceImpl implements SurveyService{
 
         int cnt = 0;
         ArrayList<Double> temp = dd.get(dd.size() - 1);
-        for (int i = 0; i < dd.size() - 1; i++){
-            if(cnt == 5) break;
-            if(temp.get(temp.size() - 1) == dd.get(i).get(temp.size() - 1)){// 같은 그룹의 향수
-                list.add(perfumeRepository.findByPerfumeId((long)i).get());
+//        System.out.println("temp의 클러스터 번호 : " + temp.get(temp.size() - 1));
+        for (int i = 0; i < dd.size() - 1; i++) {
+            if (cnt == 5) break;
+//            System.out.println(i+1 + "번 향수의 클러스터 번호 : " + dd.get(i).get(temp.size() - 1));
+            if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
+                list.add(perfumeRepository.findByPerfumeId((long) i).get());
                 cnt++;
             }
         }
@@ -172,7 +172,7 @@ public class SurveyServiceImpl implements SurveyService{
         Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(survey2InsertRequest.getPerfumeId());
 
         Long count = survey2Repository.countByUser(user);
-        if( count >= 3 ){
+        if (count >= 3) {
             Survey2 orderSurvey2 = survey2Repository.findTop1ByUserOrderByCreateDateAsc(user);
             survey2Repository.delete(orderSurvey2);
         }
@@ -208,7 +208,7 @@ public class SurveyServiceImpl implements SurveyService{
         XSSFCell cell = null;
 
         // 탐색에 사용할 sheet 객체
-        for(int i = 1; i < sheet.getLastRowNum(); i++) {
+        for (int i = 1; i < sheet.getLastRowNum(); i++) {
             row = sheet.getRow(i);
             ArrayList<Double> cluster = new ArrayList<Double>();
             for (int j = 0; j < 5; j++) {
@@ -245,10 +245,10 @@ public class SurveyServiceImpl implements SurveyService{
 
         int cnt = 0;
         ArrayList<Double> temp = dd.get(dd.size() - 1);
-        for (int i = 0; i < dd.size() - 1; i++){
-            if(cnt == 5) break;
-            if(temp.get(temp.size() - 1) == dd.get(i).get(temp.size() - 1)){// 같은 그룹의 향수
-                list.add(perfumeRepository.findByPerfumeId((long)i).get());
+        for (int i = 0; i < dd.size() - 1; i++) {
+            if (cnt == 5) break;
+            if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
+                list.add(perfumeRepository.findByPerfumeId((long) i).get());
                 cnt++;
             }
         }
