@@ -8,7 +8,7 @@
 */
 import type { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import styles from "../components/loginSignup/loginSignup.module.css";
 import Link from "next/link";
 import { apiLogin } from "../api/user";
@@ -26,6 +26,8 @@ interface LoginInput {
 }
 
 const Login: NextPage = () => {
+  const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
   const isLoggedIn = false;
   const {
     register,
@@ -92,7 +94,13 @@ const Login: NextPage = () => {
   ) : (
     <div />
   );
+  // console.log(`${url}/oauth2/authorization/google`);
 
+  // const requestSocialLogin = function () {
+  //   axios
+  //     .get(`${BASE_URL}/oauth2/authorization/google`)
+  //     .then((res) => console.log(res.request.responseURL));
+  // };
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper2}>
@@ -190,7 +198,7 @@ const Login: NextPage = () => {
             </span>
           </Link>
         </div>
-        <Link href={`${url}/oauth2/authorization/google`}>
+        <Link passHref={true} href='https://j6d104.p.ssafy.io:8443/oauth2/authorization/google'>
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>
               <Image
