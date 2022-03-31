@@ -30,6 +30,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class SurveyController {
 
     @ApiOperation("설문조사1 저장")
     @PostMapping("/1")
-    public ResponseEntity<? extends BaseResponseBody> insertSurvey1(@ApiIgnore Authentication authentication, @RequestBody Survey1InsertRequest survey1InsertRequest) {
+    public ResponseEntity<? extends BaseResponseBody> insertSurvey1(@ApiIgnore Authentication authentication, @RequestBody Survey1InsertRequest survey1InsertRequest) throws IOException {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
@@ -65,7 +66,7 @@ public class SurveyController {
 
     @ApiOperation("설문조사1 추천")
     @GetMapping("/recommend1/{surveyId}")
-    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey1(@ApiIgnore Authentication authentication, @PathVariable("surveyId") Long surveyId) {
+    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey1(@ApiIgnore Authentication authentication, @PathVariable("surveyId") Long surveyId) throws IOException {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
@@ -78,7 +79,7 @@ public class SurveyController {
 
     @ApiOperation("설문조사2 저장")
     @PostMapping("/2")
-    public ResponseEntity<? extends BaseResponseBody> insertSurvey2(@ApiIgnore Authentication authentication, @RequestBody Survey2InsertRequest survey2InsertRequest) {
+    public ResponseEntity<? extends BaseResponseBody> insertSurvey2(@ApiIgnore Authentication authentication, @RequestBody Survey2InsertRequest survey2InsertRequest) throws IOException {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
@@ -90,7 +91,7 @@ public class SurveyController {
 
     @ApiOperation("설문조사2 추천")
     @GetMapping("/recommend2/{survey2Id}")
-    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey2(@ApiIgnore Authentication authentication, @PathVariable("survey2Id") Long surveyId) {
+    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey2(@ApiIgnore Authentication authentication, @PathVariable("survey2Id") Long surveyId) throws IOException {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 

@@ -58,5 +58,4 @@ public class IdleApplication {
 //        System.out.println("classifications\n" + classifications);
 
     }
-
 }

@@ -3,20 +3,29 @@
  * SurveyServiceImpl
  *
  *
- * @author David
+ * @author David, Alice
  * @version 1.0.0
  * 생성일 2022-03-29
- * 마지막 수정일 2022-03-29
+ * 마지막 수정일 2022-03-31
  **/
 package com.idle.api.service;
 
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
+import com.idle.common.perfume.KmeansAlgorithm;
 import com.idle.db.entity.*;
 import com.idle.db.repository.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
 
 @Service("surveyService")
@@ -61,7 +70,7 @@ public class SurveyServiceImpl implements SurveyService{
 
     /* David : 설문조사1 저장 */
     @Override
-    public List<Perfume> insertSurvey1(User user, Survey1InsertRequest req) {
+    public List<Perfume> insertSurvey1(User user, Survey1InsertRequest req) throws IOException {
         Long count = survey1Repository.countByUser(user);
         if( count >= 3 ){
             Survey1 orderSurvey1 = survey1Repository.findTop1ByUserOrderByCreateDateAsc(user);
@@ -86,11 +95,68 @@ public class SurveyServiceImpl implements SurveyService{
         return recommendList;
     }
 
-    /* David : 설문조사1 기반 향수 추천 */
+    /* David, Alice : 설문조사1 기반 향수 추천 */
     @Override
-    public List<Perfume> recommendPerfumeBySurvey1(Survey1 survey1) {
+    public List<Perfume> recommendPerfumeBySurvey1(Survey1 survey1) throws IOException {
 
-        return null;
+        ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
+
+        // 데이터셋 추가
+        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+        File xlsx = new File(filePath);
+        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        // 엑셀파일 전체 내용을 담고 있는 객체
+        XSSFSheet sheet = wb.getSheetAt(0);
+        XSSFRow row = null;
+        XSSFCell cell = null;
+
+        // 탐색에 사용할 sheet 객체
+        for(int i = 1; i < sheet.getLastRowNum(); i++) {
+            row = sheet.getRow(i);
+            ArrayList<Double> cluster = new ArrayList<Double>();
+            for (int j = 0; j < 5; j++) {
+                cell = row.getCell(j);
+                switch (cell.getCellType()) {
+                    case Cell.CELL_TYPE_STRING:
+                        cluster.add(Double.valueOf(cell.getStringCellValue()));
+                        break;
+                    case Cell.CELL_TYPE_NUMERIC:
+                        cluster.add(cell.getNumericCellValue());
+                        break;
+                }
+            }
+
+            dataSet.add(cluster);   // 데이터셋 list에 데이터(Season, Time, Gender, TPO, Mood) 추가
+        }
+        
+        // 설문조사 데이터를 dataSet 리스트에 추가
+        ArrayList<Double> cluster = new ArrayList<Double>();
+        cluster.add((double) survey1.getSeason());
+        cluster.add((double) survey1.getTime());
+        cluster.add((double) survey1.getGender());
+        cluster.add((double) survey1.getTpo());
+        cluster.add((double) survey1.getMood());
+        dataSet.add(cluster);
+
+        // (Season, Time, Gender, TPO, Mood, 클러스터 번호)
+        KmeansAlgorithm d = new KmeansAlgorithm();
+        ArrayList<ArrayList<Double>> dd = d.getClusters(dataSet, 10);  // 클러스터링
+
+        // 리턴할 List<Perfume> 생성
+        List<Perfume> list = new ArrayList<>();
+
+        int cnt = 0;
+        ArrayList<Double> temp = dd.get(dd.size() - 1);
+        for (int i = 0; i < dd.size() - 1; i++){
+            if(cnt == 5) break;
+            if(temp.get(temp.size() - 1) == dd.get(i).get(temp.size() - 1)){// 같은 그룹의 향수
+                list.add(perfumeRepository.findByPerfumeId((long)i).get());
+                cnt++;
+            }
+        }
+
+        return list;
     }
 
     /* David : 설문조사2 조회 */
@@ -102,7 +168,7 @@ public class SurveyServiceImpl implements SurveyService{
 
     /* David : 설문조사2 저장 */
     @Override
-    public List<Perfume> insertSurvey2(User user, Survey2InsertRequest survey2InsertRequest) {
+    public List<Perfume> insertSurvey2(User user, Survey2InsertRequest survey2InsertRequest) throws IOException {
         Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(survey2InsertRequest.getPerfumeId());
 
         Long count = survey2Repository.countByUser(user);
@@ -125,11 +191,69 @@ public class SurveyServiceImpl implements SurveyService{
         return recommendList;
     }
 
-    /* David : 설문조사2 기반 향수 추천 */
+    /* David, Alice : 설문조사2 기반 향수 추천 */
     @Override
-    public List<Perfume> recommendPerfumeBySurvey2(Survey2 survey2) {
+    public List<Perfume> recommendPerfumeBySurvey2(Survey2 survey2) throws IOException {
 
-        return null;
+        ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
+
+        // 데이터셋 추가
+        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+        File xlsx = new File(filePath);
+        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        // 엑셀파일 전체 내용을 담고 있는 객체
+        XSSFSheet sheet = wb.getSheetAt(0);
+        XSSFRow row = null;
+        XSSFCell cell = null;
+
+        // 탐색에 사용할 sheet 객체
+        for(int i = 1; i < sheet.getLastRowNum(); i++) {
+            row = sheet.getRow(i);
+            ArrayList<Double> cluster = new ArrayList<Double>();
+            for (int j = 0; j < 5; j++) {
+                cell = row.getCell(j);
+                switch (cell.getCellType()) {
+                    case Cell.CELL_TYPE_STRING:
+                        cluster.add(Double.valueOf(cell.getStringCellValue()));
+                        break;
+                    case Cell.CELL_TYPE_NUMERIC:
+                        cluster.add(cell.getNumericCellValue());
+                        break;
+                }
+            }
+
+            dataSet.add(cluster);   // 데이터셋 list에 데이터(Season, Time, Gender, TPO, Mood) 추가
+        }
+
+        // 설문조사 데이터를 dataSet 리스트에 추가
+        ArrayList<Double> cluster = new ArrayList<Double>();
+        Perfume perfume = survey2.getPerfume();
+        cluster.add((double) perfume.getSeason());
+        cluster.add((double) perfume.getTime());
+        cluster.add((double) perfume.getGender());
+        cluster.add((double) perfume.getTpo());
+        cluster.add((double) perfume.getMood());
+        dataSet.add(cluster);
+
+        // (Season, Time, Gender, TPO, Mood, 클러스터 번호)
+        KmeansAlgorithm d = new KmeansAlgorithm();
+        ArrayList<ArrayList<Double>> dd = d.getClusters(dataSet, 10);  // 클러스터링
+
+        // 리턴할 List<Perfume> 생성
+        List<Perfume> list = new ArrayList<>();
+
+        int cnt = 0;
+        ArrayList<Double> temp = dd.get(dd.size() - 1);
+        for (int i = 0; i < dd.size() - 1; i++){
+            if(cnt == 5) break;
+            if(temp.get(temp.size() - 1) == dd.get(i).get(temp.size() - 1)){// 같은 그룹의 향수
+                list.add(perfumeRepository.findByPerfumeId((long)i).get());
+                cnt++;
+            }
+        }
+
+        return list;
     }
 
 

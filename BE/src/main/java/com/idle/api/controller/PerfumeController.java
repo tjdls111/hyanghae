@@ -2,14 +2,15 @@
  * PerfumeController
  * 향수 검색 API 구현
  *
- * @author Woody, David
+ * @author Woody, David, Alice
  * @version 1.0.0
  * 생성일 2022/03/16
- * 마지막 수정일 2022/03/24
+ * 마지막 수정일 2022/03/31
  **/
 package com.idle.api.controller;
 
 import com.idle.api.request.ReviewInsertRequest;
+import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.response.*;
 import com.idle.api.service.PerfumeService;
 import com.idle.common.jwt.dto.IdleUserDetails;
@@ -17,9 +18,13 @@ import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
 import com.idle.db.entity.Review;
 import com.idle.db.entity.User;
+import com.idle.db.repository.PerfumeRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +35,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +51,9 @@ public class PerfumeController {
 
     @Autowired
     private PerfumeService perfumeService;
+
+    @Autowired
+    private PerfumeRepository perfumeRepository;
 
 
     /* David  */
@@ -163,5 +175,45 @@ public class PerfumeController {
         User user = userDetails.getUser();
         Map<String,List<Perfume>> map = perfumeService.getRecommendPerfumeList(user);
         return ResponseEntity.status(200).body(RecommendPerfumeListResponse.of(200, "Success",map));
+    }
+
+    /* Alice */
+    @ApiOperation("향수 데이터 DB 추가")
+    @GetMapping("/insertperfume")
+    public ResponseEntity<BaseResponseBody> insertPerfume() throws IOException {
+
+        // 데이터셋 추가
+        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+        File xlsx = new File(filePath);
+        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        // 엑셀파일 전체 내용을 담고 있는 객체
+        XSSFSheet sheet = wb.getSheetAt(0);
+        XSSFRow row = null;
+
+        // 탐색에 사용할 sheet 객체
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            row = sheet.getRow(i);
+            Perfume perfume = new Perfume();
+
+            perfume.setSeason((int)row.getCell(0).getNumericCellValue());
+            perfume.setTime((int)row.getCell(1).getNumericCellValue());
+            perfume.setGender((int)row.getCell(2).getNumericCellValue());
+            perfume.setTpo((int)row.getCell(3).getNumericCellValue());
+            perfume.setMood((int)row.getCell(4).getNumericCellValue());
+            perfume.setGroup(row.getCell(5).getStringCellValue());
+            perfume.setNote1(row.getCell(6).getStringCellValue());
+            perfume.setNote2(row.getCell(7).getStringCellValue());
+            perfume.setNote3(row.getCell(8).getStringCellValue());
+            perfume.setPerfumeName(row.getCell(9).getStringCellValue());
+            perfume.setPerfumeBrand(row.getCell(10).getStringCellValue());
+            perfume.setPerfumeScore(0);
+            perfume.setReviewCnt(0);
+            perfume.setLikeCnt(0);
+
+            perfumeRepository.save(perfume);
+        }
+        
+        return ResponseEntity.ok(BaseResponseBody.of(200,"DB 삽입 성공"));
     }
 }
