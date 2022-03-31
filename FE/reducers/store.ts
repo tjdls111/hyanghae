@@ -21,7 +21,6 @@ const makeStore = () => {
   } else {
     const persistedReducer = persistReducer(persistConfig, rootReducer);
     const store = createStore(persistedReducer);
-    // store.__persistor = persistStore(store);
     persistStore(store);
     return store;
   }
@@ -29,5 +28,4 @@ const makeStore = () => {
 
 export const wrapper = createWrapper(makeStore);
 
-// RootState의 타입
 export type RootState = ReturnType<typeof rootReducer>;
