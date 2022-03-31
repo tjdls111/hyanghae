@@ -198,7 +198,7 @@ const Login: NextPage = () => {
             </span>
           </Link>
         </div>
-        <Link href={`${BASE_URL}/oauth2/authorization/google`}>
+        <Link href='https://j6d104.p.ssafy.io:8443/oauth2/authorization/google'>
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>
               <Image
