@@ -8,11 +8,7 @@
 */
 
 import { useRouter } from "next/router";
-import React, {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { apiPostPerfumeReview, apiPutPerfumeReview } from "../../api/perfume";
 import styles from "./review.module.css";
 interface Props {
@@ -36,9 +32,8 @@ const Review = (Props: Props) => {
     const token = localStorage.getItem("token");
     const perfumeId = Number(router.query.id as string);
 
-    console.log(Props.isEditMode)
     if (review.current?.value) {
-      if (Props.isEditMode === 'true') {
+      if (Props.isEditMode === "true") {
         // 수정
         await apiPutPerfumeReview(
           token,
@@ -46,14 +41,13 @@ const Review = (Props: Props) => {
           review.current?.value,
           selected
         )
-          .then((res) => {
-          })
+          .then((res) => {})
           .catch((err) => {
             alert("수정하려다가 에러..");
           });
-          review.current.value = "";
-          Props.setEdit(false);
-        } else {
+        review.current.value = "";
+        Props.setEdit(false);
+      } else {
         // 새로 만들기
         await apiPostPerfumeReview(
           token,
@@ -63,6 +57,7 @@ const Review = (Props: Props) => {
         )
           .then((res) => {
             review.current.value = "";
+            router.reload(window.location.pathname);
           })
           .catch((err) => {
             alert("Sorry.. You can write only one review.");

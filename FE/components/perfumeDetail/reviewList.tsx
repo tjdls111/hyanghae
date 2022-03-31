@@ -13,7 +13,6 @@ import { apiDeletePerfumeReview, apiGetPerfumeReview } from "../../api/perfume";
 import { apiUserLookUp } from "../../api/user";
 import styles from "./reviewList.module.css";
 import Review from "./review";
-import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../reducers/hooks";
 interface ReviewInterface {
   reviewContent: string;
@@ -39,43 +38,43 @@ const ReviewList = () => {
     }
   }, [token]);
 
+  //댓글 편집 여부
+  const changeEditMode = (e) => {
+    e.preventDefault();
+    setEditMode(!editMode);
+  };
+
   const onDelete = (e) => {
     if (token) {
       e.preventDefault();
       apiDeletePerfumeReview(router.query.id as string, token)
         .then((res) => {
-          apiGetPerfumeReview(router.query.id as string)
-            .then((res) => {
-              alert("삭제되었습니다.");
-              setData(res.data.reviewList);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+          alert("삭제되었습니다.");
+          getReview();
         })
         .catch((err) => {
           console.log(err);
         });
+      getReview();
     }
+  };
+
+  const getReview = () => {
+    apiGetPerfumeReview(router.query.id as string)
+      .then((res) => {
+        setData(res.data.reviewList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
     if (router.isReady) {
-      apiGetPerfumeReview(router.query.id as string)
-        .then((res) => {
-          console.log(res);
-          setData(res.data.reviewList);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      getReview();
     }
   }, [router, editMode]);
 
-  const changeEditMode = (e) => {
-    e.preventDefault();
-    setEditMode(!editMode);
-  };
   return (
     <article className={styles.container}>
       <h1 className={styles.title}>Reviews</h1>
