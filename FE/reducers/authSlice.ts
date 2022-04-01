@@ -1,12 +1,17 @@
 import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
-
+import { updateEbayKey } from "../api/perfume";
 interface authState {
   isAuthenticated: boolean;
   token: string | null;
+  ebayApi: string | null;
 }
 
-const initialState: authState = { isAuthenticated: true, token: null };
+const initialState: authState = {
+  isAuthenticated: true,
+  token: null,
+  ebayApi: null,
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -20,6 +25,9 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.token = null;
     },
+    update(state, action) {
+      state.ebayApi = action.payload;
+    },
   },
   // extraReducers: {
   //   [HYDRATE]: (state, action) => {
@@ -32,5 +40,5 @@ const authSlice = createSlice({
   // },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, update } = authSlice.actions;
 export default authSlice.reducer;

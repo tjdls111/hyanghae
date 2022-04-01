@@ -12,8 +12,9 @@ import styles from "./item.module.css";
 import Image from "next/image";
 import EbayBtn from "./ebayBtn";
 import EbayList from "./ebayList";
-import { apiShoppingSearch } from "../../api/perfume";
-
+import { apiShoppingSearch, updateEbayKey } from "../../api/perfume";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "../../reducers/hooks";
 interface InnerProps {
   data: {
     name: string;
@@ -40,6 +41,14 @@ interface Item {
 }
 const Item = ({ data }: InnerProps) => {
   const [lists, setLists] = useState([] as Array<Item>);
+
+  const dispatch = useDispatch();
+  const isAuthenticated = useAppSelector((state) => state.authReducer.ebayApi);
+
+  updateEbayKey().then((res) => {
+    console.log(res);
+  });
+  // dispatch(updateEbayKey)
 
   useEffect(() => {
     // 이베이 쇼핑 검색 api 로 검색 결과 가져오기
