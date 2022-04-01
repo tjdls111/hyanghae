@@ -35,6 +35,7 @@ public class PerfumeResponse {
     int season;
     int tpo;
     int mood;
+    String imgUrl;
 
     public static PerfumeResponse of(Perfume perfume) {
         PerfumeResponse res = new PerfumeResponse();
@@ -51,6 +52,7 @@ public class PerfumeResponse {
         res.setSeason(perfume.getSeason());
         res.setTpo(perfume.getTpo());
         res.setMood(perfume.getMood());
+        res.setImgUrl(perfume.getImgUrl());
 
         return res;
     }

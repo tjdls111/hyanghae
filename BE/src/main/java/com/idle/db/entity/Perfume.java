@@ -77,6 +77,9 @@ public class Perfume  {
     @Column(name="mood", nullable = false)
     int mood;
 
+    @Column(name="p_url", nullable = false)
+    String imgUrl;
+
     @OneToMany(mappedBy = "perfume", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     Set<Survey2> survey2List = new HashSet<>();

@@ -230,6 +230,7 @@ public class PerfumeController {
             perfume.setNote2(row.getCell(7).getStringCellValue());
             perfume.setNote3(row.getCell(8).getStringCellValue());
             perfume.setPerfumeName(row.getCell(9).getStringCellValue());
+            perfume.setImgUrl(row.getCell(10).getStringCellValue());
             perfume.setPerfumeBrand(brand);
             perfume.setPerfumeScore(0);
             perfume.setReviewCnt(0);
