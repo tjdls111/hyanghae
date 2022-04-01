@@ -87,6 +87,11 @@ const Item = ({ data }: InnerProps) => {
           {lists && lists.length > 0 && (
             <img src={`${lists[0]?.image?.imageUrl}`} />
           )}
+          {lists.length == 0 && (
+            <div className={styles.imageContainer}>
+              <Image layout="fill" src="/images/perfume.jpg" />
+            </div>
+          )}
         </div>
         <p>Seasonal: {data.season}</p>
         <p>Style: {data.style}</p>
