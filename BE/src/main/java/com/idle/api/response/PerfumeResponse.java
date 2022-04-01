@@ -9,13 +9,13 @@
 **/
 package com.idle.api.response;
 
+import com.idle.db.entity.Brand;
 import com.idle.db.entity.Perfume;
 import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -40,7 +40,7 @@ public class PerfumeResponse {
         PerfumeResponse res = new PerfumeResponse();
         res.setPerfumeId(perfume.getPerfumeId());
         res.setPerfumeName(perfume.getPerfumeName());
-        res.setPerfumeBrand(perfume.getPerfumeBrand());
+        res.setPerfumeBrand(perfume.getPerfumeBrand().getBrandName());
         res.setPerfumeScore(perfume.getPerfumeScore());
         res.setGroup(perfume.getGroup());
         res.setNote1(perfume.getNote1());

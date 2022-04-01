@@ -14,10 +14,8 @@ import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.response.*;
 import com.idle.api.service.PerfumeService;
 import com.idle.common.jwt.dto.IdleUserDetails;
-import com.idle.db.entity.LikePerfume;
-import com.idle.db.entity.Perfume;
-import com.idle.db.entity.Review;
-import com.idle.db.entity.User;
+import com.idle.db.entity.*;
+import com.idle.db.repository.BrandRepository;
 import com.idle.db.repository.PerfumeRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -54,6 +52,9 @@ public class PerfumeController {
 
     @Autowired
     private PerfumeRepository perfumeRepository;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
 
     /* David  */
@@ -194,6 +195,7 @@ public class PerfumeController {
         // 탐색에 사용할 sheet 객체
         for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             row = sheet.getRow(i);
+            Brand brand = brandRepository.findByBrandName(row.getCell(10).getStringCellValue()).get();
             Perfume perfume = new Perfume();
 
             perfume.setSeason((int)row.getCell(0).getNumericCellValue());
@@ -206,14 +208,14 @@ public class PerfumeController {
             perfume.setNote2(row.getCell(7).getStringCellValue());
             perfume.setNote3(row.getCell(8).getStringCellValue());
             perfume.setPerfumeName(row.getCell(9).getStringCellValue());
-            perfume.setPerfumeBrand(row.getCell(10).getStringCellValue());
+            perfume.setPerfumeBrand(brand);
             perfume.setPerfumeScore(0);
             perfume.setReviewCnt(0);
             perfume.setLikeCnt(0);
 
             perfumeRepository.save(perfume);
         }
-        
+
         return ResponseEntity.ok(BaseResponseBody.of(200,"DB 삽입 성공"));
     }
 }

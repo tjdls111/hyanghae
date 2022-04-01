@@ -37,8 +37,9 @@ public class Perfume  {
     @Column(name = "p_name", nullable = false)
     String perfumeName;
 
-    @Column(name = "p_brand", nullable = false)
-    String perfumeBrand;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "p_brand", nullable = false)
+    Brand perfumeBrand;
 
     @Column(name = "p_score", nullable = false)
     float perfumeScore;
