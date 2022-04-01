@@ -1,16 +1,6 @@
-/**
- *
- * PerfumeListResponse
- * 향수 목록 조회 response 생성
- *
- * @author David
- * @version 1.0.0
- * 생성일 2022-03-16
- * 마지막 수정일 2022-03-28
- **/
-
 package com.idle.api.response;
 
+import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.Perfume;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +13,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class PerfumeListResponse extends BaseResponseBody{
+public class PerfumeListByBrandResponse extends BaseResponseBody{
 
     Long totalElements;
     int totalPages;
@@ -32,8 +22,8 @@ public class PerfumeListResponse extends BaseResponseBody{
     boolean last;
     List<Map<String, Object>> perfumeList;
 
-    public static PerfumeListResponse of(Integer statusCode, String message,  Page<Perfume> perfumes) {
-        PerfumeListResponse res = new PerfumeListResponse();
+    public static PerfumeListByBrandResponse of(Integer statusCode, String message,  Page<Perfume> perfumes) {
+        PerfumeListByBrandResponse res = new PerfumeListByBrandResponse();
         List<Map<String, Object>> perfumeList = new ArrayList<>();
 
         res.setStatusCode(statusCode);
@@ -44,22 +34,16 @@ public class PerfumeListResponse extends BaseResponseBody{
         res.setFirst(perfumes.isFirst());
         res.setLast(perfumes.isLast());
 
-        for(Perfume perfume : perfumes.getContent()){
+        for(int i=0; i<perfumes.getContent().size(); i++){
             Map<String, Object> perfumeInfo = new HashMap<>();
-            perfumeInfo.put("perfumeId",perfume.getPerfumeId());
-            perfumeInfo.put("perfumeName",perfume.getPerfumeName());
-            perfumeInfo.put("imgUrl",perfume.getImgUrl());
-            perfumeInfo.put("perfumeBrand",perfume.getPerfumeBrand());
-            perfumeInfo.put("note1",perfume.getNote1());
-            perfumeInfo.put("note2",perfume.getNote2());
-            perfumeInfo.put("note3",perfume.getNote3());
-            perfumeInfo.put("perfumeScore",perfume.getPerfumeScore());
+            perfumeInfo.put("perfumeId",perfumes.getContent().get(i).getPerfumeId());
+            perfumeInfo.put("perfumeName",perfumes.getContent().get(i).getPerfumeName());
+            perfumeInfo.put("imgUrl",perfumes.getContent().get(i).getImgUrl());
+
             perfumeList.add(perfumeInfo);
         }
-
         res.setPerfumeList(perfumeList);
 
         return res;
-
     }
 }
