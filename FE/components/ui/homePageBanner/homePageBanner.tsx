@@ -13,7 +13,7 @@ import sliderData from "./homePageBannerData";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const ImageSlider: React.FC = function () {
+const HomePageBanner: React.FC = function () {
   const [current, setCurrent] = useState(0);
   const length = sliderData.length;
 
@@ -70,4 +70,4 @@ const ImageSlider: React.FC = function () {
   );
 };
 
-export default ImageSlider;
+export default HomePageBanner;

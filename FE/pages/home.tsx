@@ -10,13 +10,15 @@
 import React from "react";
 import { NextPage } from "next";
 import Navigation from "../components/navigation/navigation";
-import ImageSlider from "../components/ui/homePageBanner/homePageBanner";
+import HomePageBanner from "../components/ui/homePageBanner/homePageBanner";
+import BestProduct from "../components/bestProduct/bestProduct";
 
 const HomePage: NextPage = () => {
   return (
     <>
       <Navigation />
-      <ImageSlider />
+      <HomePageBanner />
+      <BestProduct />
     </>
   );
 };

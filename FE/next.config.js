@@ -13,8 +13,10 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
+  },
+  images: {
+    domains: ["fimgs.net"],
   },
 };
 
