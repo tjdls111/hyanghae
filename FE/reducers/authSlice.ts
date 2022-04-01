@@ -1,4 +1,3 @@
-import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface authState {
@@ -6,7 +5,7 @@ interface authState {
   token: String | null;
 }
 
-const initialState: authState = { isAuthenticated: true, token: null };
+const initialState: authState = { isAuthenticated: false, token: null };
 
 const authSlice = createSlice({
   name: "auth",
@@ -21,15 +20,6 @@ const authSlice = createSlice({
       state.token = null;
     },
   },
-  // extraReducers: {
-  //   [HYDRATE]: (state, action) => {
-  //     console.log("HYDRATE", action.payload);
-  //     return {
-  //       ...state,
-  //       ...action.payload,
-  //     };
-  //   },
-  // },
 });
 
 export const { login, logout } = authSlice.actions;
