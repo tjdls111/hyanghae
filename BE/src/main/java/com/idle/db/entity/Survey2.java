@@ -36,7 +36,7 @@ public class Survey2 extends BaseTimeEntity{
     @JoinColumn(name = "u_seq", nullable = false)
     User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonIgnore
     @JoinColumn(name = "p_id", nullable = false)
     Perfume perfume;

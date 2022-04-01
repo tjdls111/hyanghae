@@ -205,6 +205,18 @@ public class PerfumeController {
     @GetMapping("/insertperfume")
     public ResponseEntity<BaseResponseBody> insertPerfume() throws IOException {
 
+        //향수 브랜드 추가
+        String[] engBrandName = {"Chanel", "Jo Malone London", "Givenchy", "Byredo", "Anna Sui", "Le Labo", "Hermes", "Lanvin", "Calvin Klein", "Bvlgari", "Gucci", "Diptyque", "Dolce&Gabbana"};
+        String[] korBrandName = {"샤넬", "조말론", "지방시", "바이레도", "안나수이", "르라보", "에르메스", "랑방", "캘빈클라인", "불가리", "구찌", "딥디크", "돌체엔가바나"};
+        for(int i=0; i<= engBrandName.length; i++){
+            Brand insertBrand = new Brand();
+            insertBrand.setBrandName(engBrandName[i]);
+            insertBrand.setKorName(korBrandName[i]);
+            brandRepository.save(insertBrand);
+        }
+
+
+
         // 데이터셋 추가
         String filePath = "src/main/resources/perfume/perfumes.xlsx";
         File xlsx = new File(filePath);

@@ -20,6 +20,9 @@ public class Brand {
     @Column(name = "b_name")
     String brandName;
 
+    @Column(name = "kor_name")
+    String korName;
+
     @OneToMany(mappedBy = "perfumeBrand", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     Set<Perfume> perfumeList = new HashSet<>();

@@ -15,6 +15,7 @@ import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 
 
 @Getter
@@ -27,6 +28,8 @@ public class PerfumeResponse {
     String perfumeBrand;
     float perfumeScore;
     String group;
+    int reviewCnt;
+    int likeCnt;
     String note1;
     String note2;
     String note3;
@@ -44,6 +47,8 @@ public class PerfumeResponse {
         res.setPerfumeBrand(perfume.getPerfumeBrand().getBrandName());
         res.setPerfumeScore(perfume.getPerfumeScore());
         res.setGroup(perfume.getGroup());
+        res.setReviewCnt(perfume.getReviewCnt());
+        res.setLikeCnt(perfume.getLikeCnt());
         res.setNote1(perfume.getNote1());
         res.setNote2(perfume.getNote2());
         res.setNote3(perfume.getNote3());
