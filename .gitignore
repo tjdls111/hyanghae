@@ -38,6 +38,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # ML
-ML/datas/
-ML/kfashion_ai_model/
-.idea/
+ML/
