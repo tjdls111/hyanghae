@@ -5,12 +5,11 @@
  * @author Woody, David, Alice
  * @version 1.0.0
  * 생성일 2022/03/16
- * 마지막 수정일 2022/03/31
+ * 마지막 수정일 2022/04/01
  **/
 package com.idle.api.controller;
 
 import com.idle.api.request.ReviewInsertRequest;
-import com.idle.api.request.UserSignUpRequest;
 import com.idle.api.response.*;
 import com.idle.api.service.PerfumeService;
 import com.idle.common.jwt.dto.IdleUserDetails;
@@ -35,7 +34,6 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +86,17 @@ public class PerfumeController {
         return ResponseEntity.status(200).body(PerfumeResponse.of(perfume));
     }
 
+    /* David */
+    @ApiOperation("향수 브랜드 조회")
+    @GetMapping("/brand")
+    public ResponseEntity<? extends BaseResponseBody> getBrandList() {
+
+        List<Brand> brandList = perfumeService.getBrandList();
+        return ResponseEntity.ok(BrandListResponse.of(200,"success",brandList));
+
+    }
+
+    /* David */
     @ApiOperation("향수 리뷰 작성")
     @PostMapping("/review")
     public ResponseEntity<? extends BaseResponseBody> insertReview(@ApiIgnore Authentication authentication, @RequestBody ReviewInsertRequest reviewInsertRequest) {

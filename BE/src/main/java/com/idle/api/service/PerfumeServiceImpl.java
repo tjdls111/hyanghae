@@ -12,10 +12,7 @@ package com.idle.api.service;
 import com.google.common.collect.Lists;
 import com.idle.api.request.ReviewInsertRequest;
 import com.idle.db.entity.*;
-import com.idle.db.repository.LikePerfumeRepository;
-import com.idle.db.repository.PerfumeRepository;
-import com.idle.db.repository.ReviewRepository;
-import com.idle.db.repository.UserRepository;
+import com.idle.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +35,9 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     @Autowired
     LikePerfumeRepository likePerfumeRepository;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     @Override
     public Page<Perfume> getPerfumeSearchPage(String keyword, String content, Pageable pageable) {
@@ -64,6 +64,13 @@ public class PerfumeServiceImpl implements PerfumeService{
     public Perfume getPerfumeByPerfumeId(Long perfumeId) {
         Perfume perfume = perfumeRepository.findByPerfumeId(perfumeId).orElse(null);
         return perfume;
+    }
+
+    /* David : 향수 브랜드 목록 조회 */
+    @Override
+    public List<Brand> getBrandList() {
+        List<Brand> brandList = brandRepository.findAll();
+        return brandList;
     }
 
     /* David : 향수 리뷰 작성 */

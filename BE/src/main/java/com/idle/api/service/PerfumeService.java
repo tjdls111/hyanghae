@@ -10,10 +10,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.ReviewInsertRequest;
-import com.idle.db.entity.LikePerfume;
-import com.idle.db.entity.Perfume;
-import com.idle.db.entity.Review;
-import com.idle.db.entity.User;
+import com.idle.db.entity.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -26,6 +23,8 @@ public interface PerfumeService {
     Page<Perfume> getPerfumeSearchPage(String keyword, String content, Pageable pageable);
     Page<Perfume> getPerfumeList(Pageable pageable);
     Perfume getPerfumeByPerfumeId(Long perfumeId);
+    //향수 브랜드
+    List<Brand> getBrandList();
     //향수 리뷰
     String insertReview(User user, ReviewInsertRequest reviewInsertRequest);
     Page<Review> getReviewList(Pageable pageable,Long perfumeId);
