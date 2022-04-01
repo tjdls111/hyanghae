@@ -87,12 +87,25 @@ public class PerfumeController {
     }
 
     /* David */
-    @ApiOperation("향수 브랜드 조회")
+    @ApiOperation("브랜드 조회")
     @GetMapping("/brand")
     public ResponseEntity<? extends BaseResponseBody> getBrandList() {
 
         List<Brand> brandList = perfumeService.getBrandList();
         return ResponseEntity.ok(BrandListResponse.of(200,"success",brandList));
+
+    }
+    /* David */
+    @ApiOperation("브랜드별 향수 목록 조회")
+    @GetMapping("/brand/{perfumeBrand}")
+    public ResponseEntity<? extends BaseResponseBody> getPerfumeListByBrand(@PageableDefault(size=9, sort="perfumeName",direction = Sort.Direction.ASC)Pageable pageable,
+                                                                            @PathVariable("perfumeBrand")String perfumeBrand,
+                                                                            @RequestParam(value = "content") String content) {
+
+        Page<Perfume> res = perfumeService.getPerfumeListByBrand(pageable, perfumeBrand, content);
+        System.out.println(res.getContent().get(0).getPerfumeName());
+
+        return ResponseEntity.ok(PerfumeListByBrandResponse.of(200,"success",res));
 
     }
 

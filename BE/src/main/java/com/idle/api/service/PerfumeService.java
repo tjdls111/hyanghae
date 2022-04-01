@@ -25,6 +25,7 @@ public interface PerfumeService {
     Perfume getPerfumeByPerfumeId(Long perfumeId);
     //향수 브랜드
     List<Brand> getBrandList();
+    Page<Perfume> getPerfumeListByBrand(Pageable pageable, String perfumeBrand, String content);
     //향수 리뷰
     String insertReview(User user, ReviewInsertRequest reviewInsertRequest);
     Page<Review> getReviewList(Pageable pageable,Long perfumeId);

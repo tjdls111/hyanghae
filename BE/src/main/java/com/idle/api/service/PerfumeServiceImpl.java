@@ -66,11 +66,20 @@ public class PerfumeServiceImpl implements PerfumeService{
         return perfume;
     }
 
-    /* David : 향수 브랜드 목록 조회 */
+    /* David : 브랜드 조회 */
     @Override
     public List<Brand> getBrandList() {
         List<Brand> brandList = brandRepository.findAll();
         return brandList;
+    }
+
+    /* David : 브랜드별 향수 목록 조회*/
+    @Override
+    public Page<Perfume> getPerfumeListByBrand(Pageable pageable, String perfumeBrand, String content) {
+        Brand brand = brandRepository.findByBrandName(perfumeBrand).get();
+        Page<Perfume> perfumeList = perfumeRepository.findByPerfumeBrandAndPerfumeNameContaining(pageable, brand, content);
+        System.out.println(perfumeList.getContent().get(0).getPerfumeName());
+        return perfumeList;
     }
 
     /* David : 향수 리뷰 작성 */
