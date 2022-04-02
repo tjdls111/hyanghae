@@ -69,9 +69,9 @@ export const apiPostPerfumeReview = async (
   }
 };
 
-export const apiGetPerfumeReview = async (perfumeId: string) => {
+export const apiGetPerfumeReview = async (perfumeId: string, page:number, size:number, sort:string='createDate,DESC') => {
   try {
-    return await axios.get(`${BASE_URL}/perfume/review/list/${perfumeId}`);
+    return await axios.get(`${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}&sort=${sort}`);
   } catch (e) {
     throw new Error("server error");
   }

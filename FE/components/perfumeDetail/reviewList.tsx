@@ -14,6 +14,7 @@ import { apiUserLookUp } from "../../api/user";
 import styles from "./reviewList.module.css";
 import Review from "./review";
 import { useAppSelector } from "../../reducers/hooks";
+import Pagination from "./pagination";
 interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
@@ -24,6 +25,9 @@ const ReviewList = () => {
   const router = useRouter();
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(null);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   const token = useAppSelector((state) => state.authReducer.token);
 
@@ -44,6 +48,7 @@ const ReviewList = () => {
     setEditMode(!editMode);
   };
 
+  // 댓글 삭제
   const onDelete = (e) => {
     if (token) {
       e.preventDefault();
@@ -59,9 +64,12 @@ const ReviewList = () => {
     }
   };
 
+  // 댓글 가져오기
   const getReview = () => {
-    apiGetPerfumeReview(router.query.id as string)
+    apiGetPerfumeReview(router.query.id as string, 1, 1)
       .then((res) => {
+        console.log(res.data);
+        setTotal(res.data.totalPages);
         setData(res.data.reviewList);
       })
       .catch((err) => {
@@ -81,6 +89,21 @@ const ReviewList = () => {
       {data.length == 0 && (
         <h2 className={styles.content}>There are no review.. </h2>
       )}
+      {data.length > 0 && (
+        <label htmlFor="limit">
+          <span className={styles.content}>페이지 당 표시할 소식 수</span>
+          <select
+            value={limit}
+            onChange={({ target: { value } }) => setLimit(Number(value))}
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="12">12</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+      )}
+
       <ul className={styles.myList}>
         {data &&
           data.map((d) => (
@@ -127,6 +150,16 @@ const ReviewList = () => {
             </li>
           ))}
       </ul>
+      {data.length !== 0 && (
+        <footer>
+          <Pagination
+            total={total}
+            limit={limit}
+            page={page}
+            setPage={setPage}
+          />
+        </footer>
+      )}
     </article>
   );
 };

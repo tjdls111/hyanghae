@@ -1,0 +1,36 @@
+.pagNav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 16px;
+}
+
+.pagBtn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 0;
+  background: pink;
+  color: yellow;
+  font-size: 1rem;
+}
+
+.pagBtn:hover {
+  background: black;
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.pagBtn:disabled {
+  background: grey;
+  cursor: revert;
+  transform: revert;
+}
+
+.pagBtn:aria-current {
+  background: red;
+  font-weight: bold;
+  cursor: revert;
+  transform: revert;
+}
