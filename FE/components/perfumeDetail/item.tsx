@@ -15,6 +15,7 @@ import EbayList from "./ebayList";
 import { apiShoppingSearch, updateEbayKey } from "../../api/perfume";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../reducers/hooks";
+import Like from "./like";
 interface InnerProps {
   data: {
     name: string;
@@ -41,6 +42,7 @@ interface Item {
 }
 const Item = ({ data }: InnerProps) => {
   const [lists, setLists] = useState([] as Array<Item>);
+  const [isLike, setIsLike] = useState(false);
 
   const dispatch = useDispatch();
   const isAuthenticated = useAppSelector((state) => state.authReducer.ebayApi);
@@ -100,6 +102,8 @@ const Item = ({ data }: InnerProps) => {
         <h1>{data.name}</h1>
         <h2>(Score: {data.score})</h2>
         <h2>Note: {data.note}</h2>
+        {isLike && <h1>🧡</h1>}
+        {!isLike && <h1>🤍</h1>}
         {lists && <EbayList lists={lists} />}
 
         <EbayBtn keyword={data.name} />
