@@ -1,4 +1,3 @@
-import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
 import { updateEbayKey } from "../api/perfume";
 interface authState {
@@ -29,15 +28,6 @@ const authSlice = createSlice({
       state.ebayApi = action.payload;
     },
   },
-  // extraReducers: {
-  //   [HYDRATE]: (state, action) => {
-  //     console.log("HYDRATE", action.payload);
-  //     return {
-  //       ...state,
-  //       ...action.payload,
-  //     };
-  //   },
-  // },
 });
 
 export const { login, logout, update } = authSlice.actions;
