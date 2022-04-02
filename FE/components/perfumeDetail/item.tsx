@@ -8,14 +8,19 @@
 */
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./item.module.css";
 import Image from "next/image";
 import EbayBtn from "./ebayBtn";
 import EbayList from "./ebayList";
-import { apiShoppingSearch, updateEbayKey } from "../../api/perfume";
+import {
+  apiShoppingSearch,
+  reviewLike,
+  updateEbayKey,
+} from "../../api/perfume";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../reducers/hooks";
-import Like from "./like";
+
 interface InnerProps {
   data: {
     name: string;
@@ -43,9 +48,19 @@ interface Item {
 const Item = ({ data }: InnerProps) => {
   const [lists, setLists] = useState([] as Array<Item>);
   const [isLike, setIsLike] = useState(false);
+  const router = useRouter();
 
   const dispatch = useDispatch();
   const isAuthenticated = useAppSelector((state) => state.authReducer.ebayApi);
+  const token = useAppSelector((state) => state.authReducer.token);
+
+  const onLike = () => {
+    const perfumeId = Number(router.query.id as string);
+    // setIsLike 부분은 추후에 변경해야 함!!! (실제로 좋아요 여부를 반영해야 함.)
+    reviewLike(token, perfumeId).finally(() => {
+      setIsLike(!isLike);
+    });
+  };
 
   updateEbayKey().then((res) => {
     console.log(res);
@@ -102,8 +117,16 @@ const Item = ({ data }: InnerProps) => {
         <h1>{data.name}</h1>
         <h2>(Score: {data.score})</h2>
         <h2>Note: {data.note}</h2>
-        {isLike && <h1>🧡</h1>}
-        {!isLike && <h1>🤍</h1>}
+        {isLike && (
+          <button onClick={onLike}>
+            <h1>🧡</h1>
+          </button>
+        )}
+        {!isLike && (
+          <button onClick={onLike}>
+            <h1>🤍</h1>
+          </button>
+        )}
         {lists && <EbayList lists={lists} />}
 
         <EbayBtn keyword={data.name} />

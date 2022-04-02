@@ -69,9 +69,16 @@ export const apiPostPerfumeReview = async (
   }
 };
 
-export const apiGetPerfumeReview = async (perfumeId: string, page:number, size:number, sort:string='createDate,DESC') => {
+export const apiGetPerfumeReview = async (
+  perfumeId: string,
+  page: number,
+  size: number,
+  sort: string = "createDate,DESC"
+) => {
   try {
-    return await axios.get(`${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}&sort=${sort}`);
+    return await axios.get(
+      `${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}&sort=${sort}`
+    );
   } catch (e) {
     throw new Error("server error");
   }
@@ -133,5 +140,17 @@ export const updateEbayKey = async () => {
   } catch (e) {
     console.log(e);
     // throw new Error("server error");
+  }
+};
+
+export const reviewLike = async (token: string, perfumeId: number) => {
+  try {
+    return await axios.get(`${BASE_URL}/perfume/like/${perfumeId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
   }
 };

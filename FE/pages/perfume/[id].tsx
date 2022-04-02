@@ -26,6 +26,7 @@ interface PerfumeResult {
   perfumeScore: string;
   season: string;
   tpo: string;
+  likeCnt: string;
 }
 
 interface PerfumeData {
@@ -35,6 +36,7 @@ interface PerfumeData {
   note: string;
   season: string;
   style: string;
+  likeCnt: string;
 }
 
 const Detail: NextPage = () => {
@@ -46,6 +48,7 @@ const Detail: NextPage = () => {
       (async () => {
         apiPerfumeDetail(router.query.id as string)
           .then((res) => {
+            console.log(res);
             let myres: PerfumeResult = {
               dayNight: "",
               gender: "",
@@ -58,6 +61,7 @@ const Detail: NextPage = () => {
               perfumeScore: "",
               season: "",
               tpo: "",
+              likeCnt: "",
             };
             myres = res.data as PerfumeResult;
             setData({
@@ -67,6 +71,7 @@ const Detail: NextPage = () => {
               note: "",
               season: myres.season,
               style: myres.tpo,
+              likeCnt: myres.likeCnt,
             });
           })
           .catch((err) => {
@@ -80,7 +85,7 @@ const Detail: NextPage = () => {
     <>
       <Navigation />
       <Item data={data} />
-      <Review isEditMode='false' setEdit={()=>{}} star="5" content="" />
+      <Review isEditMode="false" setEdit={() => {}} star="5" content="" />
       <ReviewList />
     </>
   );
