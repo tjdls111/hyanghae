@@ -208,7 +208,7 @@ public class PerfumeController {
         //향수 브랜드 추가
         String[] engBrandName = {"Chanel", "Jo Malone London", "Givenchy", "Byredo", "Anna Sui", "Le Labo", "Hermes", "Lanvin", "Calvin Klein", "Bvlgari", "Gucci", "Diptyque", "Dolce&Gabbana"};
         String[] korBrandName = {"샤넬", "조말론", "지방시", "바이레도", "안나수이", "르라보", "에르메스", "랑방", "캘빈클라인", "불가리", "구찌", "딥디크", "돌체엔가바나"};
-        for(int i=0; i<= engBrandName.length; i++){
+        for(int i=0; i<engBrandName.length; i++){
             Brand insertBrand = new Brand();
             insertBrand.setBrandName(engBrandName[i]);
             insertBrand.setKorName(korBrandName[i]);
@@ -242,7 +242,7 @@ public class PerfumeController {
             perfume.setNote2(row.getCell(7).getStringCellValue());
             perfume.setNote3(row.getCell(8).getStringCellValue());
             perfume.setPerfumeName(row.getCell(9).getStringCellValue());
-            perfume.setImgUrl(row.getCell(10).getStringCellValue());
+            perfume.setImgUrl(row.getCell(11).getStringCellValue());
             perfume.setPerfumeBrand(brand);
             perfume.setPerfumeScore(0);
             perfume.setReviewCnt(0);
