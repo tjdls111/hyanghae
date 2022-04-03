@@ -44,8 +44,6 @@ const HomePageBanner: React.FC = function () {
                   className={`${styles.image} ${
                     idx === current && styles.activeImage
                   }`}
-                  width="1000"
-                  height="1000"
                   layout="fill"
                   src={data.path}
                   alt="test"

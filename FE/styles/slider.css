@@ -1,0 +1,42 @@
+.swiper-container {
+  margin: auto;
+  max-width: 1200px;
+  overflow: hidden;
+  list-style: none;
+  padding-top: 7rem;
+  z-index: 1;
+  position: relative;
+}
+
+.swiper-navigation-container {
+  position: absolute;
+  top: 0;
+  right: 3rem;
+  display: flex;
+  column-gap: 1rem;
+}
+
+.swiper-heading {
+  position: absolute;
+  top: 0;
+  font-size: 3rem;
+  color: #333;
+}
+
+.swiper-button-prev-unique {
+  fill: #777;
+  width: 2.5rem;
+}
+
+.swiper-button-next-unique {
+  fill: #777;
+  width: 2.5rem;
+}
+
+.swiper-button-prev-unique.swiper-button-diabled {
+  opacity: 0.3;
+}
+
+.swiper-button-next-unique.swiper-button-diabled {
+  opacity: 0.3;
+}
