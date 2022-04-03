@@ -9,7 +9,11 @@ const ReviewCard: React.FC<{ review: reviewType }> = ({ review }) => {
     <div className={styles.container}>
       <section className={styles.productInfo}>
         <div className={styles.productImgWrapper}>
-          <Image src={review.imgUrl} layout="fill" />
+          <Image
+            className={styles.productImg}
+            src={review.imgUrl}
+            layout="fill"
+          />
         </div>
         <div className={styles.productText}>
           <p className={styles.productName}>{review.name}</p>
