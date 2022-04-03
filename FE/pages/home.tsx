@@ -13,6 +13,7 @@ import Navigation from "../components/navigation/navigation";
 import HomePageBanner from "../components/ui/homePageBanner/homePageBanner";
 import BestProduct from "../components/bestProduct/bestProduct";
 import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
+import Footer from "../components/landing/footer";
 
 const HomePage: NextPage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage: NextPage = () => {
       <HomePageBanner />
       <BestProduct />
       <SeasonalProduct />
+      <Footer />
     </>
   );
 };
