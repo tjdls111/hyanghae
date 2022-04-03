@@ -21,10 +21,12 @@ export const apiShoppingSearch = async (
   try {
     console.log(process.env.EBAY_API_KEY);
     return await axios.get(
-      `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}&limit=5`,
+      `https://openapi.naver.com/v1/search/shop.json?query=chocolate`,
       {
         headers: {
-          Authorization: `Bearer ${process.env.EBAY_API_KEY}`,
+          "X-Naver-Client-Id": "SGQWYLc_8_6M2ZpCjAsg",
+          "X-Naver-Client-Secret": "_8QJILf9ZB",
+          // Accept: "*/*",
         },
       }
     );
@@ -32,6 +34,23 @@ export const apiShoppingSearch = async (
     throw new Error("server Error");
   }
 };
+// export const apiShoppingSearch = async (
+//   keyword: string
+// ): Promise<searchResult> => {
+//   try {
+//     console.log(process.env.EBAY_API_KEY);
+//     return await axios.get(
+//       `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}&limit=5`,
+//       {
+//         headers: {
+//           Authorization: `Bearer ${process.env.EBAY_API_KEY}`,
+//         },
+//       }
+//     );
+//   } catch (e) {
+//     throw new Error("server Error");
+//   }
+// };
 
 export interface PerfumeResult {
   message: string;

@@ -84,14 +84,16 @@ const Item = ({ data }: InnerProps) => {
   };
 
   useEffect(() => {
-    // 이베이 쇼핑 검색 api 로 검색 결과 가져오기
-    apiShoppingSearch(data.name)
-      .then((res) => {
-        setLists(res.data.itemSummaries);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (data.name) {
+      // 이베이 쇼핑 검색 api 로 검색 결과 가져오기
+      apiShoppingSearch(data.name)
+        .then((res) => {
+          setLists(res.data.itemSummaries);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }, [data]);
 
   let myLoader;
