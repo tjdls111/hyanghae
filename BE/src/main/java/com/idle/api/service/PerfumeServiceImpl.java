@@ -9,7 +9,6 @@
 **/
 package com.idle.api.service;
 
-import com.google.common.collect.Lists;
 import com.idle.api.request.ReviewInsertRequest;
 import com.idle.db.entity.*;
 import com.idle.db.repository.*;
@@ -78,7 +77,7 @@ public class PerfumeServiceImpl implements PerfumeService{
     public Page<Perfume> getPerfumeListByBrand(Pageable pageable, String perfumeBrand, String content) {
         Brand brand = brandRepository.findByBrandName(perfumeBrand).get();
         Page<Perfume> perfumeList = perfumeRepository.findByPerfumeBrandAndPerfumeNameContaining(pageable, brand, content);
-        System.out.println(perfumeList.getContent().get(0).getPerfumeName());
+
         return perfumeList;
     }
 

@@ -73,15 +73,18 @@ public class PerfumeController {
         return ResponseEntity.ok(PerfumeListResponse.of(200, "Success", page));
     }
 
-    /* Woody */
+    /* Woody, David */
     @ApiOperation("향수 상세 정보")
     @GetMapping("/{perfumeId}")
-    public ResponseEntity<PerfumeResponse> getPerfume(@PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
-
+    public ResponseEntity<PerfumeResponse> getPerfume(@ApiIgnore Authentication authentication, @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
         Perfume perfume = perfumeService.getPerfumeByPerfumeId(perfumeId);
-
         if (perfume == null) {
             return ResponseEntity.status(404).body(null);
+        }
+        if(authentication != null){
+            IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+            User user = userDetail.getUser();
+            return ResponseEntity.status(200).body(PerfumeResponse.of(perfume,user));
         }
         return ResponseEntity.status(200).body(PerfumeResponse.of(perfume));
     }
@@ -103,7 +106,6 @@ public class PerfumeController {
                                                                             @RequestParam(value = "content") String content) {
 
         Page<Perfume> res = perfumeService.getPerfumeListByBrand(pageable, perfumeBrand, content);
-        System.out.println(res.getContent().get(0).getPerfumeName());
 
         return ResponseEntity.ok(PerfumeListByBrandResponse.of(200,"success",res));
 
@@ -172,7 +174,7 @@ public class PerfumeController {
         if (res.equals("fail")) {
             return ResponseEntity.status(401).body(BaseResponseBody.of(401, "좋아요 등록 실패"));
         } else if (res.equals("clear")) {
-            return ResponseEntity.status(401).body(BaseResponseBody.of(200, "좋아요 해제"));
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "좋아요 해제"));
         }
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "좋아요 등록"));
