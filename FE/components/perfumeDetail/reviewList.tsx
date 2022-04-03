@@ -131,7 +131,7 @@ const ReviewList = () => {
                     />
                   </div>
                   {d.userNickname === userName && (
-                    <div className={styles.oneReview}>
+                    <div className={styles.btnContainer}>
                       <button
                         className={styles.editBtn}
                         onClick={changeEditMode}
@@ -143,25 +143,6 @@ const ReviewList = () => {
                       </form>
                     </div>
                   )}
-                  {/* <div
-                    className={clsx(styles.imageContainer, styles.starBox)}
-                    style={{ width: d.reviewScore * 20 }}
-                  >
-                    <Image
-                      className={styles.pointOfStar}
-                      alt="별"
-                      src="/images/star.png"
-                      layout="fill"
-                    />
-                  </div>
-                  <div className={styles.imageContainer}>
-                    <Image
-                      className={styles.backBox}
-                      alt="별"
-                      src="/images/greyStar.png"
-                      layout="fill"
-                    />
-                  </div> */}
                 </div>
               )}
               {editMode && (

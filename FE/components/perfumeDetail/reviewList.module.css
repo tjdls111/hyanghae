@@ -37,6 +37,7 @@
 .title {
   font-size: 3.5rem;
   text-align: center;
+  margin-bottom: 3rem;
 }
 
 .content {
@@ -45,25 +46,16 @@
 
 .oneReview {
   display: flex;
-}
-/* .starBox {
-  z-index: 1000;
-  height: 5rem;
-  overflow: hidden;
-}
-.pointOfStar {
-  position: absolute;
-  z-index: 10;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed var(--color-primary-light-2);
+  margin-top: 2rem;
 }
 
-.backStar {
-  position: absolute;
+.btnContainer {
+  display: flex;
+  align-items: center;
 }
-.imageContainer {
-  width: 30rem;
-  height: 5rem;
-  position: relative;
-} */
+
 .starBox {
   z-index: 1000;
   margin-left: 2rem;
