@@ -1,16 +1,18 @@
 // 향수 이미지를 어떻게 가져올지 고민해봐야 할듯
-export interface review {
+export interface reviewType {
   imgUrl: string;
   name: string;
+  brand: string;
   rating: number;
   nickname: string;
   content: string;
 }
 
-export const DUMMY_DATA: review[] = [
+export const DUMMY_DATA: reviewType[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -19,6 +21,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -27,6 +30,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -35,6 +39,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -43,6 +48,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -51,6 +57,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -59,6 +66,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -67,6 +75,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -75,6 +84,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:
@@ -83,6 +93,7 @@ export const DUMMY_DATA: review[] = [
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
     name: "Jo Malone London",
+    brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
     content:

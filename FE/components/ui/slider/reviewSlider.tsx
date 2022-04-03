@@ -1,5 +1,5 @@
 import React from "react";
-import { review } from "../../recentReviews/dummyData";
+import { reviewType } from "../../recentReviews/dummyData";
 import Swiper, { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -7,7 +7,9 @@ import ReviewCard from "../reviewCard/reviewCard";
 import LeftArrow from "../../../public/SVG/circle-left.svg";
 import RightArrow from "../../../public/SVG/circle-right.svg";
 
-const ReviewSlider: React.FC<{ slideItems: review[] }> = ({ slideItems }) => {
+const ReviewSlider: React.FC<{ slideItems: reviewType[] }> = ({
+  slideItems,
+}) => {
   const swiper = new Swiper(".product-swiper-container", {
     modules: [Navigation],
     slidesPerView: 3,
@@ -19,12 +21,12 @@ const ReviewSlider: React.FC<{ slideItems: review[] }> = ({ slideItems }) => {
   });
 
   return (
-    <div className="review-swiper-container">
+    <div className="product-swiper-container">
       <h1 className="swiper-heading">Recent Reviews</h1>
       <div className="swiper-wrapper">
         {slideItems.map((item) => (
           <div className="swiper-slide">
-            <ReviewCard key={item.name} />
+            <ReviewCard review={item} key={item.name} />
           </div>
         ))}
       </div>
