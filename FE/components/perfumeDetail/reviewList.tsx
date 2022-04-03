@@ -15,6 +15,8 @@ import styles from "./reviewList.module.css";
 import Review from "./review";
 import { useAppSelector } from "../../reducers/hooks";
 import Pagination from "./pagination";
+import Image from "next/image";
+import clsx from "clsx";
 interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
@@ -55,6 +57,7 @@ const ReviewList = () => {
       apiDeletePerfumeReview(router.query.id as string, token)
         .then((res) => {
           alert("삭제되었습니다.");
+          setPage(0);
           getReview();
         })
         .catch((err) => {
@@ -90,7 +93,7 @@ const ReviewList = () => {
       )}
       {data.length > 0 && (
         <label htmlFor="limit">
-          <span className={styles.content}>페이지 당 표시할 소식 수</span>
+          <span className={styles.content}>Review count per page </span>
           <select
             value={limit}
             onChange={({ target: { value } }) => setLimit(Number(value))}
@@ -110,9 +113,45 @@ const ReviewList = () => {
               {!editMode && (
                 <div className={styles.oneReview}>
                   <p className={styles.content}>
-                    {d.userNickname} : {`${d.reviewContent}`} (
-                    {`${d.reviewScore}`})
+                    {d.userNickname} : {`${d.reviewContent}`} ({d.reviewScore})
                   </p>
+                  <div>
+                    <div
+                      className={styles.starBox}
+                      style={{ width: d.reviewScore * 16 }}
+                    >
+                      <img
+                        className={styles.pointOfStar}
+                        alt="별"
+                        src="/images/star.png"
+                      />
+                    </div>
+                    <img
+                      className={styles.backStar}
+                      alt="별"
+                      src="/images/greyStar.png"
+                    />
+                  </div>
+                  {/* <div
+                    className={clsx(styles.imageContainer, styles.starBox)}
+                    style={{ width: d.reviewScore * 20 }}
+                  >
+                    <Image
+                      className={styles.pointOfStar}
+                      alt="별"
+                      src="/images/star.png"
+                      layout="fill"
+                    />
+                  </div>
+                  <div className={styles.imageContainer}>
+                    <Image
+                      className={styles.backBox}
+                      alt="별"
+                      src="/images/greyStar.png"
+                      layout="fill"
+                    />
+                  </div> */}
+
                   {d.userNickname === userName && (
                     <div className={styles.oneReview}>
                       <button

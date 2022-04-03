@@ -58,8 +58,6 @@ const Item = ({ data }: InnerProps) => {
     });
   };
 
-  // dispatch(updateEbayKey)
-
   useEffect(() => {
     // 이베이 쇼핑 검색 api 로 검색 결과 가져오기
     apiShoppingSearch(data.name)

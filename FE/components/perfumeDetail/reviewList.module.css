@@ -47,3 +47,43 @@
   display: flex;
   margin-right: 1rem;
 }
+/* .starBox {
+  z-index: 1000;
+  height: 5rem;
+  overflow: hidden;
+}
+.pointOfStar {
+  position: absolute;
+  z-index: 10;
+}
+
+.backStar {
+  position: absolute;
+}
+.imageContainer {
+  width: 30rem;
+  height: 5rem;
+  position: relative;
+} */
+.starBox {
+  z-index: 1000;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  height: 4rem;
+  overflow: hidden;
+}
+
+.pointOfStar {
+  z-index: 10;
+  height: 4rem;
+  width: 10rem;
+}
+
+.backStar {
+  z-index: -10;
+  position: absolute;
+  margin-left: 2rem;
+  margin-top: -4rem;
+  width: 10rem;
+  height: 4rem;
+}
