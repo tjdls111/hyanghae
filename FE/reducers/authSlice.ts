@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { updateEbayKey } from "../api/perfume";
 interface authState {
   isAuthenticated: boolean;
   token: string | null;

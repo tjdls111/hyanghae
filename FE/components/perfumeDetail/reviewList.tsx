@@ -21,12 +21,12 @@ interface ReviewInterface {
   userNickname: string;
 }
 const ReviewList = () => {
-  const [data, setData] = useState([] as Array<ReviewInterface>);
   const router = useRouter();
+  const [data, setData] = useState([] as Array<ReviewInterface>);
   const [editMode, setEditMode] = useState(false);
   const [userName, setUserName] = useState(null);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(3);
+  const [page, setPage] = useState(0);
   const [total, setTotal] = useState(0);
 
   const token = useAppSelector((state) => state.authReducer.token);
@@ -66,10 +66,9 @@ const ReviewList = () => {
 
   // 댓글 가져오기
   const getReview = () => {
-    apiGetPerfumeReview(router.query.id as string, 1, 1)
+    apiGetPerfumeReview(router.query.id as string, page, limit, "")
       .then((res) => {
-        console.log(res.data);
-        setTotal(res.data.totalPages);
+        setTotal(res.data.totalElements);
         setData(res.data.reviewList);
       })
       .catch((err) => {
@@ -81,7 +80,7 @@ const ReviewList = () => {
     if (router.isReady) {
       getReview();
     }
-  }, [router, editMode]);
+  }, [router, editMode, limit, page]);
 
   return (
     <article className={styles.container}>
@@ -96,10 +95,10 @@ const ReviewList = () => {
             value={limit}
             onChange={({ target: { value } }) => setLimit(Number(value))}
           >
+            <option value="3">3</option>
             <option value="5">5</option>
             <option value="10">10</option>
-            <option value="12">12</option>
-            <option value="20">20</option>
+            <option value="15">15</option>
           </select>
         </label>
       )}

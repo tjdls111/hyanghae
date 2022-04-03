@@ -16,7 +16,7 @@ const Pagination = ({ total, limit, page, setPage }: Props) => {
       <button
         className={styles.pagBtn}
         onClick={() => setPage(page - 1)}
-        disabled={page === 1}
+        disabled={page === 0}
       >
         &lt;
       </button>
@@ -27,9 +27,9 @@ const Pagination = ({ total, limit, page, setPage }: Props) => {
             className={styles.pagBtn}
             type="button"
             // eslint-disable-next-line react/no-array-index-key
-            key={i + 1}
-            onClick={() => setPage(i + 1)}
-            aria-current={page === i + 1 ? "page" : undefined}
+            key={i}
+            onClick={() => setPage(i)}
+            aria-current={page === i ? "page" : undefined}
           >
             {i + 1}
           </button>
@@ -37,7 +37,7 @@ const Pagination = ({ total, limit, page, setPage }: Props) => {
       <button
         className={styles.pagBtn}
         onClick={() => setPage(page + 1)}
-        disabled={page === numPages}
+        disabled={page === numPages - 1}
       >
         &gt;
       </button>

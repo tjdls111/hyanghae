@@ -19,7 +19,7 @@ export const apiShoppingSearch = async (
   keyword: string
 ): Promise<searchResult> => {
   try {
-    console.log(process.env.EBAY_API_KEY)
+    console.log(process.env.EBAY_API_KEY);
     return await axios.get(
       `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}&limit=5`,
       {
@@ -74,11 +74,11 @@ export const apiGetPerfumeReview = async (
   perfumeId: string,
   page: number,
   size: number,
-  sort: string = "createDate,DESC"
+  sort: string
 ) => {
   try {
     return await axios.get(
-      `${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}&sort=${sort}`
+      `${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}`
     );
   } catch (e) {
     throw new Error("server error");
