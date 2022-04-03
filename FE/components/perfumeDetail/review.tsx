@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { apiPostPerfumeReview, apiPutPerfumeReview } from "../../api/perfume";
 import styles from "./review.module.css";
+import { useAppSelector } from "../../reducers/hooks";
 interface Props {
   star: string;
   content: string;
@@ -22,6 +23,7 @@ const Review = (Props: Props) => {
   const review = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
   const [selected, setSelected] = useState(Props.star || "5");
+  const token = useAppSelector((state) => state.authReducer.token);
 
   useEffect(() => {
     review.current.value = Props.content;
@@ -29,7 +31,6 @@ const Review = (Props: Props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
     const perfumeId = Number(router.query.id as string);
 
     if (review.current?.value) {
@@ -56,6 +57,7 @@ const Review = (Props: Props) => {
           selected
         )
           .then((res) => {
+            console.log(res);
             review.current.value = "";
             router.reload(window.location.pathname);
           })

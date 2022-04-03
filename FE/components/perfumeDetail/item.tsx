@@ -13,11 +13,7 @@ import styles from "./item.module.css";
 import Image from "next/image";
 import EbayBtn from "./ebayBtn";
 import EbayList from "./ebayList";
-import {
-  apiShoppingSearch,
-  reviewLike,
-  updateEbayKey,
-} from "../../api/perfume";
+import { apiShoppingSearch, reviewLike } from "../../api/perfume";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../reducers/hooks";
 
@@ -62,9 +58,6 @@ const Item = ({ data }: InnerProps) => {
     });
   };
 
-  updateEbayKey().then((res) => {
-    console.log(res);
-  });
   // dispatch(updateEbayKey)
 
   useEffect(() => {
