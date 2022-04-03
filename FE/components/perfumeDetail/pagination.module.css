@@ -11,13 +11,14 @@
   border-radius: 8px;
   padding: 8px;
   margin: 0;
-  background: pink;
-  color: yellow;
+  background: var(--color-primary-light-3);
+  color: var(--color-grey-dark-1);
   font-size: 1rem;
 }
 
 .pagBtn:hover {
-  background: black;
+  background: var(--color-primary-light-1);
+  color: var(--color-grey-light-1);
   cursor: pointer;
   transform: translateY(-2px);
 }

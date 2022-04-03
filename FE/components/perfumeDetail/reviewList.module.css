@@ -19,18 +19,18 @@
 
 .delBtn {
   border-radius: 5px;
-  border: 0;
+  border: 1px solid var(--color-grey-dark-4);
   padding: 1rem;
-  background-color: red;
-  color: var(--color-grey-light-3);
+  background: var(--color-primary);
+  color: var(--color-grey-light-1);
   cursor: pointer;
 }
 
 .editBtn {
   border-radius: 5px;
-  border: 1px solid black;
+  border: 1px solid var(--color-grey-dark-4);
   padding: 1rem;
-  background-color: yellow;
+  background-color: var(--color-primary-shade);
   cursor: pointer;
 }
 
