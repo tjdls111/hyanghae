@@ -27,16 +27,30 @@ interface PerfumeResult {
   season: string;
   tpo: string;
   likeCnt: string;
+  group: string;
+  imgUrl: string;
+  note1: string;
+  note2: string;
+  note3: string;
+  reviewCnt: string;
 }
 
 interface PerfumeData {
   name: string;
   score: string;
   price: string;
-  note: string;
   season: string;
   style: string;
   likeCnt: string;
+  gender: string;
+  imgUrl: string;
+  mood: string;
+  note1: string;
+  note2: string;
+  note3: string;
+  perfumeBrand: string;
+  tpo: string;
+  reviewCnt: string;
 }
 
 const Detail: NextPage = () => {
@@ -62,16 +76,30 @@ const Detail: NextPage = () => {
               season: "",
               tpo: "",
               likeCnt: "",
+              group: "",
+              imgUrl: "",
+              note1: "",
+              note2: "",
+              note3: "",
+              reviewCnt: "",
             };
             myres = res.data as PerfumeResult;
             setData({
               name: myres.perfumeName,
               score: myres.perfumeScore,
               price: myres.perfumeCost,
-              note: "",
               season: myres.season,
               style: myres.tpo,
               likeCnt: myres.likeCnt,
+              gender: myres.gender,
+              imgUrl: myres.imgUrl,
+              mood: myres.mood,
+              note1: myres.note1,
+              note2: myres.note2,
+              note3: myres.note3,
+              perfumeBrand: myres.perfumeBrand,
+              tpo: myres.tpo,
+              reviewCnt: myres.reviewCnt,
             });
           })
           .catch((err) => {

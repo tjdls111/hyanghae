@@ -15,8 +15,6 @@ import styles from "./reviewList.module.css";
 import Review from "./review";
 import { useAppSelector } from "../../reducers/hooks";
 import Pagination from "./pagination";
-import Image from "next/image";
-import clsx from "clsx";
 interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
@@ -126,7 +124,7 @@ const ReviewList = () => {
                     </div>
                   )}
                   <p className={styles.content}>
-                    {d.userNickname} : {`${d.reviewContent}`} ({d.reviewScore})
+                    {d.userNickname} : {`${d.reviewContent}`}
                   </p>
                   <div>
                     <div
@@ -136,7 +134,7 @@ const ReviewList = () => {
                       <img
                         className={styles.pointOfStar}
                         alt="별"
-                        src="/images/star.png"
+                        src="/images/pinkStar.png"
                       />
                     </div>
                     <img

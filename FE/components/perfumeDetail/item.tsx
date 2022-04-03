@@ -22,9 +22,18 @@ interface InnerProps {
     name: string;
     score: string;
     price: string;
-    note: string;
     season: string;
     style: string;
+    likeCnt: string;
+    gender: string;
+    imgUrl: string;
+    mood: string;
+    note1: string;
+    note2: string;
+    note3: string;
+    perfumeBrand: string;
+    tpo: string;
+    reviewCnt: string;
   };
 }
 
@@ -101,13 +110,21 @@ const Item = ({ data }: InnerProps) => {
             </div>
           )}
         </div>
-        <p>Seasonal: {data.season}</p>
-        <p>Style: {data.style}</p>
+        <p className={styles.content}>Seasonal: {data.season}</p>
+        <p className={styles.content}>Style: {data.tpo}</p>
       </div>
       <div>
-        <h1>{data.name}</h1>
-        <h2>(Score: {data.score})</h2>
-        <h2>Note: {data.note}</h2>
+        <span className={styles.title}>
+          {data.name} | {data.perfumeBrand}
+        </span>
+        <span className={styles.content}>for {data.gender}</span>
+        <p className={styles.content}>
+          Rating {data.score} out of 5 with {data.reviewCnt} votes.
+        </p>
+        <p className={styles.content}>
+          Notes: {data.note1}, {data.note2}, {data.note3}
+        </p>
+        <p className={styles.content}>{data.likeCnt} people likes this item.</p>
         {isLike && (
           <button onClick={onLike}>
             <h1>🧡</h1>
