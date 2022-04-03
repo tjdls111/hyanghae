@@ -1,22 +1,20 @@
 import React from "react";
 import { product } from "../../bestProduct/dummyData";
-import Swiper, { Navigation, Pagination } from "swiper";
+import Swiper, { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
 import ProductCard from "../productCard/productCard";
 import LeftArrow from "../../../public/SVG/circle-left.svg";
 import RightArrow from "../../../public/SVG/circle-right.svg";
 
-const Slider: React.FC<{ slideItems: product[]; header: string }> = ({
+const ProductSlider: React.FC<{ slideItems: product[]; header: string }> = ({
   slideItems,
   header,
 }) => {
-  const swiper = new Swiper(".swiper-container", {
-    modules: [Navigation, Pagination],
+  const swiper = new Swiper(".product-swiper-container", {
+    modules: [Navigation],
     slidesPerView: 4,
     direction: "horizontal",
-    loop: false,
     navigation: {
       nextEl: ".swiper-button-next-unique",
       prevEl: ".swiper-button-prev-unique",
@@ -25,7 +23,7 @@ const Slider: React.FC<{ slideItems: product[]; header: string }> = ({
 
   return (
     <>
-      <div className="swiper-container">
+      <div className="product-swiper-container">
         <h1 className="swiper-heading">{header}</h1>
         <div className="swiper-wrapper">
           {slideItems.map((item) => (
@@ -43,4 +41,4 @@ const Slider: React.FC<{ slideItems: product[]; header: string }> = ({
   );
 };
 
-export default Slider;
+export default ProductSlider;

@@ -1,12 +1,15 @@
 import React from "react";
-import styles from "./seasonalProduct.module.css";
-import Slider from "../ui/slider/slider";
+import styles from "./seasonalProducts.module.css";
+import ProductSlider from "../ui/slider/productSlider";
 import { DUMMY_DATA } from "./dummyData";
 
 const SeasonalProduct: React.FC = () => {
   return (
     <section className={styles.container}>
-      <Slider header={"봄에 어울리는 향수"} slideItems={DUMMY_DATA}></Slider>
+      <ProductSlider
+        header={"봄에 어울리는 향수"}
+        slideItems={DUMMY_DATA}
+      ></ProductSlider>
     </section>
   );
 };
