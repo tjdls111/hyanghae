@@ -6,7 +6,7 @@ import styles from "./bestProduct.module.css";
 const BestProduct: React.FC = () => {
   return (
     <section className={styles.container}>
-      <Slider slideItems={DUMMY_DATA}></Slider>
+      <Slider header={"BEST 10"} slideItems={DUMMY_DATA}></Slider>
     </section>
   );
 };

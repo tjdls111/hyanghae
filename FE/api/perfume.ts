@@ -14,14 +14,19 @@ export interface searchResult {
   statusCode: number;
 }
 
-export const apiShoppingSearch = async (keyword: string): Promise<searchResult> => {
+export const apiShoppingSearch = async (
+  keyword: string
+): Promise<searchResult> => {
   try {
-    return await axios.get(`https://openapi.naver.com/v1/search/shop.json?query=${keyword}`, {
-      headers: {
-        // "X-Naver-Client-Id": "",
-        // "X-Naver-Client-Secret": "",
-      },
-    });
+    return await axios.get(
+      `https://openapi.naver.com/v1/search/shop.json?query=${keyword}`,
+      {
+        headers: {
+          // "X-Naver-Client-Id": "",
+          // "X-Naver-Client-Secret": "",
+        },
+      }
+    );
   } catch (e) {
     throw new Error("server Error");
   }
@@ -33,10 +38,19 @@ export interface PerfumeResult {
   data: object;
 }
 
-export const apiPerfumeDetail = async (perfumeId: string): Promise<PerfumeResult> => {
+export const apiPerfumeDetail = async (
+  perfumeId: string
+): Promise<PerfumeResult> => {
   try {
     return await axios.get(`${BASE_URL}/perfume/${perfumeId}/`);
   } catch (e) {
     throw new Error("server error");
   }
+};
+
+// best 10 향수 조회(홈)
+export const apiBestPerfumes = async function () {
+  try {
+    const response = await axios.get(``);
+  } catch {}
 };

@@ -8,7 +8,10 @@ import ProductCard from "../productCard/productCard";
 import LeftArrow from "../../../public/SVG/circle-left.svg";
 import RightArrow from "../../../public/SVG/circle-right.svg";
 
-const Slider: React.FC<{ slideItems: product[] }> = ({ slideItems }) => {
+const Slider: React.FC<{ slideItems: product[]; header: string }> = ({
+  slideItems,
+  header,
+}) => {
   const swiper = new Swiper(".swiper-container", {
     modules: [Navigation, Pagination],
     slidesPerView: 4,
@@ -23,7 +26,7 @@ const Slider: React.FC<{ slideItems: product[] }> = ({ slideItems }) => {
   return (
     <>
       <div className="swiper-container">
-        <h1 className="swiper-heading">BEST 10</h1>
+        <h1 className="swiper-heading">{header}</h1>
         <div className="swiper-wrapper">
           {slideItems.map((item) => (
             <div className="swiper-slide">

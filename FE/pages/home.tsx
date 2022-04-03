@@ -12,6 +12,7 @@ import { NextPage } from "next";
 import Navigation from "../components/navigation/navigation";
 import HomePageBanner from "../components/ui/homePageBanner/homePageBanner";
 import BestProduct from "../components/bestProduct/bestProduct";
+import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
 
 const HomePage: NextPage = () => {
   return (
@@ -19,6 +20,7 @@ const HomePage: NextPage = () => {
       <Navigation />
       <HomePageBanner />
       <BestProduct />
+      <SeasonalProduct />
     </>
   );
 };
