@@ -8,6 +8,8 @@
 
 .btn {
   border-radius: 5px;
+  padding: 1rem;
   background-color: var(--color-primary-shade);
+  border: 0px;
   cursor: pointer;
 }

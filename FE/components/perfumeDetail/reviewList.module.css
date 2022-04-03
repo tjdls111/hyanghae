@@ -67,7 +67,7 @@
 .starBox {
   z-index: 1000;
   margin-left: 2rem;
-  margin-right: 2rem;
+  margin-right: 12rem;
   height: 4rem;
   overflow: hidden;
 }
@@ -75,7 +75,7 @@
 .pointOfStar {
   z-index: 10;
   height: 4rem;
-  width: 10rem;
+  width: 13rem;
 }
 
 .backStar {
@@ -83,6 +83,6 @@
   position: absolute;
   margin-left: 2rem;
   margin-top: -4rem;
-  width: 10rem;
+  width: 13rem;
   height: 4rem;
 }

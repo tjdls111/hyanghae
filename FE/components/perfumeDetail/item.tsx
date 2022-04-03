@@ -110,31 +110,53 @@ const Item = ({ data }: InnerProps) => {
             </div>
           )}
         </div>
-        <p className={styles.content}>Seasonal: {data.season}</p>
-        <p className={styles.content}>Style: {data.tpo}</p>
+        <p className={styles.content}>
+          Seasonal : {data.season == "0" && "Spring🌸/Summer🌊"}
+          {data.season == "1" && "Fall🍁/Winter☃"}
+          {data.season == "2" && "All Season"}
+        </p>
+        <p className={styles.content}>
+          TPO : {data.tpo == "0" && "All situation"}
+          {data.tpo == "1" && "Daily"}
+          {data.tpo == "2" && "Date💜"}
+          {data.tpo == "3" && "Interview🧐"}
+        </p>
+        <p className={styles.content}>
+          Mood : {data.mood == "0" && "All"}
+          {data.mood == "1" && "Lively"}
+          {data.mood == "2" && "Elegant"}
+          {data.mood == "3" && "Fresh"}
+          {data.mood == "4" && "Warm"}
+        </p>
       </div>
       <div>
         <span className={styles.title}>
           {data.name} | {data.perfumeBrand}
         </span>
-        <span className={styles.content}>for {data.gender}</span>
+        <span className={styles.content}>
+          for {data.gender == "0" && "Male"}
+          {data.gender == "1" && "Female"}
+          {data.gender == "2" && "All"}
+        </span>
         <p className={styles.content}>
-          Rating {data.score} out of 5 with {data.reviewCnt} votes.
+          Score : {data.score}/5 with {data.reviewCnt} votes.
         </p>
         <p className={styles.content}>
           Notes: {data.note1}, {data.note2}, {data.note3}
         </p>
         <p className={styles.content}>{data.likeCnt} people likes this item.</p>
-        {isLike && (
-          <button onClick={onLike}>
-            <h1>🧡</h1>
-          </button>
-        )}
-        {!isLike && (
-          <button onClick={onLike}>
-            <h1>🤍</h1>
-          </button>
-        )}
+        <div className={styles.btnContainer}>
+          {isLike && (
+            <button className={styles.btn} onClick={onLike}>
+              <h1>🧡</h1>
+            </button>
+          )}
+          {!isLike && (
+            <button className={styles.btn} onClick={onLike}>
+              <h1>🤍</h1>
+            </button>
+          )}
+        </div>
         {lists && <EbayList lists={lists} />}
 
         <EbayBtn keyword={data.name} />

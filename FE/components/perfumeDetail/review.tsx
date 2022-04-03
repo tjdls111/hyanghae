@@ -79,7 +79,7 @@ const Review = (Props: Props) => {
   return (
     <section className={styles.container}>
       <form className={styles.formContainer} onSubmit={onSubmit}>
-        <label htmlFor="review">
+        <label className={styles.content} htmlFor="review">
           Please leave an honest and kind review ^^
         </label>
         <textarea

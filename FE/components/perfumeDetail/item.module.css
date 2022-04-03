@@ -24,5 +24,15 @@
 .content {
   margin: 1rem;
   font-size: 2.3rem;
-  font-weight: bolder;
+}
+
+.btn {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.btnContainer {
+  text-align: center;
+  margin: 0.5rem 0;
 }

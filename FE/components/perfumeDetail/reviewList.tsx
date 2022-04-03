@@ -110,26 +110,13 @@ const ReviewList = () => {
             <li key={d.userNickname}>
               {!editMode && (
                 <div className={styles.oneReview}>
-                  {d.userNickname === userName && (
-                    <div className={styles.oneReview}>
-                      <button
-                        className={styles.editBtn}
-                        onClick={changeEditMode}
-                      >
-                        Edit
-                      </button>
-                      <form onSubmit={onDelete}>
-                        <button className={styles.delBtn}>Delete</button>
-                      </form>
-                    </div>
-                  )}
                   <p className={styles.content}>
                     {d.userNickname} : {`${d.reviewContent}`}
                   </p>
                   <div>
                     <div
                       className={styles.starBox}
-                      style={{ width: d.reviewScore * 16 }}
+                      style={{ width: d.reviewScore * 22 }}
                     >
                       <img
                         className={styles.pointOfStar}
@@ -143,6 +130,19 @@ const ReviewList = () => {
                       src="/images/greyStar.png"
                     />
                   </div>
+                  {d.userNickname === userName && (
+                    <div className={styles.oneReview}>
+                      <button
+                        className={styles.editBtn}
+                        onClick={changeEditMode}
+                      >
+                        Edit
+                      </button>
+                      <form onSubmit={onDelete}>
+                        <button className={styles.delBtn}>Delete</button>
+                      </form>
+                    </div>
+                  )}
                   {/* <div
                     className={clsx(styles.imageContainer, styles.starBox)}
                     style={{ width: d.reviewScore * 20 }}
