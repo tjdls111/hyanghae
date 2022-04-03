@@ -64,7 +64,7 @@ const Detail: NextPage = () => {
       (async () => {
         apiPerfumeDetail(router.query.id as string)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             let myres: PerfumeResult = {
               dayNight: "",
               gender: "",

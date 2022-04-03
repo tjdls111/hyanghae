@@ -19,17 +19,15 @@ export const apiShoppingSearch = async (
   keyword: string
 ): Promise<searchResult> => {
   try {
-    console.log(process.env.EBAY_API_KEY);
-    return await axios.get(
-      `https://openapi.naver.com/v1/search/shop.json?query=chocolate`,
-      {
-        headers: {
-          "X-Naver-Client-Id": "SGQWYLc_8_6M2ZpCjAsg",
-          "X-Naver-Client-Secret": "_8QJILf9ZB",
-          // Accept: "*/*",
-        },
-      }
-    );
+    return await axios.get(`/v1/search/shop.json`, {
+      params: {
+        query: "초콜릿",
+      },
+      headers: {
+        "X-Naver-Client-Id": "SGQWYLc_8_6M2ZpCjAsg",
+        "X-Naver-Client-Secret": "_8QJILf9ZB",
+      },
+    });
   } catch (e) {
     throw new Error("server Error");
   }

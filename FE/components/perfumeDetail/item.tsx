@@ -73,7 +73,7 @@ const Item = ({ data }: InnerProps) => {
         } else {
           setLikeCnt(likeCnt - 1);
         }
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => {
         setLikeCnt(likeCnt - 1);
