@@ -24,7 +24,7 @@ interface InnerProps {
     price: string;
     season: string;
     style: string;
-    likeCnt: string;
+    likeCnt: number;
     gender: string;
     imgUrl: string;
     mood: string;
@@ -34,6 +34,7 @@ interface InnerProps {
     perfumeBrand: string;
     tpo: string;
     reviewCnt: string;
+    like: boolean;
   };
 }
 
@@ -52,7 +53,8 @@ interface Item {
 }
 const Item = ({ data }: InnerProps) => {
   const [lists, setLists] = useState([] as Array<Item>);
-  const [isLike, setIsLike] = useState(false);
+  const [isLike, setIsLike] = useState(data.like);
+  const [likeCnt, setLikeCnt] = useState(data.likeCnt | 0);
   const router = useRouter();
 
   const dispatch = useDispatch();
@@ -60,11 +62,25 @@ const Item = ({ data }: InnerProps) => {
   const token = useAppSelector((state) => state.authReducer.token);
 
   const onLike = () => {
+    console.log(data.like);
+    console.log(data.likeCnt);
     const perfumeId = Number(router.query.id as string);
     // setIsLike 부분은 추후에 변경해야 함!!! (실제로 좋아요 여부를 반영해야 함.)
-    reviewLike(token, perfumeId).finally(() => {
-      setIsLike(!isLike);
-    });
+    reviewLike(token, perfumeId)
+      .then((res) => {
+        if (res?.data?.message === "좋아요 해제") {
+          setLikeCnt(likeCnt + 1);
+        } else {
+          setLikeCnt(likeCnt - 1);
+        }
+        console.log(res);
+      })
+      .catch((err) => {
+        setLikeCnt(likeCnt - 1);
+      })
+      .finally(() => {
+        setIsLike(!isLike);
+      });
   };
 
   useEffect(() => {
@@ -144,7 +160,7 @@ const Item = ({ data }: InnerProps) => {
         <p className={styles.content}>
           Notes: {data.note1}, {data.note2}, {data.note3}
         </p>
-        <p className={styles.content}>{data.likeCnt} people likes this item.</p>
+        <p className={styles.content}>{likeCnt} people likes this item.</p>
         <div className={styles.btnContainer}>
           {isLike && (
             <button className={styles.btn} onClick={onLike}>

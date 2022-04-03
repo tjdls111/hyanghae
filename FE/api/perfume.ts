@@ -129,6 +129,7 @@ export const reviewLike = async (token: string, perfumeId: number) => {
       },
     });
   } catch (e) {
-    throw new Error("server error");
+    // throw new Error("server error");
+    console.log(e);
   }
 };
