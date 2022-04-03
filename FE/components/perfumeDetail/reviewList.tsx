@@ -112,6 +112,19 @@ const ReviewList = () => {
             <li key={d.userNickname}>
               {!editMode && (
                 <div className={styles.oneReview}>
+                  {d.userNickname === userName && (
+                    <div className={styles.oneReview}>
+                      <button
+                        className={styles.editBtn}
+                        onClick={changeEditMode}
+                      >
+                        Edit
+                      </button>
+                      <form onSubmit={onDelete}>
+                        <button className={styles.delBtn}>Delete</button>
+                      </form>
+                    </div>
+                  )}
                   <p className={styles.content}>
                     {d.userNickname} : {`${d.reviewContent}`} ({d.reviewScore})
                   </p>
@@ -151,20 +164,6 @@ const ReviewList = () => {
                       layout="fill"
                     />
                   </div> */}
-
-                  {d.userNickname === userName && (
-                    <div className={styles.oneReview}>
-                      <button
-                        className={styles.editBtn}
-                        onClick={changeEditMode}
-                      >
-                        Edit
-                      </button>
-                      <form onSubmit={onDelete}>
-                        <button className={styles.delBtn}>Delete</button>
-                      </form>
-                    </div>
-                  )}
                 </div>
               )}
               {editMode && (
