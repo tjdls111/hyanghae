@@ -9,6 +9,7 @@
  **/
 package com.idle.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -26,7 +27,7 @@ public class Survey1 extends BaseTimeEntity{
     Long surveyId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JsonManagedReference
+    @JsonBackReference
     @JoinColumn(name = "u_seq", nullable = false)
     User user;
 

@@ -9,17 +9,14 @@
 **/
 package com.idle.api.service;
 
-import com.google.common.collect.Lists;
 import com.idle.api.request.ReviewInsertRequest;
 import com.idle.db.entity.*;
-import com.idle.db.repository.LikePerfumeRepository;
-import com.idle.db.repository.PerfumeRepository;
-import com.idle.db.repository.ReviewRepository;
-import com.idle.db.repository.UserRepository;
+import com.idle.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
@@ -38,6 +35,9 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     @Autowired
     LikePerfumeRepository likePerfumeRepository;
+
+    @Autowired
+    private BrandRepository brandRepository;
 
     @Override
     public Page<Perfume> getPerfumeSearchPage(String keyword, String content, Pageable pageable) {
@@ -64,6 +64,22 @@ public class PerfumeServiceImpl implements PerfumeService{
     public Perfume getPerfumeByPerfumeId(Long perfumeId) {
         Perfume perfume = perfumeRepository.findByPerfumeId(perfumeId).orElse(null);
         return perfume;
+    }
+
+    /* David : 브랜드 조회 */
+    @Override
+    public List<Brand> getBrandList() {
+        List<Brand> brandList = brandRepository.findAll();
+        return brandList;
+    }
+
+    /* David : 브랜드별 향수 목록 조회*/
+    @Override
+    public Page<Perfume> getPerfumeListByBrand(Pageable pageable, String perfumeBrand, String content) {
+        Brand brand = brandRepository.findByBrandName(perfumeBrand).get();
+        Page<Perfume> perfumeList = perfumeRepository.findByPerfumeBrandAndPerfumeNameContaining(pageable, brand, content);
+
+        return perfumeList;
     }
 
     /* David : 향수 리뷰 작성 */
@@ -141,6 +157,7 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     /* David : 향수 좋아요 등록/해제 */
     @Override
+    @Transactional
     public String likePerfume(User user, Long perfumeId) {
         Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(perfumeId);
         if(!checkPerfume.isPresent()){
@@ -149,6 +166,7 @@ public class PerfumeServiceImpl implements PerfumeService{
         Optional<LikePerfume> checkLikePerfume  = likePerfumeRepository.findByUserAndPerfume(user, checkPerfume.get());
         if(checkLikePerfume.isPresent()){
             likePerfumeRepository.delete(checkLikePerfume.get());
+            //향수 정보 업데이트
             int likeCnt = likePerfumeRepository.countByPerfume(checkPerfume.get()); // 좋아요 개수
             checkPerfume.get().setLikeCnt(likeCnt);
             perfumeRepository.save(checkPerfume.get()); // 향수 정보 업데이트
@@ -160,14 +178,15 @@ public class PerfumeServiceImpl implements PerfumeService{
         int likeCnt = likePerfumeRepository.countByPerfume(checkPerfume.get()); // 좋아요 개수
         checkPerfume.get().setLikeCnt(likeCnt);
         perfumeRepository.save(checkPerfume.get()); // 향수 정보 업데이트
+
         return "register";
     }
 
     /* David : 향수 좋아요 목록 조회 */
     @Override
     public Page<LikePerfume> getLikePerfumeList(User user, Pageable pageable) {
-        Page<LikePerfume> likePerfumes = likePerfumeRepository.findByUser(user, pageable);
-        return likePerfumes;
+        Page<LikePerfume> likePerfumesList = likePerfumeRepository.findByUser(user, pageable);
+        return likePerfumesList;
     }
 
     /* David : 향수 추천 결과 목록 조회 (설문조사1, 2, 3의 결과) */

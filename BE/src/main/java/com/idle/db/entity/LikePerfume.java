@@ -29,7 +29,7 @@ import java.io.Serializable;
 public class LikePerfume implements Serializable {
     @Id
     @ManyToOne
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name="u_seq")
     private User user;
 
