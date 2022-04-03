@@ -18,6 +18,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Getter
@@ -65,7 +66,7 @@ public class PerfumeResponse {
         return res;
     }
 
-    public static PerfumeResponse of(Perfume perfume, User user) {
+    public static PerfumeResponse of(Perfume perfume, List<LikePerfume> likePerfumeList) {
         PerfumeResponse res = new PerfumeResponse();
         res.setPerfumeId(perfume.getPerfumeId());
         res.setPerfumeName(perfume.getPerfumeName());
@@ -84,9 +85,8 @@ public class PerfumeResponse {
         res.setMood(perfume.getMood());
         res.setImgUrl(perfume.getImgUrl());
 
-        List<LikePerfume> targetList = new ArrayList<>(user.getLikePerfumeList());
-        for(int i=0; i<targetList.size(); i++){
-            if(targetList.get(i).getPerfume().getPerfumeId().equals(perfume.getPerfumeId())){
+        for(int i=0; i<likePerfumeList.size(); i++){
+            if(likePerfumeList.get(i).getPerfume().getPerfumeId().equals(perfume.getPerfumeId())){
                 res.setLike(true);
                 break;
             }

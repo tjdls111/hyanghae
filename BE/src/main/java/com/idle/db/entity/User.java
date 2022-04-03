@@ -60,8 +60,8 @@ public class User extends BaseTimeEntity {
     @JsonBackReference
     Set<Review> reviewList = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonBackReference
     Set<LikePerfume> likePerfumeList = new HashSet<>();
 
     @Builder

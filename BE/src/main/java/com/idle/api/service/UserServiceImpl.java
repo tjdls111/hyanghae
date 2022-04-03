@@ -11,6 +11,7 @@
 package com.idle.api.service;
 
 import com.idle.api.request.*;
+import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.User;
 import com.idle.db.repository.UserRepository;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -278,5 +280,12 @@ public class UserServiceImpl implements UserService{
         javaMailSender.send(simpleMessage);
 
         return "success";
+    }
+
+    @Override
+    public Set<LikePerfume> getLikePerfumeList(User user) {
+        User user1 = userRepository.findById(user.getUserSeq()).get();
+        Set<LikePerfume> likePerfumeSet = user1.getLikePerfumeList();
+        return likePerfumeSet;
     }
 }

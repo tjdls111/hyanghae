@@ -11,7 +11,10 @@
 package com.idle.api.service;
 
 import com.idle.api.request.*;
+import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.User;
+
+import java.util.Set;
 
 
 public interface UserService {
@@ -29,4 +32,5 @@ public interface UserService {
     void updateUserPw(UserCheckPwRequest userCheckPwRequest, User user);
     void deleteUser(User user);
     String findUserPw(UserPwRequest userPwRequest);
+    Set<LikePerfume> getLikePerfumeList(User user);
 }
