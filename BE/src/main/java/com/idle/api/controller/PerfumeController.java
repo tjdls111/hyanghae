@@ -12,6 +12,7 @@ package com.idle.api.controller;
 import com.idle.api.request.ReviewInsertRequest;
 import com.idle.api.response.*;
 import com.idle.api.service.PerfumeService;
+import com.idle.api.service.UserService;
 import com.idle.common.jwt.dto.IdleUserDetails;
 import com.idle.db.entity.*;
 import com.idle.db.repository.BrandRepository;
@@ -35,8 +36,10 @@ import springfox.documentation.annotations.ApiIgnore;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 @CrossOrigin("*")
@@ -47,6 +50,9 @@ public class PerfumeController {
 
     @Autowired
     private PerfumeService perfumeService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private PerfumeRepository perfumeRepository;
@@ -73,15 +79,21 @@ public class PerfumeController {
         return ResponseEntity.ok(PerfumeListResponse.of(200, "Success", page));
     }
 
-    /* Woody */
+    /* Woody, David */
     @ApiOperation("향수 상세 정보")
     @GetMapping("/{perfumeId}")
-    public ResponseEntity<PerfumeResponse> getPerfume(@PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
-
+    public ResponseEntity<PerfumeResponse> getPerfume(@ApiIgnore Authentication authentication, @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
         Perfume perfume = perfumeService.getPerfumeByPerfumeId(perfumeId);
-
         if (perfume == null) {
             return ResponseEntity.status(404).body(null);
+        }
+        if(authentication != null){
+            IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+            User user = userDetail.getUser();
+            Set<LikePerfume> likePerfumeList = userService.getLikePerfumeList(user);
+            List<LikePerfume> targetList = new ArrayList<>(likePerfumeList);
+
+            return ResponseEntity.status(200).body(PerfumeResponse.of(perfume,targetList));
         }
         return ResponseEntity.status(200).body(PerfumeResponse.of(perfume));
     }
@@ -103,7 +115,6 @@ public class PerfumeController {
                                                                             @RequestParam(value = "content") String content) {
 
         Page<Perfume> res = perfumeService.getPerfumeListByBrand(pageable, perfumeBrand, content);
-        System.out.println(res.getContent().get(0).getPerfumeName());
 
         return ResponseEntity.ok(PerfumeListByBrandResponse.of(200,"success",res));
 
@@ -169,10 +180,11 @@ public class PerfumeController {
         User user = userDetail.getUser();
 
         String res = perfumeService.likePerfume(user, perfumeId);
+        System.out.println(res);
         if (res.equals("fail")) {
             return ResponseEntity.status(401).body(BaseResponseBody.of(401, "좋아요 등록 실패"));
         } else if (res.equals("clear")) {
-            return ResponseEntity.status(401).body(BaseResponseBody.of(200, "좋아요 해제"));
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "좋아요 해제"));
         }
 
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "좋아요 등록"));
