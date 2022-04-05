@@ -20,6 +20,7 @@ import {
 } from "../api/user";
 import Image from "next/image";
 import { useAppSelector } from "../reducers/hooks";
+import Link from "next/link";
 
 interface SignupInput {
   result: string;
@@ -443,7 +444,9 @@ const Signup: NextPage = () => {
             회원가입
           </button>
         </form>
-        <p className={styles.guide}>그냥 둘러 볼게요.</p>
+        <Link href="/home">
+          <p className={styles.guide}>그냥 둘러 볼게요.</p>
+        </Link>
       </div>
     </div>
   );

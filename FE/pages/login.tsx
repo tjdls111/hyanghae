@@ -175,7 +175,9 @@ const Login: NextPage = () => {
         <Link href="/signup">
           <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
         </Link>
+        <Link href="/home">
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        </Link>
         <div className={styles.find}>
           <Link href="/findid">
             <span className={`${styles.guide} ${styles.signup}`}>아이디 찾기</span>

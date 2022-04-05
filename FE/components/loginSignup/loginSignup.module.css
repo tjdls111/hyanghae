@@ -64,11 +64,14 @@
 .message {
   color: var(--color-grey-light-1);
   padding: 0.8em;
+  font-size: 1.5rem;
 }
 
 .guide {
   color: var(--color-grey-light-1);
-  margin-top: 0.5em;
+  margin: 1em 0;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .signup {
