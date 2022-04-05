@@ -1,17 +1,19 @@
 import React from "react";
 import styles from "./surv2PerfumeResult.module.css";
 import Image from "next/image";
+import { useRouter } from "next/router";
 interface propType {
   brand: string;
   name: string;
-  note1: string;
-  note2: string;
-  note3: string;
+  id: number;
   url: string;
 }
 
-const Surv2PerfumeResult = ({ brand, name, note1, note2, note3, url }: propType) => {
-  const forDetail = () => {};
+const Surv2PerfumeResult = ({ brand, name, id, url }: propType) => {
+  const router = useRouter();
+  const forDetail = () => {
+    router.replace(`/perfume/${id}`);
+  };
   return (
     <>
       <div className={styles.resultList}>
@@ -24,7 +26,7 @@ const Surv2PerfumeResult = ({ brand, name, note1, note2, note3, url }: propType)
             <div className={styles.informWrapper}>
               <div style={{ marginRight: "1rem" }}>{brand}</div>
               <div style={{ marginRight: "1rem" }}>{name}</div>
-              <div style={{ display: "absolute" }}>
+              <div className={styles.detailButton}>
                 <button type="button" onClick={forDetail}>
                   향수 상세보기
                 </button>

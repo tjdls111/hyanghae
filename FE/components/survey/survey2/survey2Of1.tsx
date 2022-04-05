@@ -21,7 +21,6 @@ const Survey2Of1 = () => {
   const [searchString, setSearch] = useState("");
   const [brand, setBrand] = useState("brand");
   const [isData, setData] = useState(false);
-  const [isPage, setPage] = useState(false);
   const [pageNum, setPageNum] = useState(1);
   const [rstBox, setRstBox] = useState({
     selectId: -1,
@@ -29,7 +28,8 @@ const Survey2Of1 = () => {
     url: "",
   });
   const [isClick, setClick] = useState(false);
-
+  const [pbBarState, setPbBarState] = useState(false);
+  const setPageBar = useRef(false); 
   const token = useAppSelector((state: RootState) => state.authReducer.token);
   const perfumeRef = useRef<HTMLInputElement>(null);
 
@@ -59,8 +59,6 @@ const Survey2Of1 = () => {
     };
   }, []);
 
-  
-
   useEffect(() => {
     let isCompleted = false;
     (async function get() {
@@ -72,13 +70,13 @@ const Survey2Of1 = () => {
         }
       } catch (e) {
         setData(false);
-        setPage(false);
+        setPageBar.current = false;
         console.error(e);
       }
     })();
     return () => {
       isCompleted = true;
-      setPage(true);
+      setPageBar.current = true;
     };
   }, [pageNum]);
 
@@ -87,7 +85,7 @@ const Survey2Of1 = () => {
     value !== "none" ? setValid(false) : setValid(true);
     setBrand(value);
     setData(false);
-    setPage(false);
+    setPageBar.current = false;
     perfumeRef.current.value = "";
   };
 
@@ -95,24 +93,28 @@ const Survey2Of1 = () => {
   const callApiSearch = async () => {
     if (perfumeRef.current.value === "") {
       setData(false);
-      setPage(false);
+      setPageBar.current = false;
       return;
     }
     try {
       const result = await apiSurvey2Perfume(brand, perfumeRef.current.value, 1, 10);
       setSearch(perfumeRef.current.value);
-      setData(true);
 
-      setPerfumeData(result.data);
-      if (result.data.totalPages > 1) {
-        setPageNum(1);
-        setPage(true);
-      } else {
-        setPage(false);
+      if (result.data.totalPages === 0) {
+        setData(false);
+        setPageBar.current = false;
+        setPbBarState(false);
+        return;
       }
+      setData(true);
+      setPerfumeData(result.data);
+      setPageNum(1);
+      setPageBar.current = true;
+      setPbBarState(true);
+
     } catch (e) {
       setData(false);
-      setPage(false);
+      setPageBar.current = false;
       console.error(e);
     }
   };
@@ -162,7 +164,7 @@ const Survey2Of1 = () => {
           <div className={styles.perfumeList}>
             {isData ? perfumeList : <div style={{ marginTop: "2rem" }}>Empty result</div>}
             <div>
-              {isPage ? (
+              {setPageBar.current ? (
                 <Paging limit={perfumeDt.totalPages} page={pageNum} setPage={setPageNum} />
               ) : null}
             </div>

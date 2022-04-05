@@ -44,5 +44,8 @@
 
 .resultList :hover {
   background-color: var(--color-primary-shade);
+}
+
+.reusltList > button :hover {
   cursor: pointer;
 }
