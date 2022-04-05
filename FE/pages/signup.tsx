@@ -142,12 +142,16 @@ const Signup: NextPage = () => {
   const submitEmail = () => {
     const { emailPartOne, emailPartTwo } = getValues();
 
-    apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
-      .then((res) => {
-        setisEmailClicked(true);
-        setConfirmationNumber(res.data.number);
-      })
-      .catch(console.log);
+    if (emailPartOne) {
+      setisEmailClicked(true);
+      apiSendEmailNum(`${emailPartOne}@${emailPartTwo}`)
+        .then((res) => {
+          setConfirmationNumber(res.data.number);
+        })
+        .catch(console.log);
+    } else {
+      alert("이메일을 입력하세요.");
+    }
   };
 
   const checkValidationCode = () => {
@@ -383,18 +387,31 @@ const Signup: NextPage = () => {
             className={`${styles.selectInput} ${styles.mailForm}`}
             {...register("emailPartTwo")}
           >
-            <option value="naver.com">네이버</option>
-            <option value="kakao.com">카카오</option>
-            <option value="gmail.com">지메일</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="kakao.com">kakao.com</option>
+            <option value="hanmail.net">hanmail.net</option>
+            <option value="daum.net">daum.net</option>
           </select>
           <span>
-            <button
-              onClick={submitEmail}
-              type="button"
-              className={styles.smallInputBtn}
-            >
-              보내기
-            </button>
+            {isEmailClicked && (
+              <button
+                type="button"
+                className={styles.smallInputBtnNo}
+
+              >
+                보내기
+              </button>
+            )}
+            {!isEmailClicked && (
+              <button
+                onClick={submitEmail}
+                type="button"
+                className={styles.smallInputBtn}
+              >
+                보내기
+              </button>
+            )}
           </span>
 
           {emailPartOneError}
