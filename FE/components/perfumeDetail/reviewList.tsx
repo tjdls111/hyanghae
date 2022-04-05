@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-29
+마지막 수정일 2022-04-05
 */
 
 import React, { useEffect, useState } from "react";
@@ -42,7 +42,7 @@ const ReviewList = () => {
     }
   }, [token]);
 
-  //댓글 편집 여부
+  //댓글 편집 모드 여부
   const changeEditMode = (e) => {
     e.preventDefault();
     setEditMode(!editMode);
@@ -82,6 +82,12 @@ const ReviewList = () => {
       });
   };
 
+  // limit 수 바꾸기
+  const changeLimit = (value) => {
+    setLimit(Number(value));
+    setPage(0);
+  };
+
   useEffect(() => {
     if (router.isReady) {
       getReview();
@@ -99,7 +105,7 @@ const ReviewList = () => {
           <span className={styles.content}>Review count per page </span>
           <select
             value={limit}
-            onChange={({ target: { value } }) => setLimit(Number(value))}
+            onChange={({ target: { value } }) => changeLimit(value)}
           >
             <option value="3">3</option>
             <option value="5">5</option>
