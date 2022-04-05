@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 /*
 signup.test.tsx
 @author scarlet
@@ -413,7 +409,3 @@ describe("react Hook Form", () => {
   });
   afterEach(cleanup);
 });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
