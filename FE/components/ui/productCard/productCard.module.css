@@ -59,6 +59,18 @@
 
 .descriptionRow3 {
   display: flex;
+  justify-content: center;
   column-gap: 0.5rem;
   font-size: 1.2rem;
+}
+
+.note {
+  white-space: normal;
+}
+
+@media (max-width: 600px) {
+  .imageWrapper {
+    width: 15rem;
+    height: 20rem;
+  }
 }

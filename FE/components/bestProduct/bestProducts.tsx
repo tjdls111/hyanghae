@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ProductSlider from "../ui/slider/productSlider";
-import { DUMMY_DATA } from "./dummyData";
 import styles from "./bestProducts.module.css";
-import { getBestPerfumes } from "../../api/bestPerfume";
+import { getBestPerfumes } from "../../api/perfume";
 import { product } from "perfume";
 
 const BestProducts: React.FC = () => {
   const [bestPerfumes, setBestPerfumes] = useState<product[] | null>(null);
-
-  console.log(bestPerfumes);
 
   useEffect(() => {
     getBestPerfumes().then((data) => setBestPerfumes(data.perfumeList));

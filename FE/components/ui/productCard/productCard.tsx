@@ -5,7 +5,6 @@ import Star from "../../../public/SVG/star_rate.svg";
 import { product } from "perfume";
 
 const ProductCard: React.FC<{ product: product }> = ({ product }) => {
-  console.log(product);
   return (
     <div className={styles.productCardContainer}>
       <section className={styles.imageWrapper}>
@@ -18,15 +17,15 @@ const ProductCard: React.FC<{ product: product }> = ({ product }) => {
             <p className={styles.ratingText}>{product.perfumeScore}</p>
           </div>
 
-          {/* <div className={styles.brand}>{product.perfumeBrand.brandName}</div> */}
+          <div className={styles.brand}>{product.perfumeBrand.brandName}</div>
         </div>
         <div className={styles.descriptionRow2}>
           <div className={styles.title}>{product.perfumeName}</div>
         </div>
         <div className={styles.descriptionRow3}>
-          <p>{`#${product.note1}`}</p>
-          <p>{`#${product.note2}`}</p>
-          <p>{`#${product.note3}`}</p>
+          <p className={styles.note}>{`#${product.note1}`}</p>
+          <p className={styles.note}>{`#${product.note2}`}</p>
+          <p className={styles.note}>{`#${product.note3}`}</p>
         </div>
       </section>
     </div>

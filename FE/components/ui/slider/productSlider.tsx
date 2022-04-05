@@ -13,11 +13,20 @@ const ProductSlider: React.FC<{
 }> = ({ slideItems, header }) => {
   const swiper = new Swiper(".product-swiper-container", {
     modules: [Navigation],
-    slidesPerView: 4,
+    slidesPerView: 2,
     direction: "horizontal",
     navigation: {
       nextEl: ".swiper-button-next-unique",
       prevEl: ".swiper-button-prev-unique",
+    },
+    breakpoints: {
+      800: {
+        slidesPerView: 3,
+      },
+
+      1000: {
+        slidesPerView: 4,
+      },
     },
   });
 
