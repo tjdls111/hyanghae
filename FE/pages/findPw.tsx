@@ -152,7 +152,7 @@ const FindPw: NextPage = () => {
         </Link>
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
         <div className={styles.find}>
-          <Link href="/findid">
+          <Link href="/findId">
             <span className={`${styles.guide} ${styles.signup}`}>
               아이디 찾기
             </span>

@@ -17,7 +17,7 @@ const navItemData = [
   {
     id: "navItem02",
     name: "Recommeded",
-    path: "/recommended",
+    path: "/survey",
   },
   {
     id: "navItem02",
@@ -35,11 +35,7 @@ const ResponsiveNav: React.FC<{
   const router = useRouter();
 
   return (
-    <nav
-      className={`${styles.navContainer} ${
-        mobileNavOpen && styles.mobileNavActive
-      }`}
-    >
+    <nav className={`${styles.navContainer} ${mobileNavOpen && styles.mobileNavActive}`}>
       <button onClick={mobileNavCloseHandler} className={styles.navCloseButton}>
         X
       </button>
