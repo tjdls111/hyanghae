@@ -155,6 +155,14 @@ public class PerfumeServiceImpl implements PerfumeService{
 
     }
 
+    /* David : 최근 리뷰 조회 */
+    @Override
+    public List<Review> getRecentReviewList() {
+        List<Review> reviewList = reviewRepository.findTop10ByOrderByCreateDateDesc();
+        return reviewList;
+    }
+
+
     /* David : 향수 좋아요 등록/해제 */
     @Override
     @Transactional
