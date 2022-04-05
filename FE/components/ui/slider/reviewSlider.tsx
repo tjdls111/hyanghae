@@ -10,7 +10,7 @@ import RightArrow from "../../../public/SVG/circle-right.svg";
 const ReviewSlider: React.FC<{ slideItems: reviewType[] }> = ({
   slideItems,
 }) => {
-  const swiper = new Swiper(".product-swiper-container", {
+  const swiper = new Swiper(".review-swiper-container", {
     modules: [Navigation],
     slidesPerView: 2,
     direction: "horizontal",
@@ -21,7 +21,7 @@ const ReviewSlider: React.FC<{ slideItems: reviewType[] }> = ({
   });
 
   return (
-    <div className="product-swiper-container">
+    <div className="review-swiper-container">
       <h1 className="swiper-heading">Recent Reviews</h1>
       <div className="swiper-wrapper">
         {slideItems.map((item) => (
