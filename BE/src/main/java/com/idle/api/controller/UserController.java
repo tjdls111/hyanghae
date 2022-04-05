@@ -10,10 +10,7 @@
 package com.idle.api.controller;
 
 import com.idle.api.request.*;
-import com.idle.api.response.BaseResponseBody;
-import com.idle.api.response.UserEmailNumberResponse;
-import com.idle.api.response.UserLoginResponse;
-import com.idle.api.response.UserResponse;
+import com.idle.api.response.*;
 import com.idle.api.service.UserService;
 import com.idle.common.jwt.JwtTokenUtil;
 import com.idle.common.jwt.dto.IdleUserDetails;
@@ -29,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -161,12 +159,12 @@ public class UserController {
     @ApiOperation("아이디 찾기")
     @GetMapping("/finduserid/{email}")
     public ResponseEntity<BaseResponseBody> findUserId(@PathVariable("email") String email) {
-        String res = userService.findUserIdByUserEmail(email);
+        List<User> userList = userService.findUserIdByUserEmail(email);
 
-        if (res.equals("fail")) {
+        if (userList.isEmpty()) {
             return ResponseEntity.status(401).body(BaseResponseBody.of(401,"해당 이메일로 가입된 아이디가 없습니다."));
         }
-        return ResponseEntity.ok(BaseResponseBody.of(200,"이메일로 아이디를 전송했습니다."));
+        return ResponseEntity.ok(IdListResponse.of(200,"아이디 찾기 성공",userList));
     }
 
     /* Woody */
