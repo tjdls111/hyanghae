@@ -5,31 +5,30 @@ import Survey1Of3 from "./survey1/survey1Of3";
 import Survey1Of4 from "./survey1/survey1Of4";
 import Survey1Of5 from "./survey1/survey1Of5";
 import Survey1Res from "./survey1/survey1Res";
-import styles from "./survey.module.css";
 const Servey1 = () => {
-  const [oneState, setOneState] = useState(-1);
-  const [twoState, setTwoState] = useState(-1);
-  const [threeState, setThreeState] = useState(-1);
-  const [fourState, setFourState] = useState(-1);
-  const [fiveState, setFiveState] = useState(-1);
+  const [time, setOneState] = useState(-1);
+  const [gender, setTwoState] = useState(-1);
+  const [season, setThreeState] = useState(-1);
+  const [tpo, setFourState] = useState(-1);
+  const [mood, setFiveState] = useState(-1);
 
-  const resultProp = { oneState, twoState, threeState, fourState, fiveState };
+  const resultProp = { time, gender, season, tpo, mood };
   return (
-    <div className={styles.container}>
-      {oneState === -1 ? (
+    <>
+      {time === -1 ? (
         <Survey1Of1 setState={setOneState} />
-      ) : twoState === -1 ? (
+      ) : gender === -1 ? (
         <Survey1Of2 setState={setTwoState} />
-      ) : threeState === -1 ? (
+      ) : season === -1 ? (
         <Survey1Of3 setState={setThreeState} />
-      ) : fourState === -1 ? (
+      ) : tpo === -1 ? (
         <Survey1Of4 setState={setFourState} />
-      ) : fiveState === -1 ? (
+      ) : mood === -1 ? (
         <Survey1Of5 setState={setFiveState} />
       ) : (
         <Survey1Res prop={resultProp} />
       )}
-    </div>
+    </>
   );
 };
 

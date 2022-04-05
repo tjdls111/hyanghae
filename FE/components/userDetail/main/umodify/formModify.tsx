@@ -62,7 +62,7 @@ const FormModify = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     let completed = false;
-    async function get() {
+    (async function get() {
       if (token) {
         try {
           const res = await apiUserLookUp(token);
@@ -78,8 +78,8 @@ const FormModify = () => {
           throw new Error("Front logic error");
         }
       }
-    }
-    get();
+    })();
+
     return () => {
       completed = true;
     };
