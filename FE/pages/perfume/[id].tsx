@@ -13,6 +13,7 @@ import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
 import ReviewList from "../../components/perfumeDetail/reviewList";
+import { useAppSelector } from "../../reducers/hooks";
 
 interface PerfumeResult {
   dayNight: string;
@@ -57,14 +58,15 @@ interface PerfumeData {
 
 const Detail: NextPage = () => {
   const [data, setData] = useState({} as PerfumeData);
+  const token = useAppSelector((state) => state.authReducer.token);
 
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
       (async () => {
-        apiPerfumeDetail(router.query.id as string)
+        apiPerfumeDetail(token || "", router.query.id as string)
           .then((res) => {
-            // console.log(res);
+            console.log(res);
             let myres: PerfumeResult = {
               dayNight: "",
               gender: "",

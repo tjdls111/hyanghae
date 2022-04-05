@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-23
+마지막 수정일 2022-04-05
 */
 
 import React, { useEffect, useState } from "react";
@@ -53,30 +53,29 @@ interface Item {
 }
 const Item = ({ data }: InnerProps) => {
   const [lists, setLists] = useState([] as Array<Item>);
-  const [isLike, setIsLike] = useState(data.like);
-  const [likeCnt, setLikeCnt] = useState(data.likeCnt | 0);
+  const [isLike, setIsLike] = useState(false);
+  const [likeCnt, setLikeCnt] = useState(0);
   const router = useRouter();
 
-  const dispatch = useDispatch();
-  const isAuthenticated = useAppSelector((state) => state.authReducer.ebayApi);
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
   const token = useAppSelector((state) => state.authReducer.token);
 
+  useEffect(() => {
+    setIsLike(data.like);
+    setLikeCnt(data.likeCnt);
+  }, [data]);
+
   const onLike = () => {
-    console.log(data.like);
-    console.log(data.likeCnt);
     const perfumeId = Number(router.query.id as string);
-    // setIsLike 부분은 추후에 변경해야 함!!! (실제로 좋아요 여부를 반영해야 함.)
     reviewLike(token, perfumeId)
       .then((res) => {
         if (res?.data?.message === "좋아요 해제") {
-          setLikeCnt(likeCnt + 1);
+          setLikeCnt(likeCnt === 0 ? 0 : likeCnt - 1);
         } else {
-          setLikeCnt(likeCnt - 1);
+          setLikeCnt(likeCnt + 1);
         }
-        // console.log(res);
-      })
-      .catch((err) => {
-        setLikeCnt(likeCnt - 1);
       })
       .finally(() => {
         setIsLike(!isLike);
@@ -85,7 +84,7 @@ const Item = ({ data }: InnerProps) => {
 
   useEffect(() => {
     if (data.name) {
-      // 이베이 쇼핑 검색 api 로 검색 결과 가져오기
+      // 쇼핑 검색 api 로 검색 결과 가져오기
       apiShoppingSearch(data.name)
         .then((res) => {
           setLists(res.data.itemSummaries);
@@ -101,7 +100,7 @@ const Item = ({ data }: InnerProps) => {
   useEffect(() => {
     if (lists) {
       myLoader = () => {
-        return `${lists[0].image?.imageUrl}`;
+        return `${data.imgUrl}`;
       };
     }
   }, [lists]);
@@ -109,28 +108,19 @@ const Item = ({ data }: InnerProps) => {
   return (
     <main className={styles.container}>
       <div>
-        <div className={styles.imageContainer}>
-          {myLoader && (
-            <Image
-              className={styles.image}
-              loader={myLoader}
-              src="img"
-              alt="perfume image"
-              layout="fill"
-            />
-          )}
-          {lists && lists.length > 0 && (
-            <img src={`${lists[0]?.image?.imageUrl}`} />
-          )}
-          {lists.length == 0 && (
-            <div className={styles.imageContainer}>
-              <Image layout="fill" src="/images/perfume.jpg" />
-            </div>
-          )}
-        </div>
+        {data.imgUrl && (
+          <div className={styles.imageContainer}>
+            <Image layout="fill" src={data.imgUrl} />
+          </div>
+        )}
+        {!data.imgUrl && (
+          <div className={styles.imageContainer}>
+            <Image layout="fill" src="/images/perfume.jpg" />
+          </div>
+        )}
         <p className={styles.content}>
           Seasonal : {data.season == "0" && "Spring🌸/Summer🌊"}
-          {data.season == "1" && "Fall🍁/Winter☃"}
+          {data.season == "1" && "Fall🍁/Winter⛄"}
           {data.season == "2" && "All Season"}
         </p>
         <p className={styles.content}>
@@ -163,18 +153,20 @@ const Item = ({ data }: InnerProps) => {
           Notes: {data.note1}, {data.note2}, {data.note3}
         </p>
         <p className={styles.content}>{likeCnt} people likes this item.</p>
-        <div className={styles.btnContainer}>
-          {isLike && (
-            <button className={styles.btn} onClick={onLike}>
-              <h1>🧡</h1>
-            </button>
-          )}
-          {!isLike && (
-            <button className={styles.btn} onClick={onLike}>
-              <h1>🤍</h1>
-            </button>
-          )}
-        </div>
+        {isAuthenticated && (
+          <div className={styles.btnContainer}>
+            {isLike && (
+              <button className={styles.btn} onClick={onLike}>
+                <h1>🧡</h1>
+              </button>
+            )}
+            {!isLike && (
+              <button className={styles.btn} onClick={onLike}>
+                <h1>🤍</h1>
+              </button>
+            )}
+          </div>
+        )}
         {lists && <EbayList lists={lists} />}
 
         <EbayBtn keyword={data.name} />

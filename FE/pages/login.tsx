@@ -175,7 +175,9 @@ const Login: NextPage = () => {
         <Link href="/signup">
           <strong className={`${styles.guide} ${styles.signup}`}>지금 가입하세요</strong>
         </Link>
+        <Link href="/home">
         <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        </Link>
         <div className={styles.find}>
           <Link href="/findid">
             <span className={`${styles.guide} ${styles.signup}`}>아이디 찾기</span>
@@ -185,7 +187,7 @@ const Login: NextPage = () => {
             <span className={`${styles.guide} ${styles.signup}`}>비밀번호 찾기</span>
           </Link>
         </div>
-        <Link passHref={true} href="https://j6d104.p.ssafy.io:8443/oauth2/authorization/google">
+        <a href="https://j6d104.p.ssafy.io:8443/oauth2/authorization/google">
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>
               <Image
@@ -198,7 +200,7 @@ const Login: NextPage = () => {
             </div>
             <p className={styles.socialLoginText}>구글 로그인</p>
           </button>
-        </Link>
+        </a>
       </div>
     </div>
   );
