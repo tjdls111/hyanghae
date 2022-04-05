@@ -53,13 +53,19 @@ interface Item {
 }
 const Item = ({ data }: InnerProps) => {
   const [lists, setLists] = useState([] as Array<Item>);
-  const [isLike, setIsLike] = useState(data.like || false);
-  const [likeCnt, setLikeCnt] = useState(data.likeCnt || 0);
+  const [isLike, setIsLike] = useState(false);
+  const [likeCnt, setLikeCnt] = useState(0);
   const router = useRouter();
 
-  const dispatch = useDispatch();
-  const isAuthenticated = useAppSelector((state) => state.authReducer.ebayApi);
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
   const token = useAppSelector((state) => state.authReducer.token);
+
+  useEffect(() => {
+    setIsLike(data.like);
+    setLikeCnt(data.likeCnt);
+  }, [data]);
 
   const onLike = () => {
     const perfumeId = Number(router.query.id as string);
@@ -147,18 +153,20 @@ const Item = ({ data }: InnerProps) => {
           Notes: {data.note1}, {data.note2}, {data.note3}
         </p>
         <p className={styles.content}>{likeCnt} people likes this item.</p>
-        <div className={styles.btnContainer}>
-          {isLike && (
-            <button className={styles.btn} onClick={onLike}>
-              <h1>🧡</h1>
-            </button>
-          )}
-          {!isLike && (
-            <button className={styles.btn} onClick={onLike}>
-              <h1>🤍</h1>
-            </button>
-          )}
-        </div>
+        {isAuthenticated && (
+          <div className={styles.btnContainer}>
+            {isLike && (
+              <button className={styles.btn} onClick={onLike}>
+                <h1>🧡</h1>
+              </button>
+            )}
+            {!isLike && (
+              <button className={styles.btn} onClick={onLike}>
+                <h1>🤍</h1>
+              </button>
+            )}
+          </div>
+        )}
         {lists && <EbayList lists={lists} />}
 
         <EbayBtn keyword={data.name} />

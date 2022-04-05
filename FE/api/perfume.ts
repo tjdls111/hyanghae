@@ -57,10 +57,15 @@ export interface PerfumeResult {
 }
 
 export const apiPerfumeDetail = async (
+  token: string,
   perfumeId: string
 ): Promise<PerfumeResult> => {
   try {
-    return await axios.get(`${BASE_URL}/perfume/${perfumeId}/`);
+    return await axios.get(`${BASE_URL}/perfume/${perfumeId}/`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   } catch (e) {
     throw new Error("server error");
   }
