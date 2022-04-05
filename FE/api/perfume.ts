@@ -47,10 +47,3 @@ export const apiPerfumeDetail = async (
     throw new Error("server error");
   }
 };
-
-// best 10 향수 조회(홈)
-export const apiBestPerfumes = async function () {
-  try {
-    const response = await axios.get(``);
-  } catch {}
-};
