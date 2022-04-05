@@ -187,7 +187,7 @@ const Login: NextPage = () => {
             <span className={`${styles.guide} ${styles.signup}`}>비밀번호 찾기</span>
           </Link>
         </div>
-        <Link passHref={true} href="https://j6d104.p.ssafy.io:8443/oauth2/authorization/google">
+        <a href="https://j6d104.p.ssafy.io:8443/oauth2/authorization/google">
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>
               <Image
@@ -200,7 +200,7 @@ const Login: NextPage = () => {
             </div>
             <p className={styles.socialLoginText}>구글 로그인</p>
           </button>
-        </Link>
+        </a>
       </div>
     </div>
   );
