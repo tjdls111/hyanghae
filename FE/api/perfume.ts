@@ -100,7 +100,7 @@ export const apiGetPerfumeReview = async (
 ) => {
   try {
     return await axios.get(
-      `${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}`
+      `${BASE_URL}/perfume/review/list/${perfumeId}?page=${page}&size=${size}&sort=${sort}`
     );
   } catch (e) {
     throw new Error("server error");

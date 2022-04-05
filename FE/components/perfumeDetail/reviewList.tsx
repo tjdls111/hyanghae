@@ -67,7 +67,12 @@ const ReviewList = () => {
 
   // 댓글 가져오기
   const getReview = () => {
-    apiGetPerfumeReview(router.query.id as string, page, limit, "")
+    apiGetPerfumeReview(
+      router.query.id as string,
+      page,
+      limit,
+      "createDate,DESC"
+    )
       .then((res) => {
         setTotal(res.data.totalElements);
         setData(res.data.reviewList);
