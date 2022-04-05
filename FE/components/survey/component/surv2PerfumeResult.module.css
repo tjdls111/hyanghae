@@ -19,3 +19,16 @@
   left: 5rem;
   top: 3rem;
 }
+
+.detailButton {
+  position: absolute;
+  top: -250%;
+  margin-left: 15rem;
+}
+.detailButton > button {
+  border-radius: 3px;
+  background-color: aliceblue;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+}

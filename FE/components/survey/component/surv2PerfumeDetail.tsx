@@ -3,7 +3,7 @@ import styles from "./surv2PerfumeDetail.module.css";
 import Image from "next/image";
 import { useAppSelector } from "../../../reducers/hooks";
 import { RootState } from "../../../reducers/store";
-import { apiSurvey2SameRes, listRes, surveyPerfume } from "../../../api/survey";
+import { apiSurvey2SameRes, surveyPerfume } from "../../../api/survey";
 import Surv2PerfumeResult from "./surv2PerfumeResult";
 
 interface propType {
@@ -29,18 +29,14 @@ const Surv2PerfumeDetail = ({ id, name, url, brand, setBack }: propType) => {
     }
   };
 
-  const goDifferPerfume = () => {
-    
-  };
+  const goDifferPerfume = () => {};
 
   const resultRecommend = state.map((item) => (
     <Surv2PerfumeResult
       brand={item.perfumeBrand.korName}
       name={item.perfumeName}
       url={item.imgUrl}
-      note1={item.note1}
-      note2={item.note2}
-      note3={item.note3}
+      id={item.perfumeId}
     />
   ));
 
