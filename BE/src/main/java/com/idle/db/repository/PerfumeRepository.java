@@ -10,6 +10,7 @@
 package com.idle.db.repository;
 
 
+import com.idle.db.entity.Brand;
 import com.idle.db.entity.Perfume;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,6 +24,8 @@ public interface PerfumeRepository extends JpaRepository<Perfume, Long> {
     Optional<Perfume> findByPerfumeId(Long perfumeid);
     Page<Perfume> findByPerfumeNameContaining(String content, Pageable pageable);
     Page<Perfume> findByPerfumeBrandContaining(String content, Pageable pageable);
+
+    Page<Perfume> findByPerfumeBrandAndPerfumeNameContaining(Pageable pageable, Brand brand, String content);
 
     List<Perfume> findByMoodGreaterThan(int mood);
 

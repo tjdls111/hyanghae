@@ -94,7 +94,9 @@ const Navigation: React.FC = () => {
                   로그아웃
                 </p>
                 <span>|</span>
-                <p className={styles.profileMenuItem}>마이페이지</p>
+                <Link href="/userDetail">
+                  <p className={styles.profileMenuItem}>마이페이지</p>
+                </Link>
               </>
             )}
             {isAuthenticated || (

@@ -1,6 +1,7 @@
 .container {
   background-color: var(--color-grey-dark-1);
 }
+
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
@@ -8,6 +9,8 @@
 }
 
 .inputContainer {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
   padding-bottom: 20em;
 }
@@ -58,14 +61,26 @@
   cursor: pointer;
 }
 
+.smallInputBtnNo {
+  width: 3.5em;
+  height: 3em;
+  background-color: var(--color-grey-dark-3);
+  color: var(--color-grey-light-1);
+  border: 0.1em solid black;
+  border-radius: 0.2em;
+}
+
 .message {
   color: var(--color-grey-light-1);
   padding: 0.8em;
+  font-size: 1.5rem;
 }
 
 .guide {
   color: var(--color-grey-light-1);
-  margin-top: 0.5em;
+  margin: 1em 0;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .signup {

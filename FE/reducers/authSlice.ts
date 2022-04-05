@@ -1,12 +1,15 @@
-import { HYDRATE } from "next-redux-wrapper";
 import { createSlice } from "@reduxjs/toolkit";
-
 interface authState {
   isAuthenticated: boolean;
-  token: String | null;
+  token: string | null;
+  ebayApi: string | null;
 }
 
-const initialState: authState = { isAuthenticated: true, token: null };
+const initialState: authState = {
+  isAuthenticated: true,
+  token: null,
+  ebayApi: null,
+};
 
 const authSlice = createSlice({
   name: "auth",
@@ -20,17 +23,13 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.token = null;
     },
+    update(state, action) {
+      state.ebayApi = action.payload;
+    },
   },
-  // extraReducers: {
-  //   [HYDRATE]: (state, action) => {
-  //     console.log("HYDRATE", action.payload);
-  //     return {
-  //       ...state,
-  //       ...action.payload,
-  //     };
-  //   },
-  // },
 });
 
-export const { login, logout } = authSlice.actions;
+
+
+export const { login, logout, update } = authSlice.actions;
 export default authSlice.reducer;

@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.buttonContainer > div > button {
+  cursor: pointer;
+}
+.resultContainer {
+  position: absolute;
+}
+
+.buttonContainer {
+  position: absolute;
+}
+
+.imageWrapper {
+  width: 15rem;
+  height: 15rem;
+  position: absolute;
+}
+
+.informWrapper {
+  white-space: nowrap;
+  position: absolute;
+  top: 62%;
+}
+
+.resultHeader {
+  position: absolute;
+  font-size: 2rem;
+  top: 65%;
+  white-space: nowrap;
+}
+
+.resultList {
+  position: absolute;
+  top: 70%;
+  white-space: nowrap;
+}
+
+.resultList :hover {
+  background-color: var(--color-primary-shade);
+}
+
+.reusltList > button :hover {
+  cursor: pointer;
+}

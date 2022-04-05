@@ -48,7 +48,11 @@ public class PerfumeListResponse extends BaseResponseBody{
             Map<String, Object> perfumeInfo = new HashMap<>();
             perfumeInfo.put("perfumeId",perfume.getPerfumeId());
             perfumeInfo.put("perfumeName",perfume.getPerfumeName());
+            perfumeInfo.put("imgUrl",perfume.getImgUrl());
             perfumeInfo.put("perfumeBrand",perfume.getPerfumeBrand());
+            perfumeInfo.put("note1",perfume.getNote1());
+            perfumeInfo.put("note2",perfume.getNote2());
+            perfumeInfo.put("note3",perfume.getNote3());
             perfumeInfo.put("perfumeScore",perfume.getPerfumeScore());
             perfumeList.add(perfumeInfo);
         }

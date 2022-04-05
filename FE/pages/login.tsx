@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-07
-마지막 수정일 2022-03-21
+마지막 수정일 2022-03-22
 */
 import type { NextPage } from "next";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -52,7 +52,7 @@ const Login: NextPage = () => {
   }, []);
 
   const url = process.env.NEXT_PUBLIC_BASE_URL;
-  console.log(url);
+
   const onValidSubmit: SubmitHandler<LoginInput> = async () => {
     const { id, password } = getValues();
     try {
@@ -63,7 +63,6 @@ const Login: NextPage = () => {
       router.replace("/home");
     } catch (e) {
       const error = e as AxiosError;
-      // console.error(error);
       window.alert("아이디, 비밀번호 정보가 없습니다. 확인해주세요.");
     }
   };
@@ -184,7 +183,9 @@ const Login: NextPage = () => {
             지금 가입하세요
           </strong>
         </Link>
-        <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        <Link href="/home">
+          <p className={`${styles.guide} ${styles.main}`}>그냥 둘러 볼게요.</p>
+        </Link>
         <div className={styles.find}>
           <Link href="/findid">
             <span className={`${styles.guide} ${styles.signup}`}>
@@ -198,7 +199,7 @@ const Login: NextPage = () => {
             </span>
           </Link>
         </div>
-        <Link passHref={true} href='https://j6d104.p.ssafy.io:8443/oauth2/authorization/google'>
+        <a href="https://j6d104.p.ssafy.io:8443/oauth2/authorization/google">
           <button className={styles.socialLogin} aria-label="socialBtn">
             <div className={styles.imageWrapper}>
               <Image
@@ -211,7 +212,7 @@ const Login: NextPage = () => {
             </div>
             <p className={styles.socialLoginText}>구글 로그인</p>
           </button>
-        </Link>
+        </a>
       </div>
     </div>
   );
