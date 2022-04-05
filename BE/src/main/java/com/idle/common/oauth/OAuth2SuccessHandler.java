@@ -52,7 +52,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 //
 //        System.out.println(token);
 
-        response.sendRedirect("http://localhost:3001/oauth/redirect?token="+token);
+        response.sendRedirect("https://j6d104.p.ssafy.io/oauth/redirect?token="+token);
         var writer = response.getWriter();
 
         writer.flush();
