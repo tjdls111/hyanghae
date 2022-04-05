@@ -240,9 +240,8 @@ public class SurveyServiceImpl implements SurveyService {
         KmeansAlgorithm d = new KmeansAlgorithm();
         ArrayList<ArrayList<Double>> dd = d.getClusters(dataSet, 10);  // 클러스터링
 
-        // 리턴할 List<Perfume> 생성
+        // 비슷한 향수 추천 : 리턴할 List<Perfume> 생성
         List<Perfume> list = new ArrayList<>();
-
         int cnt = 0;
         ArrayList<Double> temp = dd.get(dd.size() - 1);
         for (int i = 0; i < dd.size() - 1; i++) {
@@ -250,6 +249,18 @@ public class SurveyServiceImpl implements SurveyService {
             if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
                 list.add(perfumeRepository.findByPerfumeId((long) i+1).get());
                 cnt++;
+            }
+        }
+
+        // 색다른 향수 추천
+        List<Perfume> list2 = new ArrayList<>();
+        int cnt2 = 0;
+        ArrayList<Double> temp2 = dd.get(dd.size() - 1); // 클러스터 번호
+        for (int i = 0; i < dd.size() - 1; i++){
+            if(cnt2 == 5) break;
+            if(temp2.get(temp2.size() - 1).doubleValue() != dd.get(i).get(temp2.size() - 1).doubleValue()){// 다른 그룹의 향수
+                list2.add(perfumeRepository.findByPerfumeId((long) i+1).get());
+                cnt2++;
             }
         }
 
