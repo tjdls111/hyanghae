@@ -172,6 +172,15 @@ public class PerfumeController {
     }
 
     /* David */
+    @ApiOperation("향수 최근 리뷰 목록 조회")
+    @GetMapping("/review/recent")
+    public ResponseEntity<? extends BaseResponseBody> getRecentReviewList() {
+        List<Review> recentReviewList = perfumeService.getRecentReviewList();
+        return ResponseEntity.ok(RecentReviewListResponse.of(200, "Success", recentReviewList));
+    }
+
+
+    /* David */
     @ApiOperation("향수 좋아요 등록/해제")
     @GetMapping("/like/{perfumeId}")
     public ResponseEntity<? extends BaseResponseBody> likePerfume(@ApiIgnore Authentication authentication,

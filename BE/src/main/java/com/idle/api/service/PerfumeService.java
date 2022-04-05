@@ -31,6 +31,7 @@ public interface PerfumeService {
     Page<Review> getReviewList(Pageable pageable,Long perfumeId);
     String updateReview(User user, ReviewInsertRequest reviewInsertRequest);
     String deleteReview(User user, Long perfumeId);
+    List<Review> getRecentReviewList();
     //향수 좋아요
     String likePerfume(User user, Long perfumeId);
     Page<LikePerfume> getLikePerfumeList(User user, Pageable pageable);

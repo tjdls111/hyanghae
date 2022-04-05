@@ -17,12 +17,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, ReviewId> {
     Optional<Review> findByUserAndPerfume(User user, Perfume perfume);
     Page<Review> findByPerfume(Pageable pageable, Perfume perfume);
     int countByPerfume(Perfume perfume);
+    List<Review> findTop10ByOrderByCreateDateDesc();
 
     @Query(value ="SELECT AVG(r_score) FROM Review r WHERE r.p_id = ?1",nativeQuery = true)
     float findAvgWithJPQL(Long perfumeId);
