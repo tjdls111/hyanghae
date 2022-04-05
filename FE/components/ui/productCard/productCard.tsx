@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./productCard.module.css";
-import { product } from "../../bestProduct/dummyData";
 import Star from "../../../public/SVG/star_rate.svg";
+import { product } from "perfume";
 
 const ProductCard: React.FC<{ product: product }> = ({ product }) => {
+  console.log(product);
   return (
     <div className={styles.productCardContainer}>
       <section className={styles.imageWrapper}>
@@ -14,13 +15,13 @@ const ProductCard: React.FC<{ product: product }> = ({ product }) => {
         <div className={styles.descriptionRow1}>
           <div className={styles.rating}>
             <Star className={styles.ratingIcon} />
-            <p className={styles.ratingText}>{product.rating}</p>
+            <p className={styles.ratingText}>{product.perfumeScore}</p>
           </div>
 
-          <div className={styles.brand}>{product.brand}</div>
+          {/* <div className={styles.brand}>{product.perfumeBrand.brandName}</div> */}
         </div>
         <div className={styles.descriptionRow2}>
-          <div className={styles.title}>{product.name}</div>
+          <div className={styles.title}>{product.perfumeName}</div>
         </div>
         <div className={styles.descriptionRow3}>
           <p>{`#${product.note1}`}</p>
