@@ -110,7 +110,7 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/day.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/daily.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     데일리용
@@ -137,7 +137,7 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/night.jpg" alt="night" />
+                <CardMedia component="img" image="/images/survey/date.png" alt="night" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     데이트용
@@ -164,7 +164,7 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 3)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/interview.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     면접용

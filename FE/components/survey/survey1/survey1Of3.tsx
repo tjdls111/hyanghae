@@ -106,7 +106,7 @@ const Survey1Of3: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/night.jpg" alt="night" />
+                <CardMedia component="img" image="/images/survey/spring.png" alt="night" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     봄
@@ -133,7 +133,7 @@ const Survey1Of3: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/day.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/summer.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     여름
@@ -160,7 +160,7 @@ const Survey1Of3: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/fall.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     가을
@@ -187,7 +187,7 @@ const Survey1Of3: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 3)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/winter.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     겨울

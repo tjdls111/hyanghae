@@ -1,0 +1,21 @@
+.resultList {
+  height: 6rem;
+  width: 30rem;
+  position: relative;
+  margin: auto;
+  border: 1px dashed var(--color-primary-light-3);
+}
+
+.resultImgWrapper {
+  width: 5em;
+  height: 5em;
+  display: inline-block;
+  position: absolute;
+}
+.informWrapper {
+  position: absolute;
+  display: flex;
+  margin: auto;
+  left: 5rem;
+  top: 3rem;
+}

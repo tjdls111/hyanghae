@@ -84,7 +84,7 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/night.jpg" alt="night" />
+                <CardMedia component="img" image="/images/survey/man.png" alt="night" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     남성
@@ -111,7 +111,7 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/day.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/woman.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     여성
@@ -138,7 +138,7 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia component="img" image="/images/survey/manwoman.png" alt="survey3" />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     남여공용
@@ -152,9 +152,7 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
           </div>
         </div>
       </div>
-      <div
-        className={styles.btns}
-      >
+      <div className={styles.btns}>
         <Button onClick={prevCard} size="large" variant="contained">
           이전
         </Button>
