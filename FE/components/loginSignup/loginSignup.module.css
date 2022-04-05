@@ -1,6 +1,7 @@
 .container {
   background-color: var(--color-grey-dark-1);
 }
+
 .title {
   color: var(--color-grey-light-1);
   text-align: center;
@@ -8,6 +9,8 @@
 }
 
 .inputContainer {
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
   padding-bottom: 20em;
 }

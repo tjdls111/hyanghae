@@ -84,7 +84,9 @@ export const apiSurvey1Res = async (
   }
 };
 
-export const apiSurvey2Brand = async (accessToken: string): Promise<resType> => {
+export const apiSurvey2Brand = async (
+  accessToken: string
+): Promise<resType> => {
   try {
     return await axios.get(`${BASE_URL}/perfume/brand`, {
       headers: {

@@ -6,16 +6,13 @@
 마지막 수정일 2022-03-22
 */
 import { useEffect, useState } from "react";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import type { NextPage } from "next";
-import { SubmitHandler, useForm, useFormState } from "react-hook-form";
-import { AxiosError } from "axios";
 import Navigation from "../../components/navigation/navigation";
-import Link from "next/link";
 import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
-import { rmSync } from "fs";
+import ReviewList from "../../components/perfumeDetail/reviewList";
 
 interface PerfumeResult {
   dayNight: string;
@@ -27,29 +24,47 @@ interface PerfumeResult {
   perfumeId: string;
   perfumeName: string;
   perfumeScore: string;
-  perfumeUrl: string;
   season: string;
   tpo: string;
+  likeCnt: number;
+  group: string;
+  imgUrl: string;
+  note1: string;
+  note2: string;
+  note3: string;
+  reviewCnt: string;
+  like: boolean;
 }
 
 interface PerfumeData {
   name: string;
   score: string;
   price: string;
-  note: string;
-  imgPath: string;
   season: string;
   style: string;
+  likeCnt: number;
+  gender: string;
+  imgUrl: string;
+  mood: string;
+  note1: string;
+  note2: string;
+  note3: string;
+  perfumeBrand: string;
+  tpo: string;
+  reviewCnt: string;
+  like: boolean;
 }
 
 const Detail: NextPage = () => {
   const [data, setData] = useState({} as PerfumeData);
+
   const router = useRouter();
   useEffect(() => {
     if (router.isReady) {
       (async () => {
         apiPerfumeDetail(router.query.id as string)
           .then((res) => {
+            // console.log(res);
             let myres: PerfumeResult = {
               dayNight: "",
               gender: "",
@@ -60,43 +75,50 @@ const Detail: NextPage = () => {
               perfumeId: "",
               perfumeName: "",
               perfumeScore: "",
-              perfumeUrl: "",
               season: "",
               tpo: "",
+              likeCnt: 0,
+              group: "",
+              imgUrl: "",
+              note1: "",
+              note2: "",
+              note3: "",
+              reviewCnt: "",
+              like: false,
             };
             myres = res.data as PerfumeResult;
             setData({
               name: myres.perfumeName,
               score: myres.perfumeScore,
               price: myres.perfumeCost,
-              note: "",
-              imgPath:
-                "https://photo.akmall.com/image4/goods/78/58/60/94/78586094_M_350.jpg",
               season: myres.season,
               style: myres.tpo,
+              likeCnt: myres.likeCnt,
+              gender: myres.gender,
+              imgUrl: myres.imgUrl,
+              mood: myres.mood,
+              note1: myres.note1,
+              note2: myres.note2,
+              note3: myres.note3,
+              perfumeBrand: myres.perfumeBrand,
+              tpo: myres.tpo,
+              reviewCnt: myres.reviewCnt,
+              like: myres.like,
             });
           })
           .catch((err) => {
             console.log(err);
           });
       })();
-
-      // 이베이/ 네이버 등 쇼핑 검색 api 로 검색 결과 가져오기 -> 결과가 있으면 연결되도록!
-      // apiShoppingSearch()
-      //   .then((res) => {
-      //     console.log(res);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
     }
-  }, [router.isReady]);
+  }, [router]);
 
   return (
     <>
       <Navigation />
       <Item data={data} />
-      <Review />
+      <Review isEditMode="false" setEdit={() => {}} star="5" content="" />
+      <ReviewList />
     </>
   );
 };
