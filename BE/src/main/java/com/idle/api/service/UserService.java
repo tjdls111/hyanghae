@@ -14,6 +14,7 @@ import com.idle.api.request.*;
 import com.idle.db.entity.LikePerfume;
 import com.idle.db.entity.User;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -25,7 +26,7 @@ public interface UserService {
     String sendUserEmailNumber(String userEmail);
     String login(UserLoginRequest userLoginRequest);
     String passwordEncode(String userPw);
-    String findUserIdByUserEmail(String userEmail);
+    List<User> findUserIdByUserEmail(String userEmail);
     User getUserByUserId(String userId);
     String updateUserNickname(UserNicknameUpdateRequest userNicknameUpdateRequest, User user);
     void updateUser(UserUpdateRequest userUpdateReq, User user);
