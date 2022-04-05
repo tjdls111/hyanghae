@@ -24,6 +24,9 @@ const Review = (Props: Props) => {
   const router = useRouter();
   const [selected, setSelected] = useState(Props.star || "5");
   const token = useAppSelector((state) => state.authReducer.token);
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   useEffect(() => {
     review.current.value = Props.content;
@@ -76,33 +79,41 @@ const Review = (Props: Props) => {
     setSelected(e.target.value);
   };
 
-  return (
-    <section className={styles.container}>
-      <form className={styles.formContainer} onSubmit={onSubmit}>
-        <label className={styles.content} htmlFor="review">
-          Please leave an honest and kind review ^^
-        </label>
-        <textarea
-          id="review"
-          name="review"
-          rows={5}
-          cols={50}
-          ref={review}
-          placeholder="Please write a review :)"
-        ></textarea>
+  if (isAuthenticated) {
+    return (
+      <section className={styles.container}>
+        <form className={styles.formContainer} onSubmit={onSubmit}>
+          <label className={styles.content} htmlFor="review">
+            Please leave an honest and kind review ^^
+          </label>
+          <textarea
+            id="review"
+            name="review"
+            rows={5}
+            cols={50}
+            ref={review}
+            placeholder="Please write a review :)"
+          ></textarea>
 
-        <select name="star" id="star" onChange={handleChangeSelect}>
-          <option value="5">⭐⭐⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="1">⭐</option>
-        </select>
+          <select name="star" id="star" onChange={handleChangeSelect}>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+          </select>
 
-        <button className={styles.btn}>Write a Review</button>
-      </form>
-    </section>
-  );
+          <button className={styles.btn}>Write a Review</button>
+        </form>
+      </section>
+    );
+  } else {
+    return (
+      <div className={styles.content}>
+        If you want to write a review, please login.
+      </div>
+    );
+  }
 };
 
 export default Review;
