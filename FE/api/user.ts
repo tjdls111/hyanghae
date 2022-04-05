@@ -22,14 +22,14 @@ export interface userLookUpType {
   userNickName: string;
 }
 // @author scarlet
-export interface resType {
+interface resType {
   data?: dataType;
 }
 
 export interface resLookUpType {
   data?: userLookUpType;
 }
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const apiSignup = async (
   userEmail: string,
@@ -67,10 +67,7 @@ export const socialLogin = () => {
 export const apiFindUserId = async (email: string) =>
   await axios.get(`${BASE_URL}/user/finduserid/${email}`);
 
-export const apiFindpw = async (
-  userEmail: string,
-  userId: string
-): Promise<resType> => {
+export const apiFindpw = async (userEmail: string, userId: string): Promise<resType> => {
   try {
     return await axios.put(`${BASE_URL}/user/finduserpw`, {
       userEmail,
@@ -81,10 +78,7 @@ export const apiFindpw = async (
   }
 };
 
-export const apiLogin = async (
-  userId: string,
-  userPw: string
-): Promise<resType> => {
+export const apiLogin = async (userId: string, userPw: string): Promise<resType> => {
   try {
     return await axios.post(`${BASE_URL}/user/login`, {
       userId,
@@ -96,10 +90,7 @@ export const apiLogin = async (
 };
 
 // @author scarlet
-export const apiCheckMod = async (
-  userPw: string,
-  accessToken: string
-): Promise<resType> => {
+export const apiCheckMod = async (userPw: string, accessToken: string): Promise<resType> => {
   try {
     return await axios.post(
       `${BASE_URL}/user/checkpw`,
@@ -118,9 +109,7 @@ export const apiCheckMod = async (
 };
 
 // @author scarlet
-export const apiUserLookUp = async (
-  accessToken: string
-): Promise<resLookUpType> => {
+export const apiUserLookUp = async (accessToken: string): Promise<resLookUpType> => {
   try {
     return await axios.get(`${BASE_URL}/user/info`, {
       headers: {

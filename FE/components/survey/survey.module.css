@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh;
   margin: auto;
+  max-height: 55vh;
 }
 
 .inner-cont {
@@ -12,8 +12,8 @@
 }
 
 .header {
-  margin-top: 20rem;
-  margin-bottom: 5rem;
+  margin-top: 15rem;
+  margin-bottom: 10rem;
   text-align: center;
   font-size: 3rem;
 }
@@ -28,18 +28,39 @@
   position: absolute;
   top: 0;
   left: 0;
+  height: 100%;
   transition: all 1s;
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    max-height: 55vh;
+  }
+  .card {
+    transition: all 1s;
+    height: 80%;
+  }
+
+  .inner-cont {
+    perspective: none;
+  }
   .cardsWrapper {
     width: 20rem;
-    margin-top: 10rem;
     transform-style: none;
   }
-  .cardsWrapper .card:not(.now) {
-    display: none;
+
+  .now {
+    filter: brightness(100%);
   }
+  .btns {
+    margin: 0;
+  }
+}
+
+.btns {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
 }
 
 /* 
@@ -51,3 +72,8 @@
 .card:nth-child(3) {
   transform: rotateY(240deg) translateZ(250px) rotateY(-240deg);
 } */
+.btns {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: space-around;
+}

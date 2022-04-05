@@ -15,7 +15,11 @@ const SelectSurvey = () => {
   const router = useRouter();
   const [state, setState] = useState(1);
   const nextStep = (num: number) => {
-    router.push(`survey/${num}`);
+    if (num !== state) {
+      return;
+    }
+
+    router.push(`survey/${num + 1}`);
   };
   const innerCardRef = useRef<HTMLDivElement[]>([]);
   const firstNum = 0;
@@ -27,10 +31,10 @@ const SelectSurvey = () => {
       const degree = 360 / nodeList.length;
 
       if (i === 0) {
-        item.style.transform = "rotateY(0deg) translateZ(250px)";
+        item.style.transform = "rotateY(0deg) translateZ(10rem)";
         item.style.filter = "brightness(100%)";
       } else {
-        item.style.transform = `rotateY(${degree * i}deg) translateZ(250px) rotateY(-${
+        item.style.transform = `rotateY(${degree * i}deg) translateZ(10rem) rotateY(-${
           degree * i
         }deg)`;
         item.style.filter = "brightness(60%)";
@@ -40,10 +44,7 @@ const SelectSurvey = () => {
   };
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    if (!mediaQuery.matches) {
-      transformCard();
-    }
+    transformCard();
   }, [state]);
 
   const prevCard = () => {
@@ -151,12 +152,7 @@ const SelectSurvey = () => {
           </div>
         </div>
       </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+      <div className={styles.btns}>
         <Button onClick={prevCard} size="large" variant="contained">
           이전
         </Button>
