@@ -16,7 +16,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -25,7 +25,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -34,7 +34,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -43,7 +43,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -52,7 +52,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -61,7 +61,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요.",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -70,7 +70,7 @@ export const DUMMY_DATA: reviewType[] = [
     rating: 4,
     nickname: "향기고수웬디",
     content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 ",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -78,8 +78,7 @@ export const DUMMY_DATA: reviewType[] = [
     brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
-    content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+    content: "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -87,8 +86,7 @@ export const DUMMY_DATA: reviewType[] = [
     brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
-    content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+    content: "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 ",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -96,8 +94,7 @@ export const DUMMY_DATA: reviewType[] = [
     brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
-    content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+    content: "20대 첫 향수로 구입했는데 만족스럽습니다. ",
   },
   {
     imgUrl: "https://fimgs.net/mdimg/perfume/375x500.60484.jpg",
@@ -105,7 +102,6 @@ export const DUMMY_DATA: reviewType[] = [
     brand: "Jo Malone",
     rating: 4,
     nickname: "향기고수웬디",
-    content:
-      "20대 첫 향수로 구입했는데 만족스럽습니다. 포장도 이쁘고 향도 튀지 않네요. 추천합니다!",
+    content: "20대 첫 향수로 구입했는데 만족스럽습니다",
   },
 ];

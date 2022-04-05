@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Swiper, { Navigation } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,24 +11,26 @@ const ProductSlider: React.FC<{
   slideItems: product[] | null;
   header: string;
 }> = ({ slideItems, header }) => {
-  const swiper = new Swiper(".product-swiper-container", {
-    modules: [Navigation],
-    slidesPerView: 2,
-    direction: "horizontal",
-    navigation: {
-      nextEl: ".swiper-button-next-unique",
-      prevEl: ".swiper-button-prev-unique",
-    },
-    breakpoints: {
-      800: {
-        slidesPerView: 3,
+  useEffect(() => {
+    const productSlider = new Swiper(".product-swiper-container", {
+      modules: [Navigation],
+      slidesPerView: 2,
+      direction: "horizontal",
+      navigation: {
+        nextEl: ".swiper-button-next-unique",
+        prevEl: ".swiper-button-prev-unique",
       },
+      breakpoints: {
+        800: {
+          slidesPerView: 3,
+        },
 
-      1000: {
-        slidesPerView: 4,
+        1000: {
+          slidesPerView: 4,
+        },
       },
-    },
-  });
+    });
+  }, []);
 
   return (
     <>
