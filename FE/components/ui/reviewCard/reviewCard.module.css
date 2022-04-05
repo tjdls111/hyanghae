@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  width: 50rem;
+  width: 100%;
   align-items: center;
 }
 
@@ -33,6 +33,7 @@
   color: #333;
   font-weight: 600;
   font-size: 1.4rem;
+  text-align: center;
 }
 
 .productBrand {
@@ -74,6 +75,7 @@
 }
 
 .reviewContent {
+  text-overflow: ellipsis;
   font-size: 1.4rem;
   line-height: 1.6;
 }

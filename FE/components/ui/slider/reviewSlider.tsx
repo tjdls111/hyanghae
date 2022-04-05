@@ -12,11 +12,17 @@ const ReviewSlider: React.FC<{ slideItems: reviewType[] }> = ({
 }) => {
   const swiper = new Swiper(".review-swiper-container", {
     modules: [Navigation],
-    slidesPerView: 2,
+    slidesPerView: 1,
+    spaceBetween: 10,
     direction: "horizontal",
     navigation: {
       nextEl: ".swiper-button-next-unique",
       prevEl: ".swiper-button-prev-unique",
+    },
+    breakpoints: {
+      500: {
+        slidesPerView: 2,
+      },
     },
   });
 
