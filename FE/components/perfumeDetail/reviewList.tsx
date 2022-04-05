@@ -127,7 +127,11 @@ const ReviewList = () => {
                   <div>
                     <div
                       className={styles.starBox}
-                      style={{ width: d.reviewScore * 22 }}
+                      style={
+                        screen.width > 1200
+                          ? { width: d.reviewScore * 28 }
+                          : { width: d.reviewScore * 22 }
+                      }
                     >
                       <img
                         className={styles.pointOfStar}
