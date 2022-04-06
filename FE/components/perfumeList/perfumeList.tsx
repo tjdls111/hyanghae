@@ -13,9 +13,9 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
   const [loading, setLoading] = useState(false);
   const sort = useAppSelector((state) => state.sortReducer.sort);
   const searchContent = useAppSelector((state) => state.searchReducer.content);
-  console.log(searchContent);
+  const [isLastPage, setIsLastPage] = useState(false);
 
-  // 필터가 바뀔경우
+  // 필터 혹은 검색어가 바뀔경우
   // 1. 리스트 비우기
   // 2. 페이지 0으로 재설정
   // 3. 데이터 가져오기
@@ -42,6 +42,8 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
         })
         .then((res) => {
           setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
+          // 마지막 페이지 체크
+          setIsLastPage(res.data.last);
         });
       setLoading(false);
     } else {
@@ -51,6 +53,8 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
         })
         .then((res) => {
           setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
+          // 마지막 페이지 체크
+          setIsLastPage(res.data.last);
         });
       setLoading(false);
     }
@@ -62,7 +66,7 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
   }, [fetchPerfumes]);
 
   useEffect(() => {
-    if (inView && !loading) {
+    if (inView && !loading && !isLastPage) {
       setPage((prev) => prev + 1);
     }
   }, [inView, loading]);
