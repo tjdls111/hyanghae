@@ -35,16 +35,13 @@ const grey = {
 
 const StyledButton = styled("button")(
   ({ theme }) => `
+  display: block;
   font-size: 1.4rem;
-  box-sizing: border-box;
-  min-height: calc(1.5em + 22px);
-  min-width: 320px;
   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
   border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
   border-radius: 0.75em;
-  margin: 0.5em;
   padding: 10px;
-  text-align: left;
+  text-align: center;
   line-height: 1.5;
   color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
 
@@ -76,7 +73,7 @@ const StyledListbox = styled("ul")(
   box-sizing: border-box;
   padding: 5px;
   margin: 10px 0;
-  min-width: 320px;
+  min-width: 100px;
   background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
   border: 1px solid ${theme.palette.mode === "dark" ? grey[800] : grey[300]};
   border-radius: 0.75em;
