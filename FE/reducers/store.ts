@@ -1,17 +1,23 @@
 import authReducer from "./authSlice";
 import sortReducer from "./sortSlice";
 import titleReducer from "./titleSlice";
+import searchReducer from "./searchSlice";
 import { createWrapper } from "next-redux-wrapper";
 import { combineReducers, createStore } from "redux";
 import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/lib/persistReducer";
 import persistStore from "redux-persist/lib/persistStore";
 
-const rootReducer = combineReducers({ authReducer, sortReducer, titleReducer });
+const rootReducer = combineReducers({
+  authReducer,
+  sortReducer,
+  titleReducer,
+  searchReducer,
+});
 
 const persistConfig = {
   key: "root",
-  blacklist: ["sort", "title"],
+  blacklist: ["sort", "title", "content"],
   storage,
 };
 
