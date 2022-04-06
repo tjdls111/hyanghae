@@ -14,7 +14,6 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
   const sort = useAppSelector((state) => state.sortReducer.sort);
   const searchContent = useAppSelector((state) => state.searchReducer.content);
   const [isLastPage, setIsLastPage] = useState(false);
-
   // 필터 혹은 검색어가 바뀔경우
   // 1. 리스트 비우기
   // 2. 페이지 0으로 재설정
@@ -22,6 +21,7 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
   useEffect(() => {
     setPerfumes([]);
     setPage(0);
+    setIsLastPage(false);
     fetchPerfumes();
   }, [sort, searchContent]);
 
@@ -44,7 +44,8 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
           setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
           // 마지막 페이지 체크
           setIsLastPage(res.data.last);
-        });
+        })
+        .catch(console.log);
       setLoading(false);
     } else {
       await axios
@@ -55,10 +56,11 @@ const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
           setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
           // 마지막 페이지 체크
           setIsLastPage(res.data.last);
-        });
+        })
+        .catch(console.log);
       setLoading(false);
     }
-  }, [page]);
+  }, [page, sort, searchContent]);
 
   // 함수가 새로 생성되면 실행
   useEffect(() => {
