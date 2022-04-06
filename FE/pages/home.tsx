@@ -10,17 +10,18 @@
 import React from "react";
 import { NextPage } from "next";
 import Navigation from "../components/navigation/navigation";
-import HomePageBanner from "../components/ui/homePageBanner/homePageBanner";
+import NewHomePageBanner from "../components/ui/homePageBanner/newHomePageBanner";
 import BestProduct from "../components/bestProduct/bestProducts";
 import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
 import Footer from "../components/landing/footer";
 import RecentReviews from "../components/recentReviews/recentReviews";
+import Container from "../components/ui/container/container";
 
 const HomePage: NextPage = () => {
   return (
     <>
       <Navigation />
-      <HomePageBanner />
+      <NewHomePageBanner />
       <BestProduct />
       <SeasonalProduct />
       <RecentReviews />
