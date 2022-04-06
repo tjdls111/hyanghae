@@ -88,10 +88,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
-<<<<<<< HEAD
                   className={styles.media}
-=======
->>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/day.jpg"
                   alt="survey3"
@@ -123,10 +120,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
-<<<<<<< HEAD
                   className={styles.media}
-=======
->>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/night.jpg"
                   alt="night"
@@ -159,10 +153,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
-<<<<<<< HEAD
                   className={styles.media}
-=======
->>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/uni.jpg"
                   alt="survey3"
