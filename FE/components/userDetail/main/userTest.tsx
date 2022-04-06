@@ -46,54 +46,82 @@ const UserTest = () => {
 
   return (
     <section className={styles.container}>
-      <div className={styles.title}>라이프 스타일에 따른 테스트 결과 모음</div>
-      {survey1List.length == 0 && (
-        <div className={styles.subtitle}>
-          테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
-        </div>
-      )}
-      {survey1List.map((survey) => (
-        <Link
-          href={{
-            pathname: "/survey/result",
-            query: { type: 1, id: survey.surveyId },
-          }}
-        >
-          <button className={styles.btn} key={survey.surveyId}>
-            {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
-          </button>
-        </Link>
-      ))}
+      <div className={styles.divContainer}>
+        <p className={styles.title}>라이프 스타일에 따른 테스트 결과 모음</p>
+        {survey1List.length == 0 && (
+          <div className={styles.subtitle}>
+            테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
+            <Link
+              href={{
+                pathname: "/survey",
+              }}
+            >
+              <button className={styles.btn}>테스트하러 가기</button>
+            </Link>
+          </div>
+        )}
+        {survey1List.map((survey) => (
+          <Link
+            href={{
+              pathname: "/survey/result",
+              query: { type: 1, id: survey.surveyId },
+            }}
+          >
+            <button className={styles.btn} key={survey.surveyId}>
+              {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+            </button>
+          </Link>
+        ))}
+      </div>
 
-      <div className={styles.title}>향수에 따른 테스트 결과 모음</div>
-      {survey2List.length == 0 && (
-        <div className={styles.subtitle}>
-          테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
-        </div>
-      )}
-      {survey2List.map((survey) => (
-        <Link
-          href={{
-            pathname: "/survey/result",
-            query: { type: 2, id: survey.surveyId },
-          }}
-        >
+      <div className={styles.divContainer}>
+        <p className={styles.title}>향수에 따른 테스트 결과 모음</p>
+        {survey2List.length == 0 && (
+          <div className={styles.subtitle}>
+            테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
+            <Link
+              href={{
+                pathname: "/survey",
+              }}
+            >
+              <button className={styles.btn}>테스트하러 가기</button>
+            </Link>
+          </div>
+        )}
+        {survey2List.map((survey) => (
+          <Link
+            href={{
+              pathname: "/survey/result",
+              query: { type: 2, id: survey.surveyId },
+            }}
+          >
+            <button className={styles.btn} key={survey.surveyId}>
+              {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+            </button>
+          </Link>
+        ))}
+      </div>
+
+      <div className={styles.divContainer}>
+        <p className={styles.title}>옷 스타일에 따른 테스트 결과 모음</p>
+        {survey3List.length == 0 && (
+          <div className={styles.subtitle}>
+            테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
+            <Link
+              href={{
+                pathname: "/survey",
+              }}
+            >
+              <button className={styles.btn}>테스트하러 가기</button>
+            </Link>
+          </div>
+        )}
+        {survey2List.map((survey) => (
           <button className={styles.btn} key={survey.surveyId}>
             {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
           </button>
-        </Link>
-      ))}
-      <div className={styles.title}>옷 스타일에 따른 테스트 결과 모음</div>
-      {survey3List.length == 0 && (
-        <div className={styles.subtitle}>
-          테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
-        </div>
-      )}
-      {survey2List.map((survey) => (
-        <button className={styles.btn} key={survey.surveyId}>
-          {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
-        </button>
-      ))}
+        ))}
+      </div>
     </section>
   );
 };

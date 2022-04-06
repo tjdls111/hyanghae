@@ -26,3 +26,8 @@
   cursor: pointer;
   margin: 1rem;
 }
+
+.divContainer {
+  border-bottom: 2px solid pink;
+  padding: 1rem;
+}
