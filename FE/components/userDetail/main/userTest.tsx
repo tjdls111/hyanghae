@@ -54,7 +54,10 @@ const UserTest = () => {
       )}
       {survey1List.map((survey) => (
         <Link
-          href={{ pathname: "/survey/result", query: { id: survey.surveyId } }}
+          href={{
+            pathname: "/survey/result",
+            query: { type: 1, id: survey.surveyId },
+          }}
         >
           <button className={styles.btn} key={survey.surveyId}>
             {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
@@ -69,9 +72,16 @@ const UserTest = () => {
         </div>
       )}
       {survey2List.map((survey) => (
-        <button className={styles.btn} key={survey.surveyId}>
-          {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
-        </button>
+        <Link
+          href={{
+            pathname: "/survey/result",
+            query: { type: 2, id: survey.surveyId },
+          }}
+        >
+          <button className={styles.btn} key={survey.surveyId}>
+            {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+          </button>
+        </Link>
       ))}
       <div className={styles.title}>옷 스타일에 따른 테스트 결과 모음</div>
       {survey3List.length == 0 && (

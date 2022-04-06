@@ -1,7 +1,13 @@
 import UserTestResult from "../../components/userDetail/userTestResult";
+import Navigation from "../../components/navigation/navigation";
 
 const Result = () => {
-  return <UserTestResult />;
+  return (
+    <>
+      <Navigation />
+      <UserTestResult />
+    </>
+  );
 };
 
 export default Result;
