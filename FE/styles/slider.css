@@ -71,3 +71,8 @@
 .swiper-button-next-unique.swiper-button-disabled {
   opacity: 0.4;
 }
+
+.swiper .swiper-button-next,
+.swiper .swiper-button-prev {
+  color: #333;
+}

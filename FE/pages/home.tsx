@@ -15,6 +15,7 @@ import BestProduct from "../components/bestProduct/bestProducts";
 import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
 import Footer from "../components/landing/footer";
 import RecentReviews from "../components/recentReviews/recentReviews";
+import Container from "../components/ui/container/container";
 
 const HomePage: NextPage = () => {
   return (

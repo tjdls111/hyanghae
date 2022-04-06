@@ -25,7 +25,7 @@ const NewHomePageBanner: React.FC = () => {
         modules={[Navigation, Autoplay]}
         className="mySwiper"
         autoplay={{
-          delay: 5000,
+          delay: 7000,
           disableOnInteraction: false,
         }}
       >

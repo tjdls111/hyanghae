@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./reviewCard.module.css";
-import { reviewType } from "../../recentReviews/dummyData";
 import Image from "next/image";
 import Star from "../../../public/SVG/star_rate.svg";
+import { reviewType } from "perfume";
 
 const ReviewCard: React.FC<{ review: reviewType }> = ({ review }) => {
   return (
@@ -16,19 +16,19 @@ const ReviewCard: React.FC<{ review: reviewType }> = ({ review }) => {
           />
         </div>
         <div className={styles.productText}>
-          <p className={styles.productName}>{review.name}</p>
-          <p className={styles.productBrand}>{review.brand}</p>
+          <p className={styles.productName}>{review.perfumeName}</p>
+          <p className={styles.productBrand}>{review.perfumeBrand}</p>
         </div>
       </section>
       <section className={styles.reviewInfo}>
         <div className={styles.reviewHeader}>
           <div className={styles.rating}>
             <Star className={styles.ratingIcon} />
-            <p className={styles.ratingText}>{review.rating}</p>
+            <p className={styles.ratingText}>{review.reviewScore}</p>
           </div>
-          <p className={styles.userNickname}>{review.nickname}</p>
+          <p className={styles.userNickname}>{review.userNickname}</p>
         </div>
-        <div className={styles.reviewContent}>{review.content}</div>
+        <div className={styles.reviewContent}>{review.reviewContent}</div>
       </section>
     </div>
   );

@@ -11,4 +11,13 @@ declare module "perfume" {
     perfumeId: number;
     perfumeScore: number;
   }
+  export interface reviewType {
+    imgUrl: string;
+    perfumeBrand: string;
+    perfumeId: number;
+    perfumeName: string;
+    reviewContent: string;
+    reviewScore: number;
+    userNickname: string;
+  }
 }
