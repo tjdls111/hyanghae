@@ -35,9 +35,9 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
         item.style.transform = "rotateY(0deg) translateZ(10rem)";
         item.style.filter = "brightness(100%)";
       } else {
-        item.style.transform = `rotateY(${degree * i}deg) translateZ(10rem) rotateY(-${
+        item.style.transform = `rotateY(${
           degree * i
-        }deg)`;
+        }deg) translateZ(10rem) rotateY(-${degree * i}deg)`;
         item.style.filter = "brightness(60%)";
       }
       //  0 1 2  1 2 0 [2 0 1 ]
@@ -87,10 +87,16 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
                   className={styles.media}
                   component="img"
                   image="/images/survey/man.png"
                   alt="man"
+=======
+                  component="img"
+                  image="/images/survey/man.png"
+                  alt="night"
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -119,10 +125,16 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
                   className={styles.media}
                   component="img"
                   image="/images/survey/woman.png"
                   alt="woman"
+=======
+                  component="img"
+                  image="/images/survey/woman.png"
+                  alt="survey3"
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -151,10 +163,16 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
                   className={styles.media}
                   component="img"
                   image="/images/survey/manwoman.png"
                   alt="manwoman"
+=======
+                  component="img"
+                  image="/images/survey/manwoman.png"
+                  alt="survey3"
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">

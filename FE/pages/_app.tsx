@@ -8,6 +8,7 @@ _app.tsx
 */
 
 import "../styles/global.css";
+import "../styles/slider.css";
 import type { AppProps } from "next/app";
 import { wrapper } from "../reducers/store";
 

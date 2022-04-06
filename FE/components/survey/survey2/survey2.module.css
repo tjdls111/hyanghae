@@ -12,26 +12,8 @@
 
 .perfumeList {
   position: absolute;
+  overflow: hidden;
   height: auto;
   left: 50%;
-  margin-top: 10rem;
   transform: translate(-50%);
-}
-
-.emptyText {
-  margin-top: 5rem;
-  font-size: 2rem;
-  white-space: nowrap;
-}
-
-.innerBox {
-  display: flex;
-}
-.innerBox :first-child {
-  margin: auto;
-}
-
-.pageBar {
-  display: flex;
-  margin-top: 3rem;
 }

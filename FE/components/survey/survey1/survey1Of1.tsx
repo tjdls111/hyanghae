@@ -36,9 +36,9 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
         item.style.transform = "rotateY(0deg) translateZ(10rem)";
         item.style.filter = "brightness(100%)";
       } else {
-        item.style.transform = `rotateY(${degree * i}deg) translateZ(10rem) rotateY(-${
+        item.style.transform = `rotateY(${
           degree * i
-        }deg)`;
+        }deg) translateZ(10rem) rotateY(-${degree * i}deg)`;
         item.style.filter = "brightness(60%)";
       }
       //  0 1 2  1 2 0 [2 0 1 ]
@@ -88,7 +88,10 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
                   className={styles.media}
+=======
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/day.jpg"
                   alt="survey3"
@@ -120,7 +123,10 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
                   className={styles.media}
+=======
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/night.jpg"
                   alt="night"
@@ -153,7 +159,10 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
                   className={styles.media}
+=======
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/uni.jpg"
                   alt="survey3"

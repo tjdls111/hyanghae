@@ -8,9 +8,10 @@
 
 import React, { useRef, useState } from "react";
 import styles from "./modify.module.css";
+import { useAppSelector } from "../../../../reducers/hooks";
 
 import { apiCheckMod } from "../../../../api/user";
-import { useAppSelector } from "../../../../reducers/hooks";
+
 import { RootState } from "../../../../reducers/store";
 interface stateProps {
   setState: (value: boolean) => void;
@@ -21,6 +22,7 @@ const AuthModify: React.FC<stateProps> = ({ setState }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const regExp = /^[A-Za-z0-9]+$/;
   const token = useAppSelector((state: RootState) => state.authReducer.token);
+
   const changeInput = () => {
     if (inputRef.current?.value === "") {
       setValid(true);
@@ -75,7 +77,11 @@ const AuthModify: React.FC<stateProps> = ({ setState }) => {
             disabled={isValid}
             style={
               !isValid
-                ? { color: "#777", cursor: "pointer", backgroundColor: "#ffebf0" }
+                ? {
+                    color: "#777",
+                    cursor: "pointer",
+                    backgroundColor: "#ffebf0",
+                  }
                 : { color: "#ccc" }
             }
             aria-label="passwordAuth"

@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./paging.module.css";
 
 const Paging = ({ limit, page, setPage }) => {
-  const numPages = limit;
+  const numPages = limit - 1;
 
   return (
     <>
