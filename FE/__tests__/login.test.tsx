@@ -1,8 +1,7 @@
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 /*
+
+
 login.test.tsx
 @author scarlet
 @version 1.0.0
@@ -15,7 +14,7 @@ import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
-import { apiLogin, resType } from "../api/user";
+import { apiLogin } from "../api/user";
 import { BASE_URL } from "../api/utils";
 
 configure({ adapter: new Adapter() });
@@ -129,8 +128,4 @@ describe("react Hook Form", () => {
     expect(axios.post).toBeCalledTimes(1);
     expect(result).toEqual(res);
   });
-<<<<<<< Updated upstream
 });
-=======
-});
->>>>>>> Stashed changes

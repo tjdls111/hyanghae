@@ -1,7 +1,4 @@
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 /*
 signup.test.tsx
 @author scarlet
@@ -16,7 +13,7 @@ import { configure, shallow, ShallowWrapper } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { render, fireEvent, screen, waitFor, cleanup } from "@testing-library/react";
 import axios from "axios";
-import { resType, apiSignup } from "../api/user";
+import { apiSignup } from "../api/user";
 import { BASE_URL } from "../api/utils";
 jest.mock("next/router", () => ({
   useRouter() {
@@ -413,7 +410,3 @@ describe("react Hook Form", () => {
   });
   afterEach(cleanup);
 });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes

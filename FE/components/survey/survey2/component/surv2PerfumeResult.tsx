@@ -25,7 +25,7 @@ const Surv2PerfumeResult = ({ brand, name, id, url }: propType) => {
 
             <div className={styles.informWrapper}>
               <div style={{ marginRight: "1rem" }}>{brand}</div>
-              <div style={{ marginRight: "1rem" }}>{name}</div>
+              <div className={styles.perfumeEllipsis}>{name}</div>
               <div className={styles.detailButton}>
                 <button type="button" onClick={forDetail}>
                   향수 상세보기

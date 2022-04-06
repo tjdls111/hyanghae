@@ -7,6 +7,9 @@ import { CardActionArea } from "@mui/material";
 import styles from "./survey1.module.css";
 import clsx from "clsx";
 import Button from "@mui/material/Button";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../survey2/component/buttonTheme";
+import SlideNav from "../slideNav/slideNav";
 interface stateProps {
   setState: (value: number) => void;
 }
@@ -83,7 +86,12 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/uni.jpg"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     상관없음
@@ -110,7 +118,12 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/daily.png" alt="survey3" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/daily.png"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     데일리용
@@ -137,7 +150,12 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/date.png" alt="night" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/date.png"
+                  alt="night"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     데이트용
@@ -164,7 +182,12 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 3)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/interview.png" alt="survey3" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/interview.png"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     면접용
@@ -177,15 +200,20 @@ const Survey1Of4: React.FC<stateProps> = ({ setState }) => {
             </Card>
           </div>
         </div>
+        <div className={styles.slideNav}>
+          <SlideNav limit={4} state={number} />
+        </div>
       </div>
-      <div className={styles.btns}>
-        <Button onClick={prevCard} size="large" variant="contained">
-          이전
-        </Button>
-        <Button onClick={nextCard} size="large" variant="contained">
-          다음
-        </Button>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className={styles.btns}>
+          <Button onClick={prevCard} size="large" variant="contained">
+            이전
+          </Button>
+          <Button onClick={nextCard} size="large" variant="contained">
+            다음
+          </Button>
+        </div>
+      </ThemeProvider>
     </>
   );
 };

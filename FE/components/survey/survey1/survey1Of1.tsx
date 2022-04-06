@@ -7,6 +7,9 @@ import { CardActionArea } from "@mui/material";
 import clsx from "clsx";
 import Button from "@mui/material/Button";
 import styles from "./survey1.module.css";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../survey2/component/buttonTheme";
+import SlideNav from "../slideNav/slideNav";
 
 interface stateProps {
   setState: (value: number) => void;
@@ -72,7 +75,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               className={clsx(
                 {
                   [styles.card]: true,
-                  [styles.now]: number === 1,
+                  [styles.now]: number === 0,
                 },
                 "card"
               )}
@@ -85,6 +88,10 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
+                  className={styles.media}
+=======
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/day.jpg"
                   alt="survey3"
@@ -103,7 +110,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               className={clsx(
                 {
                   [styles.card]: true,
-                  [styles.now]: number === 0,
+                  [styles.now]: number === 1,
                 },
                 "card"
               )}
@@ -116,6 +123,10 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
+                  className={styles.media}
+=======
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/night.jpg"
                   alt="night"
@@ -148,6 +159,10 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             >
               <CardActionArea>
                 <CardMedia
+<<<<<<< HEAD
+                  className={styles.media}
+=======
+>>>>>>> af58809ca638d25ff20fa595383bc6afeef20fb5
                   component="img"
                   image="/images/survey/uni.jpg"
                   alt="survey3"
@@ -164,15 +179,21 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             </Card>
           </div>
         </div>
+        <div className={styles.slideNav}>
+          <SlideNav limit={3} state={number} />
+        </div>
       </div>
-      <div className={styles.btns}>
-        <Button onClick={prevCard} size="large" variant="contained">
-          이전
-        </Button>
-        <Button onClick={nextCard} size="large" variant="contained">
-          다음
-        </Button>
-      </div>
+
+      <ThemeProvider theme={theme}>
+        <div className={styles.btns}>
+          <Button onClick={prevCard} size="large" variant="contained">
+            이전
+          </Button>
+          <Button onClick={nextCard} size="large" variant="contained">
+            다음
+          </Button>
+        </div>
+      </ThemeProvider>
     </>
   );
 };

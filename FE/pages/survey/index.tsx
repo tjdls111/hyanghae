@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import SelectSurvey from "../../components/survey/selectSurvey";
 import Navigation from "../../components/navigation/navigation";
+import InsertTitle from "../../components/survey/insertTitle";
 
 const survey = () => {
+  const [state, setState] = useState(false);
   return (
     <>
       <Navigation />
-      <SelectSurvey />
+      {state ? <InsertTitle setTitle={setState} /> : <SelectSurvey />}
     </>
   );
 };

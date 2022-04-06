@@ -11,6 +11,8 @@ import { useRef, useState } from "react";
 import { apiDist } from "../../../api/user";
 import router from "next/router";
 import styles from "./userDestroy.module.css";
+import { useAppSelector } from "../../../reducers/hooks";
+import { RootState } from "../../../reducers/store";
 const UserDestroy = () => {
   const [state, setState] = useState({
     isValid: true,
@@ -19,7 +21,7 @@ const UserDestroy = () => {
   const alertString = "정말로 탈퇴하시겠습니까?";
   const { isValid } = state;
   const distMsg = "#eb2f64";
-
+  const token = useAppSelector((state: RootState) => state.authReducer.token);
   const changeInput = () => {
     if (!ref.current?.value) {
       setState({
@@ -37,7 +39,6 @@ const UserDestroy = () => {
   const ref = useRef<HTMLInputElement>(null);
   const onValidSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
     if (ref.current?.value !== dangerString) {
       setState({
         isValid: true,

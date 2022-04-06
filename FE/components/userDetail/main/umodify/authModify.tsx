@@ -11,7 +11,8 @@ import styles from "./modify.module.css";
 import { useAppSelector } from "../../../../reducers/hooks";
 
 import { apiCheckMod } from "../../../../api/user";
-import { useEffect } from "react";
+
+import { RootState } from "../../../../reducers/store";
 interface stateProps {
   setState: (value: boolean) => void;
 }
@@ -20,7 +21,7 @@ const AuthModify: React.FC<stateProps> = ({ setState }) => {
   const [isValid, setValid] = useState(true);
   const inputRef = useRef<HTMLInputElement>(null);
   const regExp = /^[A-Za-z0-9]+$/;
-  const token = useAppSelector((state) => state.authReducer.token);
+  const token = useAppSelector((state: RootState) => state.authReducer.token);
 
   const changeInput = () => {
     if (inputRef.current?.value === "") {
@@ -38,7 +39,6 @@ const AuthModify: React.FC<stateProps> = ({ setState }) => {
 
   const onValidsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const token = localStorage.getItem("token");
 
     if (inputRef.current?.value === undefined || token === null) {
       return;
