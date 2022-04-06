@@ -65,7 +65,7 @@
 }
 
 .note {
-  white-space: normal;
+  white-space: pre;
 }
 
 @media (max-width: 600px) {
