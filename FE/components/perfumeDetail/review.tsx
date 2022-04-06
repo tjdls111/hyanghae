@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-29
+마지막 수정일 2022-04-06
 */
 
 import { useRouter } from "next/router";
@@ -65,13 +65,13 @@ const Review = (Props: Props) => {
             router.reload(window.location.pathname);
           })
           .catch((err) => {
-            alert("Sorry.. You can write only one review.");
+            alert("한 계정 당 하나의 리뷰만 남길 수 있습니다.");
             review.current.value = "";
             console.log(err);
           });
       }
     } else {
-      alert("You have to write at least one text.");
+      alert("한 글자 이상 써주세요.");
     }
   };
 
@@ -84,7 +84,7 @@ const Review = (Props: Props) => {
       <section className={styles.container}>
         <form className={styles.formContainer} onSubmit={onSubmit}>
           <label className={styles.content} htmlFor="review">
-            Please leave an honest and kind review ^^
+            솔직한 리뷰를 남겨주세요 :)
           </label>
           <textarea
             id="review"
@@ -92,7 +92,7 @@ const Review = (Props: Props) => {
             rows={5}
             cols={50}
             ref={review}
-            placeholder="Please write a review :)"
+            placeholder="리뷰를 써주세요:)"
           ></textarea>
 
           <select name="star" id="star" onChange={handleChangeSelect}>
@@ -103,14 +103,14 @@ const Review = (Props: Props) => {
             <option value="1">⭐</option>
           </select>
 
-          <button className={styles.btn}>Write a Review</button>
+          <button className={styles.btn}>작성</button>
         </form>
       </section>
     );
   } else {
     return (
       <div className={styles.content}>
-        If you want to write a review, please login.
+        리뷰를 남기고 싶으면 로그인이 필요합니다.
       </div>
     );
   }

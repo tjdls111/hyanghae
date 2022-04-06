@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-04-05
+마지막 수정일 2022-04-06
 */
 
 import React, { useEffect, useState } from "react";
@@ -15,7 +15,6 @@ import styles from "./reviewList.module.css";
 import Review from "./review";
 import { useAppSelector } from "../../reducers/hooks";
 import Pagination from "./pagination";
-import clsx from "clsx";
 
 interface ReviewInterface {
   reviewContent: string;
@@ -99,13 +98,11 @@ const ReviewList = () => {
   return (
     <article className={styles.container}>
       <h1 className={styles.title}>Reviews</h1>
-      {data.length == 0 && (
-        <h2 className={styles.content}>There are no review.. </h2>
-      )}
+      {data.length == 0 && <p className={styles.content}>리뷰가 없어요... </p>}
       {data.length > 0 && (
         <div className={styles.label}>
           <label htmlFor="limit">
-            <span className={styles.content}>Review count per page </span>
+            <span className={styles.content}>한 페이지 당 후기 수 </span>
             <select
               value={limit}
               onChange={({ target: { value } }) => changeLimit(value)}
@@ -155,10 +152,10 @@ const ReviewList = () => {
                         className={styles.editBtn}
                         onClick={changeEditMode}
                       >
-                        Edit
+                        수정
                       </button>
                       <form onSubmit={onDelete}>
-                        <button className={styles.delBtn}>Delete</button>
+                        <button className={styles.delBtn}>삭제</button>
                       </form>
                     </div>
                   )}

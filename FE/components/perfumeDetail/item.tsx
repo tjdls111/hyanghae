@@ -118,22 +118,22 @@ const Item = ({ data }: InnerProps) => {
           </div>
         )}
         <p className={styles.content}>
-          Seasonal : {data.season == "0" && "Spring🌸/Summer🌊"}
-          {data.season == "1" && "Fall🍁/Winter⛄"}
-          {data.season == "2" && "All Season"}
+          계절 : {data.season == "0" && "봄🌸/여름🌊"}
+          {data.season == "1" && "가을🍁/겨울⛄"}
+          {data.season == "2" && "모든 계절"}
         </p>
         <p className={styles.content}>
-          TPO : {data.tpo == "0" && "All situation"}
-          {data.tpo == "1" && "Daily"}
-          {data.tpo == "2" && "Date💜"}
-          {data.tpo == "3" && "Interview🧐"}
+          상황 : {data.tpo == "0" && "항상"}
+          {data.tpo == "1" && "데일리"}
+          {data.tpo == "2" && "데이트💜"}
+          {data.tpo == "3" && "회사🧐"}
         </p>
         <p className={styles.content}>
-          Mood : {data.mood == "0" && "All"}
-          {data.mood == "1" && "Lively"}
-          {data.mood == "2" && "Elegant"}
-          {data.mood == "3" && "Fresh"}
-          {data.mood == "4" && "Warm"}
+          분위기 : {data.mood == "0" && "All"}
+          {data.mood == "1" && "활기찬"}
+          {data.mood == "2" && "우아한"}
+          {data.mood == "3" && "상큼한"}
+          {data.mood == "4" && "따듯한"}
         </p>
       </div>
       <div>
@@ -141,17 +141,17 @@ const Item = ({ data }: InnerProps) => {
           {data.name} | {data.perfumeBrand}
         </span>
         <span className={styles.content}>
-          for {data.gender == "0" && "Male"}
-          {data.gender == "1" && "Female"}
-          {data.gender == "2" && "All"}
+          for {data.gender == "0" && "남성"}
+          {data.gender == "1" && "여성"}
+          {data.gender == "2" && "모두"}
         </span>
         <p className={styles.content}>
-          Score : {data.score}/5 with {data.reviewCnt} votes.
+          점수 : {data.score}/5 ({data.reviewCnt} 표)
         </p>
         <p className={styles.content}>
-          Notes: #{data.note1} #{data.note2} #{data.note3}
+          #{data.note1} #{data.note2} #{data.note3}
         </p>
-        <p className={styles.content}>{likeCnt} people likes this item.</p>
+        <p className={styles.content}>{likeCnt} 명이 이 향수를 좋아합니다.</p>
         {isAuthenticated && (
           <div className={styles.btnContainer}>
             {isLike && (
