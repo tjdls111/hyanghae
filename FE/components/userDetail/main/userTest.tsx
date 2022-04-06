@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./userTest.module.css";
 import { recommend1Result, surveyList } from "../../../api/perfume";
 import { useAppSelector } from "../../../reducers/hooks";
-import Survey1Res from "../../survey/survey1/survey1Res";
+import Link from "next/link";
 
 interface surveyData {
   createDate: string;
@@ -53,9 +53,13 @@ const UserTest = () => {
         </div>
       )}
       {survey1List.map((survey) => (
-        <button className={styles.btn} key={survey.surveyId}>
-          {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
-        </button>
+        <Link
+          href={{ pathname: "/survey/result", query: { id: survey.surveyId } }}
+        >
+          <button className={styles.btn} key={survey.surveyId}>
+            {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+          </button>
+        </Link>
       ))}
 
       <div className={styles.title}>향수에 따른 테스트 결과 모음</div>
