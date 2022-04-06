@@ -21,7 +21,6 @@ import { useAppSelector } from "../../reducers/hooks";
 import { logout } from "../../reducers/authSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { submit } from "../../reducers/searchSlice";
 
 const Navigation: React.FC = () => {
   const isAuthenticated = useAppSelector(
@@ -67,8 +66,6 @@ const Navigation: React.FC = () => {
       if (!keyword.trim()) {
         return;
       }
-
-      dispatch(submit(keyword));
       router.push(`/search/${keyword}`);
     };
 

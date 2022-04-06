@@ -152,6 +152,7 @@ export default function perfumeListFilter() {
   const sort = useAppSelector((state) => state.sortReducer.sort);
 
   const handleFilterChange = function (e) {
+    console.log(e);
     dispatch(changeSort(e));
   };
 
