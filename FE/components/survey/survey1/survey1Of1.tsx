@@ -7,6 +7,9 @@ import { CardActionArea } from "@mui/material";
 import clsx from "clsx";
 import Button from "@mui/material/Button";
 import styles from "./survey1.module.css";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "../survey2/component/buttonTheme";
+import SlideNav from "../slideNav/slideNav";
 
 interface stateProps {
   setState: (value: number) => void;
@@ -33,9 +36,9 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
         item.style.transform = "rotateY(0deg) translateZ(10rem)";
         item.style.filter = "brightness(100%)";
       } else {
-        item.style.transform = `rotateY(${degree * i}deg) translateZ(10rem) rotateY(-${
+        item.style.transform = `rotateY(${
           degree * i
-        }deg)`;
+        }deg) translateZ(10rem) rotateY(-${degree * i}deg)`;
         item.style.filter = "brightness(60%)";
       }
       //  0 1 2  1 2 0 [2 0 1 ]
@@ -72,7 +75,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               className={clsx(
                 {
                   [styles.card]: true,
-                  [styles.now]: number === 1,
+                  [styles.now]: number === 0,
                 },
                 "card"
               )}
@@ -84,7 +87,12 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/day.jpg" alt="survey3" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/day.jpg"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     낮
@@ -99,7 +107,7 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               className={clsx(
                 {
                   [styles.card]: true,
-                  [styles.now]: number === 0,
+                  [styles.now]: number === 1,
                 },
                 "card"
               )}
@@ -111,7 +119,12 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/night.jpg" alt="night" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/night.jpg"
+                  alt="night"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     밤
@@ -139,7 +152,12 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/uni.jpg"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     상관없음
@@ -152,15 +170,21 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
             </Card>
           </div>
         </div>
+        <div className={styles.slideNav}>
+          <SlideNav limit={3} state={number} />
+        </div>
       </div>
-      <div className={styles.btns}>
-        <Button onClick={prevCard} size="large" variant="contained">
-          이전
-        </Button>
-        <Button onClick={nextCard} size="large" variant="contained">
-          다음
-        </Button>
-      </div>
+
+      <ThemeProvider theme={theme}>
+        <div className={styles.btns}>
+          <Button onClick={prevCard} size="large" variant="contained">
+            이전
+          </Button>
+          <Button onClick={nextCard} size="large" variant="contained">
+            다음
+          </Button>
+        </div>
+      </ThemeProvider>
     </>
   );
 };

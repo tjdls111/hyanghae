@@ -99,6 +99,14 @@ public class PerfumeController {
     }
 
     /* David */
+    @ApiOperation("계절별 향수 목록조회")
+    @GetMapping("/season/{season}")
+    public ResponseEntity<? extends BaseResponseBody> getPerfumeListBySeason(@PathVariable("season") int seson) {
+        List<Perfume> perfumes = perfumeService.getPerfumeListBySeason(seson);
+        return ResponseEntity.ok(PerfumeListBySeasonResponse.of(200, "Success",perfumes));
+    }
+
+    /* David */
     @ApiOperation("브랜드 조회")
     @GetMapping("/brand")
     public ResponseEntity<? extends BaseResponseBody> getBrandList() {

@@ -4,15 +4,14 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import NativeSelect from "@mui/material/NativeSelect";
-import { makeStyles } from "@mui/styles";
 import { useEffect } from "react";
 import { useAppSelector } from "../../../reducers/hooks";
 import { RootState } from "../../../reducers/store";
 import { apiSurvey2Brand, brandType, apiSurvey2Perfume, survey2Search } from "../../../api/survey";
 import { dataType } from "../../../api/user";
-import ResultBox from "../component/resultBox";
-import Paging from "../component/paging";
-import Surv2PerfumeDetail from "../component/surv2PerfumeDetail";
+import ResultBox from "./component/resultBox";
+import Paging from "./component/paging";
+import Surv2PerfumeDetail from "./component/surv2PerfumeDetail";
 
 const Survey2Of1 = () => {
   const [state, setState] = useState<brandType[]>([]);
@@ -29,7 +28,8 @@ const Survey2Of1 = () => {
   });
   const [isClick, setClick] = useState(false);
   const [pbBarState, setPbBarState] = useState(false);
-  const setPageBar = useRef(false); 
+  const useTotalPags = useRef(0);
+  const setPageBar = useRef(false);
   const token = useAppSelector((state: RootState) => state.authReducer.token);
   const perfumeRef = useRef<HTMLInputElement>(null);
 
@@ -63,7 +63,7 @@ const Survey2Of1 = () => {
     let isCompleted = false;
     (async function get() {
       try {
-        const result = await apiSurvey2Perfume(brand, perfumeRef.current.value, pageNum, 10);
+        const result = await apiSurvey2Perfume(brand, perfumeRef.current.value, pageNum - 1, 9);
         if (!isCompleted) {
           setPerfumeData(result.data);
           setData(true);
@@ -94,10 +94,11 @@ const Survey2Of1 = () => {
     if (perfumeRef.current.value === "") {
       setData(false);
       setPageBar.current = false;
+      setPbBarState(false);
       return;
     }
     try {
-      const result = await apiSurvey2Perfume(brand, perfumeRef.current.value, 1, 10);
+      const result = await apiSurvey2Perfume(brand, perfumeRef.current.value, 0, 9);
       setSearch(perfumeRef.current.value);
 
       if (result.data.totalPages === 0) {
@@ -106,15 +107,17 @@ const Survey2Of1 = () => {
         setPbBarState(false);
         return;
       }
+
+      if (result.data.totalPages > 1) {
+        setPageNum(1);
+        useTotalPags.current = result.data.totalPages;
+        setPageBar.current = true;
+        setPbBarState(true);
+      }
+
       setData(true);
       setPerfumeData(result.data);
-      setPageNum(1);
-      setPageBar.current = true;
-      setPbBarState(true);
-
     } catch (e) {
-      setData(false);
-      setPageBar.current = false;
       console.error(e);
     }
   };
@@ -136,8 +139,8 @@ const Survey2Of1 = () => {
   return (
     <div className={styles.container}>
       {!isClick ? (
-        <Box component="form" noValidate autoComplete="off">
-          <FormControl fullWidth>
+        <Box className={styles.innerBox} component="form" noValidate autoComplete="off">
+          <FormControl>
             <NativeSelect
               defaultValue={"none"}
               inputProps={{
@@ -146,14 +149,14 @@ const Survey2Of1 = () => {
               }}
               onChange={(e) => onChSelect(e)}
             >
-              <option value={"none"}>{brand}</option>
+              <option value={"none"}>brand</option>
               {brandList}
             </NativeSelect>
           </FormControl>
           <TextField
             id="standard-basic"
             defaultValue={searchString}
-            style={{ width: "30rem" }}
+            style={{ width: "30rem", marginLeft: "2rem", marginBottom: "1.6em" }}
             label="향수 이름을 영어로 입력해주세요"
             variant="standard"
             disabled={isValid}
@@ -162,10 +165,14 @@ const Survey2Of1 = () => {
           />
 
           <div className={styles.perfumeList}>
-            {isData ? perfumeList : <div style={{ marginTop: "2rem" }}>Empty result</div>}
-            <div>
+            {isData ? perfumeList : <div className={styles.emptyText}>Empty result</div>}
+            <div className={styles.pageBar}>
               {setPageBar.current ? (
-                <Paging limit={perfumeDt.totalPages} page={pageNum} setPage={setPageNum} />
+                <Paging
+                  limit={useTotalPags.current}
+                  page={pageNum}
+                  setPage={setPageNum}
+                />
               ) : null}
             </div>
           </div>

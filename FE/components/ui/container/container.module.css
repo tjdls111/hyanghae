@@ -1,0 +1,13 @@
+.topContainer {
+  /* 내비게이션의 높이 만큼 margin-top */
+  margin-top: 10rem;
+}
+
+.regularContainer {
+}
+
+.content {
+  margin: auto;
+  max-width: 1200px;
+  padding: 0rem 2rem 0rem;
+}

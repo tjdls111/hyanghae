@@ -147,5 +147,27 @@ export const surveyList = async (token: string) => {
     });
   } catch (e) {
     throw new Error("server error");
+    
+export const getBestPerfumes = async function () {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL + "/perfume/list",
+      { params: { page: 0, size: 10, sort: "likeCnt,DESC" } }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getPerfumes = async function (page: number, sort: string) {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL + "/perfume/list",
+      { params: { page, size: 10, sort } }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
   }
 };

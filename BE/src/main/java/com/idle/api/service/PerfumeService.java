@@ -23,6 +23,7 @@ public interface PerfumeService {
     Page<Perfume> getPerfumeSearchPage(String keyword, String content, Pageable pageable);
     Page<Perfume> getPerfumeList(Pageable pageable);
     Perfume getPerfumeByPerfumeId(Long perfumeId);
+    List<Perfume> getPerfumeListBySeason(int season);
     //향수 브랜드
     List<Brand> getBrandList();
     Page<Perfume> getPerfumeListByBrand(Pageable pageable, String perfumeBrand, String content);

@@ -13,6 +13,7 @@ const nextConfig = {
       "www.mecca.com.au",
       "www.reallyree.com",
       "piimages.parfumo.de",
+      "i.etsystatic.com",
     ],
   },
   env: {
@@ -26,7 +27,6 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
   },
 };

@@ -51,8 +51,10 @@ export interface brandType {
 
 export type surveyPerfume = surveyType & perfumeData & resType;
 export interface listRes {
-  recommendPerfumeList?: surveyPerfume[];
+  similarPerfumeList?: surveyPerfume[];
+  differentPerfumeList?: surveyPerfume[];
   brandList?: brandType[];
+  recommendPerfumeList?: surveyPerfume[];
 }
 export interface resType {
   data?: dataType & listRes;
@@ -84,9 +86,7 @@ export const apiSurvey1Res = async (
   }
 };
 
-export const apiSurvey2Brand = async (
-  accessToken: string
-): Promise<resType> => {
+export const apiSurvey2Brand = async (accessToken: string): Promise<resType> => {
   try {
     return await axios.get(`${BASE_URL}/perfume/brand`, {
       headers: {

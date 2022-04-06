@@ -6,14 +6,14 @@
 생성일 2022-03-24$
 마지막 수정일 2022-03-24$
 */
-import React, { useEffect, useState } from "react";
-import styles from "./imageSlider.module.css";
+import React, { useState } from "react";
+import styles from "./homePageBanner.module.css";
 import Image from "next/image";
-import sliderData from "./sliderData";
+import sliderData from "./homePageBannerData";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const ImageSlider: React.FC = function () {
+const HomePageBanner: React.FC = function () {
   const [current, setCurrent] = useState(0);
   const length = sliderData.length;
 
@@ -44,8 +44,6 @@ const ImageSlider: React.FC = function () {
                   className={`${styles.image} ${
                     idx === current && styles.activeImage
                   }`}
-                  width="1000"
-                  height="1000"
                   layout="fill"
                   src={data.path}
                   alt="test"
@@ -70,4 +68,4 @@ const ImageSlider: React.FC = function () {
   );
 };
 
-export default ImageSlider;
+export default HomePageBanner;

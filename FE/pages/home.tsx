@@ -10,13 +10,21 @@
 import React from "react";
 import { NextPage } from "next";
 import Navigation from "../components/navigation/navigation";
-import ImageSlider from "../components/ui/imageSlider";
+import HomePageBanner from "../components/ui/homePageBanner/homePageBanner";
+import BestProduct from "../components/bestProduct/bestProducts";
+import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
+import Footer from "../components/landing/footer";
+import RecentReviews from "../components/recentReviews/recentReviews";
 
 const HomePage: NextPage = () => {
   return (
     <>
       <Navigation />
-      <ImageSlider />
+      <HomePageBanner />
+      <BestProduct />
+      <SeasonalProduct />
+      <RecentReviews />
+      <Footer />
     </>
   );
 };

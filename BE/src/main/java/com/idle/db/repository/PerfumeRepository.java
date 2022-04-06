@@ -28,5 +28,6 @@ public interface PerfumeRepository extends JpaRepository<Perfume, Long> {
     Page<Perfume> findByPerfumeBrandAndPerfumeNameContaining(Pageable pageable, Brand brand, String content);
 
     List<Perfume> findByMoodGreaterThan(int mood);
+    List<Perfume> findTop10BySeasonOrderByPerfumeScoreDesc(int season);
 
 }

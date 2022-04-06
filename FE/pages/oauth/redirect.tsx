@@ -20,7 +20,6 @@ const Redirect: NextPage = (props) => {
 
   useEffect(() => {
     dispatch(login(router.query.token));
-    localStorage.setItem("token", router.query.token as string);
     router.replace("/home");
   }, [router.isReady]);
   return <></>;

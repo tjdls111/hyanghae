@@ -12,6 +12,8 @@ import { apiCheckNickname, apiNickCh, apiUserLookUp } from "../../../../api/user
 import { useRouter } from "next/router";
 import UserDestroy from "../userDestroy";
 import styles from "./modify.module.css";
+import { useAppSelector } from "../../../../reducers/hooks";
+import { RootState } from "../../../../reducers/store";
 
 const FormModify = () => {
   const [state, setState] = useState({
@@ -25,7 +27,7 @@ const FormModify = () => {
   const distTxtC = "#f382a2";
   const nickRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-
+  const token = useAppSelector((state: RootState) => state.authReducer.token);
   const nickChange = async () => {
     const value = nickRef.current?.value;
     if (value && value.length > 0 && value.length < 11) {
@@ -45,7 +47,6 @@ const FormModify = () => {
 
   const onSubmit = async () => {
     const value = nickRef.current?.value;
-    const token = localStorage.getItem("token");
     try {
       if (value && token) {
         await apiNickCh(value, token);
@@ -60,7 +61,6 @@ const FormModify = () => {
 
   const { isShow, id, nickName, email } = state;
   useEffect(() => {
-    const token = localStorage.getItem("token");
     let completed = false;
     (async function get() {
       if (token) {

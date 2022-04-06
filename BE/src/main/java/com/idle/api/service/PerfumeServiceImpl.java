@@ -66,6 +66,13 @@ public class PerfumeServiceImpl implements PerfumeService{
         return perfume;
     }
 
+    /* David : 계절별 향수 목록 조회 */
+    @Override
+    public List<Perfume> getPerfumeListBySeason(int season) {
+        List<Perfume> perfumeList = perfumeRepository.findTop10BySeasonOrderByPerfumeScoreDesc(season);
+        return perfumeList;
+    }
+
     /* David : 브랜드 조회 */
     @Override
     public List<Brand> getBrandList() {
