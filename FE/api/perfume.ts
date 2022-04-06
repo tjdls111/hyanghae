@@ -167,3 +167,15 @@ export const getBestPerfumes = async function () {
     console.log(e);
   }
 };
+
+export const getPerfumes = async function (page: number, sort: string) {
+  try {
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_BASE_URL + "/perfume/list",
+      { params: { page, size: 10, sort } }
+    );
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};

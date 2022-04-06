@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SelectUnstyled, {
   SelectUnstyledProps,
   selectUnstyledClasses,
@@ -8,6 +8,9 @@ import OptionUnstyled, {
 } from "@mui/base/OptionUnstyled";
 import PopperUnstyled from "@mui/base/PopperUnstyled";
 import { styled } from "@mui/system";
+import { useDispatch } from "react-redux";
+import { changeSort } from "../../../reducers/sortSlice";
+import { useAppSelector } from "../../../reducers/hooks";
 
 const blue = {
   100: "#DAECFF",
@@ -32,7 +35,6 @@ const grey = {
 
 const StyledButton = styled("button")(
   ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
   font-size: 1.4rem;
   box-sizing: border-box;
   min-height: calc(1.5em + 22px);
@@ -70,7 +72,6 @@ const StyledButton = styled("button")(
 
 const StyledListbox = styled("ul")(
   ({ theme }) => `
-  font-family: IBM Plex Sans, sans-serif;
   font-size: 1.4rem;
   box-sizing: border-box;
   padding: 5px;
@@ -143,19 +144,29 @@ const CustomSelect = React.forwardRef(function CustomSelect<TValue>(
 ) => JSX.Element;
 
 // 선택할 수 있는 필터
-const filter = [{}, {}];
+const filterList = [
+  { name: "리뷰 많은 순", value: "reviewCnt,DESC" },
+  { name: "평점 높은 순", value: "perfumeScore,DESC" },
+  { name: "좋아요 많은 순", value: "likeCnt,DESC" },
+];
 
 export default function perfumeListFilter() {
+  const dispatch = useDispatch();
+
+  const handleFilterChange = function (e) {
+    dispatch(changeSort(e));
+  };
+
   return (
     <CustomSelect
       onChange={(e) => {
-        console.log(e);
+        handleFilterChange(e);
       }}
-      defaultValue={10}
+      defaultValue="perfumeScore,DESC"
     >
-      <StyledOption value={10}>Ten</StyledOption>
-      <StyledOption value={20}>Twenty</StyledOption>
-      <StyledOption value={30}>Thirty</StyledOption>
+      {filterList.map((filter) => (
+        <StyledOption value={filter.value}>{filter.name}</StyledOption>
+      ))}
     </CustomSelect>
   );
 }
