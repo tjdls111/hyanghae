@@ -18,8 +18,9 @@ const Surv2PerfumeDetail = ({ id, name, url, brand, setBack }: propType) => {
   const [state, setState] = useState<surveyPerfume[]>([]);
   const [data, setData] = useState(false);
   const token = useAppSelector((state: RootState) => state.authReducer.token);
+  const surveyTitle = useAppSelector((state: RootState) => state.titleReducer.title);
   const goSamePerfume = async () => {
-    const data = { perfumeId: id, surveyTitle: "survey2" };
+    const data = { perfumeId: id, surveyTitle };
     try {
       const result = await apiSurvey2SameRes(data, token);
       setState(result.data.similarPerfumeList);
@@ -30,7 +31,7 @@ const Surv2PerfumeDetail = ({ id, name, url, brand, setBack }: propType) => {
   };
 
   const goDifferPerfume = async () => {
-    const data = { perfumeId: id, surveyTitle: "survey2" };
+    const data = { perfumeId: id, surveyTitle };
     try {
       const result = await apiSurvey2SameRes(data, token);
       setState(result.data.differentPerfumeList);

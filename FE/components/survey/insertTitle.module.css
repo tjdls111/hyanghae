@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  position: absolute;
+  top: 30%;
+  font-size: 3em;
+  font-weight: bolder;
+}
+
+
