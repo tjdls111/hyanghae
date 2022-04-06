@@ -14,8 +14,9 @@ package com.idle.api.controller;
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
 import com.idle.api.response.BaseResponseBody;
+import com.idle.api.response.Survey1ResultResponse;
 import com.idle.api.response.SurveyListResponse;
-import com.idle.api.response.SurveyResultResponse;
+import com.idle.api.response.Survey2ResultResponse;
 import com.idle.api.service.SurveyService;
 import com.idle.common.jwt.dto.IdleUserDetails;
 import com.idle.db.entity.Perfume;
@@ -61,7 +62,7 @@ public class SurveyController {
         //설문조사1 저장 and 추천 (Service 안에서 설문조사 저장하고 recommendPerfumeBySurvey1 호출)
         List<Perfume> recommendList = surveyService.insertSurvey1(user,survey1InsertRequest);
 
-        return ResponseEntity.ok(SurveyResultResponse.of(200,"설문조사1 등록 성공",recommendList));
+        return ResponseEntity.ok(Survey1ResultResponse.of(200,"설문조사1 등록 성공",recommendList));
     }
 
     @ApiOperation("설문조사1 추천")
@@ -74,7 +75,7 @@ public class SurveyController {
         List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey1(survey1);
 
 
-        return ResponseEntity.ok(SurveyResultResponse.of(200,"success",recommendList));
+        return ResponseEntity.ok(Survey1ResultResponse.of(200,"success",recommendList));
     }
 
     @ApiOperation("설문조사2 저장")
@@ -84,9 +85,10 @@ public class SurveyController {
         User user = userDetail.getUser();
 
         //설문조사1 저장 and 추천 (Service 안에서 설문조사 저장하고 recommendPerfumeBySurvey2 호출)
-        List<Perfume> recommendList = surveyService.insertSurvey2(user,survey2InsertRequest);
+        Map<String, List<Perfume>> map = surveyService.insertSurvey2(user,survey2InsertRequest);
+        //List<Perfume> recommendList = surveyService.insertSurvey2(user,survey2InsertRequest);
 
-        return ResponseEntity.ok(SurveyResultResponse.of(200,"설문조사2 등록 성공",recommendList));
+        return ResponseEntity.ok(Survey2ResultResponse.of(200,"설문조사2 등록 성공",map));
     }
 
     @ApiOperation("설문조사2 추천")
@@ -96,9 +98,10 @@ public class SurveyController {
         User user = userDetail.getUser();
 
         Survey2 survey2 = surveyService.getSurvey2ByUserAndSurveyId(user, surveyId);
-        List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey2(survey2);
+        Map<String, List<Perfume>> map = surveyService.recommendPerfumeBySurvey2(survey2);
+        //List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey2(survey2);
 
 
-        return ResponseEntity.ok(SurveyResultResponse.of(200,"success",recommendList));
+        return ResponseEntity.ok(Survey2ResultResponse.of(200,"success",map));
     }
 }

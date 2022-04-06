@@ -31,8 +31,7 @@ public interface SurveyService {
     List<Perfume> recommendPerfumeBySurvey1(Survey1 survey1) throws IOException;
 
     Survey2 getSurvey2ByUserAndSurveyId(User user, Long surveyId);
-    List<Perfume> insertSurvey2(User user, Survey2InsertRequest survey1InsertRequest) throws IOException;
-    List<Perfume> recommendPerfumeBySurvey2(Survey2 survey2
-    ) throws IOException;
+    Map<String, List<Perfume>> insertSurvey2(User user, Survey2InsertRequest survey1InsertRequest) throws IOException;
+    Map<String, List<Perfume>> recommendPerfumeBySurvey2(Survey2 survey2) throws IOException;
 
 }

@@ -168,7 +168,7 @@ public class SurveyServiceImpl implements SurveyService {
 
     /* David : 설문조사2 저장 */
     @Override
-    public List<Perfume> insertSurvey2(User user, Survey2InsertRequest survey2InsertRequest) throws IOException {
+    public Map<String, List<Perfume>> insertSurvey2(User user, Survey2InsertRequest survey2InsertRequest) throws IOException {
         Optional<Perfume> checkPerfume = perfumeRepository.findByPerfumeId(survey2InsertRequest.getPerfumeId());
 
         Long count = survey2Repository.countByUser(user);
@@ -186,14 +186,14 @@ public class SurveyServiceImpl implements SurveyService {
         survey2Repository.save(survey2);
 
         //향수 추천
-        List<Perfume> recommendList = recommendPerfumeBySurvey2(survey2);
+        Map<String, List<Perfume>> map = recommendPerfumeBySurvey2(survey2);
 
-        return recommendList;
+        return map;
     }
 
     /* David, Alice : 설문조사2 기반 향수 추천 */
     @Override
-    public List<Perfume> recommendPerfumeBySurvey2(Survey2 survey2) throws IOException {
+    public Map<String, List<Perfume>> recommendPerfumeBySurvey2(Survey2 survey2) throws IOException {
 
         ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
 
@@ -264,7 +264,11 @@ public class SurveyServiceImpl implements SurveyService {
             }
         }
 
-        return list;
+        Map<String, List<Perfume>> map = new HashMap<>();
+        map.put("similar",list);
+        map.put("different",list2);
+
+        return map;
     }
 
 
