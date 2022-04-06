@@ -8,7 +8,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import type { NextPage } from "next";
-import styles from "../../components/perfumeDetail/id.module.css";
 import Navigation from "../../components/navigation/navigation";
 import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
@@ -67,7 +66,6 @@ const Detail: NextPage = () => {
       (async () => {
         apiPerfumeDetail(token || "", router.query.id as string)
           .then((res) => {
-            console.log(res);
             let myres: PerfumeResult = {
               dayNight: "",
               gender: "",

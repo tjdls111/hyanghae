@@ -60,7 +60,6 @@ const Review = (Props: Props) => {
           selected
         )
           .then((res) => {
-            console.log(res);
             review.current.value = "";
             router.reload(window.location.pathname);
           })
@@ -96,6 +95,7 @@ const Review = (Props: Props) => {
           ></textarea>
 
           <select name="star" id="star" onChange={handleChangeSelect}>
+            <option>별점을 매겨주세요 :) </option>
             <option value="5">⭐⭐⭐⭐⭐</option>
             <option value="4">⭐⭐⭐⭐</option>
             <option value="3">⭐⭐⭐</option>

@@ -97,7 +97,7 @@ const ReviewList = () => {
 
   return (
     <article className={styles.container}>
-      <h1 className={styles.title}>Reviews</h1>
+      <h1 className={styles.title}>후기</h1>
       {data.length == 0 && <p className={styles.content}>리뷰가 없어요... </p>}
       {data.length > 0 && (
         <div className={styles.label}>
