@@ -15,6 +15,8 @@ import styles from "./reviewList.module.css";
 import Review from "./review";
 import { useAppSelector } from "../../reducers/hooks";
 import Pagination from "./pagination";
+import clsx from "clsx";
+
 interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
@@ -101,18 +103,20 @@ const ReviewList = () => {
         <h2 className={styles.content}>There are no review.. </h2>
       )}
       {data.length > 0 && (
-        <label htmlFor="limit">
-          <span className={styles.content}>Review count per page </span>
-          <select
-            value={limit}
-            onChange={({ target: { value } }) => changeLimit(value)}
-          >
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-        </label>
+        <div className={styles.label}>
+          <label htmlFor="limit">
+            <span className={styles.content}>Review count per page </span>
+            <select
+              value={limit}
+              onChange={({ target: { value } }) => changeLimit(value)}
+            >
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
       )}
 
       <ul className={styles.myList}>
@@ -121,9 +125,9 @@ const ReviewList = () => {
             <li key={d.userNickname}>
               {!editMode && (
                 <div className={styles.oneReview}>
-                  <p className={styles.content}>
+                  <div className={styles.content}>
                     {d.userNickname} : {`${d.reviewContent}`}
-                  </p>
+                  </div>
                   <div>
                     <div
                       className={styles.starBox}
@@ -171,7 +175,7 @@ const ReviewList = () => {
                     />
                   )}
                   {d.userNickname !== userName && (
-                    <div>
+                    <div className={styles.oneReview}>
                       {d.userNickname} : ${d.reviewScore}:{" "}
                       {`${d.reviewContent}`}
                     </div>

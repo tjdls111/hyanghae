@@ -1,8 +1,9 @@
 .container {
+  text-align: center;
   display: flex;
   justify-content: space-evenly;
   max-width: 1200px;
-  margin: 13em auto;
+  margin: 14rem auto;
 }
 
 .imageContainer {
@@ -35,4 +36,14 @@
 .btnContainer {
   text-align: center;
   margin: 0.5rem 0;
+}
+
+@media (max-width: 800px) {
+  .content {
+    font-size: 1.5rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
 }

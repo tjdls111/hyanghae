@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-04-05
+마지막 수정일 2022-04-06
 */
 
 import React, { useEffect, useState } from "react";
@@ -14,7 +14,6 @@ import Image from "next/image";
 import EbayBtn from "./ebayBtn";
 import EbayList from "./ebayList";
 import { apiShoppingSearch, reviewLike } from "../../api/perfume";
-import { useDispatch } from "react-redux";
 import { useAppSelector } from "../../reducers/hooks";
 
 interface InnerProps {
@@ -150,7 +149,7 @@ const Item = ({ data }: InnerProps) => {
           Score : {data.score}/5 with {data.reviewCnt} votes.
         </p>
         <p className={styles.content}>
-          Notes: {data.note1}, {data.note2}, {data.note3}
+          Notes: #{data.note1} #{data.note2} #{data.note3}
         </p>
         <p className={styles.content}>{likeCnt} people likes this item.</p>
         {isAuthenticated && (
