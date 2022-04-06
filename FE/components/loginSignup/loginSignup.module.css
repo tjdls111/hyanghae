@@ -142,3 +142,17 @@
 .find {
   margin: 0.5rem 0;
 }
+
+.goToLogin {
+  text-align: center;
+  padding: 1rem 0;
+  cursor: pointer;
+}
+
+.liItem {
+  list-style: none;
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  color: var(--color-grey-light-1);
+}

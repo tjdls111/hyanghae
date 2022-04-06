@@ -4,12 +4,12 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-29
+마지막 수정일 2022-04-06
 */
 
 .container {
   max-width: 1200px;
-  margin: 5rem;
+  margin: 5rem auto;
 }
 
 .myList {
@@ -42,13 +42,21 @@
 
 .content {
   font-size: 3rem;
+  text-align: center;
 }
 
 .oneReview {
   display: flex;
+  display: block;
   padding-bottom: 1rem;
   border-bottom: 1px dashed var(--color-primary-light-2);
   margin-top: 2rem;
+
+  width: 80%;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .btnContainer {
@@ -77,4 +85,38 @@
   margin-top: -4rem;
   width: 13rem;
   height: 4rem;
+}
+
+.reviewContent {
+  display: block;
+  width: 10px;
+  padding: 0 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 라인수 */
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+}
+
+@media (max-width: 800px) {
+  .content {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .oneReview {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+  }
+}
+
+.label {
+  text-align: center;
 }
