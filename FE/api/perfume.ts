@@ -3,7 +3,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-22
-마지막 수정일 2022-04-05
+마지막 수정일 2022-04-06
 */
 
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
@@ -135,5 +135,17 @@ export const reviewLike = async (token: string, perfumeId: number) => {
     });
   } catch (e) {
     console.log(e);
+  }
+};
+
+export const surveyList = async (token: string) => {
+  try {
+    return await axios.get(`${BASE_URL}/survey/list`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
   }
 };
