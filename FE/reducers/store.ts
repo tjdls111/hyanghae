@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: "root",
-  blacklist: ["sort", "title", "content"],
+  blacklist: ["titleReducer", "searchReducer"],
   storage,
 };
 

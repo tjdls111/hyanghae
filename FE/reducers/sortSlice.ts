@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const sortSlice = createSlice({
   name: "sort",
-  initialState: { sort: null },
+  initialState: { sort: "perfumeScore,DESC" },
   reducers: {
     changeSort(state, action) {
       state.sort = action.payload;

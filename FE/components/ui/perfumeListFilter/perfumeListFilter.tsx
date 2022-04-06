@@ -149,6 +149,7 @@ const filterList = [
 
 export default function perfumeListFilter() {
   const dispatch = useDispatch();
+  const sort = useAppSelector((state) => state.sortReducer.sort);
 
   const handleFilterChange = function (e) {
     dispatch(changeSort(e));
@@ -159,7 +160,7 @@ export default function perfumeListFilter() {
       onChange={(e) => {
         handleFilterChange(e);
       }}
-      defaultValue="perfumeScore,DESC"
+      defaultValue={sort}
     >
       {filterList.map((filter) => (
         <StyledOption value={filter.value}>{filter.name}</StyledOption>

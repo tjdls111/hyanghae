@@ -61,6 +61,13 @@ const Navigation: React.FC = () => {
   const searchSubmitHandler: React.FormEventHandler<HTMLFormElement> =
     function (e) {
       e.preventDefault();
+
+      // 검색어 유효성 검사
+
+      if (!keyword.trim()) {
+        return;
+      }
+
       dispatch(submit(keyword));
       router.push(`/search/${keyword}`);
     };
