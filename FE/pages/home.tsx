@@ -10,7 +10,7 @@
 import React from "react";
 import { NextPage } from "next";
 import Navigation from "../components/navigation/navigation";
-import HomePageBanner from "../components/ui/homePageBanner/homePageBanner";
+import NewHomePageBanner from "../components/ui/homePageBanner/newHomePageBanner";
 import BestProduct from "../components/bestProduct/bestProducts";
 import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
 import Footer from "../components/landing/footer";
@@ -20,7 +20,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <Navigation />
-      <HomePageBanner />
+      <NewHomePageBanner />
       <BestProduct />
       <SeasonalProduct />
       <RecentReviews />

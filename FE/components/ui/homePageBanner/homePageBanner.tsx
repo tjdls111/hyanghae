@@ -1,11 +1,3 @@
-/*
-이미지 슬라이더(캐로우셀)$
-이미지 슬라이더(캐로우셀)
-@author Jackson$
-@version 1.0.0
-생성일 2022-03-24$
-마지막 수정일 2022-03-24$
-*/
 import React, { useState } from "react";
 import styles from "./homePageBanner.module.css";
 import Image from "next/image";
