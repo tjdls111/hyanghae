@@ -6,10 +6,12 @@
  * 생성일 2022-03-29
  * 마지막 수정일 2022-03-31
  **/
+
 package com.idle.api.service;
 
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
+import com.idle.api.request.Survey3InsertRequest;
 import com.idle.common.perfume.KmeansAlgorithm;
 import com.idle.db.entity.*;
 import com.idle.db.repository.*;
@@ -39,6 +41,8 @@ public class SurveyServiceImpl implements SurveyService {
     PerfumeRepository perfumeRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    StyleRepository styleRepository;
 
 
     @Override
@@ -278,6 +282,106 @@ public class SurveyServiceImpl implements SurveyService {
         map.put("different",list2);
 
         return map;
+    }
+
+    @Override
+    public Survey3 getSurvey3ByUserAndSurveyId(User user, Long surveyId) {
+        Optional<Survey3> survey3 = survey3Repository.getSurvey3ByUserAndSurveyId(user, surveyId);
+        return survey3.get();
+    }
+
+    @Override
+    public List<Perfume> insertSurvey3(User user, Survey3InsertRequest survey3InsertRequest) throws IOException {
+
+        Long count = survey3Repository.countByUser(user);
+        if (count >= 3) {
+            Survey3 orderSurvey3 = survey3Repository.findTop1ByUserOrderByCreateDateAsc(user);
+            survey3Repository.delete(orderSurvey3);
+        }
+        //스타일 구분
+        Random rand = new Random();
+        int value = rand.nextInt(13) + 1;
+        Long styleId = Long.valueOf(value);
+        System.out.println(styleId);
+
+        Style style = styleRepository.findById(styleId).get();
+        Survey3 survey3 = Survey3.builder()
+                .user(user)
+                .surveyTitle(survey3InsertRequest.getSurveyTitle())
+                .style(style)
+                .clothesUrl(survey3InsertRequest.getClothesUrl())
+                .build();
+
+        survey3Repository.save(survey3);
+        List<Perfume> recommendList = recommendPerfumeBySurvey3(survey3);
+        return recommendList;
+    }
+
+    @Override
+    public List<Perfume> recommendPerfumeBySurvey3(Survey3 survey3) throws IOException {
+        ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
+
+        // 데이터셋 추가
+        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+        File xlsx = new File(filePath);
+        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        // 엑셀파일 전체 내용을 담고 있는 객체
+        XSSFSheet sheet = wb.getSheetAt(0);
+        XSSFRow row = null;
+        XSSFCell cell = null;
+
+        // 탐색에 사용할 sheet 객체
+        for (int i = 1; i < sheet.getLastRowNum(); i++) {
+            row = sheet.getRow(i);
+            ArrayList<Double> cluster = new ArrayList<Double>();
+            for (int j = 0; j < 5; j++) {
+                cell = row.getCell(j);
+                switch (cell.getCellType()) {
+                    case Cell.CELL_TYPE_STRING:
+                        cluster.add(Double.valueOf(cell.getStringCellValue()));
+                        break;
+                    case Cell.CELL_TYPE_NUMERIC:
+                        cluster.add(cell.getNumericCellValue());
+                        break;
+                }
+            }
+
+            dataSet.add(cluster);   // 데이터셋 list에 데이터(Season, Time, Gender, TPO, Mood) 추가
+        }
+
+        // 설문조사 데이터를 dataSet 리스트에 추가
+        ArrayList<Double> cluster = new ArrayList<Double>();
+        cluster.add((double) survey3.getStyle().getSeason());
+        cluster.add((double) survey3.getStyle().getTime());
+        cluster.add((double) survey3.getStyle().getGender());
+        cluster.add((double) survey3.getStyle().getTpo());
+        cluster.add((double) survey3.getStyle().getMood());
+        dataSet.add(cluster);
+
+        // (Season, Time, Gender, TPO, Mood, 클러스터 번호)
+        KmeansAlgorithm d = new KmeansAlgorithm();
+        ArrayList<ArrayList<Double>> dd = d.getClusters(dataSet, 10);  // 클러스터링
+
+        // 리턴할 List<Perfume> 생성
+        List<Perfume> list = new ArrayList<>();
+
+        ArrayList<Double> temp = dd.get(dd.size() - 1);
+//        System.out.println("temp의 클러스터 번호 : " + temp.get(temp.size() - 1));
+        for (int i = 0; i < dd.size() - 1; i++) {
+//            System.out.println(i+1 + "번 향수의 클러스터 번호 : " + dd.get(i).get(temp.size() - 1));
+            if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
+                list.add(perfumeRepository.findByPerfumeId((long) i+1).get());
+            }
+        }
+
+        Collections.shuffle(list);  // 리스트 랜덤 추출
+
+        for (int i = 5; i < list.size(); i++){
+            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+        }
+
+        return list;
     }
 
 
