@@ -6,12 +6,14 @@ import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import { useAppSelector } from "../../reducers/hooks";
 
-const PerfumeList = () => {
+const PerfumeList: React.FC<{ search: boolean }> = ({ search }) => {
   const [perfumes, setPerfumes] = useState<product[]>([]);
   const [page, setPage] = useState(0);
   const [ref, inView] = useInView();
   const [loading, setLoading] = useState(false);
   const sort = useAppSelector((state) => state.sortReducer.sort);
+  const searchContent = useAppSelector((state) => state.searchReducer.content);
+  console.log(searchContent);
 
   // 필터가 바뀔경우
   // 1. 리스트 비우기
@@ -21,20 +23,37 @@ const PerfumeList = () => {
     setPerfumes([]);
     setPage(0);
     fetchPerfumes();
-  }, [sort]);
+  }, [sort, searchContent]);
 
   // 서버에서 데이터를 가져오는 함수
   // useCallback을 이용하여 page가 바뀔 때 마다 새로 생성
   const fetchPerfumes = useCallback(async () => {
     setLoading(true);
-    await axios
-      .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/list", {
-        params: { page, size: 10, sort },
-      })
-      .then((res) => {
-        setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
-      });
-    setLoading(false);
+
+    if (search) {
+      await axios
+        .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/search", {
+          params: {
+            page,
+            size: 10,
+            keyword: "perfumeName",
+            content: searchContent,
+          },
+        })
+        .then((res) => {
+          setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
+        });
+      setLoading(false);
+    } else {
+      await axios
+        .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/list", {
+          params: { page, size: 10, sort },
+        })
+        .then((res) => {
+          setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
+        });
+      setLoading(false);
+    }
   }, [page]);
 
   // 함수가 새로 생성되면 실행

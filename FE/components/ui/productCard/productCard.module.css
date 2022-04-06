@@ -1,12 +1,9 @@
 .productCardContainer {
-  /* padding: 0.5rem; */
   display: flex;
   flex-direction: column;
   row-gap: 0.5rem;
   align-items: center;
   cursor: pointer;
-  /* box-shadow: 0.5rem 0.5rem 2rem #999;
-  border-radius: 1rem; */
 }
 
 .imageWrapper {
@@ -68,10 +65,6 @@
   justify-content: center;
   column-gap: 0.5rem;
   font-size: 1.2rem;
-}
-
-.note {
-  /* white-space: pre; */
 }
 
 @media (max-width: 600px) {

@@ -20,7 +20,8 @@ import MobileSearch from "./mobileSearch";
 import { useAppSelector } from "../../reducers/hooks";
 import { logout } from "../../reducers/authSlice";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { submit } from "../../reducers/searchSlice";
 
 const Navigation: React.FC = () => {
   const isAuthenticated = useAppSelector(
@@ -60,7 +61,8 @@ const Navigation: React.FC = () => {
   const searchSubmitHandler: React.FormEventHandler<HTMLFormElement> =
     function (e) {
       e.preventDefault();
-      // 검색 api
+      dispatch(submit(keyword));
+      router.push(`/search/${keyword}`);
     };
 
   const onLogoutHandler = function () {
