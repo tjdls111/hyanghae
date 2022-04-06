@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { product } from "perfume";
 import styles from "./perfumeList.module.css";
 import ProductCard from "../ui/productCard/productCard";
 import { useInView } from "react-intersection-observer";
-import { product } from "perfume";
 import axios from "axios";
 import { useAppSelector } from "../../reducers/hooks";
 
