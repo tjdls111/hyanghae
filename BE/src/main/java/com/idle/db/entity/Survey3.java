@@ -12,6 +12,7 @@ package com.idle.db.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,4 +45,12 @@ public class Survey3 extends BaseTimeEntity{
 
     @Column(name = "c_url", nullable = false)
     String clothesUrl;
+
+    @Builder
+    public Survey3(User user, Style style, String surveyTitle, String clothesUrl){
+        this.user = user;
+        this.style = style;
+        this.surveyTitle = surveyTitle;
+        this.clothesUrl = clothesUrl;
+    }
 }

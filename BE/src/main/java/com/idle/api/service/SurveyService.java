@@ -12,10 +12,8 @@ package com.idle.api.service;
 
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
-import com.idle.db.entity.Perfume;
-import com.idle.db.entity.Survey1;
-import com.idle.db.entity.Survey2;
-import com.idle.db.entity.User;
+import com.idle.api.request.Survey3InsertRequest;
+import com.idle.db.entity.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,5 +31,9 @@ public interface SurveyService {
     Survey2 getSurvey2ByUserAndSurveyId(User user, Long surveyId);
     Map<String, List<Perfume>> insertSurvey2(User user, Survey2InsertRequest survey1InsertRequest) throws IOException;
     Map<String, List<Perfume>> recommendPerfumeBySurvey2(Survey2 survey2) throws IOException;
+
+    Survey3 getSurvey3ByUserAndSurveyId(User user, Long surveyId);
+    List<Perfume> insertSurvey3(User user, Survey3InsertRequest survey3InsertRequest) throws IOException;
+    List<Perfume> recommendPerfumeBySurvey3(Survey3 survey3) throws IOException;
 
 }

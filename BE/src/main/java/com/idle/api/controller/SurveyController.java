@@ -13,16 +13,15 @@ package com.idle.api.controller;
 
 import com.idle.api.request.Survey1InsertRequest;
 import com.idle.api.request.Survey2InsertRequest;
+import com.idle.api.request.Survey3InsertRequest;
 import com.idle.api.response.BaseResponseBody;
 import com.idle.api.response.Survey1ResultResponse;
 import com.idle.api.response.SurveyListResponse;
 import com.idle.api.response.Survey2ResultResponse;
 import com.idle.api.service.SurveyService;
 import com.idle.common.jwt.dto.IdleUserDetails;
-import com.idle.db.entity.Perfume;
-import com.idle.db.entity.Survey1;
-import com.idle.db.entity.Survey2;
-import com.idle.db.entity.User;
+import com.idle.db.entity.*;
+import com.idle.db.repository.StyleRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,9 @@ public class SurveyController {
 
     @Autowired
     SurveyService surveyService;
+
+    @Autowired
+    StyleRepository styleRepository;
 
     @ApiOperation("설문조사 목록 조회")
     @GetMapping("/list")
@@ -104,4 +106,60 @@ public class SurveyController {
 
         return ResponseEntity.ok(Survey2ResultResponse.of(200,"success",map));
     }
+
+    @ApiOperation("설문조사3 저장")
+    @PostMapping("/3")
+    public ResponseEntity<? extends BaseResponseBody> insertSurvey3(@ApiIgnore Authentication authentication,
+                                                                    @ModelAttribute Survey3InsertRequest survey3InsertRequest) throws IOException {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+
+        System.out.println(survey3InsertRequest.getImgFile().getOriginalFilename());
+        System.out.println(survey3InsertRequest.getSurveyTitle());
+        System.out.println(survey3InsertRequest.getClothesUrl());
+
+        List<Perfume> recommendList = surveyService.insertSurvey3(user,survey3InsertRequest);
+
+        return ResponseEntity.ok(Survey1ResultResponse.of(200,"설문조사3 등록 성공",recommendList));
+    }
+
+    @ApiOperation("설문조사3 추천")
+    @GetMapping("/recommend3/{survey3Id}")
+    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey3(@ApiIgnore Authentication authentication, @ModelAttribute("survey2Id") Long surveyId) throws IOException {
+        IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
+        User user = userDetail.getUser();
+
+        Survey2 survey2 = surveyService.getSurvey2ByUserAndSurveyId(user, surveyId);
+        Map<String, List<Perfume>> map = surveyService.recommendPerfumeBySurvey2(survey2);
+        //List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey2(survey2);
+
+
+        return ResponseEntity.ok(Survey2ResultResponse.of(200,"success",map));
+    }
+
+    @ApiOperation("스타일 데이터 DB 추가")
+    @GetMapping("/insertStyle")
+    public ResponseEntity<BaseResponseBody> insertStyle(){
+
+        //향수 브랜드 추가
+        int[] time =    {0,0,0,1,2,2,2,2,0,0,1,1,2};
+        int[] gender =  {0,2,0,1,2,2,2,2,1,0,1,1,2};
+        int[] season =  {1,0,1,1,0,2,0,2,0,0,1,2,2};
+        int[] tpo =     {0,1,0,1,2,2,2,2,2,2,1,1,3};
+        int[] mood =    {1,0,0,1,2,2,2,2,3,3,4,1,4};
+
+        for(int i=0; i<time.length; i++){
+            Style insertStyle = new Style();
+            insertStyle.setTime(time[i]);
+            insertStyle.setGender(gender[i]);
+            insertStyle.setSeason(season[i]);
+            insertStyle.setTpo(tpo[i]);
+            insertStyle.setMood(mood[i]);
+
+            styleRepository.save(insertStyle);
+        }
+
+        return ResponseEntity.ok(BaseResponseBody.of(200,"DB 삽입 성공"));
+    }
+
 }
