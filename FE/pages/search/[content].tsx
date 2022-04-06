@@ -8,13 +8,11 @@ import { useRouter } from "next/router";
 
 const SearchResult: NextPage = () => {
   const router = useRouter();
-  const [content, setContent] = useState("");
-
-  console.log(content);
+  const [content, setContent] = useState(router.query.content as string);
 
   useEffect(() => {
     setContent(router.query.content as string);
-  }, [router.isReady, router]);
+  }, [router]);
 
   return (
     <>

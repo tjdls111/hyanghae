@@ -16,6 +16,8 @@ const PerfumeList: React.FC<{ search: boolean; content: string }> = ({
   const [loading, setLoading] = useState(false);
   const sort = useAppSelector((state) => state.sortReducer.sort);
   const [isLastPage, setIsLastPage] = useState(false);
+
+  // console.log(perfumes);
   // 필터 혹은 검색어가 바뀔경우
   // 1. 리스트 비우기
   // 2. 페이지 0으로 재설정
@@ -23,10 +25,7 @@ const PerfumeList: React.FC<{ search: boolean; content: string }> = ({
   useEffect(() => {
     setPerfumes([]);
     setPage(0);
-    setIsLastPage(false);
   }, [sort, content]);
-
-  console.log(perfumes);
 
   // 서버에서 데이터를 가져오는 함수
   // useCallback을 이용하여 page가 바뀔 때 마다 새로 생성
@@ -34,6 +33,10 @@ const PerfumeList: React.FC<{ search: boolean; content: string }> = ({
     setLoading(true);
 
     if (search) {
+      if (!content) {
+        setLoading(false);
+        return;
+      }
       await axios
         .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/search", {
           params: {
@@ -45,11 +48,9 @@ const PerfumeList: React.FC<{ search: boolean; content: string }> = ({
         })
         .then((res) => {
           setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
-          // 마지막 페이지 체크
           setIsLastPage(res.data.last);
         })
         .catch(console.log);
-      setLoading(false);
     } else {
       await axios
         .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/list", {
@@ -57,13 +58,12 @@ const PerfumeList: React.FC<{ search: boolean; content: string }> = ({
         })
         .then((res) => {
           setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
-          // 마지막 페이지 체크
           setIsLastPage(res.data.last);
         })
         .catch(console.log);
-      setLoading(false);
     }
-  }, [page]);
+    setLoading(false);
+  }, [page, content]);
 
   // 함수가 새로 생성되면 실행
   useEffect(() => {
@@ -74,7 +74,7 @@ const PerfumeList: React.FC<{ search: boolean; content: string }> = ({
     if (inView && !loading && !isLastPage) {
       setPage((prev) => prev + 1);
     }
-  }, [inView, loading]);
+  }, [inView, loading, isLastPage]);
 
   return (
     <div className={styles.grid}>
