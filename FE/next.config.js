@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 // const EbayAuthToken = require("ebay-oauth-nodejs-client");
 
-
 // const ebayAuthToken = new EbayAuthToken({
 //   clientId: "seoinkim--PRD-094e46b78-f284ac31",
 //   clientSecret: "PRD-94e46b784633-5c2d-438c-ae10-1d0e",
@@ -27,6 +26,7 @@ const nextConfig = {
       "www.mecca.com.au",
       "www.reallyree.com",
       "piimages.parfumo.de",
+      "i.etsystatic.com",
     ],
   },
   env: {
@@ -42,7 +42,6 @@ const nextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
-
     return config;
   },
 };

@@ -33,9 +33,9 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
         item.style.transform = "rotateY(0deg) translateZ(10rem)";
         item.style.filter = "brightness(100%)";
       } else {
-        item.style.transform = `rotateY(${degree * i}deg) translateZ(10rem) rotateY(-${
+        item.style.transform = `rotateY(${
           degree * i
-        }deg)`;
+        }deg) translateZ(10rem) rotateY(-${degree * i}deg)`;
         item.style.filter = "brightness(60%)";
       }
       //  0 1 2  1 2 0 [2 0 1 ]
@@ -84,7 +84,11 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/day.jpg" alt="survey3" />
+                <CardMedia
+                  component="img"
+                  image="/images/survey/day.jpg"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     낮
@@ -111,7 +115,11 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/night.jpg" alt="night" />
+                <CardMedia
+                  component="img"
+                  image="/images/survey/night.jpg"
+                  alt="night"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     밤
@@ -139,7 +147,11 @@ const Survey1Of1: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/uni.jpg" alt="survey3" />
+                <CardMedia
+                  component="img"
+                  image="/images/survey/uni.jpg"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     상관없음

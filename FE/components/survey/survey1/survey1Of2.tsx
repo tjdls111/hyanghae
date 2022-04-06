@@ -33,9 +33,9 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
         item.style.transform = "rotateY(0deg) translateZ(10rem)";
         item.style.filter = "brightness(100%)";
       } else {
-        item.style.transform = `rotateY(${degree * i}deg) translateZ(10rem) rotateY(-${
+        item.style.transform = `rotateY(${
           degree * i
-        }deg)`;
+        }deg) translateZ(10rem) rotateY(-${degree * i}deg)`;
         item.style.filter = "brightness(60%)";
       }
       //  0 1 2  1 2 0 [2 0 1 ]
@@ -84,7 +84,11 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/man.png" alt="night" />
+                <CardMedia
+                  component="img"
+                  image="/images/survey/man.png"
+                  alt="night"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     남성
@@ -111,7 +115,11 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/woman.png" alt="survey3" />
+                <CardMedia
+                  component="img"
+                  image="/images/survey/woman.png"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     여성
@@ -138,7 +146,11 @@ const Survey1Of2: React.FC<stateProps> = ({ setState }) => {
               onClick={() => nextStep(firstNum + 2)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/manwoman.png" alt="survey3" />
+                <CardMedia
+                  component="img"
+                  image="/images/survey/manwoman.png"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     남여공용
