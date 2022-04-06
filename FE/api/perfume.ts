@@ -147,7 +147,33 @@ export const surveyList = async (token: string) => {
     });
   } catch (e) {
     throw new Error("server error");
-    
+  }
+};
+
+export const recommend1Result = async (token: string, surveyId:string) => {
+  try {
+    return await axios.get(`${BASE_URL}/survey/recommend1/${surveyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
+  }
+};
+
+export const recommend2Result = async (token: string, surveyId:string) => {
+  try {
+    return await axios.get(`${BASE_URL}/survey/recommend2/${surveyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
+  }
+};
+
 export const getBestPerfumes = async function () {
   try {
     const response = await axios.get(
@@ -171,3 +197,5 @@ export const getPerfumes = async function (page: number, sort: string) {
     console.log(e);
   }
 };
+
+

@@ -8,9 +8,10 @@
 */
 
 import React, { useEffect, useState } from "react";
-import styles from "./detail.module.css";
-import { surveyList } from "../../../api/perfume";
+import styles from "./userTest.module.css";
+import { recommend1Result, surveyList } from "../../../api/perfume";
 import { useAppSelector } from "../../../reducers/hooks";
+import Survey1Res from "../../survey/survey1/survey1Res";
 
 interface surveyData {
   createDate: string;
@@ -29,33 +30,57 @@ const UserTest = () => {
   const token = useAppSelector((state) => state.authReducer.token);
 
   useEffect(() => {
-    surveyList(token as string)
-      .then((res) => {
-        console.log(res.data);
-        const tmp = res.data;
-        setSur1(tmp.survey1List);
-        setSur2(tmp.survey2List);
-        setSur3(tmp.survey3List);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    if (token) {
+      surveyList(token as string)
+        .then((res) => {
+          const tmp = res.data;
+          setSur1(tmp.survey1List[0]);
+          setSur2(tmp.survey2List[0]);
+          setSur3(tmp.survey3List[0]);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [token]);
 
-  console.log(survey1List);
   return (
-    <>
-      <h1>라이프 스타일에 따른 테스트 결과 모음</h1>
-      {survey1List && survey1List.map((s) => <div>{s.surveyTitle}</div>)}
-      {/* <h1>향수에 따른 테스트 결과 모음</h1>
-      {data?.survey1List?.map((survey) => (
-        <p key={survey.createDate}>{survey}</p>
+    <section className={styles.container}>
+      <div className={styles.title}>라이프 스타일에 따른 테스트 결과 모음</div>
+      {survey1List.length == 0 && (
+        <div className={styles.subtitle}>
+          테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
+        </div>
+      )}
+      {survey1List.map((survey) => (
+        <button className={styles.btn} key={survey.surveyId}>
+          {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+        </button>
       ))}
-      <h1>옷 스타일에 따른 테스트 결과 모음</h1>
-      {data?.survey1List?.map((survey) => (
-        <p key={survey.createDate}>{survey}</p>
-      ))} */}
-    </>
+
+      <div className={styles.title}>향수에 따른 테스트 결과 모음</div>
+      {survey2List.length == 0 && (
+        <div className={styles.subtitle}>
+          테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
+        </div>
+      )}
+      {survey2List.map((survey) => (
+        <button className={styles.btn} key={survey.surveyId}>
+          {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+        </button>
+      ))}
+      <div className={styles.title}>옷 스타일에 따른 테스트 결과 모음</div>
+      {survey3List.length == 0 && (
+        <div className={styles.subtitle}>
+          테스트를 한번도 한 적이 없으시네요~ 테스트해보세용
+        </div>
+      )}
+      {survey2List.map((survey) => (
+        <button className={styles.btn} key={survey.surveyId}>
+          {survey.surveyTitle} | {survey.createDate.slice(0, 10)}
+        </button>
+      ))}
+    </section>
   );
 };
 
