@@ -1,0 +1,45 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  margin: 16px;
+}
+
+.nav > button {
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 0;
+  background: black;
+  color: white;
+  font-size: 1rem;
+}
+
+.nav > button:hover {
+  background: var(--color-primary-light-2);
+  cursor: pointer;
+  transform: translateY(-2px);
+}
+
+.nav > button[disabled] {
+  background: grey;
+  cursor: revert;
+  transform: revert;
+}
+
+.nav > button[aria-current] {
+  background: var(--color-primary-light-1);
+  font-weight: bold;
+  cursor: revert;
+  transform: revert;
+}
+@media screen and (max-width: 768px) {
+  .nav > button {
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+}

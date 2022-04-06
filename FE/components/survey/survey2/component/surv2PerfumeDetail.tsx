@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styles from "./surv2PerfumeDetail.module.css";
 import Image from "next/image";
-import { useAppSelector } from "../../../reducers/hooks";
-import { RootState } from "../../../reducers/store";
-import { apiSurvey2SameRes, surveyPerfume } from "../../../api/survey";
+import { useAppSelector } from "../../../../reducers/hooks";
+import { RootState } from "../../../../reducers/store";
+import { apiSurvey2SameRes, surveyPerfume } from "../../../../api/survey";
 import Surv2PerfumeResult from "./surv2PerfumeResult";
 
 interface propType {
@@ -22,14 +22,23 @@ const Surv2PerfumeDetail = ({ id, name, url, brand, setBack }: propType) => {
     const data = { perfumeId: id, surveyTitle: "survey2" };
     try {
       const result = await apiSurvey2SameRes(data, token);
-      setState(result.data.recommendPerfumeList);
+      setState(result.data.similarPerfumeList);
       setData(true);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const goDifferPerfume = () => {};
+  const goDifferPerfume = async () => {
+    const data = { perfumeId: id, surveyTitle: "survey2" };
+    try {
+      const result = await apiSurvey2SameRes(data, token);
+      setState(result.data.differentPerfumeList);
+      setData(true);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const resultRecommend = state.map((item) => (
     <Surv2PerfumeResult

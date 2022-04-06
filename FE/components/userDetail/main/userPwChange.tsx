@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import styles from "./userPwChange.module.css";
 import { apiCheckMod, apiPwCh } from "../../../api/user";
 import { useRouter } from "next/router";
+import { useAppSelector } from "../../../reducers/hooks";
+import { RootState } from "../../../reducers/store";
 const UserPwChange = () => {
   const [isValid, setValid] = useState(false);
   const [isMsg1, setMsg1] = useState("");
@@ -11,7 +13,7 @@ const UserPwChange = () => {
   const ref1 = useRef<HTMLInputElement>(null);
   const ref2 = useRef<HTMLInputElement>(null);
   const router = useRouter();
-
+  const token = useAppSelector((state: RootState) => state.authReducer.token);
   const bool1 = useRef(false);
   const txt1 = useRef("");
   const txt2 = useRef("");
@@ -83,7 +85,6 @@ const UserPwChange = () => {
   };
 
   const onSubmit = async () => {
-    const token = localStorage.getItem("token");
     const currentPw = pwRef.current?.value;
     const changePw = ref2.current?.value;
     if (currentPw === changePw) {

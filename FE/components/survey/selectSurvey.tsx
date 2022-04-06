@@ -5,6 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./survey2/component/buttonTheme";
+import SlideNav from "./slideNav/slideNav";
 import clsx from "clsx";
 
 import styles from "./survey.module.css";
@@ -84,7 +87,12 @@ const SelectSurvey = () => {
               onClick={() => nextStep(firstNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/survey1.png" alt="survey1" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/survey1.png"
+                  alt="survey1"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     라이프 스타일
@@ -111,7 +119,12 @@ const SelectSurvey = () => {
               onClick={() => nextStep(firstNum + 1)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/survey2.png" alt="survey2" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/survey2.png"
+                  alt="survey2"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     내가 가진 향수
@@ -138,7 +151,12 @@ const SelectSurvey = () => {
               onClick={() => nextStep(lastNum)}
             >
               <CardActionArea>
-                <CardMedia component="img" image="/images/survey/survey3.png" alt="survey3" />
+                <CardMedia
+                  className={styles.media}
+                  component="img"
+                  image="/images/survey/survey3.png"
+                  alt="survey3"
+                />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     패션
@@ -151,15 +169,21 @@ const SelectSurvey = () => {
             </Card>
           </div>
         </div>
+        <div className={styles.slideNav}>
+          <SlideNav limit={3} state={state} />
+        </div>
       </div>
-      <div className={styles.btns}>
-        <Button onClick={prevCard} size="large" variant="contained">
-          이전
-        </Button>
-        <Button onClick={nextCard} size="large" variant="contained">
-          다음
-        </Button>
-      </div>
+
+      <ThemeProvider theme={theme}>
+        <div className={styles.btns}>
+          <Button color="primary" onClick={prevCard} size="large" variant="contained">
+            이전
+          </Button>
+          <Button onClick={nextCard} size="large" variant="contained">
+            다음
+          </Button>
+        </div>
+      </ThemeProvider>
     </>
   );
 };
