@@ -142,6 +142,7 @@ const Survey2Of1 = () => {
         <Box className={styles.innerBox} component="form" noValidate autoComplete="off">
           <FormControl>
             <NativeSelect
+              style={{ marginTop: "2em" }}
               defaultValue={"none"}
               inputProps={{
                 name: "Brand",
@@ -156,7 +157,11 @@ const Survey2Of1 = () => {
           <TextField
             id="standard-basic"
             defaultValue={searchString}
-            style={{ width: "30rem", marginLeft: "2rem", marginBottom: "1.6em" }}
+            style={{
+              width: "30rem",
+              marginLeft: "2rem",
+              marginBottom: "1.6em",
+            }}
             label="향수 이름을 영어로 입력해주세요"
             variant="standard"
             disabled={isValid}
@@ -168,11 +173,7 @@ const Survey2Of1 = () => {
             {isData ? perfumeList : <div className={styles.emptyText}>Empty result</div>}
             <div className={styles.pageBar}>
               {setPageBar.current ? (
-                <Paging
-                  limit={useTotalPags.current}
-                  page={pageNum}
-                  setPage={setPageNum}
-                />
+                <Paging limit={useTotalPags.current} page={pageNum} setPage={setPageNum} />
               ) : null}
             </div>
           </div>

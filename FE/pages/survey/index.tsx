@@ -8,7 +8,7 @@ const survey = () => {
   return (
     <>
       <Navigation />
-      {state ? <InsertTitle setTitle={setState} /> : <SelectSurvey />}
+      {!state ? <InsertTitle setState={setState} /> : <SelectSurvey />}
     </>
   );
 };

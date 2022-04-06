@@ -21,9 +21,9 @@ interface resultProp {
 
 const Survey1Res = ({ prop }: resultProp) => {
   const [state, setState] = useState<surveyPerfume[]>([]);
-
+  const surveyTitle = useAppSelector((state: RootState) => state.titleReducer.title);
   const token = useAppSelector((state: RootState) => state.authReducer.token);
-  const req = { ...prop, surveyTitle: "survey1" };
+  const req = { ...prop, surveyTitle };
   const router = useRouter();
   const showDetail = (id: number) => {
     router.replace(`/perfume/${id}`);
