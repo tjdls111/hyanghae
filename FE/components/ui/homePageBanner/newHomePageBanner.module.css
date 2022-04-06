@@ -103,6 +103,12 @@
   }
 }
 
+@media (max-width: 800px) {
+  .container {
+    height: 50vh;
+  }
+}
+
 @media (max-width: 700px) {
   .gridLayout {
     grid-template-columns: 1fr;
