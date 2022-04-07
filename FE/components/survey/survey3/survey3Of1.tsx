@@ -25,6 +25,7 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
   const inputRef = useRef<HTMLInputElement>();
   const boxRef = useRef<HTMLDivElement>(null);
   const token = useAppSelector((state: RootState) => state.authReducer.token);
+  const [loading, setLoading] = useState("");
   const surveyTitle = useAppSelector((state: RootState) => state.titleReducer.title);
   const [url, setUrl] = useState("");
   useEffect(() => {
@@ -53,15 +54,7 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
       "state_changed",
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-        }
+        setLoading(`${progress}%`);
       },
       (error) => {
         // Handle unsuccessful uploads
@@ -88,6 +81,7 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
     e.preventDefault();
     try {
       uploadFireBase();
+      setState(false);
     } catch (e) {
       console.error(e);
     }
@@ -132,7 +126,13 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
       <form className={styles.form} onSubmit={uploadImg} encType="multipart/form-data">
         <div className={styles.outerBox} onClick={handleClick}>
           <div className={styles.innerBox} ref={boxRef}>
-            {state ? <Image src={pictureRef.current.url} layout="fill" objectFit="cover" /> : "+"}
+            {state ? (
+              <Image src={pictureRef.current.url} layout="fill" objectFit="cover" />
+            ) : loading !== "" ? (
+              <div style={{ position: "absolute", fontSize: "1em" }}>{loading}</div>
+            ) : (
+              "+"
+            )}
             {state ? (
               <button className={styles.cancel} type="button" onClick={deletePhoto}>
                 X

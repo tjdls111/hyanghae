@@ -25,6 +25,9 @@
 .listContainer > * {
   margin-bottom: 2em;
 }
+.innerBox {
+  position: relative;
+}
 
 @media screen and (max-width: 768px) {
   .innerContainer {
