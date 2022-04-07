@@ -8,7 +8,8 @@ const Footer: React.FC = () => {
       <main className={styles.layout}>
         <section className={styles.footerSection}>
           <p className={styles.footerHeading}>&copy; COPYRIGHT</p>
-          <p className={styles.footerContent}>SSAFY-6TH-GUMI 아이들의 반란</p>
+          <p className={styles.footerContent}>SSAFY-6TH-GUMI</p>
+          <p className={styles.footerContent}>아이들의 반란</p>
         </section>
         <section className={styles.footerSection}>
           <p className={styles.footerHeading}>Dev Team</p>
