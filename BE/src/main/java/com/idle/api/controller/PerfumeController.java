@@ -1,6 +1,6 @@
 /**
  * PerfumeController
- * 향수 검색 API 구현
+ * 향수, 좋아요, 리뷰 컨트롤러
  *
  * @author Woody, David, Alice
  * @version 1.0.0
