@@ -114,10 +114,6 @@ public class SurveyController {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
-        System.out.println(survey3InsertRequest.getImgFile().getOriginalFilename());
-        System.out.println(survey3InsertRequest.getSurveyTitle());
-        System.out.println(survey3InsertRequest.getClothesUrl());
-
         List<Perfume> recommendList = surveyService.insertSurvey3(user,survey3InsertRequest);
 
         return ResponseEntity.ok(Survey1ResultResponse.of(200,"설문조사3 등록 성공",recommendList));
