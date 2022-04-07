@@ -5,6 +5,7 @@ import Container from "../../components/ui/container/container";
 import PerfumeSearchHeader from "../../components/perfumeSearchHeader/perfumeSearchHeader";
 import PerfumeSearchList from "../../components/perfumeList/perfumeSearchList";
 import { useRouter } from "next/router";
+import Footer from "../../components/landing/footer";
 
 const SearchResult: NextPage = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const SearchResult: NextPage = () => {
       <Container isTop={false}>
         <PerfumeSearchList content={content} />
       </Container>
+      <Footer />
     </>
   );
 };
