@@ -125,16 +125,15 @@ public class SurveyController {
 
     @ApiOperation("설문조사3 추천")
     @GetMapping("/recommend3/{survey3Id}")
-    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey3(@ApiIgnore Authentication authentication, @ModelAttribute("survey2Id") Long surveyId) throws IOException {
+    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey3(@ApiIgnore Authentication authentication, @ModelAttribute("survey3Id") Long surveyId) throws IOException {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
-        Survey2 survey2 = surveyService.getSurvey2ByUserAndSurveyId(user, surveyId);
-        Map<String, List<Perfume>> map = surveyService.recommendPerfumeBySurvey2(survey2);
-        //List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey2(survey2);
+        Survey3 survey3 = surveyService.getSurvey3ByUserAndSurveyId(user, surveyId);
+        List<Perfume> perfumeList = surveyService.recommendPerfumeBySurvey3(survey3);
 
 
-        return ResponseEntity.ok(Survey2ResultResponse.of(200,"success",map));
+        return ResponseEntity.ok(Survey1ResultResponse.of(200,"success",perfumeList));
     }
 
     @ApiOperation("스타일 데이터 DB 추가")
