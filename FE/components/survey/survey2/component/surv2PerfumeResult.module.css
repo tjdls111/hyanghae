@@ -1,5 +1,5 @@
 .resultList {
-  height: 6rem;
+  height: 10rem;
   width: 30rem;
   position: relative;
   margin: auto;
@@ -9,31 +9,37 @@
 .perfumeEllipsis {
   position: relative;
   display: block;
-  width: 20rem;
+  width: 10rem;
+  height: 1.8rem;
   margin-right: 1rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-size: 1.5em;
+}
+.brandName {
+  font-size: 1.5em;
+  margin-right: 1em;
 }
 
-.resultImgWrapper {
-  width: 5em;
-  height: 5em;
-  display: inline-block;
-  position: absolute;
+.resultImageWrapper {
+  width: 10rem;
+  height: 10rem;
+  display: block;
+  position: relative;
 }
 .informWrapper {
   position: absolute;
   display: flex;
+  top: 50%;
+  left: 35%;
   margin: auto;
-  left: 5rem;
-  top: 3rem;
 }
 
 .detailButton {
   position: absolute;
   top: -250%;
-  margin-left: 13em;
+  margin-left: 5em;
 }
 .detailButton > button {
   border-radius: 3px;
