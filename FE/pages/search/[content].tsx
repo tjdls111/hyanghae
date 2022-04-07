@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Navigation from "../../components/navigation/navigation";
 import Container from "../../components/ui/container/container";
 import PerfumeSearchHeader from "../../components/perfumeSearchHeader/perfumeSearchHeader";
-import PerfumeList from "../../components/perfumeList/perfumeList";
+import PerfumeSearchList from "../../components/perfumeList/perfumeSearchList";
 import { useRouter } from "next/router";
 
 const SearchResult: NextPage = () => {
@@ -21,7 +21,7 @@ const SearchResult: NextPage = () => {
         <PerfumeSearchHeader content={content} />
       </Container>
       <Container isTop={false}>
-        <PerfumeList content={content} search={true} />
+        <PerfumeSearchList content={content} />
       </Container>
     </>
   );
