@@ -1,16 +1,6 @@
-/*
-내비게이션
-내비게이션
-@author Jackson
-@version 1.0.0
-생성일 2022-03-14
-마지막 수정일 2022-03-18
-*/
-
 import React, { useState } from "react";
 import styles from "./navigation.module.css";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
-// import AccountIcon from "../../public/SVG/account_circle.svg";
 import { useRouter } from "next/router";
 import ResponsiveNav from "./responsiveNav";
 import LinkedLogo from "./linkedLogo";

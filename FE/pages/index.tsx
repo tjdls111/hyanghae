@@ -11,10 +11,15 @@ import React from "react";
 import Header from "../components/landing/header";
 import Tutorial from "../components/landing/tutorial";
 import Footer from "../components/landing/footer";
+import Head from "next/head";
 
 const LandingPage: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>향해</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
       <Header />
       <Tutorial />
       <Footer />

@@ -5,6 +5,8 @@ import Survey1 from "../../components/survey/survey1";
 import Survey2 from "../../components/survey/survey2";
 import Survey3 from "../../components/survey/survey3";
 import Navigation from "../../components/navigation/navigation";
+import Head from "next/head";
+
 const Detail = () => {
   const [state, setState] = useState("");
   const router = useRouter();
@@ -22,6 +24,10 @@ const Detail = () => {
 
   return (
     <>
+      <Head>
+        <title>향수 추천</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
       <Navigation />
       {state === "1" ? <Survey1 /> : state === "2" ? <Survey2 /> : <Survey3 />}
     </>

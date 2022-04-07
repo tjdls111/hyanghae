@@ -15,11 +15,15 @@ import BestProduct from "../components/bestProduct/bestProducts";
 import SeasonalProduct from "../components/seasonalProduct/seasonalProduct";
 import Footer from "../components/landing/footer";
 import RecentReviews from "../components/recentReviews/recentReviews";
-import Container from "../components/ui/container/container";
+import Head from "next/head";
 
 const HomePage: NextPage = () => {
   return (
     <>
+      <Head>
+        <title>향해</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
       <Navigation />
       <NewHomePageBanner />
       <BestProduct />

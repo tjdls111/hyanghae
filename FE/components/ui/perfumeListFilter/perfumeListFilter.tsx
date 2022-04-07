@@ -13,12 +13,12 @@ import { changeSort } from "../../../reducers/sortSlice";
 import { useAppSelector } from "../../../reducers/hooks";
 
 const blue = {
-  100: "#DAECFF",
-  200: "#99CCF3",
-  400: "#3399FF",
-  500: "#007FFF",
-  600: "#0072E5",
-  900: "#003A75",
+  100: "#f7acc1",
+  200: "#ef5983",
+  400: "#f382a2",
+  500: "#f7acc1",
+  600: "#fbd5e0",
+  900: "#ffffff",
 };
 
 const grey = {
@@ -96,7 +96,7 @@ const StyledOption = styled(OptionUnstyled)(
 
   &.${optionUnstyledClasses.selected} {
     background-color: ${theme.palette.mode === "dark" ? blue[900] : blue[100]};
-    color: ${theme.palette.mode === "dark" ? blue[100] : blue[900]};
+    color: ${theme.palette.mode === "dark" ? blue[400] : blue[900]};
   }
 
   &.${optionUnstyledClasses.highlighted} {
@@ -105,7 +105,7 @@ const StyledOption = styled(OptionUnstyled)(
   }
 
   &.${optionUnstyledClasses.highlighted}.${optionUnstyledClasses.selected} {
-    background-color: ${theme.palette.mode === "dark" ? blue[900] : blue[100]};
+    background-color: ${theme.palette.mode === "dark" ? blue[900] : blue[400]};
     color: ${theme.palette.mode === "dark" ? blue[100] : blue[900]};
   }
 

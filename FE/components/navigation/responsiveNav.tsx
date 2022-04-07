@@ -2,6 +2,9 @@ import React from "react";
 import styles from "./responsiveNav.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAppSelector } from "../../reducers/hooks";
+import Image from "next/image";
+import LetterLogo from "../../public/logos/letterLogo.png";
 
 const navItemData = [
   {
@@ -15,14 +18,9 @@ const navItemData = [
     path: "/perfumes",
   },
   {
-    id: "navItem02",
+    id: "navItem03",
     name: "Recommeded",
     path: "/survey",
-  },
-  {
-    id: "navItem02",
-    name: "About",
-    path: "/about",
   },
 ];
 
@@ -33,6 +31,9 @@ const ResponsiveNav: React.FC<{
   mobileNavCloseHandler: handler;
 }> = ({ mobileNavOpen, mobileNavCloseHandler }) => {
   const router = useRouter();
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   return (
     <nav
@@ -43,14 +44,28 @@ const ResponsiveNav: React.FC<{
       <button onClick={mobileNavCloseHandler} className={styles.navCloseButton}>
         X
       </button>
-      <div className={styles.mobileAuthGuide}>
-        <Link href="/login">
-          <button className={`${styles.mobileLoginButton}`}>LOG IN</button>
-        </Link>
-        <Link href="/signup">
-          <button className={styles.mobileSignupButton}>JOIN US</button>
-        </Link>
-      </div>
+      {isAuthenticated || (
+        <div className={styles.mobileAuthGuide}>
+          <Link href="/login">
+            <button className={`${styles.mobileLoginButton}`}>LOG IN</button>
+          </Link>
+          <Link href="/signup">
+            <button className={styles.mobileSignupButton}>JOIN US</button>
+          </Link>
+        </div>
+      )}
+      {isAuthenticated && (
+        <div className={styles.mobileAuthGuide}>
+          <div className={styles.logoWrapper}>
+            <Image
+              className={styles.logoImage}
+              src={LetterLogo}
+              layout="fill"
+            />
+          </div>
+        </div>
+      )}
+
       <ul className={styles.navigation}>
         {navItemData.map((navItem) => {
           return (

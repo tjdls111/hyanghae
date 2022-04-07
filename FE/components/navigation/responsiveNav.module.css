@@ -19,6 +19,16 @@
   display: none;
 }
 
+.logoWrapper {
+  width: 10rem;
+  height: 10rem;
+  position: relative;
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
 .mobileLoginButton {
   background-color: var(--color-primary);
   border: none;

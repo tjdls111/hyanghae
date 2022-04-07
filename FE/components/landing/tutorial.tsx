@@ -1,12 +1,3 @@
-/*
-랜딩페이지 튜토리얼
-랜딩페이지 튜토리얼 tsx
-@author Jackson
-@version 1.0.0
-생성일 2022-03-10
-마지막 수정일 2022-03-14
-*/
-
 import React from "react";
 import styles from "./tutorial.module.css";
 import Image from "next/image";

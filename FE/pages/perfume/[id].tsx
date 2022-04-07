@@ -13,6 +13,7 @@ import Review from "../../components/perfumeDetail/review";
 import Item from "../../components/perfumeDetail/item";
 import { apiPerfumeDetail, apiShoppingSearch } from "../../api/perfume";
 import ReviewList from "../../components/perfumeDetail/reviewList";
+import Head from "next/head";
 import { useAppSelector } from "../../reducers/hooks";
 
 interface PerfumeResult {
@@ -116,6 +117,10 @@ const Detail: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>상세 보기</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
       <Navigation />
       <Item data={data} />
       <Review isEditMode="false" setEdit={() => {}} star="5" content="" />

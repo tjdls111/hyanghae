@@ -1,5 +1,4 @@
 import React from "react";
-import { useAppSelector } from "../../reducers/hooks";
 import styles from "./perfumeSearchHeader.module.css";
 
 const PerfumeSearchHeader: React.FC<{ content: string }> = ({ content }) => {

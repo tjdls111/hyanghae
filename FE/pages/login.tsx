@@ -7,13 +7,18 @@
 마지막 수정일 2022-03-22
 */
 import type { NextPage } from "next";
-import LoginComponent from '../components/loginSignup/loginComponent'
-
+import LoginComponent from "../components/loginSignup/loginComponent";
+import Head from "next/head";
 
 const Login: NextPage = () => {
-  
   return (
-    <LoginComponent/>
+    <>
+      <Head>
+        <title>로그인</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
+      <LoginComponent />
+    </>
   );
 };
 

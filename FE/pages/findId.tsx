@@ -9,9 +9,18 @@
 
 import type { NextPage } from "next";
 import FindIdComponent from "../components/find/findIdComponent";
+import Head from "next/head";
 
 const FindId: NextPage = () => {
-  return <FindIdComponent />;
+  return (
+    <>
+      <Head>
+        <title>아이디 찾기</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
+      <FindIdComponent />
+    </>
+  );
 };
 
 export default FindId;
