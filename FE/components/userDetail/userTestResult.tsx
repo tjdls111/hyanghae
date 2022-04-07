@@ -47,13 +47,13 @@ const UserTestResult = () => {
           {data &&
             data.map((item) => (
               <li className={styles.reslist}>
-                {/* <div className={styles.imgContainer}>
+                { <div className={styles.imgContainer}>
                   <Image
                   src={item.imgUrl}
                   layout="fill"
                   objectFit="contain"
                   ></Image>
-                </div> */}
+                </div> }
                 <p>{item.perfumeBrand.brandName}</p>
                 <p>{item.perfumeName}</p>
                 <div className={styles.buttonContainer}>
