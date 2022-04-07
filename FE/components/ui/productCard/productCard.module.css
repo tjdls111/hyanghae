@@ -61,27 +61,15 @@
 
 .descriptionRow3 {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   column-gap: 0.5rem;
   font-size: 1.2rem;
-}
-
-.note {
-  /* white-space: pre; */
 }
 
 @media (max-width: 600px) {
   .imageWrapper {
     width: 15rem;
     height: 20rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .descriptionRow2 {
-    width: 15rem;
-  }
-  .descriptionRow3 {
-    width: 15rem;
   }
 }

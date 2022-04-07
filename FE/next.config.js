@@ -14,6 +14,7 @@ const nextConfig = {
       "www.reallyree.com",
       "piimages.parfumo.de",
       "i.etsystatic.com",
+      "fraguru.com",
     ],
   },
   env: {

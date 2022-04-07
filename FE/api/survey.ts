@@ -131,3 +131,16 @@ export const apiSurvey2SameRes = async (
     throw new Error("server Error");
   }
 };
+
+export const apiSurvey3Res = async (data: FormData, accessToken: string) => {
+  try {
+    return await axios.post(`${BASE_URL}/survey/3`, data, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": `multipart/form-data`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server Error");
+  }
+};
