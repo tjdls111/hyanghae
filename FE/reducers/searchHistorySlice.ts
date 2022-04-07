@@ -29,6 +29,9 @@ const searchHistorySlice = createSlice({
     deleteEntireHistory(state) {
       return [];
     },
+    deleteItembyKeyword(state, action) {
+      return state.filter((item) => item.searchWord !== action.payload);
+    },
   },
 });
 
@@ -37,5 +40,6 @@ export const {
   deleteLastHistory,
   deleteItem,
   deleteEntireHistory,
+  deleteItembyKeyword,
 } = searchHistorySlice.actions;
 export default searchHistorySlice.reducer;

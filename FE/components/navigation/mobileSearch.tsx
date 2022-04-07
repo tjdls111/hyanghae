@@ -12,6 +12,7 @@ const MobileSearch: React.FC<{
   keywordDeleteHandler: () => void;
   searchHistoryDeleteHandler: (itemCreatedAt: string) => void;
   deleteEntireSearchHistory: () => void;
+  selectHistoryItemHandler: (searchWord: string) => void;
 }> = ({
   mobileSearch,
   mobileSearchCloseHandler,
@@ -21,6 +22,7 @@ const MobileSearch: React.FC<{
   keywordDeleteHandler,
   searchHistoryDeleteHandler,
   deleteEntireSearchHistory,
+  selectHistoryItemHandler,
 }) => {
   const searchHistory = useAppSelector((state) => state.searchHistoryReducer);
 
@@ -78,8 +80,17 @@ const MobileSearch: React.FC<{
           {searchHistory.map((item) => {
             return (
               <li key={item.created_at} className={styles.mobileRecentItem}>
-                <p className={styles.mobileRecentTitle}>{item.searchWord}</p>
+                <p
+                  onClick={() => {
+                    mobileSearchCloseHandler();
+                    selectHistoryItemHandler(item.searchWord);
+                  }}
+                  className={styles.mobileRecentTitle}
+                >
+                  {item.searchWord}
+                </p>
                 <button
+                  type="button"
                   onClick={() => {
                     searchHistoryDeleteHandler(item.created_at);
                   }}

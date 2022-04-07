@@ -26,6 +26,7 @@ import {
   deleteLastHistory,
   deleteItem,
   deleteEntireHistory,
+  deleteItembyKeyword,
 } from "../../reducers/searchHistorySlice";
 
 const Navigation: React.FC = () => {
@@ -66,24 +67,24 @@ const Navigation: React.FC = () => {
 
   const searchSubmitHandler: React.FormEventHandler<HTMLFormElement> =
     function (e) {
+      // 공백인 경우 submit 막기
       e.preventDefault();
-
-      // 검색어 유효성 검사
       if (!keyword.trim()) {
         return;
       }
-      const now = new Date().toString();
-      // 10개인 경우 하나 삭제
+      // 기존 검색어와 겹치는 경우 삭제
+      dispatch(deleteItembyKeyword(keyword));
+
+      // 기존 검색어가 10개인 경우 한 개 삭제
       if (searchHistory.length === 10) {
         dispatch(deleteLastHistory());
       }
+
+      // redux state에 추가
+      const now = new Date().toString();
       dispatch(addHistory({ searchWord: keyword, created_at: now }));
-
-      // keyword
-      setKeyword("");
-
-      // url 변경
       router.push(`/search/${keyword}`);
+      setKeyword("");
     };
 
   const searchHistoryDeleteHandler = function (itemCreatedAt: string) {
@@ -92,6 +93,10 @@ const Navigation: React.FC = () => {
 
   const deleteEntireSearchHistory = function () {
     dispatch(deleteEntireHistory());
+  };
+
+  const selectHistoryItemHandler = function (searchWord: string) {
+    router.push(`/search/${searchWord}`);
   };
 
   const onLogoutHandler = function () {
@@ -113,6 +118,9 @@ const Navigation: React.FC = () => {
             searchSubmitHandler={searchSubmitHandler}
             keywordChangeHandler={keywordChangeHandler}
             keywordDeleteHandler={keywordDeleteHandler}
+            searchHistoryDeleteHandler={searchHistoryDeleteHandler}
+            deleteEntireSearchHistory={deleteEntireSearchHistory}
+            selectHistoryItemHandler={selectHistoryItemHandler}
           />
           <div className={styles.profileMenu}>
             {/* <AccountIcon
@@ -148,6 +156,7 @@ const Navigation: React.FC = () => {
           />
         </div>
         <MobileSearch
+          selectHistoryItemHandler={selectHistoryItemHandler}
           mobileSearch={mobileSearch}
           mobileSearchCloseHandler={mobileSearchCloseHandler}
           keyword={keyword}
