@@ -4,10 +4,8 @@ import titleReducer from "./titleSlice";
 import searchHistoryReducer from "./searchHistorySlice";
 import { createWrapper } from "next-redux-wrapper";
 import { combineReducers, createStore } from "redux";
-import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/lib/persistReducer";
 import persistStore from "redux-persist/lib/persistStore";
-// 리덕스 세션 스토리지
 import storageSession from "redux-persist/lib/storage/session";
 
 const rootReducer = combineReducers({
