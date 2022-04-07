@@ -13,7 +13,7 @@ const PerfumesPage: NextPage = () => {
         <PerfumeListHeader />
       </Container>
       <Container isTop={false}>
-        <PerfumeList />
+        <PerfumeList search={false} />
       </Container>
     </>
   );

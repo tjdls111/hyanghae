@@ -7,11 +7,15 @@ import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/lib/persistReducer";
 import persistStore from "redux-persist/lib/persistStore";
 
-const rootReducer = combineReducers({ authReducer, sortReducer, titleReducer });
+const rootReducer = combineReducers({
+  authReducer,
+  sortReducer,
+  titleReducer,
+});
 
 const persistConfig = {
   key: "root",
-  blacklist: ["sort", "title"],
+  blacklist: ["titleReducer"],
   storage,
 };
 
