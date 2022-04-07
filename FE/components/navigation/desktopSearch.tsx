@@ -49,7 +49,11 @@ const DesktopSearch: React.FC<{
       >
         <MagnifyingGlass className={styles.searchIcon} />
         <input
-          onFocus={() => setOpenHistory(true)}
+          onFocus={() => {
+            if (searchHistory.length > 0) {
+              setOpenHistory(true);
+            }
+          }}
           ref={inputRef}
           onChange={keywordChangeHandler}
           value={keyword}

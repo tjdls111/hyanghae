@@ -32,7 +32,7 @@
 .searchInput {
   border: 1px solid rgba(119, 119, 119, 0.294);
   border-radius: 0.5rem;
-  padding: 1rem 1.2rem 0.8rem 4rem;
+  padding: 1rem 3rem 0.8rem 4rem;
   outline: none;
   width: 100%;
   font-size: 1.6rem;
@@ -95,9 +95,14 @@
 .desktopRecentTitle {
   color: #333;
   padding: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
 }
 
 .desktopRecentDelete {
+  flex-basis: 10%;
   font-size: 1.6rem;
   border: none;
   background: none;

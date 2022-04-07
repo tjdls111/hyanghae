@@ -98,6 +98,9 @@
   font-size: 2rem;
   flex-grow: 1;
   padding: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .mobileRecentDelete {
