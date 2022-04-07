@@ -1,0 +1,95 @@
+.inputWrapper {
+  position: absolute;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 5em;
+}
+
+.header > :first-child {
+  font-size: 4rem;
+  font-weight: bolder;
+  margin-bottom: 1em;
+}
+
+.header > :nth-child(2) {
+  font-size: 2rem;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin: auto;
+  width: 30rem;
+  height: 50rem;
+}
+
+.outerBox {
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.innerBox {
+  position: relative;
+  width: 30rem;
+  height: 50rem;
+  cursor: pointer;
+  display: flex;
+
+  border: 1px solid black;
+  background-color: var(--color-primary-shade);
+  justify-content: center;
+  align-items: center;
+  top: 0%;
+  font-size: 10em;
+  margin: auto;
+}
+
+.buttonContainer > button :hover {
+  cursor: pointer;
+}
+
+.cancel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: red;
+  opacity: 0.4;
+  color: var(--color-grey-light-3);
+  border: transparent;
+  border-radius: 100%;
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+}
+
+@media screen and (max-width: 768px) {
+  .innerBox {
+    width: 15rem;
+    height: 30rem;
+  }
+  .header > :first-child {
+    font-size: 2rem;
+  }
+  .header > :nth-child(2) {
+    font-size: 1rem;
+  }
+  .form {
+    height: 30rem;
+  }
+}

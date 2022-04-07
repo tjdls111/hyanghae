@@ -1,0 +1,41 @@
+.imgContainer {
+  width: 15em;
+  height: 15em;
+  position: relative;
+}
+.header {
+  position: absolute;
+  top: 20%;
+  font-weight: bolder;
+  font-size: 10em;
+}
+
+.innerContainer {
+  display: flex;
+  justify-content: center;
+}
+.listContainer {
+  display: flex;
+  margin-left: 3em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.listContainer > * {
+  margin-bottom: 2em;
+}
+
+@media screen and (max-width: 768px) {
+  .innerContainer {
+    display: block;
+  }
+  .imgContainer {
+    width: 5em;
+    height: 5em;
+    position: relative;
+  }
+  .listContainer {
+    margin: 0;
+  }
+}
