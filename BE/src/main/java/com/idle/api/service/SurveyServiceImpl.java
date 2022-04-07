@@ -21,6 +21,8 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -43,7 +45,8 @@ public class SurveyServiceImpl implements SurveyService {
     UserRepository userRepository;
     @Autowired
     StyleRepository styleRepository;
-
+    @Autowired
+    ResourceLoader resourceLoader;
 
     @Override
     public Map<String, List<?>> getSurveyList(User user) {
@@ -104,9 +107,16 @@ public class SurveyServiceImpl implements SurveyService {
         ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
 
         // 데이터셋 추가
-        String filePath = "src/main/resources/perfume/perfumes.xlsx";
-        File xlsx = new File(filePath);
-        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+//        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+//        File xlsx = new File(filePath);
+//        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        ClassPathResource classPathResource = new ClassPathResource("perfume/perfumes.xlsx");
+        if(classPathResource.exists() == false){
+            System.out.println("이거 안되면 나도 몰라");
+            throw new IllegalArgumentException();
+        }
+        XSSFWorkbook wb = new XSSFWorkbook(classPathResource.getInputStream());
 
         // 엑셀파일 전체 내용을 담고 있는 객체
         XSSFSheet sheet = wb.getSheetAt(0);
@@ -206,9 +216,16 @@ public class SurveyServiceImpl implements SurveyService {
         ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
 
         // 데이터셋 추가
-        String filePath = "src/main/resources/perfume/perfumes.xlsx";
-        File xlsx = new File(filePath);
-        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+//        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+//        File xlsx = new File(filePath);
+//        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        ClassPathResource classPathResource = new ClassPathResource("perfume/perfumes.xlsx");
+        if(classPathResource.exists() == false){
+            System.out.println("이거 안되면 나도 몰라");
+            throw new IllegalArgumentException();
+        }
+        XSSFWorkbook wb = new XSSFWorkbook(classPathResource.getInputStream());
 
         // 엑셀파일 전체 내용을 담고 있는 객체
         XSSFSheet sheet = wb.getSheetAt(0);
@@ -325,9 +342,16 @@ public class SurveyServiceImpl implements SurveyService {
         ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
 
         // 데이터셋 추가
-        String filePath = "src/main/resources/perfume/perfumes.xlsx";
-        File xlsx = new File(filePath);
-        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+//        String filePath = "src/main/resources/perfume/perfumes.xlsx";
+//        File xlsx = new File(filePath);
+//        XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream(xlsx));
+
+        ClassPathResource classPathResource = new ClassPathResource("perfume/perfumes.xlsx");
+        if(classPathResource.exists() == false){
+            System.out.println("이거 안되면 나도 몰라");
+            throw new IllegalArgumentException();
+        }
+        XSSFWorkbook wb = new XSSFWorkbook(classPathResource.getInputStream());
 
         // 엑셀파일 전체 내용을 담고 있는 객체
         XSSFSheet sheet = wb.getSheetAt(0);
