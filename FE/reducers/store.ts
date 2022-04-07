@@ -15,7 +15,6 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: "root",
-  blacklist: ["titleReducer"],
   storage,
 };
 

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { surveyPerfume } from "../../../api/survey";
+
 import Image from "next/image";
 import styles from "./survey3Res.module.css";
 import Button from "@mui/material/Button";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../survey2/component/buttonTheme";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { refreshTitle } from "../../../reducers/titleSlice";
 
 const Survey3Res = ({ data }) => {
   const [random, setRandom] = useState([]);
+  const dispatch = useDispatch();
+
   const getRandomInt = () => {
     const set = new Set();
     while (set.size < 5) {
@@ -19,6 +23,7 @@ const Survey3Res = ({ data }) => {
   };
   const router = useRouter();
   const goDetail = (id) => {
+    dispatch(refreshTitle());
     router.replace(`/perfume/${id}`);
   };
 
@@ -38,7 +43,7 @@ const Survey3Res = ({ data }) => {
         style={{
           textOverflow: "ellipsis",
           overflow: "hidden",
-          width: "15em",
+          width: "12em",
           whiteSpace: "nowrap",
           textAlign: "center",
           height: "2em",

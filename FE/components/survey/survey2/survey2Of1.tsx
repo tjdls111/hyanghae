@@ -139,35 +139,36 @@ const Survey2Of1 = () => {
   return (
     <div className={styles.container}>
       {!isClick ? (
-        <Box className={styles.innerBox} component="form" noValidate autoComplete="off">
-          <FormControl>
-            <NativeSelect
-              style={{ marginTop: "2em" }}
-              defaultValue={"none"}
-              inputProps={{
-                name: "Brand",
-                id: "uncontrolled-native",
+        <Box component="form" noValidate autoComplete="off">
+          <div className={styles.innerBox}>
+            <FormControl>
+              <NativeSelect
+                defaultValue={"none"}
+                inputProps={{
+                  name: "Brand",
+                  id: "uncontrolled-native",
+                }}
+                onChange={(e) => onChSelect(e)}
+              >
+                <option value={"none"}>brand</option>
+                {brandList}
+              </NativeSelect>
+            </FormControl>
+            <TextField
+              id="standard-basic"
+              defaultValue={searchString}
+              style={{
+                width: "30rem",
+                marginLeft: "2rem",
+                marginBottom: "1.6em",
               }}
-              onChange={(e) => onChSelect(e)}
-            >
-              <option value={"none"}>brand</option>
-              {brandList}
-            </NativeSelect>
-          </FormControl>
-          <TextField
-            id="standard-basic"
-            defaultValue={searchString}
-            style={{
-              width: "30rem",
-              marginLeft: "2rem",
-              marginBottom: "1.6em",
-            }}
-            label="향수 이름을 영어로 입력해주세요"
-            variant="standard"
-            disabled={isValid}
-            inputRef={perfumeRef}
-            onChange={callApiSearch}
-          />
+              label="향수 이름을 영어로 입력해주세요"
+              variant="standard"
+              disabled={isValid}
+              inputRef={perfumeRef}
+              onChange={callApiSearch}
+            />
+          </div>
 
           <div className={styles.perfumeList}>
             {isData ? perfumeList : <div className={styles.emptyText}>Empty result</div>}

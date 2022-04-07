@@ -6,6 +6,8 @@ import { RootState } from "../../../reducers/store";
 import Image from "next/image";
 import styles from "./surveyRes.module.css";
 import { useRouter } from "next/router";
+import { refreshTitle } from "../../../reducers/titleSlice";
+import { useDispatch } from "react-redux";
 
 interface dataProp {
   gender: number;
@@ -25,7 +27,10 @@ const Survey1Res = ({ prop }: resultProp) => {
   const token = useAppSelector((state: RootState) => state.authReducer.token);
   const req = { ...prop, surveyTitle };
   const router = useRouter();
+  const dispatch = useDispatch();
+
   const showDetail = (id: number) => {
+    dispatch(refreshTitle());
     router.replace(`/perfume/${id}`);
   };
 
@@ -35,10 +40,10 @@ const Survey1Res = ({ prop }: resultProp) => {
         <Image src={item.imgUrl} layout="fill" objectFit="contain"></Image>
       </div>
 
-      <li style={{ marginBottom: "1em" }} key={idx}>
+      <li className={styles.brandName} key={idx}>
         {item.perfumeBrand.brandName}
       </li>
-      <li style={{ marginBottom: "2em" }}>{item.perfumeName}</li>
+      <li className={styles.perfumeName}>{item.perfumeName}</li>
       <div className={styles.buttonContainer}>
         <button type="button" onClick={() => showDetail(item.perfumeId)}>
           향수 상세정보
@@ -49,9 +54,7 @@ const Survey1Res = ({ prop }: resultProp) => {
 
   useEffect(() => {
     let isCompleted = false;
-
     if (token && !isCompleted) {
-      console.log(req);
       (async function post() {
         try {
           const result = await apiSurvey1Res(req, token);

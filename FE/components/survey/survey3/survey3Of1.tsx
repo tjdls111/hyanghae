@@ -53,7 +53,7 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = Math.ceil((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
         setLoading(`${progress}%`);
       },
       (error) => {
@@ -129,10 +129,11 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
             {state ? (
               <Image src={pictureRef.current.url} layout="fill" objectFit="cover" />
             ) : loading !== "" ? (
-              <div style={{ position: "absolute", fontSize: "1em" }}>{loading}</div>
+              <div className={styles.loadingFont}>{loading}</div>
             ) : (
-              "+"
+              <div className={styles.plusFont}>+</div>
             )}
+
             {state ? (
               <button className={styles.cancel} type="button" onClick={deletePhoto}>
                 X
