@@ -29,7 +29,9 @@ const Review = (Props: Props) => {
   );
 
   useEffect(() => {
-    review.current.value = Props.content;
+    if (Props.isEditMode === "True") {
+      review.current.value = Props.content;
+    }
   }, []);
 
   const onSubmit = async (e) => {
