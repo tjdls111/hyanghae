@@ -1,6 +1,7 @@
 import authReducer from "./authSlice";
 import sortReducer from "./sortSlice";
 import titleReducer from "./titleSlice";
+import searchHistoryReducer from "./searchHistorySlice";
 import { createWrapper } from "next-redux-wrapper";
 import { combineReducers, createStore } from "redux";
 import storage from "redux-persist/lib/storage";
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   authReducer,
   sortReducer,
   titleReducer,
+  searchHistoryReducer,
 });
 
 const persistConfig = {

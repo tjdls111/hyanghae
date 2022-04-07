@@ -21,11 +21,19 @@ import { useAppSelector } from "../../reducers/hooks";
 import { logout } from "../../reducers/authSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import {
+  addHistory,
+  deleteLastHistory,
+  deleteItem,
+  deleteEntireHistory,
+  deleteItembyKeyword,
+} from "../../reducers/searchHistorySlice";
 
 const Navigation: React.FC = () => {
   const isAuthenticated = useAppSelector(
     (state) => state.authReducer.isAuthenticated
   );
+  const searchHistory = useAppSelector((state) => state.searchHistoryReducer);
   const dispatch = useDispatch();
 
   const [mobileSearch, setMobileSearch] = useState(false);
@@ -59,15 +67,37 @@ const Navigation: React.FC = () => {
 
   const searchSubmitHandler: React.FormEventHandler<HTMLFormElement> =
     function (e) {
+      // 공백인 경우 submit 막기
       e.preventDefault();
-
-      // 검색어 유효성 검사
-
       if (!keyword.trim()) {
         return;
       }
+      // 기존 검색어와 겹치는 경우 삭제
+      dispatch(deleteItembyKeyword(keyword));
+
+      // 기존 검색어가 10개인 경우 한 개 삭제
+      if (searchHistory.length === 10) {
+        dispatch(deleteLastHistory());
+      }
+
+      // redux state에 추가
+      const now = new Date().toString();
+      dispatch(addHistory({ searchWord: keyword, created_at: now }));
       router.push(`/search/${keyword}`);
+      setKeyword("");
     };
+
+  const searchHistoryDeleteHandler = function (itemCreatedAt: string) {
+    dispatch(deleteItem(itemCreatedAt));
+  };
+
+  const deleteEntireSearchHistory = function () {
+    dispatch(deleteEntireHistory());
+  };
+
+  const selectHistoryItemHandler = function (searchWord: string) {
+    router.push(`/search/${searchWord}`);
+  };
 
   const onLogoutHandler = function () {
     dispatch(logout());
@@ -88,6 +118,9 @@ const Navigation: React.FC = () => {
             searchSubmitHandler={searchSubmitHandler}
             keywordChangeHandler={keywordChangeHandler}
             keywordDeleteHandler={keywordDeleteHandler}
+            searchHistoryDeleteHandler={searchHistoryDeleteHandler}
+            deleteEntireSearchHistory={deleteEntireSearchHistory}
+            selectHistoryItemHandler={selectHistoryItemHandler}
           />
           <div className={styles.profileMenu}>
             {/* <AccountIcon
@@ -123,13 +156,15 @@ const Navigation: React.FC = () => {
           />
         </div>
         <MobileSearch
+          selectHistoryItemHandler={selectHistoryItemHandler}
           mobileSearch={mobileSearch}
           mobileSearchCloseHandler={mobileSearchCloseHandler}
-          // 추가
           keyword={keyword}
           searchSubmitHandler={searchSubmitHandler}
           keywordChangeHandler={keywordChangeHandler}
           keywordDeleteHandler={keywordDeleteHandler}
+          searchHistoryDeleteHandler={searchHistoryDeleteHandler}
+          deleteEntireSearchHistory={deleteEntireSearchHistory}
         />
       </main>
     </div>
