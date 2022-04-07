@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./responsiveNav.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAppSelector } from "../../reducers/hooks";
 
 const navItemData = [
   {
@@ -33,6 +34,9 @@ const ResponsiveNav: React.FC<{
   mobileNavCloseHandler: handler;
 }> = ({ mobileNavOpen, mobileNavCloseHandler }) => {
   const router = useRouter();
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   return (
     <nav
@@ -43,14 +47,18 @@ const ResponsiveNav: React.FC<{
       <button onClick={mobileNavCloseHandler} className={styles.navCloseButton}>
         X
       </button>
-      <div className={styles.mobileAuthGuide}>
-        <Link href="/login">
-          <button className={`${styles.mobileLoginButton}`}>LOG IN</button>
-        </Link>
-        <Link href="/signup">
-          <button className={styles.mobileSignupButton}>JOIN US</button>
-        </Link>
-      </div>
+      {isAuthenticated || (
+        <div className={styles.mobileAuthGuide}>
+          <Link href="/login">
+            <button className={`${styles.mobileLoginButton}`}>LOG IN</button>
+          </Link>
+          <Link href="/signup">
+            <button className={styles.mobileSignupButton}>JOIN US</button>
+          </Link>
+        </div>
+      )}
+      {isAuthenticated && <div className={styles.mobileAuthGuide}></div>}
+
       <ul className={styles.navigation}>
         {navItemData.map((navItem) => {
           return (
