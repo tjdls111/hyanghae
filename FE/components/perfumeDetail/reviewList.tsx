@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-29
+마지막 수정일 2022-04-06
 */
 
 import React, { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ import styles from "./reviewList.module.css";
 import Review from "./review";
 import { useAppSelector } from "../../reducers/hooks";
 import Pagination from "./pagination";
+
 interface ReviewInterface {
   reviewContent: string;
   reviewScore: number;
@@ -42,7 +43,7 @@ const ReviewList = () => {
     }
   }, [token]);
 
-  //댓글 편집 여부
+  //댓글 편집 모드 여부
   const changeEditMode = (e) => {
     e.preventDefault();
     setEditMode(!editMode);
@@ -82,6 +83,12 @@ const ReviewList = () => {
       });
   };
 
+  // limit 수 바꾸기
+  const changeLimit = (value) => {
+    setLimit(Number(value));
+    setPage(0);
+  };
+
   useEffect(() => {
     if (router.isReady) {
       getReview();
@@ -90,23 +97,23 @@ const ReviewList = () => {
 
   return (
     <article className={styles.container}>
-      <h1 className={styles.title}>Reviews</h1>
-      {data.length == 0 && (
-        <h2 className={styles.content}>There are no review.. </h2>
-      )}
+      <h1 className={styles.title}>후기</h1>
+      {data.length == 0 && <p className={styles.content}>리뷰가 없어요... </p>}
       {data.length > 0 && (
-        <label htmlFor="limit">
-          <span className={styles.content}>Review count per page </span>
-          <select
-            value={limit}
-            onChange={({ target: { value } }) => setLimit(Number(value))}
-          >
-            <option value="3">3</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-          </select>
-        </label>
+        <div className={styles.label}>
+          <label htmlFor="limit">
+            <span className={styles.content}>한 페이지 당 후기 수 </span>
+            <select
+              value={limit}
+              onChange={({ target: { value } }) => changeLimit(value)}
+            >
+              <option value="3">3</option>
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
       )}
 
       <ul className={styles.myList}>
@@ -115,13 +122,17 @@ const ReviewList = () => {
             <li key={d.userNickname}>
               {!editMode && (
                 <div className={styles.oneReview}>
-                  <p className={styles.content}>
+                  <div className={styles.content}>
                     {d.userNickname} : {`${d.reviewContent}`}
-                  </p>
+                  </div>
                   <div>
                     <div
                       className={styles.starBox}
-                      style={{ width: d.reviewScore * 22 }}
+                      style={
+                        screen.width > 1200
+                          ? { width: d.reviewScore * 28 }
+                          : { width: d.reviewScore * 22 }
+                      }
                     >
                       <img
                         className={styles.pointOfStar}
@@ -141,10 +152,10 @@ const ReviewList = () => {
                         className={styles.editBtn}
                         onClick={changeEditMode}
                       >
-                        Edit
+                        수정
                       </button>
                       <form onSubmit={onDelete}>
-                        <button className={styles.delBtn}>Delete</button>
+                        <button className={styles.delBtn}>삭제</button>
                       </form>
                     </div>
                   )}
@@ -161,7 +172,7 @@ const ReviewList = () => {
                     />
                   )}
                   {d.userNickname !== userName && (
-                    <div>
+                    <div className={styles.oneReview}>
                       {d.userNickname} : ${d.reviewScore}:{" "}
                       {`${d.reviewContent}`}
                     </div>

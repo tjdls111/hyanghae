@@ -1,6 +1,6 @@
 /**
  * PerfumeController
- * 향수 검색 API 구현
+ * 향수, 좋아요, 리뷰 컨트롤러
  *
  * @author Woody, David, Alice
  * @version 1.0.0
@@ -73,8 +73,8 @@ public class PerfumeController {
     @ApiOperation("향수 검색")
     @GetMapping("/search")
     public ResponseEntity<? extends BaseResponseBody> perfumeSearchList(@RequestParam(value = "keyword") String keyword,
-                                                                 @RequestParam(value = "content") String content,
-                                                                 @PageableDefault(size = 4, sort = "perfumeName", direction = Sort.Direction.ASC) Pageable pageable) {
+                                                                        @RequestParam(value = "content") String content,
+                                                                        @PageableDefault(size = 4, sort = "perfumeName", direction = Sort.Direction.ASC) Pageable pageable) {
         Page<Perfume> page = perfumeService.getPerfumeSearchPage(keyword, content, pageable);
         return ResponseEntity.ok(PerfumeListResponse.of(200, "Success", page));
     }
@@ -82,7 +82,8 @@ public class PerfumeController {
     /* Woody, David */
     @ApiOperation("향수 상세 정보")
     @GetMapping("/{perfumeId}")
-    public ResponseEntity<PerfumeResponse> getPerfume(@ApiIgnore Authentication authentication, @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
+    public ResponseEntity<PerfumeResponse> getPerfume(@ApiIgnore Authentication authentication,
+                                                      @PathVariable("perfumeId") @ApiParam(value = "향수 번호", required = true) long perfumeId) {
         Perfume perfume = perfumeService.getPerfumeByPerfumeId(perfumeId);
         if (perfume == null) {
             return ResponseEntity.status(404).body(null);
@@ -110,7 +111,6 @@ public class PerfumeController {
     @ApiOperation("브랜드 조회")
     @GetMapping("/brand")
     public ResponseEntity<? extends BaseResponseBody> getBrandList() {
-
         List<Brand> brandList = perfumeService.getBrandList();
         return ResponseEntity.ok(BrandListResponse.of(200,"success",brandList));
 
@@ -121,9 +121,7 @@ public class PerfumeController {
     public ResponseEntity<? extends BaseResponseBody> getPerfumeListByBrand(@PageableDefault(size=9, sort="perfumeName",direction = Sort.Direction.ASC)Pageable pageable,
                                                                             @PathVariable("perfumeBrand")String perfumeBrand,
                                                                             @RequestParam(value = "content") String content) {
-
         Page<Perfume> res = perfumeService.getPerfumeListByBrand(pageable, perfumeBrand, content);
-
         return ResponseEntity.ok(PerfumeListByBrandResponse.of(200,"success",res));
 
     }
@@ -225,6 +223,7 @@ public class PerfumeController {
     public ResponseEntity<? extends BaseResponseBody> getRecommendPerfumeList(@ApiIgnore Authentication authentication) {
         IdleUserDetails userDetails = (IdleUserDetails) authentication.getDetails();
         User user = userDetails.getUser();
+
         Map<String,List<Perfume>> map = perfumeService.getRecommendPerfumeList(user);
         return ResponseEntity.status(200).body(RecommendPerfumeListResponse.of(200, "Success",map));
     }

@@ -27,27 +27,40 @@
   outline: none;
   border: 1px solid rgba(119, 119, 119, 0.294);
   border-radius: 0.5rem;
-  padding: 1rem 0rem 1rem 5rem;
-  font-size: 2rem;
+  padding: 1.5rem 0rem 1.2rem 2rem;
+  font-size: 2.3rem;
   color: #333;
   flex-grow: 1;
 }
 
+.mobileSearchButton {
+  margin-left: -6rem;
+  padding: 0.3rem;
+  border: none;
+  background: var(--color-primary);
+  border-radius: 0.3rem;
+  color: #fff;
+  font-size: 2.1rem;
+  position: relative;
+  height: 100%;
+  width: 6rem;
+}
+
+.mobileSearchButtonDisabled {
+  background-color: #777;
+}
+
 .mobileSearchIcon {
-  height: 3rem;
-  width: 3rem;
-  fill: #777;
+  height: 70%;
+  width: 70%;
+  fill: #fff;
   z-index: 2000;
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
 }
 
 .mobileSearchCancel {
   margin-left: 3rem;
   color: #555;
-  font-size: 2.2rem;
+  font-size: 3rem;
   font-weight: 600;
 }
 

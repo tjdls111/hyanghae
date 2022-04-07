@@ -6,21 +6,21 @@ import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import { useAppSelector } from "../../reducers/hooks";
 
-const PerfumeList = () => {
+const PerfumeList: React.FC = () => {
   const [perfumes, setPerfumes] = useState<product[]>([]);
   const [page, setPage] = useState(0);
   const [ref, inView] = useInView();
   const [loading, setLoading] = useState(false);
   const sort = useAppSelector((state) => state.sortReducer.sort);
+  const [isLastPage, setIsLastPage] = useState(false);
 
-  // 필터가 바뀔경우
+  // 필터 혹은 검색어가 바뀔경우
   // 1. 리스트 비우기
   // 2. 페이지 0으로 재설정
   // 3. 데이터 가져오기
   useEffect(() => {
     setPerfumes([]);
     setPage(0);
-    fetchPerfumes();
   }, [sort]);
 
   // 서버에서 데이터를 가져오는 함수
@@ -32,10 +32,16 @@ const PerfumeList = () => {
         params: { page, size: 10, sort },
       })
       .then((res) => {
-        setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
-      });
+        if (page === 0) {
+          setPerfumes([...res.data.perfumeList]);
+        } else {
+          setPerfumes((prev) => [...prev, ...res.data.perfumeList]);
+        }
+        setIsLastPage(res.data.last);
+      })
+      .catch(console.log);
     setLoading(false);
-  }, [page]);
+  }, [page, sort]);
 
   // 함수가 새로 생성되면 실행
   useEffect(() => {
@@ -43,10 +49,10 @@ const PerfumeList = () => {
   }, [fetchPerfumes]);
 
   useEffect(() => {
-    if (inView && !loading) {
+    if (inView && !loading && !isLastPage) {
       setPage((prev) => prev + 1);
     }
-  }, [inView, loading]);
+  }, [inView, loading, isLastPage]);
 
   return (
     <div className={styles.grid}>

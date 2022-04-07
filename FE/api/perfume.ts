@@ -3,7 +3,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-22
-마지막 수정일 2022-04-05
+마지막 수정일 2022-04-06
 */
 
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
@@ -24,31 +24,14 @@ export const apiShoppingSearch = async (
         query: "초콜릿",
       },
       headers: {
-        "X-Naver-Client-Id": "SGQWYLc_8_6M2ZpCjAsg",
-        "X-Naver-Client-Secret": "_8QJILf9ZB",
+        "X-Naver-Client-Id": "",
+        "X-Naver-Client-Secret": "",
       },
     });
   } catch (e) {
     throw new Error("server Error");
   }
 };
-// export const apiShoppingSearch = async (
-//   keyword: string
-// ): Promise<searchResult> => {
-//   try {
-//     console.log(process.env.EBAY_API_KEY);
-//     return await axios.get(
-//       `https://api.ebay.com/buy/browse/v1/item_summary/search?q=perfume ${keyword}&limit=5`,
-//       {
-//         headers: {
-//           Authorization: `Bearer ${process.env.EBAY_API_KEY}`,
-//         },
-//       }
-//     );
-//   } catch (e) {
-//     throw new Error("server Error");
-//   }
-// };
 
 export interface PerfumeResult {
   message: string;
@@ -151,8 +134,43 @@ export const reviewLike = async (token: string, perfumeId: number) => {
       },
     });
   } catch (e) {
-    // throw new Error("server error");
     console.log(e);
+  }
+};
+
+export const surveyList = async (token: string) => {
+  try {
+    return await axios.get(`${BASE_URL}/survey/list`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
+  }
+};
+
+export const recommend1Result = async (token: string, surveyId:string) => {
+  try {
+    return await axios.get(`${BASE_URL}/survey/recommend1/${surveyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
+  }
+};
+
+export const recommend2Result = async (token: string, surveyId:string) => {
+  try {
+    return await axios.get(`${BASE_URL}/survey/recommend2/${surveyId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw new Error("server error");
   }
 };
 
@@ -179,3 +197,5 @@ export const getPerfumes = async function (page: number, sort: string) {
     console.log(e);
   }
 };
+
+

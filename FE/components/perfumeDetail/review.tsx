@@ -4,7 +4,7 @@
 @author Wendy
 @version 1.0.0
 생성일 2022-03-17
-마지막 수정일 2022-03-29
+마지막 수정일 2022-04-06
 */
 
 import { useRouter } from "next/router";
@@ -24,9 +24,14 @@ const Review = (Props: Props) => {
   const router = useRouter();
   const [selected, setSelected] = useState(Props.star || "5");
   const token = useAppSelector((state) => state.authReducer.token);
+  const isAuthenticated = useAppSelector(
+    (state) => state.authReducer.isAuthenticated
+  );
 
   useEffect(() => {
-    review.current.value = Props.content;
+    if (Props.isEditMode === "True") {
+      review.current.value = Props.content;
+    }
   }, []);
 
   const onSubmit = async (e) => {
@@ -57,18 +62,17 @@ const Review = (Props: Props) => {
           selected
         )
           .then((res) => {
-            console.log(res);
             review.current.value = "";
             router.reload(window.location.pathname);
           })
           .catch((err) => {
-            alert("Sorry.. You can write only one review.");
+            alert("한 계정 당 하나의 리뷰만 남길 수 있습니다.");
             review.current.value = "";
             console.log(err);
           });
       }
     } else {
-      alert("You have to write at least one text.");
+      alert("한 글자 이상 써주세요.");
     }
   };
 
@@ -76,33 +80,42 @@ const Review = (Props: Props) => {
     setSelected(e.target.value);
   };
 
-  return (
-    <section className={styles.container}>
-      <form className={styles.formContainer} onSubmit={onSubmit}>
-        <label className={styles.content} htmlFor="review">
-          Please leave an honest and kind review ^^
-        </label>
-        <textarea
-          id="review"
-          name="review"
-          rows={5}
-          cols={50}
-          ref={review}
-          placeholder="Please write a review :)"
-        ></textarea>
+  if (isAuthenticated) {
+    return (
+      <section className={styles.container}>
+        <form className={styles.formContainer} onSubmit={onSubmit}>
+          <label className={styles.content} htmlFor="review">
+            솔직한 리뷰를 남겨주세요 :)
+          </label>
+          <textarea
+            id="review"
+            name="review"
+            rows={5}
+            cols={50}
+            ref={review}
+            placeholder="리뷰를 써주세요:)"
+          ></textarea>
 
-        <select name="star" id="star" onChange={handleChangeSelect}>
-          <option value="5">⭐⭐⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="1">⭐</option>
-        </select>
+          <select name="star" id="star" onChange={handleChangeSelect}>
+            <option>별점을 매겨주세요 :) </option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+          </select>
 
-        <button className={styles.btn}>Write a Review</button>
-      </form>
-    </section>
-  );
+          <button className={styles.btn}>작성</button>
+        </form>
+      </section>
+    );
+  } else {
+    return (
+      <div className={styles.content}>
+        리뷰를 남기고 싶으면 로그인이 필요합니다.
+      </div>
+    );
+  }
 };
 
 export default Review;

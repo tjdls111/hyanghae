@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./recentReviews.module.css";
 import ReviewSlider from "../ui/slider/reviewSlider";
-import { DUMMY_DATA } from "./dummyData";
+import axios from "axios";
 
 const RecentReviews: React.FC = () => {
+  const [reviews, setReviews] = useState(null);
+
+  console.log(reviews);
+
+  useEffect(() => {
+    axios
+      .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/review/recent")
+      .then((res) => setReviews(res.data.reviewList));
+  }, []);
+
   return (
     <div className={styles.container}>
-      <ReviewSlider slideItems={DUMMY_DATA} />
+      <ReviewSlider slideItems={reviews} />
     </div>
   );
 };

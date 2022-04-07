@@ -7,8 +7,11 @@ const titleSlice = createSlice({
     changeTitle(state, action) {
       state.title = action.payload;
     },
+    refreshTitle(state) {
+      state.title = null;
+    },
   },
 });
 
-export const { changeTitle } = titleSlice.actions;
+export const { changeTitle, refreshTitle } = titleSlice.actions;
 export default titleSlice.reducer;

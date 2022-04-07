@@ -31,6 +31,15 @@ public class Style {
     @Column(name = "st_id")
     Long styleId;
 
+    @Column(name="time", nullable = false)
+    int time;
+
+    @Column(name="gender", nullable = false)
+    int gender;
+
+    @Column(name="season", nullable = false)
+    int season;
+
     @Column(name="tpo", nullable = false)
     int tpo;
 
