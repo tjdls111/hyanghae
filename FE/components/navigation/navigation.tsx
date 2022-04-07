@@ -21,11 +21,18 @@ import { useAppSelector } from "../../reducers/hooks";
 import { logout } from "../../reducers/authSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import {
+  addHistory,
+  deleteLastHistory,
+  deleteItem,
+  deleteEntireHistory,
+} from "../../reducers/searchHistorySlice";
 
 const Navigation: React.FC = () => {
   const isAuthenticated = useAppSelector(
     (state) => state.authReducer.isAuthenticated
   );
+  const searchHistory = useAppSelector((state) => state.searchHistoryReducer);
   const dispatch = useDispatch();
 
   const [mobileSearch, setMobileSearch] = useState(false);
@@ -62,12 +69,30 @@ const Navigation: React.FC = () => {
       e.preventDefault();
 
       // 검색어 유효성 검사
-
       if (!keyword.trim()) {
         return;
       }
+      const now = new Date().toString();
+      // 10개인 경우 하나 삭제
+      if (searchHistory.length === 10) {
+        dispatch(deleteLastHistory());
+      }
+      dispatch(addHistory({ searchWord: keyword, created_at: now }));
+
+      // keyword
+      setKeyword("");
+
+      // url 변경
       router.push(`/search/${keyword}`);
     };
+
+  const searchHistoryDeleteHandler = function (itemCreatedAt: string) {
+    dispatch(deleteItem(itemCreatedAt));
+  };
+
+  const deleteEntireSearchHistory = function () {
+    dispatch(deleteEntireHistory());
+  };
 
   const onLogoutHandler = function () {
     dispatch(logout());
@@ -125,11 +150,12 @@ const Navigation: React.FC = () => {
         <MobileSearch
           mobileSearch={mobileSearch}
           mobileSearchCloseHandler={mobileSearchCloseHandler}
-          // 추가
           keyword={keyword}
           searchSubmitHandler={searchSubmitHandler}
           keywordChangeHandler={keywordChangeHandler}
           keywordDeleteHandler={keywordDeleteHandler}
+          searchHistoryDeleteHandler={searchHistoryDeleteHandler}
+          deleteEntireSearchHistory={deleteEntireSearchHistory}
         />
       </main>
     </div>

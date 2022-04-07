@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./mobileSearch.module.css";
 import MagnifyingGlass from "../../public/SVG/magnifying-glass.svg";
+import { useAppSelector } from "../../reducers/hooks";
 
 const MobileSearch: React.FC<{
   mobileSearch: boolean;
@@ -9,6 +10,8 @@ const MobileSearch: React.FC<{
   searchSubmitHandler: React.FormEventHandler<HTMLFormElement>;
   keywordChangeHandler: React.ChangeEventHandler<HTMLInputElement>;
   keywordDeleteHandler: () => void;
+  searchHistoryDeleteHandler: (itemCreatedAt: string) => void;
+  deleteEntireSearchHistory: () => void;
 }> = ({
   mobileSearch,
   mobileSearchCloseHandler,
@@ -16,7 +19,11 @@ const MobileSearch: React.FC<{
   searchSubmitHandler,
   keywordChangeHandler,
   keywordDeleteHandler,
+  searchHistoryDeleteHandler,
+  deleteEntireSearchHistory,
 }) => {
+  const searchHistory = useAppSelector((state) => state.searchHistoryReducer);
+
   return (
     <div
       className={`${styles.mobileSearch} ${
@@ -60,17 +67,29 @@ const MobileSearch: React.FC<{
       <div className={styles.mobileRecent}>
         <header className={styles.mobileRecentHeader}>
           <p className={styles.mobileRecentHeading}>최근 검색어</p>
-          <p className={styles.mobileRecentDeleteAll}>전체 삭제</p>
+          <p
+            onClick={deleteEntireSearchHistory}
+            className={styles.mobileRecentDeleteAll}
+          >
+            전체 삭제
+          </p>
         </header>
         <ul className={styles.mobileRecentBox}>
-          <li className={styles.mobileRecentItem}>
-            <p className={styles.mobileRecentTitle}>샤넬 넘버5</p>
-            <button className={styles.mobileRecentDelete}>X</button>
-          </li>
-          <li className={styles.mobileRecentItem}>
-            <p className={styles.mobileRecentTitle}>조말론</p>
-            <button className={styles.mobileRecentDelete}>X</button>
-          </li>
+          {searchHistory.map((item) => {
+            return (
+              <li key={item.created_at} className={styles.mobileRecentItem}>
+                <p className={styles.mobileRecentTitle}>{item.searchWord}</p>
+                <button
+                  onClick={() => {
+                    searchHistoryDeleteHandler(item.created_at);
+                  }}
+                  className={styles.mobileRecentDelete}
+                >
+                  X
+                </button>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
