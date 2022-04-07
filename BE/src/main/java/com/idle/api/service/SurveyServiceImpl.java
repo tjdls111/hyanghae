@@ -243,34 +243,24 @@ public class SurveyServiceImpl implements SurveyService {
         KmeansAlgorithm d = new KmeansAlgorithm();
         ArrayList<ArrayList<Double>> dd = d.getClusters(dataSet, 10);  // 클러스터링
 
-        // 비슷한 향수 추천 : 리턴할 List<Perfume> 생성
-        List<Perfume> list = new ArrayList<>();
+        // 비슷한 향수, 색다른 향수 추천 : 리턴할 List<Perfume> 생성
+        List<Perfume> list = new ArrayList<>(); // 비슷한 향수 저장 리스트
+        List<Perfume> list2 = new ArrayList<>();    // 색다른 향수 저장 리스트
         ArrayList<Double> temp = dd.get(dd.size() - 1);
         for (int i = 0; i < dd.size() - 1; i++) {
             if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
                 list.add(perfumeRepository.findByPerfumeId((long) i+1).get());
-            }
-        }
-
-        Collections.shuffle(list);  // 리스트 랜덤 추출
-
-        for (int i = 5; i < list.size(); i++){
-            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
-        }
-
-        // 색다른 향수 추천
-        List<Perfume> list2 = new ArrayList<>();
-        ArrayList<Double> temp2 = dd.get(dd.size() - 1); // 클러스터 번호
-        for (int i = 0; i < dd.size() - 1; i++){
-            if(temp2.get(temp2.size() - 1).doubleValue() != dd.get(i).get(temp2.size() - 1).doubleValue()){// 다른 그룹의 향수
+            } else{ // 다른 그룹의 향수
                 list2.add(perfumeRepository.findByPerfumeId((long) i+1).get());
             }
         }
 
+        Collections.shuffle(list);  // 리스트 랜덤 추출
         Collections.shuffle(list2);  // 리스트 랜덤 추출
 
-        for (int i = 5; i < list2.size(); i++){
-            list2.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+        for (int i = 5; i < list.size(); i++){
+            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+            list2.remove(i);
         }
 
         Map<String, List<Perfume>> map = new HashMap<>();
