@@ -6,7 +6,7 @@
  * @author David
  * @version 1.0.0
  * 생성일 2022-03-29
- * 마지막 수정일 2022-03-29
+ * 마지막 수정일 2022-04-07
  **/
 
 package com.idle.api.controller;
@@ -75,7 +75,7 @@ public class SurveyController {
 
         Survey1 survey1 = surveyService.getSurvey1ByUserAndSurveyId(user, surveyId);
         List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey1(survey1);
-        System.out.println("뭐야!!!!!"+recommendList.size());
+
 
         return ResponseEntity.ok(Survey1ResultResponse.of(200,"success",recommendList));
     }
