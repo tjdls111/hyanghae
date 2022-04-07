@@ -4,6 +4,7 @@ import Navigation from "../../components/navigation/navigation";
 import InsertTitle from "../../components/survey/insertTitle";
 import { useRouter } from "next/router";
 import { useAppSelector } from "../../reducers/hooks";
+import Head from "next/head";
 
 const survey = () => {
   const [state, setState] = useState(false);
@@ -16,10 +17,14 @@ const survey = () => {
     if (!isAuthenticated) {
       router.push("/login");
     }
-  }, [router.isReady]);
+  }, []);
 
   return (
     <>
+      <Head>
+        <title>향수 추천</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
       <Navigation />
       {!state ? <InsertTitle setState={setState} /> : <SelectSurvey />}
     </>

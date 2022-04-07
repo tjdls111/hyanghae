@@ -9,9 +9,18 @@
 
 import type { NextPage } from "next";
 import SignupComponent from "../components/loginSignup/signupComponent";
+import Head from "next/head";
 
 const Signup: NextPage = () => {
-  return <SignupComponent />;
+  return (
+    <>
+      <Head>
+        <title>회원가입</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
+      <SignupComponent />;
+    </>
+  );
 };
 
 export default Signup;

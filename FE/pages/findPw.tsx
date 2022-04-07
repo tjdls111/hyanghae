@@ -8,9 +8,18 @@
 */
 import type { NextPage } from "next";
 import FindPwComponent from "../components/find/findPwComponent";
+import Head from "next/head";
 
 const FindPw: NextPage = () => {
-  return <FindPwComponent />;
+  return (
+    <>
+      <Head>
+        <title>비밀번호 찾기</title>
+        <link rel="icon" href="/logos/iconLogo.png" />
+      </Head>
+      <FindPwComponent />
+    </>
+  );
 };
 
 export default FindPw;
