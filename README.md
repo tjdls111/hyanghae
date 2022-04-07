@@ -24,7 +24,7 @@
 	  - [Front](#front)
 	- [4️⃣ 프로젝트 산출물](#4️⃣-프로젝트-산출물)
 	- [5️⃣ 프로젝트 결과물](#5️⃣-프로젝트-결과물)
-- [📺 프로젝트 UCC](https://drive.google.com/file/d/12Mfx3sRjNwTiT2undbCMqLwqhOcUjI2W/view?usp=sharing)
+- [📺 프로젝트 UCC](https://drive.google.com/drive/folders/19nDtGa64AudWwS5Fxjrk2entle-rCwhH)
 <br><br>
 
 ## 1️⃣ 프로젝트 소개
