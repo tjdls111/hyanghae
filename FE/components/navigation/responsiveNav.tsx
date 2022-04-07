@@ -35,7 +35,11 @@ const ResponsiveNav: React.FC<{
   const router = useRouter();
 
   return (
-    <nav className={`${styles.navContainer} ${mobileNavOpen && styles.mobileNavActive}`}>
+    <nav
+      className={`${styles.navContainer} ${
+        mobileNavOpen && styles.mobileNavActive
+      }`}
+    >
       <button onClick={mobileNavCloseHandler} className={styles.navCloseButton}>
         X
       </button>
@@ -50,7 +54,7 @@ const ResponsiveNav: React.FC<{
       <ul className={styles.navigation}>
         {navItemData.map((navItem) => {
           return (
-            <li className={styles.navItem}>
+            <li key={navItem.id} className={styles.navItem}>
               <Link href={navItem.path}>
                 <a
                   className={`${styles.navLink} ${

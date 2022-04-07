@@ -31,7 +31,6 @@ const MobileSearch: React.FC<{
         className={styles.mobileSearchBar}
         action="submit"
       >
-        {/*  */}
         <input
           onChange={keywordChangeHandler}
           value={keyword}
