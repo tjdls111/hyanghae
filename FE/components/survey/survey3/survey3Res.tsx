@@ -54,7 +54,7 @@ const Survey3Res = ({ data }) => {
       </div>
       <ThemeProvider theme={theme}>
         <div className={styles.btn}>
-          <Button onClick={() => goDetail(data[item].id)} size="large" variant="contained">
+          <Button onClick={() => goDetail(data[item].perfumeId)} size="large" variant="contained">
             향수 상세보기
           </Button>
         </div>
