@@ -9,6 +9,7 @@ import { theme } from "../survey2/component/buttonTheme";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { apiSurvey3Res } from "../../../api/survey";
 import { storage } from "../../../firebase/firebase";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface stateType {
   url: string;
@@ -26,6 +27,7 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
   const boxRef = useRef<HTMLDivElement>(null);
   const token = useAppSelector((state: RootState) => state.authReducer.token);
   const [loading, setLoading] = useState("");
+  const [spinner, setSpinner] = useState(false);
   const surveyTitle = useAppSelector((state: RootState) => state.titleReducer.title);
   const [url, setUrl] = useState("");
   useEffect(() => {
@@ -33,8 +35,9 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
       const data = makeForm();
       (async function post() {
         try {
+          setSpinner(true);
           const result = await apiSurvey3Res(data, token);
-          console.log(result);
+          setSpinner(false);
           setResult(true);
           setData(result.data.recommendPerfumeList);
         } catch (e) {
@@ -62,7 +65,6 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
       },
       async () => {
         await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log(downloadURL);
           setUrl(downloadURL);
         });
       }
@@ -129,7 +131,17 @@ const Survey3Of1: React.FC<propType> = ({ setResult, setData }) => {
             {state ? (
               <Image src={pictureRef.current.url} layout="fill" objectFit="cover" />
             ) : loading !== "" ? (
-              <div className={styles.loadingFont}>{loading}</div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div className={styles.loadingFont}>{loading}</div>
+                <CircularProgress />
+              </div>
             ) : (
               <div className={styles.plusFont}>+</div>
             )}
