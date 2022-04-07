@@ -158,11 +158,12 @@ public class SurveyServiceImpl implements SurveyService {
         }
 
         Collections.shuffle(list);  // 리스트 랜덤 추출
-
-        for (int i = 5; i < list.size(); i++){
-            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+        System.out.println("삭제전 : " + list.size());
+        int cnt = list.size();
+        for (int i = 5; i < cnt; i++){
+            list.remove(0); //  5개 제외 나머지를 리스트에서 삭제
         }
-
+        System.out.println("삭제후 : " + list.size());
         return list;
     }
 
@@ -258,8 +259,9 @@ public class SurveyServiceImpl implements SurveyService {
 
         Collections.shuffle(list);  // 리스트 랜덤 추출
 
-        for (int i = 5; i < list.size(); i++){
-            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+        int cnt = list.size();
+        for (int i = 5; i < cnt; i++){
+            list.remove(0); //  5개 제외 나머지를 리스트에서 삭제
         }
 
         // 색다른 향수 추천
@@ -273,8 +275,9 @@ public class SurveyServiceImpl implements SurveyService {
 
         Collections.shuffle(list2);  // 리스트 랜덤 추출
 
-        for (int i = 5; i < list2.size(); i++){
-            list2.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+        int cnt2 = list2.size();
+        for (int i = 5; i < cnt2; i++){
+            list2.remove(0); //  5개 제외 나머지를 리스트에서 삭제
         }
 
         Map<String, List<Perfume>> map = new HashMap<>();
@@ -377,8 +380,9 @@ public class SurveyServiceImpl implements SurveyService {
 
         Collections.shuffle(list);  // 리스트 랜덤 추출
 
-        for (int i = 5; i < list.size(); i++){
-            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
+        int cnt = list.size();
+        for (int i = 5; i < cnt; i++){
+            list.remove(0); //  5개 제외 나머지를 리스트에서 삭제
         }
 
         return list;

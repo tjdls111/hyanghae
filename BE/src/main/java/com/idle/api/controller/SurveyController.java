@@ -75,7 +75,7 @@ public class SurveyController {
 
         Survey1 survey1 = surveyService.getSurvey1ByUserAndSurveyId(user, surveyId);
         List<Perfume> recommendList = surveyService.recommendPerfumeBySurvey1(survey1);
-
+        System.out.println("뭐야!!!!!"+recommendList.size());
 
         return ResponseEntity.ok(Survey1ResultResponse.of(200,"success",recommendList));
     }
@@ -125,7 +125,7 @@ public class SurveyController {
 
     @ApiOperation("설문조사3 추천")
     @GetMapping("/recommend3/{survey3Id}")
-    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey3(@ApiIgnore Authentication authentication, @ModelAttribute("survey3Id") Long surveyId) throws IOException {
+    public ResponseEntity<? extends BaseResponseBody> recommendBySurvey3(@ApiIgnore Authentication authentication, @PathVariable("survey3Id") Long surveyId) throws IOException {
         IdleUserDetails userDetail = (IdleUserDetails) authentication.getDetails();
         User user = userDetail.getUser();
 
