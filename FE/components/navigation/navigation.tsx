@@ -125,6 +125,11 @@ const Navigation: React.FC = () => {
         <MobileSearch
           mobileSearch={mobileSearch}
           mobileSearchCloseHandler={mobileSearchCloseHandler}
+          // 추가
+          keyword={keyword}
+          searchSubmitHandler={searchSubmitHandler}
+          keywordChangeHandler={keywordChangeHandler}
+          keywordDeleteHandler={keywordDeleteHandler}
         />
       </main>
     </div>
