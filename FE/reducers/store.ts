@@ -4,9 +4,9 @@ import titleReducer from "./titleSlice";
 import searchHistoryReducer from "./searchHistorySlice";
 import { createWrapper } from "next-redux-wrapper";
 import { combineReducers, createStore } from "redux";
-import storage from "redux-persist/lib/storage";
 import persistReducer from "redux-persist/lib/persistReducer";
 import persistStore from "redux-persist/lib/persistStore";
+import storageSession from "redux-persist/lib/storage/session";
 
 const rootReducer = combineReducers({
   authReducer,
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage: storageSession,
 };
 
 const makeStore = () => {

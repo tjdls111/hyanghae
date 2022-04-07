@@ -79,28 +79,30 @@ const DesktopSearch: React.FC<{
               전체 삭제
             </p>
           </header>
-          {searchHistory.map((item) => {
-            return (
-              <li
-                onClick={() => {
-                  selectHistoryItemHandler(item.searchWord);
-                  setOpenHistory(false);
-                }}
-                key={item.created_at}
-                className={styles.recentSearchItem}
-              >
-                <p className={styles.desktopRecentTitle}>{item.searchWord}</p>
-                <button
-                  type="button"
+          {searchHistory.map((item, idx) => {
+            if (idx < 5) {
+              return (
+                <li
                   onClick={() => {
-                    searchHistoryDeleteHandler(item.created_at);
+                    selectHistoryItemHandler(item.searchWord);
+                    setOpenHistory(false);
                   }}
-                  className={styles.desktopRecentDelete}
+                  key={item.created_at}
+                  className={styles.recentSearchItem}
                 >
-                  X
-                </button>
-              </li>
-            );
+                  <p className={styles.desktopRecentTitle}>{item.searchWord}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      searchHistoryDeleteHandler(item.created_at);
+                    }}
+                    className={styles.desktopRecentDelete}
+                  >
+                    X
+                  </button>
+                </li>
+              );
+            }
           })}
         </ul>
       </form>
