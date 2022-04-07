@@ -24,6 +24,8 @@
   margin: 2em 2em;
   text-align: center;
   align-items: center;
+  border: 1px dashed var(--color-primary-light-2);
+  padding: 1em;
 }
 .imgContainer {
   width: 10em;
@@ -39,7 +41,7 @@
   transform: translate(-50%, -50%);
   font-weight: bolder;
   white-space: nowrap;
-  font-size: 4em;
+  font-size: 8em;
 }
 
 .buttonContainer > button {
@@ -55,6 +57,21 @@
   background-color: var(--color-primary-light-3);
 }
 
+.brandName {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.perfumeName {
+  font-size: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.reslist {
+  margin: 1rem;
+  padding: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   .listItem > div > button {
     font-size: 0.5em;
@@ -64,9 +81,7 @@
     position: absolute;
     top: 40%;
   }
-}
-
-.reslist {
-  margin: 1rem;
-  padding: 1rem;
+  .header {
+    font-size: 6em;
+  }
 }

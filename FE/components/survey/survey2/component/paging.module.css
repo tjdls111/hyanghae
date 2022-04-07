@@ -34,6 +34,11 @@
   cursor: revert;
   transform: revert;
 }
+
+.paging {
+  font-size: 1.5em;
+}
+
 @media screen and (max-width: 768px) {
   .nav > button {
     width: 2em;

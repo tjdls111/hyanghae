@@ -78,6 +78,14 @@
   margin-top: 3em;
 }
 
+.loadingFont {
+  font-size: 1em;
+}
+
+.plusFont {
+  font-size: 1em;
+}
+
 @media screen and (max-width: 768px) {
   .innerBox {
     width: 15rem;
@@ -91,5 +99,12 @@
   }
   .form {
     height: 30rem;
+  }
+  .loadingFont {
+    font-size: 0.5em;
+  }
+
+  .plusFont {
+    font-size: 0.5em;
   }
 }

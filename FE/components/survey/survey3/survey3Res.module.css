@@ -13,6 +13,8 @@
 .innerContainer {
   display: flex;
   justify-content: center;
+  position: absolute;
+  top: 40%;
 }
 .listContainer {
   display: flex;
@@ -20,6 +22,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border: 1px dashed var(--color-primary-light-2);
+  padding: 1em;
 }
 
 .listContainer > * {
@@ -27,6 +31,8 @@
 }
 .innerBox {
   position: relative;
+  width: 10rem;
+  height: 10rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -40,5 +46,13 @@
   }
   .listContainer {
     margin: 0;
+    border: 1px dashed var(--color-primary-light-3);
+    padding: 1em;
+  }
+  .header {
+    position: absolute;
+    top: 20%;
+    font-weight: bolder;
+    font-size: 8em;
   }
 }
