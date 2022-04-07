@@ -3,6 +3,8 @@ import styles from "./responsiveNav.module.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAppSelector } from "../../reducers/hooks";
+import Image from "next/image";
+import LetterLogo from "../../public/logos/letterLogo.png";
 
 const navItemData = [
   {
@@ -52,7 +54,17 @@ const ResponsiveNav: React.FC<{
           </Link>
         </div>
       )}
-      {isAuthenticated && <div className={styles.mobileAuthGuide}></div>}
+      {isAuthenticated && (
+        <div className={styles.mobileAuthGuide}>
+          <div className={styles.logoWrapper}>
+            <Image
+              className={styles.logoImage}
+              src={LetterLogo}
+              layout="fill"
+            />
+          </div>
+        </div>
+      )}
 
       <ul className={styles.navigation}>
         {navItemData.map((navItem) => {
