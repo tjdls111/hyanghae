@@ -8,6 +8,7 @@ import styles from "./surveyRes.module.css";
 import { useRouter } from "next/router";
 import { refreshTitle } from "../../../reducers/titleSlice";
 import { useDispatch } from "react-redux";
+import CircularProgress from "@mui/material/CircularProgress";
 
 interface dataProp {
   gender: number;
@@ -25,6 +26,7 @@ const Survey1Res = ({ prop }: resultProp) => {
   const [state, setState] = useState<surveyPerfume[]>([]);
   const surveyTitle = useAppSelector((state: RootState) => state.titleReducer.title);
   const token = useAppSelector((state: RootState) => state.authReducer.token);
+  const [loading, setLoading] = useState(false);
   const req = { ...prop, surveyTitle };
   const router = useRouter();
   const dispatch = useDispatch();
@@ -57,7 +59,9 @@ const Survey1Res = ({ prop }: resultProp) => {
     if (token && !isCompleted) {
       (async function post() {
         try {
+          setLoading(true);
           const result = await apiSurvey1Res(req, token);
+          setLoading(false);
           setState(result.data.recommendPerfumeList);
         } catch (e) {
           console.error(e);
@@ -71,8 +75,9 @@ const Survey1Res = ({ prop }: resultProp) => {
   return (
     <div className={styles.container}>
       <header className={styles.header}>향수 추천 결과</header>
+
       <div className={styles.listWrapper}>
-        <ul className={styles.ulWrapper}>{pList}</ul>
+        {loading ? <CircularProgress /> : <ul className={styles.ulWrapper}>{pList}</ul>}
       </div>
     </div>
   );
