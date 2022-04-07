@@ -16,14 +16,9 @@ const navItemData = [
     path: "/perfumes",
   },
   {
-    id: "navItem02",
+    id: "navItem03",
     name: "Recommeded",
     path: "/survey",
-  },
-  {
-    id: "navItem02",
-    name: "About",
-    path: "/about",
   },
 ];
 

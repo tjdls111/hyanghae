@@ -2,4 +2,15 @@
   padding: 5rem 3rem 3rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.text {
+  font-size: 2rem;
+  color: #333;
+}
+
+.totalNumber {
+  font-size: 2.4rem;
+  color: var(--color-primary);
 }
