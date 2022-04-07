@@ -6,7 +6,7 @@ interface authState {
 }
 
 const initialState: authState = {
-  isAuthenticated: true,
+  isAuthenticated: false,
   token: null,
   ebayApi: null,
 };
@@ -28,8 +28,6 @@ const authSlice = createSlice({
     },
   },
 });
-
-
 
 export const { login, logout, update } = authSlice.actions;
 export default authSlice.reducer;
