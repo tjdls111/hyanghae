@@ -105,12 +105,20 @@
   flex-shrink: 1;
 }
 
+.desktopRecentTitle:hover {
+  cursor: pointer;
+}
+
 .desktopRecentDelete {
   flex-basis: 10%;
   font-size: 1.6rem;
   border: none;
   background: none;
   color: #777;
+}
+
+.desktopRecentDelete:hover {
+  cursor: pointer;
 }
 
 @media (max-width: 800px) {

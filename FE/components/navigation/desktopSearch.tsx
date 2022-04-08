@@ -82,15 +82,16 @@ const DesktopSearch: React.FC<{
           {searchHistory.map((item, idx) => {
             if (idx < 5) {
               return (
-                <li
-                  onClick={() => {
-                    selectHistoryItemHandler(item.searchWord);
-                    setOpenHistory(false);
-                  }}
-                  key={item.created_at}
-                  className={styles.recentSearchItem}
-                >
-                  <p className={styles.desktopRecentTitle}>{item.searchWord}</p>
+                <li key={item.created_at} className={styles.recentSearchItem}>
+                  <p
+                    onClick={() => {
+                      selectHistoryItemHandler(item.searchWord);
+                      setOpenHistory(false);
+                    }}
+                    className={styles.desktopRecentTitle}
+                  >
+                    {item.searchWord}
+                  </p>
                   <button
                     type="button"
                     onClick={() => {

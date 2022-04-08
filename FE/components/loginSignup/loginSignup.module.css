@@ -117,6 +117,10 @@
   column-gap: 3rem;
 }
 
+.socialLogin:hover {
+  cursor: pointer;
+}
+
 .imageWrapper {
   width: 10%;
   height: 80%;
@@ -155,4 +159,8 @@
   font-size: 1.5rem;
   padding: 0.5rem;
   color: var(--color-grey-light-1);
+}
+
+.socialLoginLink {
+  text-decoration: none;
 }
