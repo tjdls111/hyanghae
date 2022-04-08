@@ -266,28 +266,30 @@ public class SurveyServiceImpl implements SurveyService {
         ArrayList<ArrayList<Double>> dd = d.getClusters(dataSet, 10);  // 클러스터링
 
         // 비슷한 향수, 색다른 향수 추천 : 리턴할 List<Perfume> 생성
-        List<Perfume> list = new ArrayList<>(); // 비슷한 향수 저장 리스트
+        List<Perfume> list1 = new ArrayList<>(); // 비슷한 향수 저장 리스트
         List<Perfume> list2 = new ArrayList<>();    // 색다른 향수 저장 리스트
-        ArrayList<Double> temp = dd.get(dd.size() - 1);
+        ArrayList<Double> temp = dd.get(dd.size() - 1); // 입력으로 들어온 향수
         for (int i = 0; i < dd.size() - 1; i++) {
             if (temp.get(temp.size() - 1).doubleValue() == dd.get(i).get(temp.size() - 1).doubleValue()) {// 같은 그룹의 향수
-                list.add(perfumeRepository.findByPerfumeId((long) i+1).get());
+                list1.add(perfumeRepository.findByPerfumeId((long) i+1).get());
             } else{ // 다른 그룹의 향수
                 list2.add(perfumeRepository.findByPerfumeId((long) i+1).get());
             }
         }
 
-        Collections.shuffle(list);  // 리스트 랜덤 추출
+        Collections.shuffle(list1);  // 리스트 랜덤 추출
         Collections.shuffle(list2);  // 리스트 랜덤 추출
 
-        for (int i = 5; i < list.size(); i++) {
-            list.remove(i); //  5개 제외 나머지를 리스트에서 삭제
-            list2.remove(i);
+        List<Perfume> res1 = new ArrayList<>();
+        List<Perfume> res2 = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            res1.add(list1.get(i)); //  5개 향수를 결과 리스트에 추가
+            res2.add(list2.get(i));
         }
 
         Map<String, List<Perfume>> map = new HashMap<>();
-        map.put("similar",list);
-        map.put("different",list2);
+        map.put("similar",res1);
+        map.put("different",res2);
 
         return map;
     }
