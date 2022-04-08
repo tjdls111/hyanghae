@@ -152,7 +152,6 @@ export default function perfumeListFilter() {
   const sort = useAppSelector((state) => state.sortReducer.sort);
 
   const handleFilterChange = function (e) {
-    console.log(e);
     dispatch(changeSort(e));
   };
 
@@ -164,7 +163,9 @@ export default function perfumeListFilter() {
       defaultValue={sort}
     >
       {filterList.map((filter) => (
-        <StyledOption value={filter.value}>{filter.name}</StyledOption>
+        <StyledOption key={filter.value} value={filter.value}>
+          {filter.name}
+        </StyledOption>
       ))}
     </CustomSelect>
   );

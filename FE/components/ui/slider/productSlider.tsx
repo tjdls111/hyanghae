@@ -40,7 +40,7 @@ const ProductSlider: React.FC<{
           {slideItems === null
             ? null
             : slideItems.map((item) => (
-                <div className="swiper-slide">
+                <div key={item.perfumeId} className="swiper-slide">
                   <ProductCard key={item.perfumeName} product={item} />
                 </div>
               ))}
