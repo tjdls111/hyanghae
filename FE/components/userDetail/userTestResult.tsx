@@ -19,7 +19,7 @@ const UserTestResult = () => {
   const getRes1Data = (id: string) => {
     if (token) {
       recommend1Result(token, id).then((res) => {
-        setData(res.data.recommendPerfumeList.splice(0, 6));
+        setData(res.data.recommendPerfumeList);
       });
     }
   };
@@ -27,7 +27,7 @@ const UserTestResult = () => {
   const getRes2Data = (id: string) => {
     if (token) {
       recommend2Result(token, id).then((res) => {
-        setData(res.data.recommendPerfumeList.splice(0, 6));
+        setData(res.data.similarPerfumeList);
       });
     }
   };
@@ -38,22 +38,28 @@ const UserTestResult = () => {
     } else if (type == "2") {
       getRes2Data(id as string);
     }
-  }, [id]);
+  }, []);
+
   return (
     <div className={styles.container}>
-      <header className={styles.header}>향수 추천 결과</header>
+      {type == "1" && <header className={styles.header}>향수 추천 결과</header>}
+      {type == "2" && (
+        <header className={styles.header}>유사한 향수 추천 결과</header>
+      )}
       <div className={styles.listWrapper}>
         <ul className={styles.ulWrapper}>
           {data &&
             data.map((item) => (
               <li className={styles.reslist}>
-                { <div className={styles.imgContainer}>
-                  <Image
-                  src={item.imgUrl}
-                  layout="fill"
-                  objectFit="contain"
-                  ></Image>
-                </div> }
+                {
+                  <div className={styles.imgContainer}>
+                    <Image
+                      src={item.imgUrl}
+                      layout="fill"
+                      objectFit="contain"
+                    ></Image>
+                  </div>
+                }
                 <p>{item.perfumeBrand.brandName}</p>
                 <p>{item.perfumeName}</p>
                 <div className={styles.buttonContainer}>
