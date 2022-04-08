@@ -6,8 +6,6 @@ import axios from "axios";
 const RecentReviews: React.FC = () => {
   const [reviews, setReviews] = useState(null);
 
-  console.log(reviews);
-
   useEffect(() => {
     axios
       .get(process.env.NEXT_PUBLIC_BASE_URL + "/perfume/review/recent")

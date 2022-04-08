@@ -58,11 +58,11 @@ const PerfumeList: React.FC = () => {
     <div className={styles.grid}>
       {perfumes.map((perfume, idx) =>
         perfumes.length - 1 === idx ? (
-          <div ref={ref}>
+          <div key={idx} ref={ref}>
             <ProductCard key={perfume.perfumeName} product={perfume} />
           </div>
         ) : (
-          <div>
+          <div key={idx}>
             <ProductCard key={perfume.perfumeName} product={perfume} />
           </div>
         )
